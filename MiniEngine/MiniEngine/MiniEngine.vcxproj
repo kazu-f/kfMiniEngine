@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="graphics\animation\AnimationPlayController.cpp" />
+    <ClCompile Include="graphics\animation\AnimationClip.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="graphics\animation\Animation.cpp" />
     <ClCompile Include="camera\Camera.cpp" />
@@ -56,6 +58,8 @@
     <ClCompile Include="tkFile\TksFile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="graphics\animation\AnimationPlayController.h" />
+    <ClInclude Include="graphics\animation\AnimationClip.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="graphics\animation\Animation.h" />
     <ClInclude Include="camera\Camera.h" />

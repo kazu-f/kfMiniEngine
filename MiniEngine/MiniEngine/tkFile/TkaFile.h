@@ -39,6 +39,13 @@ namespace Engine {
 		/// <param name="filePath"></param>
 		void Load(const char* filePath);
 		/// <summary>
+		/// ロード済みか？
+		/// </summary>
+		bool IsLoaded()const
+		{
+			return m_isLoaded;
+		}
+		/// <summary>
 		/// アニメーションイベントにクエリを行う。
 		/// </summary>
 		/// <param name="query">クエリ関数</param>
@@ -77,6 +84,7 @@ namespace Engine {
 	private:
 		std::vector< AnimationEvent> m_animationEvents;	//アニメーションイベント。
 		std::vector< KeyFrame> m_keyFrames;				//キーフレーム。
+		bool m_isLoaded = false;	//ロード済み？
 	};
 
 }

@@ -40,5 +40,6 @@ namespace Engine {
 
 		fclose(fp);
 
+		m_isLoaded = true;
 	}
 }

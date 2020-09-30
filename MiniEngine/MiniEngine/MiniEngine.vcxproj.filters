@@ -138,6 +138,12 @@
     <ClCompile Include="GameScene.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="graphics\animation\AnimationClip.cpp">
+      <Filter>graphics\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\animation\AnimationPlayController.cpp">
+      <Filter>graphics\animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MiniEngine.h">
@@ -253,6 +259,12 @@
     </ClInclude>
     <ClInclude Include="GameScene.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\animation\AnimationClip.h">
+      <Filter>graphics\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\animation\AnimationPlayController.h">
+      <Filter>graphics\animation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
