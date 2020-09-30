@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="graphics">
+      <UniqueIdentifier>{764b5512-52ac-4a53-ae46-77f75657b126}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\GPUBuffer">
+      <UniqueIdentifier>{8e15a495-da4d-4fd4-b9a2-6cc7ae434034}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\2D">
+      <UniqueIdentifier>{5ac53df7-8da8-444c-8bba-963903ba4da3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\animation">
+      <UniqueIdentifier>{6e2fba13-df3d-457f-ab17-019c8a3d04e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HID">
+      <UniqueIdentifier>{aac9c03f-fc49-435a-bd72-c9c95e2f702c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="math">
+      <UniqueIdentifier>{aa0d6302-6fee-4671-8a35-756100535270}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tkFile">
+      <UniqueIdentifier>{2c9e110a-3d62-4c5f-b66c-cdb34d6f82c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="camera">
+      <UniqueIdentifier>{c017f83b-12d2-4348-8f0a-cbf5e3b6fa17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{02169e3e-fc38-423e-9de0-0f4db8902453}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="system">
+      <UniqueIdentifier>{6945b4fa-4dfc-4373-9c44-f57942115169}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="tkEngine.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\DescriptorHeap.cpp">
+      <Filter>graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\GraphicsEngine.cpp">
+      <Filter>graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\Material.cpp">
+      <Filter>graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\MeshParts.cpp">
+      <Filter>graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\Model.cpp">
+      <Filter>graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\PipelineState.cpp">
+      <Filter>graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\RenderTarget.cpp">
+      <Filter>graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\RootSignature.cpp">
+      <Filter>graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\Shader.cpp">
+      <Filter>graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\Skeleton.cpp">
+      <Filter>graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\Texture.cpp">
+      <Filter>graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\GPUBuffer\ConstantBuffer.cpp">
+      <Filter>graphics\GPUBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\GPUBuffer\IndexBuffer.cpp">
+      <Filter>graphics\GPUBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\GPUBuffer\RWStructuredBuffer.cpp">
+      <Filter>graphics\GPUBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\GPUBuffer\StructuredBuffer.cpp">
+      <Filter>graphics\GPUBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\GPUBuffer\VertexBuffer.cpp">
+      <Filter>graphics\GPUBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\2D\Sprite.cpp">
+      <Filter>graphics\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="HID\GamePad.cpp">
+      <Filter>HID</Filter>
+    </ClCompile>
+    <ClCompile Include="math\Math.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="math\Matrix.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="math\Vector.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="tkFile\TkaFile.cpp">
+      <Filter>tkFile</Filter>
+    </ClCompile>
+    <ClCompile Include="tkFile\TkmFile.cpp">
+      <Filter>tkFile</Filter>
+    </ClCompile>
+    <ClCompile Include="tkFile\TksFile.cpp">
+      <Filter>tkFile</Filter>
+    </ClCompile>
+    <ClCompile Include="camera\Camera.cpp">
+      <Filter>camera</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="system\system.cpp">
+      <Filter>system</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MiniEngine.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="tkEngine.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="d3dx12.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\DescriptorHeap.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\DescriptorHeap_inline.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\GraphicsEngine.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\IShaderResource.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\IUnorderAccessResource.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\Material.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\MeshParts.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\Model.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\PipelineState.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\RenderContext.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\RenderContext_inline.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\RenderTarget.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\RootSignature.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\Shader.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\Skeleton.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\Texture.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\GPUBuffer\ConstantBuffer.h">
+      <Filter>graphics\GPUBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\GPUBuffer\IndexBuffer.h">
+      <Filter>graphics\GPUBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\GPUBuffer\RWStructuredBuffer.h">
+      <Filter>graphics\GPUBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\GPUBuffer\StructuredBuffer.h">
+      <Filter>graphics\GPUBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\GPUBuffer\VertexBuffer.h">
+      <Filter>graphics\GPUBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\2D\Sprite.h">
+      <Filter>graphics\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="HID\GamePad.h">
+      <Filter>HID</Filter>
+    </ClInclude>
+    <ClInclude Include="math\Math.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\Matrix.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\Vector.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="tkFile\TkaFile.h">
+      <Filter>tkFile</Filter>
+    </ClInclude>
+    <ClInclude Include="tkFile\TkmFile.h">
+      <Filter>tkFile</Filter>
+    </ClInclude>
+    <ClInclude Include="tkFile\TksFile.h">
+      <Filter>tkFile</Filter>
+    </ClInclude>
+    <ClInclude Include="camera\Camera.h">
+      <Filter>camera</Filter>
+    </ClInclude>
+    <ClInclude Include="util\Stopwatch.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="system\system.h">
+      <Filter>system</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

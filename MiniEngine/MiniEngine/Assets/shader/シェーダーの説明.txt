@@ -1,0 +1,31 @@
++NoAnimModel_NonTexture.fx
+	テクスチャなしのモデル表示用のシェーダー。
++NoAnimModel_Texture.fx
+	テクスチャを貼り付けただけのモデル表示用のシェーダー。
++NoAnimModel_Lambert00.fx
+	ランバート拡散反射光を返すだけのシェーダー。
++NoAnimModel_Lambert01.fx
+	ランバート拡散反射光をテクスチャに適用するシェーダー。
++NoAnimModel_Lambert02.fx
+	ライトのパラメータを定数バッファで受け取るシェーダー。
++NoAnimModel_Specular00.fx
+	スペキュラ反射光を返すだけのシェーダー。
++NoAnimModel_Specular01.fx
+	スペキュラ反射光で絞りを調整できるようにしたシェーダー。
++NoAnimModel_Specular02.fx
+	スペキュラ反射光をテクスチャに適用するシェーダー。
++NoAnimModel_LambertSpecular.fx
+	ランバート拡散反射とスペキュラ反射を合成したシェーダー。
++NoAnimModel_Ambient00.fx
+	シンプルな環境光を追加したシェーダー。
++NoAnimModel_Ambient01.fx
+	環境光に半球ライトを利用したシェーダー。
++NoAnimModel_LambertSpecularAmbient.fx
+	ランバート拡散反射とスペキュラ反射と環境光を合成したシェーダー。
++NoAnimModel_NoAnimModel_RimLight00.fx
+	逆光ライト。光源の位置を無視しており、常にオブジェクトの輪郭が光る逆光ライト。
+	マリオギャラクシーが発売されたあたりで流行っていた手法。
++NoAnimModel_NoAnimModel_RimLight01.fx
+	逆光ライト。光源の位置を考慮している。
++NoAnimModel_PBR.fx
+	ディズニーベースの拡散反射光とクックトランスの鏡面反射を利用した物理ベースライティング。
