@@ -29,7 +29,7 @@ namespace Engine {
 		/// <param name="skinModel">アニメーションさせるモデル。</param>
 		/// <param name="animClipList">アニメーションクリップのリスト。</param>
 		/// <param name="animClipNum">アニメーションクリップの数。</param>
-		void Init(Model& skinModel, CAnimationClip animClipList[], int numAnimClip);
+		void Init(Skeleton & skeleton, const std::vector<std::unique_ptr<CAnimationClip >>& animClips);
 		/// <summary>
 		/// アニメーションの再生。
 		/// </summary>
@@ -71,17 +71,28 @@ namespace Engine {
 		/// <summary>
 		/// アニメーションを進める。
 		/// </summary>
+		/// <remarks>
+		/// エンジン内部で使用される関数。
+		/// 外部からは使用しない！
+		/// </remarks>
 		/// <param name="deltaTime">アニメーションを進める時間(s)</param>
-		void Update(float deltaTime);
+		void Progress(float deltaTime);
 	private:
 		/// <summary>
 		/// アニメーションの再生
 		/// </summary>
 		/// <param name="nectClip"></param>
 		/// <param name="interpolateTime"></param>
-		void PlayCommon(CAnimationClip* nectClip, float interpolateTime)
+		void PlayCommon(CAnimationClip * nextClip, float interpolateTime)
 		{
-
+			if (nextClip->IsLoaded() == false)
+			{
+				//アニメーションクリップがロードされていない。
+				MessageBoxA(NULL, "アニメーションクリップがロードされていない。", "Warning!!", MB_OK);
+				return;
+			}
+			int index = GetLastAnimationControllerIndex();
+			
 		}
 		/// <summary>
 		/// ローカルポーズの更新。
@@ -92,12 +103,30 @@ namespace Engine {
 		/// グローバルポーズの更新。
 		/// </summary>
 		void UpdateGlobalPose();
+	private:
+		/// <summary>
+		/// 最終ポーズになるアニメーションのリングバッファ上でのインデックスを取得。
+		/// </summary>
+		int GetLastAnimationControllerIndex()const
+		{
+			return GetAnimationControllerIndex(m_startAnimationPlayController, m_numAnimationPlayController);
+		}
+		/// <summary>
+		/// アニメーションコントローラのリングバッファ上でのインデックスを取得。
+		/// </summary>
+		/// <param name="startIndex">開始インデックス。</param>
+		/// <param name="localIndex">ローカルインデックス。</param>
+		int GetAnimationControllerIndex(int startIndex, int localIndex)const
+		{
+			return (startIndex + localIndex) % ANIMATION_PLAY_CONTROLLER_NUM;
+		}
 
 	private:
 		static const int ANIMATION_PLAY_CONTROLLER_NUM = 32;	//アニメーションコントローラの数。
 		std::vector<CAnimationClip*>	m_animationClips;		//アニメーションクリップの配列。
 		Skeleton* m_skelton = nullptr;							//アニメーションを適用するスケルトン。
 		CAnimationPlayController	m_animationPlayController[ANIMATION_PLAY_CONTROLLER_NUM];		//アニメーションプレイコントローラ。
+		Vector3 m_footstepDeltaValue = Vector3::Zero;			//footstepボーンの移動量。
 		int m_numAnimationPlayController = 0;					//現在使用中のアニメーション再生コントローラの数。
 		int m_startAnimationPlayController = 0;					//アニメーションコントローラの開始インデックス。
 		float m_interpolateTime = 0.0f;							//補完時間。

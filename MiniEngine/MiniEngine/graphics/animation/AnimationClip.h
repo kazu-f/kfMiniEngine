@@ -16,15 +16,20 @@ namespace Engine {
 		float time;					//時間。
 		Matrix transform;			//トランスフォーム。
 	};
+	///// <summary>
+	///// 読み込みに使うキーフレーム構造体。
+	///// </summary>
+	//struct KeyframeRow
+	//{
+	//	std::uint32_t boneIndex;	//ボーンインデックス。
+	//	float time;					//時間。
+	//	Vector3 transform[4];	//トランスフォーム。
+	//};
+
 	/// <summary>
-	/// 読み込みに使うキーフレーム構造体。
+	/// アニメーションイベント。
 	/// </summary>
-	struct KeyframeRow
-	{
-		std::uint32_t boneIndex;	//ボーンインデックス。
-		float time;					//時間。
-		Vector3 transform[4];	//トランスフォーム。
-	};
+	
 
 	class CAnimationClip
 	{
@@ -102,5 +107,5 @@ namespace Engine {
 		bool m_isLoop = false;			//ループフラグ。
 	};
 	//////////////////////CAnimationClip
-
+	using CAnimationClipPtr = std::unique_ptr<CAnimationClip>;
 }

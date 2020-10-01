@@ -8,10 +8,10 @@ namespace Engine {
 	CAnimation::~CAnimation()
 	{
 	}
-	void CAnimation::Init(Model& skinModel, CAnimationClip animClipList[], int animClipNum)
+	void CAnimation::Init(Skeleton & skeleton, const std::vector<std::unique_ptr<CAnimationClip >>& animClips)
 	{
 	}
-	void CAnimation::Update(float deltaTime)
+	void CAnimation::Progress(float deltaTime)
 	{
 	}
 	void CAnimation::UpdateLocalPose(float deltaTime)
