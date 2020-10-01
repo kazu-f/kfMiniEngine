@@ -43,6 +43,9 @@
     <Filter Include="system">
       <UniqueIdentifier>{6945b4fa-4dfc-4373-9c44-f57942115169}</UniqueIdentifier>
     </Filter>
+    <Filter Include="policy">
+      <UniqueIdentifier>{bd14b65e-b1d6-4908-96c7-38d73c7ac577}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tkEngine.cpp">
@@ -265,6 +268,9 @@
     </ClInclude>
     <ClInclude Include="graphics\animation\AnimationPlayController.h">
       <Filter>graphics\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="policy\Noncopyable.h">
+      <Filter>policy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

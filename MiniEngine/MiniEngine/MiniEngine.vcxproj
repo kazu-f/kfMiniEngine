@@ -91,6 +91,7 @@
     <ClInclude Include="math\Matrix.h" />
     <ClInclude Include="math\Vector.h" />
     <ClInclude Include="MiniEngine.h" />
+    <ClInclude Include="policy\Noncopyable.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="system\system.h" />
     <ClInclude Include="tkEngine.h" />
