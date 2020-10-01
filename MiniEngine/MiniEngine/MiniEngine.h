@@ -47,6 +47,11 @@
 #include "graphics/Model.h"
 #include "HID/GamePad.h"
 
+#include "graphics/Skeleton.h"
+#include "graphics/animation/Animation.h"
+#include "graphics/animation/AnimationClip.h"
+#include "graphics/animation/AnimationPlayController.h"
+
 const UINT FRAME_BUFFER_W = 1280;				//フレームバッファの幅。
 const UINT FRAME_BUFFER_H = 720;				//フレームバッファの高さ。
 

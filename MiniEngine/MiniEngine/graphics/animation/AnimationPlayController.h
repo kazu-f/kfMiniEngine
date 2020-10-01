@@ -46,7 +46,10 @@ namespace Engine {
 			m_footstepPos = Vector3::Zero;
 			m_footstepDeltaValue = Vector3::Zero;
 			//アニメーションイベントの発生フラグを全てfalseにする。
-			//イベント未実装なんだよなぁ
+			auto& animEventArray = m_animationClip->GetAnimationEvent();
+			for (auto i = 0; i < m_animationClip->GetNumAnimationEvent(); i++) {
+				animEventArray[i].SetInvokedFlag(false);
+			}
 		}
 		/// <summary>
 		/// 補完時間の設定かな。

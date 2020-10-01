@@ -6,7 +6,7 @@ namespace Engine {
 	/// <summary>
 	/// ボーン。
 	/// </summary>
-	class Bone {
+	class Bone : Noncopyable {
 	public:
 		/// <summary>
 		/// コンストラクタ。
@@ -142,7 +142,7 @@ namespace Engine {
 	/// <summary>
 	/// スケルトンクラス。
 	/// </summary>
-	class Skeleton {
+	class Skeleton : Noncopyable {
 	public:
 		using OnPostProcessSkeletonUpdate = std::function<void()>;
 
@@ -223,6 +223,10 @@ namespace Engine {
 		{
 			return m_boneMatrixs.get();
 		}
+		void SetMarkPlayAnimation()
+		{
+			m_isPlayAnimation = true;
+		}
 	public:
 
 
@@ -249,5 +253,6 @@ namespace Engine {
 		std::vector<BonePtr>	m_bones;				//ボーンの配列。
 		std::unique_ptr<Matrix[]>	m_boneMatrixs;		//ボーン行列。
 		bool m_isInited = false;						//初期化済み？
+		bool m_isPlayAnimation = false;					//アニメーションが流し込まれている？
 	};
 }

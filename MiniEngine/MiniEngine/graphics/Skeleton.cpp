@@ -121,13 +121,27 @@ namespace Engine {
 
 	void Skeleton::Update(const Matrix& mWorld)
 	{
-		//ワールド行列を構築していく
-		for (auto& bone : m_bones) {
-			if (bone->GetParentBoneNo() != -1) {
-				continue;
+		if (m_isPlayAnimation) {
+			//ボーン行列をルートボーンの空間からワールド空間を構築していく。
+			for (auto& bone : m_bones) {
+				Matrix mBoneWorld;
+				Matrix localMatrix = bone->GetLocalMatrix();
+				//親の行列とローカル行列を乗算して、ワールド行列を計算。
+				mBoneWorld = localMatrix * mWorld;
+				bone->SetWorldMatrix(mBoneWorld);
 			}
-			//ルート。
-			UpdateBoneWorldMatrix(*bone, mWorld);
+		}
+		else {
+			//アニメーションが流し込まれていると、ボーン行列がルートボーン空間に
+			//変換されているが、流されていないと親の骨の座標系のままなので、
+			//ルートボーン空間->ワールド行列を構築していく
+			for (auto& bone : m_bones) {
+				if (bone->GetParentBoneNo() != -1) {
+					continue;
+				}
+				//ルート。
+				UpdateBoneWorldMatrix(*bone, mWorld);
+			}
 		}
 
 		//ボーン行列を計算。

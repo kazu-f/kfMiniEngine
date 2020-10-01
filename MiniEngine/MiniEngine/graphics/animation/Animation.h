@@ -9,6 +9,7 @@
 
 namespace Engine {
 	class Skeleton;
+	using AnimationEventListener = std::function<void(const wchar_t* clipname, const wchar_t* eventName)>;
 
 	class CAnimation
 	{
@@ -126,13 +127,14 @@ namespace Engine {
 		std::vector<CAnimationClip*>	m_animationClips;		//アニメーションクリップの配列。
 		Skeleton* m_skelton = nullptr;							//アニメーションを適用するスケルトン。
 		CAnimationPlayController	m_animationPlayController[ANIMATION_PLAY_CONTROLLER_NUM];		//アニメーションプレイコントローラ。
-		Vector3 m_footstepDeltaValue = Vector3::Zero;			//footstepボーンの移動量。
 		int m_numAnimationPlayController = 0;					//現在使用中のアニメーション再生コントローラの数。
 		int m_startAnimationPlayController = 0;					//アニメーションコントローラの開始インデックス。
 		float m_interpolateTime = 0.0f;							//補完時間。
 		float m_interpolateTimeEnd = 0.0f;						//補完終了時間。？
+		bool m_isInterpolate = false;							//補完中か？
+		std::vector<AnimationEventListener> m_animationEventListeners;	//アニメーションのイベントリスナー。
+		Vector3 m_footstepDeltaValue = Vector3::Zero;			//footstepボーンの移動量。			//補完中かどうか。
 		float m_deltaTimeOnUpdate = 0.0f;						//Update関数を実行したときのデルタタイム。
-		bool m_isInterpolate = false;				//補完中かどうか。
 		bool m_isInited = false;					//ロード済みかどうか。
 	};
 	////////////CAnimationClass
