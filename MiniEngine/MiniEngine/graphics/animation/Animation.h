@@ -78,6 +78,26 @@ namespace Engine {
 		/// </remarks>
 		/// <param name="deltaTime">アニメーションを進める時間(s)</param>
 		void Progress(float deltaTime);
+		/// <summary>
+		/// アニメーションイベントリスナーを登録。
+		/// </summary>
+		/// <param name="eventListener">登録したいイベントリスナー。</param>
+		void AddAnimationEventListener(AnimationEventListener eventListener)
+		{
+			m_animationEventListeners.push_back(eventListener);
+		}
+		/// <summary>
+		/// ワールド空間でのフットステップの移動量を計算する。
+		/// </summary>
+		/// <remarks>
+		/// フットステップの移動量は、モデルのルートからの相対移動量。
+		/// そのため、ワールド空間に変換するのに平行移動量は不要。
+		/// モデルの回転と拡大率のみ指定する。
+		/// </remarks>
+		/// <param name="rotation"></param>
+		/// <param name="scale"></param>
+		/// <returns></returns>
+		Vector3 CalsFootstepDeltaInWorldSpace(Quaternion rotation, Vector3 scale)const;
 	private:
 		/// <summary>
 		/// アニメーションの再生
@@ -94,6 +114,24 @@ namespace Engine {
 			}
 			int index = GetLastAnimationControllerIndex();
 			
+			if (m_animationPlayController[index].GetAnimClip() == nextClip) {
+				//同じアニメーションが流れる。
+				return;
+			}
+			if (interpolateTime == 0.0f) {
+				//補完無し。
+				m_numAnimationPlayController = 1;
+			}
+			else {
+				//補完あり。
+				m_numAnimationPlayController++;
+			}
+			index = GetLastAnimationControllerIndex();
+			m_animationPlayController[index].ChangeAnimationClip(nextClip);
+			m_animationPlayController[index].SetInterpolateTime(interpolateTime);
+			m_interpolateTime = 0.0f;				//補完時間を0に
+			m_interpolateTimeEnd = interpolateTime;	//補完終了時間を設定。
+
 		}
 		/// <summary>
 		/// ローカルポーズの更新。
@@ -125,7 +163,7 @@ namespace Engine {
 	private:
 		static const int ANIMATION_PLAY_CONTROLLER_NUM = 32;	//アニメーションコントローラの数。
 		std::vector<CAnimationClip*>	m_animationClips;		//アニメーションクリップの配列。
-		Skeleton* m_skelton = nullptr;							//アニメーションを適用するスケルトン。
+		Skeleton* m_skeleton = nullptr;							//アニメーションを適用するスケルトン。
 		CAnimationPlayController	m_animationPlayController[ANIMATION_PLAY_CONTROLLER_NUM];		//アニメーションプレイコントローラ。
 		int m_numAnimationPlayController = 0;					//現在使用中のアニメーション再生コントローラの数。
 		int m_startAnimationPlayController = 0;					//アニメーションコントローラの開始インデックス。
