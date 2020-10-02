@@ -17,6 +17,9 @@ private:
 	Model robotPBRModel;		//モデル。
 	Model	robotModel;			//モデル。
 	ModelInitData initData;
+	Skeleton m_skeleton;
+	CAnimation m_animation;
+	std::vector<CAnimationClipPtr> m_animationClips;	//アニメーションクリップの配列。
 	bool isPBR = true;
 };
 

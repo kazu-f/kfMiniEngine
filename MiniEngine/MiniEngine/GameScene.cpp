@@ -51,6 +51,29 @@ void GameScene::Init()
 
 	robotPBRModel.UpdateWorldMatrix(pos, g_quatIdentity, scale);
 	robotModel.UpdateWorldMatrix(pos, g_quatIdentity, scale);
+
+	//アニメーションのためのロードを行う。
+	if (m_skeleton.Init("Assets/modelData/unityChan.tks")) {
+		if (m_skeleton.IsLoaded()) {
+			//ボーンの構築。
+			m_skeleton.BuildBoneMatrices();
+			//モデルと関連付け。
+			robotPBRModel.BindSkeleton(m_skeleton);
+
+			//アニメーションクリップのロード。
+			auto animClip = std::make_unique<CAnimationClip>();
+			animClip->Load("Assets/animData/idle.tka");
+			m_animationClips.push_back(move(animClip));
+
+			for (auto& animClip : m_animationClips) {
+				animClip->SetLoopFlag(true);
+				animClip->BuildKeyFramesAndAnimationEvents();
+			}
+
+			m_animation.Init(m_skeleton, m_animationClips);
+		}
+	}
+
 }
 
 void GameScene::Release()
@@ -79,6 +102,14 @@ void GameScene::Update()
 	light.eyePos = g_camera3D->GetPosition();
 	if (g_pad[0]->IsTrigger(enButtonA)) {
 		isPBR = !isPBR;
+	}
+	if (m_animation.IsInited()) {
+		//アニメーションを再生。
+		m_animation.Progress(1.0f/30.0f);
+	}
+	if (m_skeleton.IsInited()) {
+		//スケルトンを更新。
+		m_skeleton.Update(robotPBRModel.GetWorldMatrix());
 	}
 }
 

@@ -29,5 +29,8 @@ namespace Engine {
 		}
 
 		fclose(fp);
+
+		//ƒ[ƒh‚ªÏ‚ñ‚¾B
+		m_isLoaded = true;
 	}
 }

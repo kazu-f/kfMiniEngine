@@ -48,6 +48,9 @@ namespace Engine {
 	bool Skeleton::Init(const char* tksFilePath)
 	{
 		m_tksFile.Load(tksFilePath);
+		if (m_tksFile.IsLoaded() == false) {
+			return false;
+		}
 
 		return true;
 	}

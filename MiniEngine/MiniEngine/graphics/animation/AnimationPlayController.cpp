@@ -12,7 +12,7 @@ namespace Engine {
 		int numBones = skeleton->GetNumBones();
 		//ボーン行列をバシッと確保。
 		m_boneMatrix.resize(numBones);
-		m_skeleton - skeleton;
+		m_skeleton = skeleton;
 	}
 	void CAnimationPlayController::InvokeAnimationEvent(CAnimation* animation)
 	{

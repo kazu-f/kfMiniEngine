@@ -177,7 +177,14 @@ namespace Engine {
 		/// <param name="tksFilePath">tksファイルのファイルパス</param>
 		/// <returns>trueが返ってきたらロード成功。</returns>
 		bool Init(const char* tksFilePath);
-
+		/// <summary>
+		/// tksファイルをロード済みか判定。
+		/// </summary>
+		/// <returns></returns>
+		bool IsLoaded()const
+		{
+			return m_tksFile.IsLoaded();
+		}
 		/// <summary>
 		/// 初期化済みか判定。
 		/// </summary>

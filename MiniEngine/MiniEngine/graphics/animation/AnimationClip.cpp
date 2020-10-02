@@ -13,6 +13,8 @@ namespace Engine {
 			MessageBoxA(NULL, "AnimClipのLoadに失敗。ファイルパス確認！", "Warning!!", MB_OK);
 			return;
 		}
+		//ロード済み。
+		m_isLoaded = true;
 	}
 	void CAnimationClip::BuildKeyFramesAndAnimationEvents()
 	{

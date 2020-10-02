@@ -148,7 +148,7 @@ namespace Engine {
 		/// </summary>
 		int GetLastAnimationControllerIndex()const
 		{
-			return GetAnimationControllerIndex(m_startAnimationPlayController, m_numAnimationPlayController);
+			return GetAnimationControllerIndex(m_startAnimationPlayController, m_numAnimationPlayController - 1);
 		}
 		/// <summary>
 		/// アニメーションコントローラのリングバッファ上でのインデックスを取得。

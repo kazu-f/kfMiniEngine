@@ -35,9 +35,15 @@ namespace Engine {
 				query(bone);
 			}
 		}
+
+		bool IsLoaded()const
+		{
+			return m_isLoaded;
+		}
 	private:
 		int m_numBone = 0;			//骨の数。
 		std::vector<SBone> m_bones;	//骨のリスト。
+		bool m_isLoaded = false;
 	};
 
 }
