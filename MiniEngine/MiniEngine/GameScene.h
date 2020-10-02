@@ -14,7 +14,6 @@ public:
 
 private:
 	Light light;		//ライト。
-	Model robotPBRModel;		//モデル。
 	Model	robotModel;			//モデル。
 	ModelInitData initData;
 	Skeleton m_skeleton;

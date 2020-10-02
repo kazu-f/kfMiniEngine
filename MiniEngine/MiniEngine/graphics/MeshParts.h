@@ -104,5 +104,6 @@ namespace Engine {
 		std::vector< DescriptorHeap > m_descriptorHeap;			//ディスクリプタヒープ。
 		Skeleton* m_skeleton = nullptr;							//スケルトン。
 		void* m_expandData = nullptr;							//ユーザー拡張データ。
+		bool m_isCreateDescriptHeap = false;					//ディスクリプタヒープが作成されているか。
 	};
 }

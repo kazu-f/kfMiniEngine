@@ -45,8 +45,8 @@ namespace Engine {
 			m_expandData = expandData;
 		}
 		m_expandShaderResourceView = expandShaderResourceView;
-		//ディスクリプタヒープを作成。
-		CreateDescriptorHeaps();
+		////ディスクリプタヒープを作成。
+		//CreateDescriptorHeaps();
 	}
 
 	void MeshParts::CreateDescriptorHeaps()
@@ -82,6 +82,8 @@ namespace Engine {
 				descriptorHeapNo++;
 			}
 		}
+		//ディスクリプタヒープが作成された。
+		m_isCreateDescriptHeap = true;
 	}
 	void MeshParts::CreateMeshFromTkmMesh(
 		const TkmFile::SMesh& tkmMesh,
@@ -166,6 +168,9 @@ namespace Engine {
 		const Matrix& mProj
 	)
 	{
+		if (m_isCreateDescriptHeap == false) {
+			CreateDescriptorHeaps();
+		}
 #if 1
 
 		//メッシュごとにドロー

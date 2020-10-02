@@ -24,11 +24,18 @@ cbuffer LightCb : register(b1){
 	float3 ambinentLight;			//環境光。
 };
 
+//スキニング用の頂点データをひとまとめ。
+struct SSkinVSIn {
+	int4  Indices  	: BLENDINDICES0;
+	float4 Weights  : BLENDWEIGHT0;
+};
+
 //頂点シェーダーへの入力。
 struct SVSIn{
 	float4 pos 		: POSITION;		//モデルの頂点座標。
 	float3 normal	: NORMAL;		//法線。
 	float2 uv 		: TEXCOORD0;	//UV座標。
+	SSkinVSIn skinVert;				//スキン用の頂点データ。
 };
 //ピクセルシェーダーへの入力。
 struct SPSIn{
@@ -42,26 +49,66 @@ struct SPSIn{
 Texture2D<float4> g_texture : register(t0);	
 Texture2D<float4> g_normalMap : register(t1);
 Texture2D<float4> g_specularMap : register(t2);
+//ボーン行列。
+StructuredBuffer<float4x4> boneMatrix : register(t3);
 
 //サンプラステート。
 sampler g_sampler : register(s0);
+
+//スキン行列を計算する関数。
+float4x4 CalcSkinMatrix(SSkinVSIn skinVert)
+{
+	float4x4 skinning = 0;
+	float w = 0.0f;
+	[unroll]
+	for (int i = 0; i < 3; i++)
+	{
+		skinning += boneMatrix[skinVert.Indices[i]] * skinVert.Weights[i];
+		w += skinVert.Weights[i];
+	}
+
+	skinning += boneMatrix[skinVert.Indices[3]] * (1.0f - w);
+	return skinning;
+}
+
+//頂点シェーダーのコア関数。
+SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
+{
+	SPSIn psIn;
+	float4x4 m;
+	if (hasSkin) {
+		m = CalcSkinMatrix(vsIn.skinVert);
+	}
+	else {
+		m = mWorld;
+	}
+
+	psIn.pos = mul(m, vsIn.pos);						//モデルの頂点をワールド座標系に変換。
+	psIn.worldPos = psIn.pos;
+	psIn.pos = mul(mView, psIn.pos);						//ワールド座標系からカメラ座標系に変換。
+	psIn.pos = mul(mProj, psIn.pos);						//カメラ座標系からスクリーン座標系に変換。
+	psIn.normal = normalize(mul(m, vsIn.normal));		//法線をワールド座標系に変換。
+	psIn.uv = vsIn.uv;
+
+	return psIn;
+}
 
 /// <summary>
 /// モデル用の頂点シェーダーのエントリーポイント。
 /// </summary>
 SPSIn VSMain(SVSIn vsIn, uniform bool hasSkin)
 {
-	SPSIn psIn;
-
-	psIn.pos = mul(mWorld, vsIn.pos);						//モデルの頂点をワールド座標系に変換。
-	psIn.worldPos = psIn.pos.xyz;
-	psIn.pos = mul(mView, psIn.pos);						//ワールド座標系からカメラ座標系に変換。
-	psIn.pos = mul(mProj, psIn.pos);						//カメラ座標系からスクリーン座標系に変換。
-	psIn.normal = normalize(mul(mWorld, vsIn.normal));		//法線をワールド座標系に変換。
-	psIn.uv = vsIn.uv;
-
-	return psIn;
+	return VSMainCore(vsIn, false);
 }
+
+/*!--------------------------------------------------------------------------------------
+ * @brief	スキンありモデル用の頂点シェーダー。
+-------------------------------------------------------------------------------------- */
+SPSIn VSMainSkin(SVSIn vsIn)
+{
+	return VSMainCore(vsIn,true);
+}
+
 /// <summary>
 /// モデル用のピクセルシェーダーのエントリーポイント
 /// </summary>
@@ -80,7 +127,9 @@ float4 PSMain( SPSIn psIn ) : SV_Target0
 			}
 			float3 diffuse;
 			diffuse = directionalLight[i].color.xyz * (1.0f-metaric) * NdotL; //拡散反射光を足し算する。
-			return float4( diffuse, 1.0f);
+			
+			//return float4( diffuse, 1.0f);		//なんか拡散反射レベルを見たかったんかこれ？
+			
 			//ライトをあてる物体から視点に向かって伸びるベクトルを計算する。
 			float3 eyeToPixel = eyePos - psIn.worldPos;
 			eyeToPixel = normalize(eyeToPixel);

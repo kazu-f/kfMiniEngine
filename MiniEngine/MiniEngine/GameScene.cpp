@@ -34,23 +34,23 @@ void GameScene::Init()
 
 
 	initData.m_tkmFilePath = "Assets/modelData/unityChan.tkm";
-	initData.m_fxFilePath = "Assets/shader/NoAnimModel_PBR.fx";
+	initData.m_fxFilePath = "Assets/shader/NoAnimModel_LambertSpecularAmbient.fx";
+	initData.m_vsEntryPointFunc = "VSMainSkin";
 	initData.m_expandConstantBuffer = &light;
 	initData.m_expandConstantBufferSize = sizeof(light);
 
-	robotPBRModel.Init(initData);
-	initData.m_fxFilePath = "Assets/shader/NoAnimModel_LambertSpecularAmbient.fx";
 	robotModel.Init(initData);
 	g_camera3D->SetPosition({ 0.0f, 50.0f, 100.0f });
 	Vector3 pos, scale;
-
 
 	scale.x = 1.0f;
 	scale.y = 1.0f;
 	scale.z = 1.0f;
 
-	robotPBRModel.UpdateWorldMatrix(pos, g_quatIdentity, scale);
-	robotModel.UpdateWorldMatrix(pos, g_quatIdentity, scale);
+	Quaternion qRot;
+	qRot.SetRotationDegX(90.0f);
+
+	robotModel.UpdateWorldMatrix(pos, qRot, scale);
 
 	//アニメーションのためのロードを行う。
 	if (m_skeleton.Init("Assets/modelData/unityChan.tks")) {
@@ -58,7 +58,7 @@ void GameScene::Init()
 			//ボーンの構築。
 			m_skeleton.BuildBoneMatrices();
 			//モデルと関連付け。
-			robotPBRModel.BindSkeleton(m_skeleton);
+			robotModel.BindSkeleton(m_skeleton);
 
 			//アニメーションクリップのロード。
 			auto animClip = std::make_unique<CAnimationClip>();
@@ -109,17 +109,11 @@ void GameScene::Update()
 	}
 	if (m_skeleton.IsInited()) {
 		//スケルトンを更新。
-		m_skeleton.Update(robotPBRModel.GetWorldMatrix());
+		m_skeleton.Update(robotModel.GetWorldMatrix());
 	}
 }
 
 void GameScene::Draw(RenderContext& rc)
 {
-	if (isPBR) {
-		//3Dモデルを表示する。
-		robotPBRModel.Draw(rc);
-	}
-	else {
-		robotModel.Draw(rc);
-	}
+	robotModel.Draw(rc);
 }
