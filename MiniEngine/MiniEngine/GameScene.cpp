@@ -64,6 +64,9 @@ void GameScene::Init()
 			auto animClip = std::make_unique<CAnimationClip>();
 			animClip->Load("Assets/animData/idle.tka");
 			m_animationClips.push_back(move(animClip));
+			auto animClipRun = std::make_unique<CAnimationClip>();
+			animClipRun->Load("Assets/animData/run.tka");
+			m_animationClips.push_back(move(animClipRun));
 
 			for (auto& animClip : m_animationClips) {
 				animClip->SetLoopFlag(true);
@@ -94,6 +97,13 @@ void GameScene::Update()
 		qRot.Apply(lig.direction);
 	}
 
+	if (g_pad[0]->IsPress(enButtonA)) {
+		m_animation.Play(0, 0.6f);
+	}
+	if (g_pad[0]->IsPress(enButtonB)) {
+		m_animation.Play(1, 0.6f);
+	}
+
 	//カメラも回す。
 	qRot.SetRotationDegY(g_pad[0]->GetLStickXF());
 	auto camPos = g_camera3D->GetPosition();
@@ -105,7 +115,7 @@ void GameScene::Update()
 	}
 	if (m_animation.IsInited()) {
 		//アニメーションを再生。
-		m_animation.Progress(1.0f/30.0f);
+		m_animation.Progress(1.0f/120.0f);
 	}
 	if (m_skeleton.IsInited()) {
 		//スケルトンを更新。
