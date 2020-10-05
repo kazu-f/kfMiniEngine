@@ -28,7 +28,6 @@
 #include "math/Vector.h"
 #include "math/Matrix.h"
 
-#include "tkEngine.h"
 #include "graphics/GPUBuffer/VertexBuffer.h"
 #include "graphics/GPUBuffer/IndexBuffer.h"
 #include "graphics/IShaderResource.h"
@@ -49,6 +48,9 @@
 #include "graphics/2D/Sprite.h"
 #include "graphics/Model.h"
 #include "HID/GamePad.h"
+#include "util/CGameTime.h"
+
+#include "tkEngine.h"
 
 #include "graphics/Skeleton.h"
 #include "graphics/animation/Animation.h"

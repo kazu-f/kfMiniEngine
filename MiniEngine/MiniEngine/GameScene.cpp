@@ -103,7 +103,6 @@ void GameScene::Update()
 	if (g_pad[0]->IsPress(enButtonB)) {
 		m_animation.Play(1, 0.6f);
 	}
-
 	//カメラも回す。
 	qRot.SetRotationDegY(g_pad[0]->GetLStickXF());
 	auto camPos = g_camera3D->GetPosition();
@@ -115,7 +114,7 @@ void GameScene::Update()
 	}
 	if (m_animation.IsInited()) {
 		//アニメーションを再生。
-		m_animation.Progress(1.0f/120.0f);
+		m_animation.Progress(GameTime().GetFrameDeltaTime());
 	}
 	if (m_skeleton.IsInited()) {
 		//スケルトンを更新。

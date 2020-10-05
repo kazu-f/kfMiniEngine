@@ -5,6 +5,10 @@
 namespace Engine {
 	TkEngine* g_engine = nullptr;
 
+	TkEngine::TkEngine()
+	{
+	}
+
 	TkEngine::~TkEngine()
 	{
 		if (m_graphicsEngine) {
