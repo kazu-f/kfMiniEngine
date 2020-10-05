@@ -34,7 +34,7 @@ void GameScene::Init()
 
 
 	initData.m_tkmFilePath = "Assets/modelData/unityChan.tkm";
-	initData.m_fxFilePath = "Assets/shader/NoAnimModel_LambertSpecularAmbient.fx";
+	initData.m_fxFilePath = "Assets/shader/model.fx";
 	initData.m_vsEntryPointFunc = "VSMainSkin";
 	initData.m_expandConstantBuffer = &light;
 	initData.m_expandConstantBufferSize = sizeof(light);
