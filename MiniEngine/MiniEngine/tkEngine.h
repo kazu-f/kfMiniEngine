@@ -1,12 +1,13 @@
 #pragma once
 
+#include "util/Stopwatch.h"
 #include "HID/GamePad.h"
 
 namespace Engine {
 
 	class GraphicsEngine;
 
-	class TkEngine {
+	class TkEngine : Noncopyable {
 	public:
 		/// <summary>
 		/// デストラクタ。
@@ -28,6 +29,8 @@ namespace Engine {
 		GraphicsEngine* m_graphicsEngine = nullptr;		//グラフィックエンジン。
 		GamePad m_pad[GamePad::CONNECT_PAD_MAX];		//ゲームパッド。
 
+	public:
+		Stopwatch			m_sw;						//タイマークラス。
 	};
 
 	extern TkEngine* g_engine;	//TKエンジン。

@@ -147,6 +147,12 @@
     <ClCompile Include="graphics\animation\AnimationPlayController.cpp">
       <Filter>graphics\animation</Filter>
     </ClCompile>
+    <ClCompile Include="util\Stopwatch.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="util\CGameTime.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MiniEngine.h">
@@ -271,6 +277,9 @@
     </ClInclude>
     <ClInclude Include="policy\Noncopyable.h">
       <Filter>policy</Filter>
+    </ClInclude>
+    <ClInclude Include="util\CGameTime.h">
+      <Filter>util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

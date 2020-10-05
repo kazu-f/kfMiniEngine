@@ -10,6 +10,8 @@
 #include <list>
 #include <D3Dcompiler.h>
 #include <Windows.h>
+#include <wincodec.h>
+#include <wincodecsdk.h>
 #include <d3d12.h>
 #include <map>
 #include <functional>
@@ -17,6 +19,7 @@
 #include <DirectXMath.h>
 #include <Xinput.h>
 #include <array>
+#include <queue>
 
 #include "d3dx12.h"
 
