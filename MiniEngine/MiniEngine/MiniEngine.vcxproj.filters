@@ -46,6 +46,9 @@
     <Filter Include="policy">
       <UniqueIdentifier>{bd14b65e-b1d6-4908-96c7-38d73c7ac577}</UniqueIdentifier>
     </Filter>
+    <Filter Include="graphics\light">
+      <UniqueIdentifier>{23807ab7-7b7c-49b4-add7-9d6ec13da296}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tkEngine.cpp">
@@ -152,6 +155,9 @@
     </ClCompile>
     <ClCompile Include="util\CGameTime.cpp">
       <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\light\LightManager.cpp">
+      <Filter>graphics\light</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -280,6 +286,12 @@
     </ClInclude>
     <ClInclude Include="util\CGameTime.h">
       <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\light\SLightData.h">
+      <Filter>graphics\light</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\light\LightManager.h">
+      <Filter>graphics\light</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

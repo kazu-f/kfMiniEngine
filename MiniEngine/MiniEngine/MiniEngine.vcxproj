@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="graphics\light\LightManager.cpp" />
     <ClCompile Include="util\CGameTime.cpp" />
     <ClCompile Include="graphics\animation\AnimationPlayController.cpp" />
     <ClCompile Include="graphics\animation\AnimationClip.cpp" />
@@ -60,6 +61,8 @@
     <ClCompile Include="util\Stopwatch.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="graphics\light\SLightData.h" />
+    <ClInclude Include="graphics\light\LightManager.h" />
     <ClInclude Include="util\CGameTime.h" />
     <ClInclude Include="graphics\animation\AnimationPlayController.h" />
     <ClInclude Include="graphics\animation\AnimationClip.h" />
