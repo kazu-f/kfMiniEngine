@@ -49,6 +49,9 @@
     <Filter Include="graphics\light">
       <UniqueIdentifier>{23807ab7-7b7c-49b4-add7-9d6ec13da296}</UniqueIdentifier>
     </Filter>
+    <Filter Include="gameObject">
+      <UniqueIdentifier>{40d94d8c-12b9-4d9c-9275-0090efcbe19a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tkEngine.cpp">
@@ -158,6 +161,12 @@
     </ClCompile>
     <ClCompile Include="graphics\light\LightManager.cpp">
       <Filter>graphics\light</Filter>
+    </ClCompile>
+    <ClCompile Include="gameObject\GameObjectManager.cpp">
+      <Filter>gameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="gameObject\IGameObject.cpp">
+      <Filter>gameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -292,6 +301,15 @@
     </ClInclude>
     <ClInclude Include="graphics\light\LightManager.h">
       <Filter>graphics\light</Filter>
+    </ClInclude>
+    <ClInclude Include="gameObject\GameObjectManager.h">
+      <Filter>gameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="gameObject\IGameObject.h">
+      <Filter>gameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="util\Util.h">
+      <Filter>util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="gameObject\GameObjectManager.cpp" />
+    <ClCompile Include="gameObject\IGameObject.cpp" />
     <ClCompile Include="graphics\light\LightManager.cpp" />
     <ClCompile Include="util\CGameTime.cpp" />
     <ClCompile Include="graphics\animation\AnimationPlayController.cpp" />
@@ -61,6 +63,8 @@
     <ClCompile Include="util\Stopwatch.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="gameObject\GameObjectManager.h" />
+    <ClInclude Include="gameObject\IGameObject.h" />
     <ClInclude Include="graphics\light\SLightData.h" />
     <ClInclude Include="graphics\light\LightManager.h" />
     <ClInclude Include="util\CGameTime.h" />
@@ -105,6 +109,7 @@
     <ClInclude Include="tkFile\TkmFile.h" />
     <ClInclude Include="tkFile\TksFile.h" />
     <ClInclude Include="util\Stopwatch.h" />
+    <ClInclude Include="util\Util.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -42,6 +42,8 @@
 #include "graphics/DescriptorHeap.h"
 #include "graphics/RenderTarget.h"
 
+#include "gameObject/GameObjectManager.h"
+
 #include "graphics/RenderContext_inline.h"
 #include "graphics/DescriptorHeap_inline.h"
 
