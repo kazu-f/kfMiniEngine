@@ -65,13 +65,39 @@ namespace Engine {
 		/// </returns>
 		virtual bool Start() { return true; }
 		/// <summary>
+		/// Update関数が実行される前に呼ばれる更新関数。
+		/// </summary>
+		virtual void PreUpdate() {}
+		/// <summary>
 		/// 更新処理。
 		/// </summary>
 		virtual void Update() {}
 		/// <summary>
+		/// Update関数が実行された後で呼ばれる更新関数。
+		/// </summary>
+		virtual void PostUpdate() {}
+	public:		//描画関係の処理。
+		/// <summary>
 		/// 描画処理。
 		/// </summary>
 		virtual void Draw() {}
+		/// <summary>
+		/// シャドウマップへのレンダリングパスから呼ばれる描画処理。
+		/// </summary>
+		virtual void RenderToShadowMap(RenderContext& rc, const Matrix& mLightViwe, const Matrix& mLightProj)
+		{
+		}
+		/// <summary>
+		/// フォワードレンダリング。
+		/// </summary>
+		/// <remarks>
+		/// 特殊なシェーディングを行うものをレンダリングする。
+		/// 通常のレンダリングには物理ベースシェーダーが使用されている？
+		/// </remarks>
+		virtual void ForwardRender(RenderContext& rc)
+		{
+			(void)rc;
+		}
 		/// <summary>
 		/// 削除されるときに呼ばれる。
 		/// </summary>
@@ -108,6 +134,20 @@ namespace Engine {
 		virtual bool IsStart()const
 		{
 			return m_isStart;
+		}
+		/// <summary>
+		/// アクティブかどうか。
+		/// </summary>
+		bool IsActive()const
+		{
+			return m_isActive;
+		}
+		/// <summary>
+		/// アクティブフラグを設定。
+		/// </summary>
+		void SetActiveFlag(bool flag)
+		{
+			m_isActive = flag;
 		}
 		/// <summary>
 		/// タグを設定。
@@ -167,23 +207,29 @@ namespace Engine {
 	public: //処理のラップ。
 		void StartWrapper()
 		{
-			if (!m_isStart && m_isRegist && !m_isDead && !m_isRegistDeadList) {
+			if (m_isActive && !m_isStart && !m_isDead && !m_isRegistDeadList) {
 				if (Start()) {
 					//初期化完了。
 					m_isStart = true;
 				}
 			}
 		}
+		void PreUpdateWrapper()
+		{
+			if (m_isActive && m_isStart && !m_isDead && !m_isRegistDeadList) {
+				PreUpdate();
+			}
+		}
 		void UpdateWrapper()
 		{
-			if (m_isStart && m_isRegist && !m_isDead && !m_isRegistDeadList) {
+			if (m_isActive && m_isStart && !m_isDead && !m_isRegistDeadList) {
 				Update();
 			}
 		}
-		void DrawWrapper()
+		void PostUpdateWrapper()
 		{
-			if (m_isStart && m_isRegist && !m_isDead && !m_isRegistDeadList) {
-				Draw();
+			if (m_isActive && m_isStart && !m_isDead && !m_isRegistDeadList) {
+				PostUpdate();
 			}
 		}
 		void OnDestroyWrapper()
@@ -198,6 +244,27 @@ namespace Engine {
 
 			OnDestroy();
 		}
+		/// <summary>
+		/// 描画関係
+		/// </summary>
+		void DrawWrapper()
+		{
+			if (m_isActive && m_isStart && !m_isDead && !m_isRegistDeadList) {
+				Draw();
+			}
+		}
+		void RenderToShadowMapWraper(RenderContext& rc, const Matrix& mLightView, const Matrix& mLightProj)
+		{
+			if (m_isActive && m_isStart && !m_isDead && !m_isRegistDeadList) {
+				RenderToShadowMap(rc, mLightView, mLightProj);
+			}
+		}
+		void ForwardRenderWrapper(RenderContext& rc)
+		{
+			if (m_isActive && m_isStart && !m_isDead && !m_isRegistDeadList) {
+				ForwardRender(rc);
+			}
+		}
 
 		friend class CGameObjectManager;
 	protected:
@@ -207,6 +274,7 @@ namespace Engine {
 		bool m_isRegistDeadList = false;	//!<死亡リストに積まれている。
 		bool m_isNewFromGameObjectManager;	//|<GameObjectManagerでnewされた。
 		bool m_isRegist = false;			//!<GameObjectManajerに登録されている？
+		bool m_isActive = true;			//!<アクティブフラグ。
 		unsigned int m_tags = 0;			//!<タグ。
 		unsigned int m_nameKey = 0;			//!<名前キー。
 		std::list<EventListener> m_eventListeners;		//!<イベントリスナー。

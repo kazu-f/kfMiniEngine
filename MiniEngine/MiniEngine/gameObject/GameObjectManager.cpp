@@ -15,11 +15,29 @@ namespace Engine {
 		}
 	}
 
+	void CGameObjectManager::PreUpdate()
+	{
+		for (auto& objList : m_gameObjectListArray) {
+			for (auto& obj : objList) {
+				obj->PreUpdateWrapper();
+			}
+		}
+	}
+
 	void CGameObjectManager::Update()
 	{
 		for (GameObjectList objList : m_gameObjectListArray) {
 			for (IGameObject* obj : objList) {
 				obj->UpdateWrapper();
+			}
+		}
+	}
+
+	void CGameObjectManager::PostUpdate()
+	{
+		for (auto& objList : m_gameObjectListArray) {
+			for (auto& obj : objList) {
+				obj->PostUpdateWrapper();
 			}
 		}
 	}
@@ -30,6 +48,33 @@ namespace Engine {
 		{
 			for (IGameObject* obj : objList) {
 				obj->DrawWrapper();
+			}
+		}
+	}
+
+	void CGameObjectManager::ForwardRender(RenderContext& rc)
+	{
+		for (auto& objList : m_gameObjectListArray) {
+			for (auto& obj : objList) {
+				obj->ForwardRenderWrapper(rc);
+			}
+		}
+	}
+
+	//void CGameObjectManager::RenderHUD(RenderContext& rc)
+	//{
+	//	for (auto& objList : m_gameObjectListArray) {
+	//		for (auto& obj : objList) {
+
+	//		}
+	//	}
+	//}
+
+	void CGameObjectManager::RenderToShadowMap(RenderContext& rc, const Matrix& mLightView, const Matrix& mLightProj)
+	{
+		for (auto& objList : m_gameObjectListArray) {
+			for (auto& obj : objList) {
+				obj->RenderToShadowMapWraper(rc, mLightView, mLightView);
 			}
 		}
 	}
@@ -59,9 +104,17 @@ namespace Engine {
 
 	void CGameObjectManager::ExecuteFromGameThread()
 	{
-		Start();		//初期化。
-		Update();		//更新処理。
-		Draw();			//描画処理。
+		//更新系の処理。
+		{
+			Start();		//初期化。
+			PreUpdate();	//事前アップデート。
+			Update();		//更新処理。
+			PostUpdate();	//遅延アップデート。
+		}
+		//描画系の処理。
+		{
+			g_graphicsEngine->Render(this);
+		}
 
 		ExecuteDeleteGameObjects();		//削除処理。
 	}

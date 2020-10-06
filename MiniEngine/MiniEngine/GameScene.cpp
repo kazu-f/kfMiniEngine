@@ -9,7 +9,7 @@ GameScene::~GameScene()
 {
 }
 
-void GameScene::Init()
+bool GameScene::Start()
 {
 	//ライトを用意する。
 
@@ -77,6 +77,7 @@ void GameScene::Init()
 		}
 	}
 
+	return true;
 }
 
 void GameScene::Release()
@@ -122,7 +123,7 @@ void GameScene::Update()
 	}
 }
 
-void GameScene::Draw(RenderContext& rc)
+void GameScene::ForwardRender(RenderContext& rc)
 {
 	robotModel.Draw(rc);
 }

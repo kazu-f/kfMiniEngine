@@ -24,10 +24,24 @@ namespace Engine {
 		for (int i = 0; i < GamePad::CONNECT_PAD_MAX; i++) {
 			g_pad[i] = &m_pad[i];
 		}
+		//ゲームオブジェクトマネージャーの初期化。
+		GameObjectManager().Init(20);
+	}
+	void TkEngine::GameUpdate()
+	{
+
+		BeginFrame();
+		//グラフィックエンジンの更新。
+		m_graphicsEngine->Update();
+
+		GameObjectManager().ExecuteFromGameThread();
+
+		EndFrame();
 	}
 	void TkEngine::BeginFrame()
 	{
-		m_graphicsEngine->BeginRender();
+		m_sw.Start();
+
 		for (auto& pad : m_pad) {
 			pad.BeginFrame();
 			pad.Update();
@@ -36,6 +50,7 @@ namespace Engine {
 	}
 	void TkEngine::EndFrame()
 	{
-		m_graphicsEngine->EndRender();
+		m_sw.Stop();
+		m_gameTime.PushFrameDeltaTime(static_cast<float>(m_sw.GetElapsed()));
 	}
 }

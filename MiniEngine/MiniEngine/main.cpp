@@ -25,35 +25,34 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	// ここから初期化を行うコードを記述する。
 	//////////////////////////////////////
 
-	GameScene game;
-	game.Init();
+	NewGO<GameScene>(0);
 
 	//////////////////////////////////////
 	// 初期化を行うコードを書くのはここまで！！！
 	//////////////////////////////////////
-	auto& renderContext = g_graphicsEngine->GetRenderContext();
+	//auto& renderContext = g_graphicsEngine->GetRenderContext();
+
 	// ここからゲームループ。
 	while (DispatchWindowMessage())
 	{
-		//レンダリング開始。
-		g_engine->BeginFrame();
+		/*
+			次の目標
+			エンジンの中で更新処理をまとめて、
+			この中で呼び出す。
+		*/
+		g_engine->GameUpdate();
 		
 		
 		//////////////////////////////////////
 		//ここから絵を描くコードを記述する。
 		//////////////////////////////////////
 
-		//更新処理。
-		game.Update();
-		//描画処理。
-		game.Draw(renderContext);
 
 
 		//////////////////////////////////////
 		//絵を描くコードを書くのはここまで！！！
 		//////////////////////////////////////
 		//レンダリング終了。
-		g_engine->EndFrame();
 	}
 	return 0;
 }

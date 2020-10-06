@@ -15,6 +15,7 @@
 #include "camera/Camera.h"
 
 namespace Engine {
+	class CGameObjectManager;
 
 	/// <summary>
 	/// DirectX12に依存するグラフィックスエンジン
@@ -37,6 +38,20 @@ namespace Engine {
 		/// <returns>falseが返ってきたら作成に失敗。</returns>
 		bool Init(HWND hwnd, UINT frameBufferWidth, UINT frameBufferHeight);
 		/// <summary>
+		/// 更新処理。
+		/// </summary>
+		void Update();
+		/// <summary>
+		/// 描画を行う。
+		/// </summary>
+		void Render(CGameObjectManager* goMgr);
+	private:
+		/// <summary>
+		/// 描画時に呼ばれる処理。
+		/// </summary>
+		/// <param name="goMgr"></param>
+		void OnRender(CGameObjectManager* goMgr);
+		/// <summary>
 		/// レンダリング開始。
 		/// </summary>
 		/// <remarks>
@@ -50,6 +65,7 @@ namespace Engine {
 		/// 1フレームのレンダリングの終了時に呼び出してください。
 		/// </remarks>
 		void EndRender();
+	public:
 		/// <summary>
 		/// D3Dデバイスを取得。
 		/// </summary>

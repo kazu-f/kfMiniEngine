@@ -171,6 +171,7 @@ namespace Engine {
 		g_graphicsEngine = this;
 		return true;
 	}
+
 	IDXGIFactory4* GraphicsEngine::CreateDXGIFactory()
 	{
 		UINT dxgiFactoryFlags = 0;
@@ -408,13 +409,31 @@ namespace Engine {
 		}
 		return true;
 	}
-	void GraphicsEngine::BeginRender()
+	void GraphicsEngine::Update()
 	{
-		m_frameIndex = m_swapChain->GetCurrentBackBufferIndex();
-
 		//カメラを更新する。
 		m_camera2D.Update();
 		m_camera3D.Update();
+	}
+	void GraphicsEngine::Render(CGameObjectManager* goMgr)
+	{
+		BeginRender();
+		
+		OnRender(goMgr);
+
+		EndRender();
+	}
+	void GraphicsEngine::OnRender(CGameObjectManager* goMgr)
+	{
+		//フォワードレンダリングパス。
+		goMgr->ForwardRender(m_renderContext);
+
+
+
+	}
+	void GraphicsEngine::BeginRender()
+	{
+		m_frameIndex = m_swapChain->GetCurrentBackBufferIndex();
 
 		//コマンドアロケータををリセット。
 		m_commandAllocator->Reset();

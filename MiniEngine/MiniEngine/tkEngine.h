@@ -18,6 +18,10 @@ namespace Engine {
 		/// </summary>
 		~TkEngine();
 		/// <summary>
+		/// ゲームの処理。
+		/// </summary>
+		void GameUpdate();
+		/// <summary>
 		/// フレームの開始時に呼ばれる処理。
 		/// </summary>
 		void BeginFrame();

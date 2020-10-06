@@ -195,8 +195,18 @@ namespace Engine {
 		void ExecuteDeleteGameObjects();
 
 		void Start();		//スタートを呼び出す。
+		void PreUpdate();	//事前更新。
 		void Update();		//更新処理を呼び出す。
-		void Draw();		//描画処理を呼び出す。
+		void PostUpdate();	//遅延更新。
+
+	public:
+		/// <summary>
+		/// 描画関係の更新処理はグラフィックエンジンから呼び出す。
+		/// </summary>
+		void Draw();
+		void ForwardRender(RenderContext& rc);
+		//void RenderHUD(RenderContext& rc);
+		void RenderToShadowMap(RenderContext& rc,const Matrix& mLightView,const Matrix& mLightProj);
 
 	private:
 		typedef std::list<IGameObject*> GameObjectList;			//!<ゲームオブジェクト*のリスト。
