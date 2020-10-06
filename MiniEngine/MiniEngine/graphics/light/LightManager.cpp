@@ -17,13 +17,9 @@ namespace Engine {
 
 	void CLightManager::AddLight(prefab::CLightBase* light)
 	{
-
 		//ライトの振り分け
 		const std::type_info& typeInfo = typeid(*light);
-		if (typeInfo == typeid(CLightBase)) {
-
-		}
-		else if (typeInfo == typeid(CDirectionLight)) {
+		if (typeInfo == typeid(CDirectionLight)) {
 			//登録済みか調べる。
 			auto findIt = std::find(m_directionLidhts.begin(), m_directionLidhts.end(), light);
 			if (findIt == m_directionLidhts.end()) {
@@ -41,10 +37,7 @@ namespace Engine {
 	{
 		//登録を解除する。
 		const std::type_info& typeInfo = typeid(*light);
-		if (typeInfo == typeid(CLightBase)) {
-			
-		}
-		else if(typeInfo == typeid(CDirectionLight)){
+		if(typeInfo == typeid(CDirectionLight)){
 			m_directionLidhts.erase(
 				std::remove(m_directionLidhts.begin(),m_directionLidhts.end(),light),
 				m_directionLidhts.end()			
@@ -55,8 +48,28 @@ namespace Engine {
 	void CLightManager::LightUpdate()
 	{
 		//ディレクションライトのストラクチャーバッファを更新。
+		int ligNo = 0;
+		for (auto lig : m_directionLidhts) {
+			if (lig->IsActive() == false) {
+				//アクティブじゃない奴はスキップ。
+				continue;
+			}
+			m_rawDirectionLight[ligNo] = lig->GetRawData();
+			ligNo++;
+		}
+		int numDirLig = ligNo;		//ディレクションライトの数。
+		//ポイントライトの処理はそのうち。
+		ligNo = 0;
+		
+		int numPointLig = ligNo;
 
-
+		m_lightParam.numDirectionLight = numDirLig;		//ディレクションライトの数。
+		m_lightParam.numPointLight = numPointLig;		//ポイントライトの数。
+		m_lightParam.eyePos = g_camera3D->GetPosition();//視点の座標。
+		m_lightParam.screenParam.x = 0.0f;				//near
+		m_lightParam.screenParam.y = 0.0f;				//far
+		m_lightParam.screenParam.z = static_cast<float>(g_graphicsEngine->GetFrameBufferWidth());	//screenWidth
+		m_lightParam.screenParam.w = static_cast<float>(g_graphicsEngine->GetFrameBufferHeight());	//screenHeight
 	}
 
 	void CLightManager::Render(RenderContext& rc)

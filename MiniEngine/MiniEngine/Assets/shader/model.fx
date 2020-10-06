@@ -1,18 +1,18 @@
+/*
+*		モデルシェーダー。
+*/
+
+#include "modelCB.h"
+#include "modelStruct.h"
 
 static const int NUM_DIRECTIONAL_LIGHT = 4;	//ディレクションライトの本数。
-
-//モデル用の定数バッファ
-cbuffer ModelCb : register(b0) {
-	float4x4 mWorld;
-	float4x4 mView;
-	float4x4 mProj;
-};
 
 //ディレクションライト。
 struct DirectionalLight {
 	float4 color;		//ライトの色。
 	float3 direction;	//ライトの方向。
 };
+
 //ライト用の定数バッファ。
 cbuffer LightCb : register(b1) {
 	DirectionalLight directionalLight[NUM_DIRECTIONAL_LIGHT];
