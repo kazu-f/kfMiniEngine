@@ -6,6 +6,10 @@
 #include "SLightData.h"
 
 namespace Engine {
+	namespace prefab {
+		class CLightBase;
+	}
+
 	/// <summary>
 	/// ライトの管理者。
 	/// </summary>
@@ -23,11 +27,11 @@ namespace Engine {
 		/// <summary>
 		/// ライトを追加する。
 		/// </summary>
-
+		void AddLight(prefab::CLightBase* light);
 		/// <summary>
 		/// ライトを削除する。
 		/// </summary>
-
+		void RemoveLight(prefab::CLightBase* light);
 		/// <summary>
 		/// 更新処理。
 		/// </summary>

@@ -52,6 +52,12 @@
     <Filter Include="gameObject">
       <UniqueIdentifier>{40d94d8c-12b9-4d9c-9275-0090efcbe19a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="prefab">
+      <UniqueIdentifier>{685e0cba-9ba1-4524-b24c-e57cdd6b2b8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="prefab\light">
+      <UniqueIdentifier>{0ff9d23b-fa30-4a08-b2db-b38cba3951f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tkEngine.cpp">
@@ -167,6 +173,9 @@
     </ClCompile>
     <ClCompile Include="gameObject\IGameObject.cpp">
       <Filter>gameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="prefab\light\LightBase.cpp">
+      <Filter>prefab\light</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -310,6 +319,9 @@
     </ClInclude>
     <ClInclude Include="util\Util.h">
       <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="prefab\light\LightBase.h">
+      <Filter>prefab\light</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

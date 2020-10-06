@@ -19,6 +19,7 @@ namespace Engine {
 	{
 		//グラフィックエンジンの初期化。
 		m_graphicsEngine = new GraphicsEngine();
+		g_graphicsEngine = m_graphicsEngine;
 		m_graphicsEngine->Init(hwnd, frameBufferWidth, frameBufferHeight);
 		//ゲームパッドの初期化。
 		for (int i = 0; i < GamePad::CONNECT_PAD_MAX; i++) {

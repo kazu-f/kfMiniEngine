@@ -167,8 +167,12 @@ namespace Engine {
 
 		g_camera2D = &m_camera2D;
 		g_camera3D = &m_camera3D;
-		//
-		g_graphicsEngine = this;
+
+
+		//ライトマネージャーの作成。
+		m_lightManager = std::make_unique<CLightManager>();
+		m_lightManager->Init();
+
 		return true;
 	}
 

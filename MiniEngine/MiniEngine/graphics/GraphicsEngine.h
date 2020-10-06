@@ -16,6 +16,7 @@
 
 namespace Engine {
 	class CGameObjectManager;
+	class CLightManager;
 
 	/// <summary>
 	/// DirectX12に依存するグラフィックスエンジン
@@ -136,6 +137,13 @@ namespace Engine {
 		{
 			return m_currentFrameBufferRTVHandle;
 		}
+		/// <summary>
+		/// ライトマネージャーの取得。
+		/// </summary>
+		CLightManager* GetLightManager()
+		{
+			return m_lightManager.get();
+		}
 	private:
 		/// <summary>
 		/// D3Dデバイスの作成。
@@ -240,6 +248,7 @@ namespace Engine {
 		UINT m_frameBufferHeight = 0;		//フレームバッファの高さ。
 		Camera m_camera2D;					//2Dカメラ。
 		Camera m_camera3D;					//3Dカメラ。
+		std::unique_ptr<CLightManager> m_lightManager;		//ライトマネージャー。
 	};
 	extern GraphicsEngine* g_graphicsEngine;	//グラフィックスエンジン
 	extern Camera* g_camera2D;					//2Dカメラ。

@@ -22,6 +22,7 @@
     <ClCompile Include="gameObject\GameObjectManager.cpp" />
     <ClCompile Include="gameObject\IGameObject.cpp" />
     <ClCompile Include="graphics\light\LightManager.cpp" />
+    <ClCompile Include="prefab\light\LightBase.cpp" />
     <ClCompile Include="util\CGameTime.cpp" />
     <ClCompile Include="graphics\animation\AnimationPlayController.cpp" />
     <ClCompile Include="graphics\animation\AnimationClip.cpp" />
@@ -67,6 +68,7 @@
     <ClInclude Include="gameObject\IGameObject.h" />
     <ClInclude Include="graphics\light\SLightData.h" />
     <ClInclude Include="graphics\light\LightManager.h" />
+    <ClInclude Include="prefab\light\LightBase.h" />
     <ClInclude Include="util\CGameTime.h" />
     <ClInclude Include="graphics\animation\AnimationPlayController.h" />
     <ClInclude Include="graphics\animation\AnimationClip.h" />

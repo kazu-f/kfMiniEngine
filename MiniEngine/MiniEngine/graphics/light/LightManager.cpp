@@ -6,11 +6,19 @@ namespace Engine {
 	void CLightManager::Init()
 	{
 		//アンビエントライトの初期化。
-
+		SetAmbientLight({ 0.5f,0.5f,0.5f });
 		//ライトのパラメータ用の定数バッファを作成。
 		m_lightParamCB.Init(sizeof(SLightParam), nullptr);
 		//ディレクションライト用のストラクチャバッファを作成。
 		m_directionLightSB.Init(sizeof(SDirectionLight), MAX_DIRECTION_LIGHT, nullptr);
+	}
+
+	void CLightManager::AddLight(prefab::CLightBase* light)
+	{
+	}
+
+	void CLightManager::RemoveLight(prefab::CLightBase* light)
+	{
 	}
 
 	void CLightManager::LightUpdate()
