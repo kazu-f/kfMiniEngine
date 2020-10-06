@@ -13,7 +13,7 @@ namespace Engine {
 		void CLightBase::OnDestroy()
 		{
 			g_graphicsEngine->GetLightManager()->RemoveLight(this);
-			OnDstroySub();
+			OnDestroySub();
 		}
 	}
 

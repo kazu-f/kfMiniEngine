@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "LightManager.h"
+#include "prefab/light/DirectionLight.h"
 
 namespace Engine {
+	using namespace prefab;
 
 	void CLightManager::Init()
 	{
@@ -15,10 +17,39 @@ namespace Engine {
 
 	void CLightManager::AddLight(prefab::CLightBase* light)
 	{
+
+		//ƒ‰ƒCƒg‚ÌU‚è•ª‚¯
+		const std::type_info& typeInfo = typeid(*light);
+		if (typeInfo == typeid(CLightBase)) {
+
+		}
+		else if (typeInfo == typeid(CDirectionLight)) {
+			//“o˜^Ï‚İ‚©’²‚×‚éB
+			auto findIt = std::find(m_directionLidhts.begin(), m_directionLidhts.end(), light);
+			if (findIt == m_directionLidhts.end()) {
+				//V‹K“o˜^B
+				m_directionLidhts.push_back(reinterpret_cast<CDirectionLight*>(light));
+			}
+			else {
+				//Šù‚É“o˜^‚³‚ê‚Ä‚¢‚éB
+				return;
+			}
+		}
 	}
 
 	void CLightManager::RemoveLight(prefab::CLightBase* light)
 	{
+		//“o˜^‚ğ‰ğœ‚·‚éB
+		const std::type_info& typeInfo = typeid(*light);
+		if (typeInfo == typeid(CLightBase)) {
+			
+		}
+		else if(typeInfo == typeid(CDirectionLight)){
+			m_directionLidhts.erase(
+				std::remove(m_directionLidhts.begin(),m_directionLidhts.end(),light),
+				m_directionLidhts.end()			
+			);
+		}
 	}
 
 	void CLightManager::LightUpdate()

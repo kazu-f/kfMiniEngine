@@ -30,7 +30,7 @@ namespace Engine {
 	
 		private:
 			virtual bool StartSub() = 0;
-			virtual void OnDstroySub() {};
+			virtual void OnDestroySub() {};
 		private:
 			unsigned int m_lightingMaterialIDGroup = 0xFFFFFFFF;		//!<ライトの影響を与える相手を識別するマテリアルIDグループ。0xFFFFFFFFですべてに影響を与える。
 

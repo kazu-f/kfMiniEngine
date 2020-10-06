@@ -177,6 +177,9 @@
     <ClCompile Include="prefab\light\LightBase.cpp">
       <Filter>prefab\light</Filter>
     </ClCompile>
+    <ClCompile Include="prefab\light\DirectionLight.cpp">
+      <Filter>prefab\light</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MiniEngine.h">
@@ -305,9 +308,6 @@
     <ClInclude Include="util\CGameTime.h">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="graphics\light\SLightData.h">
-      <Filter>graphics\light</Filter>
-    </ClInclude>
     <ClInclude Include="graphics\light\LightManager.h">
       <Filter>graphics\light</Filter>
     </ClInclude>
@@ -322,6 +322,12 @@
     </ClInclude>
     <ClInclude Include="prefab\light\LightBase.h">
       <Filter>prefab\light</Filter>
+    </ClInclude>
+    <ClInclude Include="prefab\light\DirectionLight.h">
+      <Filter>prefab\light</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\light\LightData.h">
+      <Filter>graphics\light</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

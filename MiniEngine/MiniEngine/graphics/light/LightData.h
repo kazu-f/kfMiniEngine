@@ -10,9 +10,9 @@ namespace Engine
 	/// ディレクションライト。
 	/// </summary>
 	struct SDirectionLight {
-		Vector3 direction;	//ライトの方向。
-		float pad0;			//パディング。
 		Vector4 color;		//ライトのカラー。
+		Vector3 direction;	//ライトの方向。
+		unsigned int lightingMaterialIDGroup;
 	};
 
 	/// <summary>

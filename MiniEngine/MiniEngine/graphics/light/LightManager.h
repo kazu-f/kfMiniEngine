@@ -3,11 +3,12 @@
 /// ライトマネージャー。
 /// </summary>
 
-#include "SLightData.h"
+#include "LightData.h"
 
 namespace Engine {
 	namespace prefab {
 		class CLightBase;
+		class CDirectionLight;
 	}
 
 	/// <summary>
@@ -101,7 +102,7 @@ namespace Engine {
 		/// <summary>
 		/// ここにディレクションライトクラスとポイントライトクラスのリスト。
 		/// </summary>
-
+		std::list<prefab::CDirectionLight*> m_directionLidhts;			//ディレクションライトの配列。
 		ConstantBuffer m_lightParamCB;		//定数バッファ。
 		StructuredBuffer m_directionLightSB;//ディレクションライトのストラクチャバッファ。
 	};

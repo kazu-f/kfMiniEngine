@@ -10,8 +10,8 @@ cbuffer ModelCb : register(b0) {
 
 //ディレクションライト。
 struct DirectionalLight {
-	float3 direction;	//ライトの方向。
 	float4 color;		//ライトの色。
+	float3 direction;	//ライトの方向。
 };
 //ライト用の定数バッファ。
 cbuffer LightCb : register(b1) {
