@@ -7,7 +7,7 @@
 
 static const float PI = 3.14159265358979323846;
 
-static const int NUM_DIRECTIONAL_LIGHT = 4;	//ディレクションライトの本数。
+//static const int NUM_DIRECTIONAL_LIGHT = 4;	//ディレクションライトの本数。
 
 ////ライト用の定数バッファ。
 //cbuffer LightCb : register(b2) {

@@ -70,6 +70,7 @@ namespace Engine {
 				descriptorHeap.RegistShaderResource(1, mesh->m_materials[matNo]->GetNormalMap());		//法線マップ。
 				descriptorHeap.RegistShaderResource(2, mesh->m_materials[matNo]->GetSpecularMap());	//スペキュラマップ。
 				descriptorHeap.RegistShaderResource(3, m_boneMatricesStructureBuffer);
+				descriptorHeap.RegistShaderResource(4, g_graphicsEngine->GetLightManager()->GetDirectionLightStructuredBuffer());
 				if (m_expandShaderResourceView) {
 					descriptorHeap.RegistShaderResource(EXPAND_SRV_REG__START_NO, *m_expandShaderResourceView);
 				}
@@ -173,6 +174,8 @@ namespace Engine {
 			CreateDescriptorHeaps();
 		}
 #if 1
+
+		//auto ligMgr = g_graphicsEngine->GetLightManager();
 
 		//メッシュごとにドロー
 		//プリミティブのトポロジーはトライアングルリストのみ。

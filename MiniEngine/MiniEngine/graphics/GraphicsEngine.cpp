@@ -418,10 +418,15 @@ namespace Engine {
 		//カメラを更新する。
 		m_camera2D.Update();
 		m_camera3D.Update();
+
+		//ライトの更新処理。
+		m_lightManager->LightUpdate();
 	}
 	void GraphicsEngine::Render(CGameObjectManager* goMgr)
 	{
 		BeginRender();
+
+		PreRender();
 		
 		OnRender(goMgr);
 

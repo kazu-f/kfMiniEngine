@@ -16,11 +16,13 @@ bool GameScene::Start()
 	prefab::CDirectionLight* light = NewGO<prefab::CDirectionLight>(0);
 
 	Vector4 color = Vector4::Gray;
-	Vector3 m_lightDir = { 0.0f,0.0f,-1.0f };
+	m_lightDir = { 0.0f,0.0f,-1.0f };
 	light->SetColor(color);
 	light->SetDirection(m_lightDir);
 
 	m_lightArray.push_back(light);
+
+	//g_graphicsEngine->GetLightManager()->SetAmbientLight({ 0.2f,0.2f,0.2f });
 
 	//light.directionalLight[0].color.x = 0.5f;
 	//light.directionalLight[0].color.y = 0.5f;
@@ -51,6 +53,7 @@ bool GameScene::Start()
 	robotModel.Init(initData);
 	g_camera3D->SetPosition({ 0.0f, 50.0f, 100.0f });
 	Vector3 pos, scale;
+	pos = { 0.0f,0.0f,0.0f };
 
 	scale.x = 1.0f;
 	scale.y = 1.0f;
@@ -114,6 +117,12 @@ void GameScene::Update()
 	if (g_pad[0]->IsPress(enButtonB)) {
 		m_animation.Play(1, 0.6f);
 	}
+
+	//ŠÂ‹«Œõ‚Ì•Ï‰»‚ð‚³‚¹‚éB
+	m_lightPow += g_pad[0]->GetLStickYF() * 0.02f;
+	m_lightPow = min(1.0f, max(0.0f, m_lightPow));
+	g_graphicsEngine->GetLightManager()->SetAmbientLight({ m_lightPow,m_lightPow,m_lightPow });
+
 	//ƒJƒƒ‰‚à‰ñ‚·B
 	qRot.SetRotationDegY(g_pad[0]->GetLStickXF());
 	auto camPos = g_camera3D->GetPosition();

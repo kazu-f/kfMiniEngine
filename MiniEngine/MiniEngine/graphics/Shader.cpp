@@ -19,6 +19,7 @@ namespace Engine {
 		UINT compileFlags = 0;
 #endif
 		auto hr = D3DCompileFromFile(filePath, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, entryFuncName, shaderModel, compileFlags, 0, &m_blob, &errorBlob);
+		//auto hr = D3DCompileFromFile(filePath, nullptr, nullptr, entryFuncName, shaderModel, compileFlags, 0, &m_blob, &errorBlob);
 
 		if (FAILED(hr)) {
 			if (hr == STIERR_OBJECTNOTFOUND) {
