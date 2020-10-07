@@ -9,13 +9,13 @@ static const float PI = 3.14159265358979323846;
 
 static const int NUM_DIRECTIONAL_LIGHT = 4;	//ディレクションライトの本数。
 
-//ライト用の定数バッファ。
-cbuffer LightCb : register(b1) {
-	SDirectionalLight directionalLight[NUM_DIRECTIONAL_LIGHT];
-	float3 eyePos;					//カメラの視点。
-	float specPow;					//スペキュラの絞り。
-	float3 ambinentLight;			//環境光。
-};
+////ライト用の定数バッファ。
+//cbuffer LightCb : register(b2) {
+//	SDirectionalLight directionalLight[NUM_DIRECTIONAL_LIGHT];
+//	float3 eyePos;					//カメラの視点。
+//	float specPow;					//スペキュラの絞り。
+//	float3 ambinentLight;			//環境光。
+//};
 
 //モデルテクスチャ。
 Texture2D<float4> g_texture : register(t0);
@@ -24,7 +24,7 @@ Texture2D<float4> g_specularMap : register(t2);
 //ボーン行列。
 StructuredBuffer<float4x4> boneMatrix : register(t3);
 //ディレクションライト。
-StructuredBuffer<SDirectionalLight> directionalLights : register(t4);
+StructuredBuffer<SDirectionalLight> directionalLight : register(t4);
 
 //サンプラステート。
 sampler g_sampler : register(s0);
@@ -43,7 +43,7 @@ float Beckmann(float m, float t)
 }
 
 //フレネル項?の近似式らしい？
-float specFrenel(float f0, float u)
+float specFresnel(float f0, float u)
 {
 	return f0 + (1 - f0) * pow(1 - u, 5);
 }
@@ -63,7 +63,7 @@ float BRDF(float3 L, float3 V, float3 N)
 	float f0 = 0.5f;				//謎の数字。
 									//垂直入射時のフレネル反射係数???
 	
-	float H = normalize(L + V);		//ライト+視点のハーフベクトル。
+	float3 H = normalize(L + V);		//ライト+視点のハーフベクトル。
 
 	//色々内積取ってる。
 	float NdotH = dot(N, H);		//法線とハーフベクトル
@@ -71,7 +71,7 @@ float BRDF(float3 L, float3 V, float3 N)
 	float NdotL = dot(N, L);		//法線とライト
 	float NdotV = dot(N, V);		//法線と視点
 
-	float D = Backmann(microfacet, NdotH);	//
+	float D = Beckmann(microfacet, NdotH);	//
 	float F = specFresnel(f0, VdotH);		//フレネル項の近似式。
 
 	float t = 2.0 * NdotH / VdotH;			//計算の共通項を取っておく感じ。
@@ -122,10 +122,12 @@ SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
 	}
 
 	psIn.pos = mul(m, vsIn.pos);						//モデルの頂点をワールド座標系に変換。
-	psIn.worldPos = psIn.pos;
+	psIn.worldPos = psIn.pos.xyz;
 	psIn.pos = mul(mView, psIn.pos);						//ワールド座標系からカメラ座標系に変換。
 	psIn.pos = mul(mProj, psIn.pos);						//カメラ座標系からスクリーン座標系に変換。
 	psIn.normal = normalize(mul(m, vsIn.normal));		//法線をワールド座標系に変換。
+	psIn.Tangent = normalize(mul(m, vsIn.Tangent));
+	psIn.biNormal = normalize(mul(m, vsIn.biNormal));
 	psIn.uv = vsIn.uv;
 
 	return psIn;
@@ -158,7 +160,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	// 拡散反射を計算
 	//////////////////////////////////////////////////////
 	{
-		for (int i = 0; i < NUM_DIRECTIONAL_LIGHT; i++) {
+		for (int i = 0; i < numDirectionLight; i++) {
 			float NdotL = dot(psIn.normal, -directionalLight[i].direction);	//ライトの逆方向と法線で内積を計算する。
 			if (NdotL < 0.0f) {	//内積の計算結果はマイナスになるので、if文で判定する。
 				NdotL = 0.0f;
@@ -179,8 +181,9 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 			if (d < 0.0f) {
 				d = 0.0f;
 			}
-			d = pow(d, specPow) * metaric;
-			float3 spec = directionalLight[i].color * d * 5.0f;
+			//d = pow(d, specPow) * metaric;
+			d = pow(d, 5.0f) * metaric;		//仮置き。
+			float3 spec = directionalLight[i].color.xyz * d * 5.0f;
 			//スペキュラ反射の光を足し算する。
 			lig += diffuse + spec;
 		}
@@ -189,7 +192,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	//////////////////////////////////////////////////////
 	// 環境光を計算
 	//////////////////////////////////////////////////////
-	lig += ambinentLight; //足し算するだけ
+	lig += ambientLight; //足し算するだけ
 
 	float4 texColor = g_texture.Sample(g_sampler, psIn.uv);
 	texColor.xyz *= lig; //光をテクスチャカラーに乗算する。

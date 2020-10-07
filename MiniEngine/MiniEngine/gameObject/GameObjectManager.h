@@ -258,7 +258,7 @@ namespace Engine {
 	/// <param name="">謎。この引数を入れる必要はないはず...？</param>
 	/// <returns>生成したインスタンスのアドレス。</returns>
 	template<class T>
-	static inline T* NewGO(int priority, const char* objctName = nullptr, typename T::IGameObject* = nullptr)
+	static inline T* NewGO(int priority, const char* objctName = nullptr, typename T::IGameObjectIsBase* = nullptr)
 	{
 		return GameObjectManager().NewGameObject<T>((GameObjectPrio)priority, objctName);
 	}

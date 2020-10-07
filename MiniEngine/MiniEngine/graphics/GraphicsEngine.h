@@ -48,6 +48,10 @@ namespace Engine {
 		void Render(CGameObjectManager* goMgr);
 	private:
 		/// <summary>
+		/// プレレンダリング。
+		/// </summary>
+		void PreRender();
+		/// <summary>
 		/// 描画時に呼ばれる処理。
 		/// </summary>
 		/// <param name="goMgr"></param>

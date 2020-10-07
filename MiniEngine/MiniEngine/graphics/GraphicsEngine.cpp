@@ -427,6 +427,12 @@ namespace Engine {
 
 		EndRender();
 	}
+	void GraphicsEngine::PreRender()
+	{
+		//ライト情報の更新。
+		m_lightManager->Render(m_renderContext);
+		//指向性シャドウ回りの処理。
+	}
 	void GraphicsEngine::OnRender(CGameObjectManager* goMgr)
 	{
 		//フォワードレンダリングパス。

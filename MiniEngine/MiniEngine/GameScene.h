@@ -13,12 +13,14 @@ public:
 	void ForwardRender(RenderContext& rc) override;		//描画処理。
 
 private:
-	Light light;		//ライト。
+	//Light light;		//ライト。
 	Model	robotModel;			//モデル。
 	ModelInitData initData;
 	Skeleton m_skeleton;
 	CAnimation m_animation;
 	std::vector<CAnimationClipPtr> m_animationClips;	//アニメーションクリップの配列。
+	std::vector<prefab::CDirectionLight*> m_lightArray;
+	Vector3 m_lightDir = Vector3::Zero;
 	bool isPBR = true;
 };
 

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "GameScene.h"
+#include "prefab/light/DirectionLight.h"
 
 GameScene::GameScene()
 {
@@ -12,22 +13,30 @@ GameScene::~GameScene()
 bool GameScene::Start()
 {
 	//ライトを用意する。
+	prefab::CDirectionLight* light = NewGO<prefab::CDirectionLight>(0);
 
-	light.directionalLight[0].color.x = 0.5f;
-	light.directionalLight[0].color.y = 0.5f;
-	light.directionalLight[0].color.z = 0.5f;
+	Vector4 color = Vector4::Gray;
+	Vector3 m_lightDir = { 0.0f,0.0f,-1.0f };
+	light->SetColor(color);
+	light->SetDirection(m_lightDir);
 
-	light.directionalLight[0].direction.x = 0.0f;
-	light.directionalLight[0].direction.y = 0.0f;
-	light.directionalLight[0].direction.z = -1.0f;
+	m_lightArray.push_back(light);
+
+	//light.directionalLight[0].color.x = 0.5f;
+	//light.directionalLight[0].color.y = 0.5f;
+	//light.directionalLight[0].color.z = 0.5f;
+
+	//light.directionalLight[0].direction.x = 0.0f;
+	//light.directionalLight[0].direction.y = 0.0f;
+	//light.directionalLight[0].direction.z = -1.0f;
 
 
 
-	light.ambinetLight.x = 0.2f;
-	light.ambinetLight.y = 0.2f;
-	light.ambinetLight.z = 0.2f;
-	light.eyePos = g_camera3D->GetPosition();
-	light.specPow = 5.0f;
+	//light.ambinetLight.x = 0.2f;
+	//light.ambinetLight.y = 0.2f;
+	//light.ambinetLight.z = 0.2f;
+	//light.eyePos = g_camera3D->GetPosition();
+	//light.specPow = 5.0f;
 
 	//3Dモデルを作成。
 
@@ -36,8 +45,8 @@ bool GameScene::Start()
 	initData.m_tkmFilePath = "Assets/modelData/unityChan.tkm";
 	initData.m_fxFilePath = "Assets/shader/model.fx";
 	initData.m_vsEntryPointFunc = "VSMainSkin";
-	initData.m_expandConstantBuffer = &light;
-	initData.m_expandConstantBufferSize = sizeof(light);
+	//initData.m_expandConstantBuffer = &light;
+	//initData.m_expandConstantBufferSize = sizeof(light);
 
 	robotModel.Init(initData);
 	g_camera3D->SetPosition({ 0.0f, 50.0f, 100.0f });
@@ -94,8 +103,9 @@ void GameScene::Update()
 		qRot.SetRotationDegY(-1.0f);
 	}
 
-	for (auto& lig : light.directionalLight) {
-		qRot.Apply(lig.direction);
+	qRot.Apply(m_lightDir);
+	for (auto& lig : m_lightArray) {
+		lig->SetDirection(m_lightDir);
 	}
 
 	if (g_pad[0]->IsPress(enButtonA)) {
@@ -109,7 +119,7 @@ void GameScene::Update()
 	auto camPos = g_camera3D->GetPosition();
 	qRot.Apply(camPos);
 	g_camera3D->SetPosition(camPos);
-	light.eyePos = g_camera3D->GetPosition();
+	//light.eyePos = g_camera3D->GetPosition();
 	if (g_pad[0]->IsTrigger(enButtonA)) {
 		isPBR = !isPBR;
 	}

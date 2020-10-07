@@ -19,7 +19,7 @@ namespace Engine {
 		{
 			m_light.lightingMaterialIDGroup = GetLightingMaterialIDGroup();
 		}
-		void CDirectionLight::SetDirection(Vector3& direction)
+		void CDirectionLight::SetDirection(const Vector3& direction)
 		{
 			m_light.direction = direction;
 			m_light.direction.Normalize();		//正規化後のベクトル入れるより重いんかなぁ？

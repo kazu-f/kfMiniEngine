@@ -13,6 +13,7 @@ namespace Engine {
 	class IGameObject : Noncopyable
 	{
 	public:
+		using IGameObjectIsBase = IGameObject;
 		IGameObject() :
 			m_priority(0),
 			m_isStart(false),

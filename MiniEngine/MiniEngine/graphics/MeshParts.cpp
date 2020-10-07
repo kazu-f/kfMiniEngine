@@ -74,8 +74,9 @@ namespace Engine {
 					descriptorHeap.RegistShaderResource(EXPAND_SRV_REG__START_NO, *m_expandShaderResourceView);
 				}
 				descriptorHeap.RegistConstantBuffer(0, m_commonConstantBuffer);
+				descriptorHeap.RegistConstantBuffer(1, g_graphicsEngine->GetLightManager()->GetLightParamConstantBuffer());		//ライトの設定。
 				if (m_expandConstantBuffer.IsValid()) {
-					descriptorHeap.RegistConstantBuffer(1, m_expandConstantBuffer);
+					descriptorHeap.RegistConstantBuffer(2, m_expandConstantBuffer);
 				}
 				//ディスクリプタヒープへの登録を確定させる。
 				descriptorHeap.Commit();

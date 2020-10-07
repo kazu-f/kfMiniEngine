@@ -17,7 +17,7 @@ namespace Engine {
 			/// <summary>
 			/// ライトの方向を設定。
 			/// </summary>
-			void SetDirection(Vector3& direction);
+			void SetDirection(const Vector3& direction);
 			/// <summary>
 			/// ディレクションライトの方向を取得。
 			/// </summary>
