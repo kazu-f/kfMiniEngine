@@ -5,41 +5,16 @@
 #include "modelCB.h"
 #include "modelStruct.h"
 
-static const int NUM_DIRECTIONAL_LIGHT = 4;	//ディレクションライトの本数。
+static const float PI = 3.14159265358979323846;
 
-//ディレクションライト。
-struct DirectionalLight {
-	float4 color;		//ライトの色。
-	float3 direction;	//ライトの方向。
-};
+static const int NUM_DIRECTIONAL_LIGHT = 4;	//ディレクションライトの本数。
 
 //ライト用の定数バッファ。
 cbuffer LightCb : register(b1) {
-	DirectionalLight directionalLight[NUM_DIRECTIONAL_LIGHT];
+	SDirectionalLight directionalLight[NUM_DIRECTIONAL_LIGHT];
 	float3 eyePos;					//カメラの視点。
 	float specPow;					//スペキュラの絞り。
 	float3 ambinentLight;			//環境光。
-};
-
-//スキニング用の頂点データをひとまとめ。
-struct SSkinVSIn {
-	int4  Indices  	: BLENDINDICES0;
-	float4 Weights  : BLENDWEIGHT0;
-};
-
-//頂点シェーダーへの入力。
-struct SVSIn {
-	float4 pos 		: POSITION;		//モデルの頂点座標。
-	float3 normal	: NORMAL;		//法線。
-	float2 uv 		: TEXCOORD0;	//UV座標。
-	SSkinVSIn skinVert;				//スキン用の頂点データ。
-};
-//ピクセルシェーダーへの入力。
-struct SPSIn {
-	float4 pos 			: SV_POSITION;	//スクリーン空間でのピクセルの座標。
-	float3 normal		: NORMAL;		//法線。
-	float2 uv 			: TEXCOORD0;	//uv座標。
-	float3 worldPos		: TEXCOORD1;	//ワールド空間でのピクセルの座標。
 };
 
 //モデルテクスチャ。
@@ -48,9 +23,75 @@ Texture2D<float4> g_normalMap : register(t1);
 Texture2D<float4> g_specularMap : register(t2);
 //ボーン行列。
 StructuredBuffer<float4x4> boneMatrix : register(t3);
+//ディレクションライト。
+StructuredBuffer<SDirectionalLight> directionalLights : register(t4);
 
 //サンプラステート。
 sampler g_sampler : register(s0);
+
+//ベックマン分布?	
+/*
+	m			(面の粗さ)
+	t = N・H	(法線・ハーフベクトル)
+	M = m^2		T = (N・H)^2
+*/
+float Beckmann(float m, float t)
+{
+	float M = m * m;
+	float T = t * t;
+	return exp((T - 1) / (M * T)) / (M * M * T);
+}
+
+//フレネル項?の近似式らしい？
+float specFrenel(float f0, float u)
+{
+	return f0 + (1 - f0) * pow(1 - u, 5);
+}
+
+/*
+*	BRDF(双方向反射率分布関数)
+*	スペキュラの計算に使ってる。？
+*	Lがライト
+*	Vが視点	
+*	Nが法線
+*/
+float BRDF(float3 L, float3 V, float3 N)
+{
+	float microfacet = 1.0f;		//マイクロファセット
+									//表面の凸凹具合を表す的な？
+									//面の粗さとかを調整するパラメータらしい？
+	float f0 = 0.5f;				//謎の数字。
+									//垂直入射時のフレネル反射係数???
+	
+	float H = normalize(L + V);		//ライト+視点のハーフベクトル。
+
+	//色々内積取ってる。
+	float NdotH = dot(N, H);		//法線とハーフベクトル
+	float VdotH = dot(V, H);		//視点とハーフベクトル
+	float NdotL = dot(N, L);		//法線とライト
+	float NdotV = dot(N, V);		//法線と視点
+
+	float D = Backmann(microfacet, NdotH);	//
+	float F = specFresnel(f0, VdotH);		//フレネル項の近似式。
+
+	float t = 2.0 * NdotH / VdotH;			//計算の共通項を取っておく感じ。
+	float G = max( 0.0f, min(1.0f,min(t * NdotV, t * NdotL)) );		//幾何学的減衰係数？
+																	//最大値を1.0、最小値を0.0の間で
+																	//値の小さいほうを取る
+
+	float m = PI * NdotV * NdotL;			//クックトランス反射モデルの分母になる値？	
+
+	/*
+	*	F:フレネル項
+	*	D:微小面分布
+	*	G:幾何学的減衰係数
+	*/
+	return max(F * D * G / m, 0.0f);
+}
+/*
+	拡散反射回りの実装するべし！
+	DisneyDiffuse!
+*/
 
 //スキン行列を計算する関数。
 float4x4 CalcSkinMatrix(SSkinVSIn skinVert)

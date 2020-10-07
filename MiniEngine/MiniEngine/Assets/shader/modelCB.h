@@ -11,7 +11,7 @@ cbuffer ModelCb : register(b0) {
 //*	ライト用の定数バッファ
 //*	tkLightManager.hのSLightParamと対応する。
 //*/
-//cbuffer lightCb : register(b100)
+//cbuffer lightCb : register(b1)
 //{
 //	float3 eyePos			: packoffset(c0);		//カメラの位置。
 //	int numDirectionLight	: packoffset(c0.w);		//ディレクションライトの数。
