@@ -15,7 +15,7 @@ bool GameScene::Start()
 	//ライトを用意する。
 	prefab::CDirectionLight* light = NewGO<prefab::CDirectionLight>(0);
 
-	Vector4 color = Vector4::Gray;
+	Vector4 color = Vector4::Gray * 3.0f;
 	m_lightDir = { 0.0f,0.0f,-1.0f };
 	light->SetColor(color);
 	light->SetDirection(m_lightDir);
@@ -128,7 +128,6 @@ void GameScene::Update()
 	auto camPos = g_camera3D->GetPosition();
 	qRot.Apply(camPos);
 	g_camera3D->SetPosition(camPos);
-	//light.eyePos = g_camera3D->GetPosition();
 	if (g_pad[0]->IsTrigger(enButtonA)) {
 		isPBR = !isPBR;
 	}

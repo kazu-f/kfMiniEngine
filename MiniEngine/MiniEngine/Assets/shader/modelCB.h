@@ -20,3 +20,11 @@ cbuffer lightCb : register(b1)
 	float4 screenParam		: packoffset(c2);		//スクリーンパラメータ(neae,far,screenW,screenH)
 }
 
+/*
+*	マテリアルの定数バッファ
+*	Material.hのSMaterialParamに対応する。
+*/
+cbuffer MaterialParamCb : register(b2) {
+	int hasNormalMap;		//法線マップがある？
+	int hasSpecularMap;		//スペキュラマップがある？
+}

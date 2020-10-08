@@ -69,15 +69,16 @@ namespace Engine {
 				descriptorHeap.RegistShaderResource(0, mesh->m_materials[matNo]->GetAlbedoMap());		//アルベドマップ。
 				descriptorHeap.RegistShaderResource(1, mesh->m_materials[matNo]->GetNormalMap());		//法線マップ。
 				descriptorHeap.RegistShaderResource(2, mesh->m_materials[matNo]->GetSpecularMap());	//スペキュラマップ。
-				descriptorHeap.RegistShaderResource(3, m_boneMatricesStructureBuffer);
-				descriptorHeap.RegistShaderResource(4, g_graphicsEngine->GetLightManager()->GetDirectionLightStructuredBuffer());
+				descriptorHeap.RegistShaderResource(3, m_boneMatricesStructureBuffer);				//ボーンの設定。
+				descriptorHeap.RegistShaderResource(4, g_graphicsEngine->GetLightManager()->GetDirectionLightStructuredBuffer());	//ライトの設定。
 				if (m_expandShaderResourceView) {
 					descriptorHeap.RegistShaderResource(EXPAND_SRV_REG__START_NO, *m_expandShaderResourceView);
 				}
 				descriptorHeap.RegistConstantBuffer(0, m_commonConstantBuffer);
 				descriptorHeap.RegistConstantBuffer(1, g_graphicsEngine->GetLightManager()->GetLightParamConstantBuffer());		//ライトの設定。
+				descriptorHeap.RegistConstantBuffer(2, mesh->m_materials[matNo]->GetConstantBuffer());				//マテリアルの定数バッファ。
 				if (m_expandConstantBuffer.IsValid()) {
-					descriptorHeap.RegistConstantBuffer(2, m_expandConstantBuffer);
+					descriptorHeap.RegistConstantBuffer(3, m_expandConstantBuffer);
 				}
 				//ディスクリプタヒープへの登録を確定させる。
 				descriptorHeap.Commit();

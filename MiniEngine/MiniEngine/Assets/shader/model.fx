@@ -71,7 +71,7 @@ float BRDF(float3 L, float3 V, float3 N)
 	float NdotL = dot(N, L);		//法線とライト
 	float NdotV = dot(N, V);		//法線と視点
 
-	float D = Beckmann(microfacet, NdotH);	//
+	float D = Beckmann(microfacet, NdotH);	//微小面分布関数。
 	float F = specFresnel(f0, VdotH);		//フレネル項の近似式。
 
 	float t = 2.0 * NdotH / VdotH;			//計算の共通項を取っておく感じ。
@@ -88,10 +88,49 @@ float BRDF(float3 L, float3 V, float3 N)
 	*/
 	return max(F * D * G / m, 0.0f);
 }
+
 /*
-	拡散反射回りの実装するべし！
-	DisneyDiffuse!
+*	フレネル式？
+*	なんか少し違う？1.0の部分が変数になってる？
 */
+float SchlickFresnel(float u, float f0, float f90)
+{
+	//f90が1.0ならフレネル式ですねぇ。
+	return f0 + (f90 - f0) * pow(1.0f - u, 5.0f);
+}
+
+/*
+*	正規化Disneyモデル拡散反射。
+*	albedColor	:	ライトの強さかなぁ？
+*	N			:	法線の正規化ベクトル
+*	L			:	ライトへの正規化ベクトル
+*	V			:	視点の正規化ベクトル
+*	roughness	:	表面の粗さを表すパラメータらしい
+*/
+float NormalizedDisneyDiffuse(float albedColor, float3 N, float3 L, float3 V, float roughness)
+{
+	float3 H = normalize(L + V);		//ハーフベクトル。
+
+	float energiBias = lerp(0.0f, 0.5f, roughness);				//なんか正規化のための数値？0.0～0.5の線形補完
+	float energyFactor = lerp(1.0f, 1.0f / 1.51f, roughness);	//同じく？なんかメンドイ線形補完してる感じする。
+	//内積する。(下限0.0～上限1.0)
+	float LdotH = saturate(dot(L, H));		//ライトとハーフベクトル
+	float NdotL = saturate(dot(N, L));		//法線とライト
+	float NdotV = saturate(dot(N, V));		//法線と視点
+
+	//謎数値　フレネル反射率?(0.0～1.0)
+	float Fd90 = energyBias + 2.0f * LdotH * LdotH * roughness;
+	
+	//これだったら普通にフレネル式使うんでいいんでは？
+	float FL = SchlickFresnel(1.0f, Fd90, NdotL);	//フレネル係数(法線・ライト)
+	float FV = SchlickFresnel(1.0f, Fd90, NdotV);	//フレネル係数(法線・視点)
+
+	/*
+	*	よくわからん係数 * ライトの強さ？ 
+	*	* フレネル係数(N・L) * フレネル係数(N・V) / PI
+	*/
+	return (energyFactor * baseColor * FL * FV) / PI;
+}
 
 //スキン行列を計算する関数。
 float4x4 CalcSkinMatrix(SSkinVSIn skinVert)
@@ -197,4 +236,13 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	float4 texColor = g_texture.Sample(g_sampler, psIn.uv);
 	texColor.xyz *= lig; //光をテクスチャカラーに乗算する。
 	return float4(texColor.xyz, 1.0f);
+}
+
+//物理ベースライティングのピクセルシェーダー。
+float4 PSMainBPR(SPSIn psIn) : SV_Target0
+{
+	//法線の計算。
+	float3 normal = psIn.nomal;
+
+
 }
