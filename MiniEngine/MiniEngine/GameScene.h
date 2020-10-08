@@ -21,7 +21,7 @@ private:
 	std::vector<CAnimationClipPtr> m_animationClips;	//アニメーションクリップの配列。
 	std::vector<prefab::CDirectionLight*> m_lightArray;
 	Vector3 m_lightDir = Vector3::Zero;
-	float m_lightPow = 0.5;
+	float m_lightPow = 0.2f;
 	bool isPBR = true;
 };
 

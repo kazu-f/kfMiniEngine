@@ -107,11 +107,11 @@ float SchlickFresnel(float u, float f0, float f90)
 *	V			:	視点の正規化ベクトル
 *	roughness	:	表面の粗さを表すパラメータらしい
 */
-float NormalizedDisneyDiffuse(float albedColor, float3 N, float3 L, float3 V, float roughness)
+float3 NormalizedDisneyDiffuse(float3 baseColor, float3 N, float3 L, float3 V, float roughness)
 {
 	float3 H = normalize(L + V);		//ハーフベクトル。
 
-	float energiBias = lerp(0.0f, 0.5f, roughness);				//なんか正規化のための数値？0.0～0.5の線形補完
+	float energyBias = lerp(0.0f, 0.5f, roughness);				//なんか正規化のための数値？0.0～0.5の線形補完
 	float energyFactor = lerp(1.0f, 1.0f / 1.51f, roughness);	//同じく？なんかメンドイ線形補完してる感じする。
 	//内積する。(下限0.0～上限1.0)
 	float LdotH = saturate(dot(L, H));		//ライトとハーフベクトル
@@ -242,7 +242,42 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 float4 PSMainBPR(SPSIn psIn) : SV_Target0
 {
 	//法線の計算。
-	float3 normal = psIn.nomal;
+	float3 normal;
+	if (hasNormalMap) {
+		//法線マップから法線を引っ張ってくる。
+		float3 binSpaceNormal = g_normalMap.Sample(g_sampler, psIn.uv).xyz;
+		binSpaceNormal = (binSpaceNormal * 2.0f) - 1.0f;	//-1.0f～1.0fに調整。
+		normal = psIn.Tangent * binSpaceNormal.x		//接線(法線に対して右？)
+			+ psIn.biNormal * binSpaceNormal.y			//従法線(法線に対して上)
+			+ psIn.normal * binSpaceNormal.z;			//法線方向
+	}
+	else {
+		normal = psIn.normal;
+	}
+	float3 lig = 0;		//ライト
+	float3 toEye = normalize(eyePos - psIn.worldPos);		//点から視点までの正規化ベクトル
+	float metaric = 0.0f;			//スペキュラ
+	float4 albedoColor = g_texture.Sample(g_sampler, psIn.uv);	//テクスチャカラー。		
+	if (hasSpecularMap) {
+		//スペキュラマップがある。
+		metaric = g_specularMap.Sample(g_sampler, psIn.uv).a;
+	}
+	float roughness = 0.5f;			//拡散反射の面の粗さ。
+	for (int ligNo = 0; ligNo < numDirectionLight; ligNo++)
+	{
+		float3 baseColor = max(dot(normal, -directionalLight[ligNo].direction), 0.0f) * directionalLight[ligNo].color;
+		//DisneyModel拡散反射
+		lig += NormalizedDisneyDiffuse(baseColor, normal, -directionalLight[ligNo].direction, toEye, roughness);
+		//スペキュラ反射
+		lig += BRDF(-directionalLight[ligNo].direction, toEye, normal) 
+			* directionalLight[ligNo].color.xyz 
+			* metaric * directionalLight[ligNo].color.w;
+	}
+	//環境光。
+	lig += ambientLight;
 
-
+	//最終的な色を決定する。
+	float4 finalColor = 1.0f;
+	finalColor.xyz = albedoColor.xyz * lig;
+	return finalColor;
 }

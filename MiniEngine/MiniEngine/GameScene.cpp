@@ -22,6 +22,14 @@ bool GameScene::Start()
 
 	m_lightArray.push_back(light);
 
+	prefab::CDirectionLight* light2 = NewGO<prefab::CDirectionLight>(0);
+
+	m_lightDir = { 0.0f,0.0f,1.0f };
+	light2->SetColor(color);
+	light2->SetDirection(m_lightDir);
+
+	m_lightArray.push_back(light2);
+
 	//g_graphicsEngine->GetLightManager()->SetAmbientLight({ 0.2f,0.2f,0.2f });
 
 	//light.directionalLight[0].color.x = 0.5f;
@@ -47,6 +55,7 @@ bool GameScene::Start()
 	initData.m_tkmFilePath = "Assets/modelData/unityChan.tkm";
 	initData.m_fxFilePath = "Assets/shader/model.fx";
 	initData.m_vsEntryPointFunc = "VSMainSkin";
+	initData.m_psEntryPointFunc = "PSMainBPR";
 	//initData.m_expandConstantBuffer = &light;
 	//initData.m_expandConstantBufferSize = sizeof(light);
 
@@ -106,10 +115,10 @@ void GameScene::Update()
 		qRot.SetRotationDegY(-1.0f);
 	}
 
-	qRot.Apply(m_lightDir);
-	for (auto& lig : m_lightArray) {
-		lig->SetDirection(m_lightDir);
-	}
+	//qRot.Apply(m_lightDir);
+	//for (auto& lig : m_lightArray) {
+	//	lig->SetDirection(m_lightDir);
+	//}
 
 	if (g_pad[0]->IsPress(enButtonA)) {
 		m_animation.Play(0, 0.6f);
