@@ -1,6 +1,7 @@
 #pragma once
 
 namespace Engine {
+
 	/// <summary>
 	/// インデックスバッファ。
 	/// </summary>
@@ -25,7 +26,7 @@ namespace Engine {
 		/// インデックスバッファビューを取得。
 		/// </summary>
 		/// <returns></returns>
-		D3D12_INDEX_BUFFER_VIEW& GetView()
+		const D3D12_INDEX_BUFFER_VIEW& GetView() const
 		{
 			return m_indexBufferView;
 		}
@@ -37,9 +38,39 @@ namespace Engine {
 		{
 			return m_count;
 		}
+		/// <summary>
+		/// インデックスバッファのストライドを取得。
+		/// </summary>
+		/// ストライドというのは、１要素のサイズのこと。
+		/// ここでは、一つのインデックスのサイズを取得することになる。
+		/// 2か4が返ってきます。
+		/// <returns></returns>
+		UINT GetStrideInBytes() const
+		{
+			return static_cast<UINT>(m_strideInBytes);
+		}
+		/// <summary>
+		/// インデックスバッファのサイズ(単位：バイト)を取得。
+		/// </summary>
+		/// <returns></returns>
+		UINT GetSizeInBytes() const
+		{
+			return static_cast<UINT>(m_sizeInBytes);
+		}
+		/// <summary>
+		/// ID3D12Resourceのアドレスを取得します。
+		/// </summary>
+		/// <returns></returns>
+		ID3D12Resource* GetID3DResourceAddress() const
+		{
+			return m_indexBuffer;
+		}
+	private:
 	private:
 		ID3D12Resource* m_indexBuffer = nullptr;	//インデックスバッファ。
 		D3D12_INDEX_BUFFER_VIEW m_indexBufferView;	//インデックスバッファビュー。
 		int m_count = 0;							//インデックスの数。
+		int m_strideInBytes = 0;					//ストライド(単位：バイト)。
+		int m_sizeInBytes = 0;						//サイズ(単位：バイト)。
 	};
 }

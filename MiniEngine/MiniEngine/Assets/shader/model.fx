@@ -57,7 +57,7 @@ float specFresnel(float f0, float u)
 */
 float BRDF(float3 L, float3 V, float3 N)
 {
-	float microfacet = 1.0f;		//マイクロファセット
+	float microfacet = 0.3f;		//マイクロファセット
 									//表面の凸凹具合を表す的な？
 									//面の粗さとかを調整するパラメータらしい？
 	float f0 = 0.5f;				//謎の数字。
@@ -95,7 +95,7 @@ float BRDF(float3 L, float3 V, float3 N)
 */
 float SchlickFresnel(float u, float f0, float f90)
 {
-	//f90が1.0ならフレネル式ですねぇ。
+	//f90が1.0ならフレネル式?。
 	return f0 + (f90 - f0) * pow(1.0f - u, 5.0f);
 }
 

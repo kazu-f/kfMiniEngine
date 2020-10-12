@@ -22,12 +22,18 @@ namespace Engine {
 			std::string albedoMapFileName;			//アルベドマップのファイル名。
 			std::string normalMapFileName;			//法線マップのファイル名。
 			std::string specularMapFileName;		//スペキュラマップのファイル名。
+			std::string reflectionMapFileName;			//リフレクションマップのファイル名。
+			std::string refractionMapFileName;		//屈折率マップのファイル名。
 			std::unique_ptr<char[]>	albedoMap;		//ロードされたアルベドマップ。(ddsファイル)
 			unsigned int albedoMapSize;				//アルベドマップのサイズ。(ddsファイル)
 			std::unique_ptr<char[]>	normalMap;		//ロードされた法線マップ。(ddsファイル)
 			unsigned int normalMapSize;				//法線マップのサイズ。
 			std::unique_ptr<char[]>	specularMap;	//ロードされたスペキュラマップ。(ddsファイル)
 			unsigned int specularMapSize;			//スペキュラマップのサイズ。(ddsファイル)
+			std::unique_ptr<char[]>	reflectionMap;		//ロードされたリフレクションマップ。(ddsファイル)
+			unsigned int reflectionMapSize;				//リフレクションマップのサイズ。
+			std::unique_ptr<char[]>	refractionMap;	//ロードされた屈折率マップ。(ddsファイル)
+			unsigned int refractionMapSize;			//屈折率マップのサイズ。(ddsファイル)
 		};
 		/// <summary>
 		/// 頂点。

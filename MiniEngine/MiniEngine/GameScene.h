@@ -15,13 +15,14 @@ public:
 private:
 	//Light light;		//ライト。
 	Model	robotModel;			//モデル。
+	Model	m_testBox;			//テスト用の箱。
 	ModelInitData initData;
 	Skeleton m_skeleton;
 	CAnimation m_animation;
 	std::vector<CAnimationClipPtr> m_animationClips;	//アニメーションクリップの配列。
 	std::vector<prefab::CDirectionLight*> m_lightArray;
 	Vector3 m_lightDir = Vector3::Zero;
-	float m_lightPow = 0.2f;
+	float m_lightPow = 0.5f;
 	bool isPBR = true;
 };
 
