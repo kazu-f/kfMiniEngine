@@ -180,6 +180,9 @@
     <ClCompile Include="prefab\light\DirectionLight.cpp">
       <Filter>prefab\light</Filter>
     </ClCompile>
+    <ClCompile Include="graphics\ShadowMap.cpp">
+      <Filter>graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MiniEngine.h">
@@ -328,6 +331,9 @@
     </ClInclude>
     <ClInclude Include="graphics\light\LightData.h">
       <Filter>graphics\light</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\ShadowMap.h">
+      <Filter>graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
