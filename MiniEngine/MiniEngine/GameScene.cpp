@@ -45,14 +45,14 @@ bool GameScene::Start()
 	//3Dモデルを作成。
 
 
-	initData.m_tkmFilePath = "Assets/modelData/unityChan.tkm";
+	initData.m_tkmFilePath = "Assets/modelData/unityChan2.tkm";
 	initData.m_fxFilePath = "Assets/shader/model.fx";
 	initData.m_vsEntryPointFunc = "VSMainSkin";
 	initData.m_psEntryPointFunc = "PSMainBPR";
 	//initData.m_expandConstantBuffer = &light;
 	//initData.m_expandConstantBufferSize = sizeof(light);
 
-	//robotModel.Init(initData);
+	robotModel.Init(initData);
 	
 	
 	initData.m_vsEntryPointFunc = "VSMain";
@@ -75,30 +75,30 @@ bool GameScene::Start()
 
 	m_testBox.UpdateWorldMatrix({ 10.0f,0.0f,0.0f }, Quaternion::Identity, scale);
 
-	////アニメーションのためのロードを行う。
-	//if (m_skeleton.Init("Assets/modelData/unityChan.tks")) {
-	//	if (m_skeleton.IsLoaded()) {
-	//		//ボーンの構築。
-	//		m_skeleton.BuildBoneMatrices();
-	//		//モデルと関連付け。
-	//		robotModel.BindSkeleton(m_skeleton);
+	//アニメーションのためのロードを行う。
+	if (m_skeleton.Init("Assets/modelData/unityChan2.tks")) {
+		if (m_skeleton.IsLoaded()) {
+			//ボーンの構築。
+			m_skeleton.BuildBoneMatrices();
+			//モデルと関連付け。
+			robotModel.BindSkeleton(m_skeleton);
 
-	//		//アニメーションクリップのロード。
-	//		auto animClip = std::make_unique<CAnimationClip>();
-	//		animClip->Load("Assets/animData/idle.tka");
-	//		m_animationClips.push_back(move(animClip));
-	//		auto animClipRun = std::make_unique<CAnimationClip>();
-	//		animClipRun->Load("Assets/animData/run.tka");
-	//		m_animationClips.push_back(move(animClipRun));
+			//アニメーションクリップのロード。
+			auto animClip = std::make_unique<CAnimationClip>();
+			animClip->Load("Assets/animData/idle.tka");
+			m_animationClips.push_back(move(animClip));
+			auto animClipRun = std::make_unique<CAnimationClip>();
+			animClipRun->Load("Assets/animData/run.tka");
+			m_animationClips.push_back(move(animClipRun));
 
-	//		for (auto& animClip : m_animationClips) {
-	//			animClip->SetLoopFlag(true);
-	//			animClip->BuildKeyFramesAndAnimationEvents();
-	//		}
+			for (auto& animClip : m_animationClips) {
+				animClip->SetLoopFlag(true);
+				animClip->BuildKeyFramesAndAnimationEvents();
+			}
 
-	//		m_animation.Init(m_skeleton, m_animationClips);
-	//	}
-	//}
+			m_animation.Init(m_skeleton, m_animationClips);
+		}
+	}
 
 	return true;
 }
@@ -154,6 +154,6 @@ void GameScene::Update()
 
 void GameScene::ForwardRender(RenderContext& rc)
 {
-	//robotModel.Draw(rc);
+	robotModel.Draw(rc);
 	m_testBox.Draw(rc);
 }
