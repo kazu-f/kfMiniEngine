@@ -335,5 +335,8 @@
     <ClInclude Include="graphics\ShadowMap.h">
       <Filter>graphics</Filter>
     </ClInclude>
+    <ClInclude Include="graphics\GraphicsConfig.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

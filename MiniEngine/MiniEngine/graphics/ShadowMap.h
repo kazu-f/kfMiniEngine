@@ -1,6 +1,5 @@
 #pragma once
 
-static const int NUM_SHADOW_MAP = 3;		//シャドウマップの数。
 
 namespace Engine {
 	/// <summary>
@@ -16,7 +15,7 @@ namespace Engine {
 		/// <summary>
 		/// 初期化処理。
 		/// </summary>
-		void Init();
+		void Init(SShadowMapConfig& cnfig);
 		/// <summary>
 		/// シャドウマップへのレンダリングを行う。
 		/// </summary>

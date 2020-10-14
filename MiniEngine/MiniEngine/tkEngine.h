@@ -2,6 +2,7 @@
 
 #include "util/Stopwatch.h"
 #include "HID/GamePad.h"
+#include "graphics/GraphicsConfig.h"
 
 namespace Engine {
 
