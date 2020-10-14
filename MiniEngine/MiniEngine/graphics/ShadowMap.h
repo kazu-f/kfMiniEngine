@@ -42,6 +42,16 @@ namespace Engine {
 		{
 			m_isEnable = false;
 		}
+	public:
+		/// <summary>
+		/// キャスターへ登録する。
+		/// </summary>
+		void RegistShadowCaster(Model* caster) {
+			m_shadowCasters.push_back(caster);
+		}
+
+
+
 	private:	//内部的な処理。
 		/// <summary>
 		/// ライトの座標を計算する。
@@ -55,13 +65,13 @@ namespace Engine {
 		struct SShadowCb {
 			Matrix mLVP[NUM_SHADOW_MAP];
 			Vector4 texOffset;
-			float depthOffset;
+			float depthOffset[NUM_SHADOW_MAP];
 			float pading;
 			float shadowAreaDepthInViewSpace[NUM_SHADOW_MAP];	//カメラ空間での影を落とすエリアの深度テーブル。
 		};
 
 		std::vector<Model*> m_shadowCasters;					//シャドウキャスターの配列。
-		Matrix m_LVP[NUM_SHADOW_MAP];							//ライトビュープロジェクション行列。
+		Matrix m_LVPMatrix[NUM_SHADOW_MAP];							//ライトビュープロジェクション行列。
 		SShadowCb m_shadowCbEntity;
 	private:
 		ConstantBuffer m_shadowCb;								//定数バッファ。
