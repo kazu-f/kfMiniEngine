@@ -1,6 +1,12 @@
 #pragma once
 
 namespace Engine {
+	enum EnRenderStep {
+		enRenderStep_Undef,							//とりあえず未定義
+		enRenderStep_CreateDirectionalShadowMap,	//指向性シャドウマップ作成。
+		enRenderStep_ForwardRender,					//フォワードレンダリング。
+	};
+
 	class ConstantBuffer;
 	class Texture;
 	class DescriptorHeap;
@@ -268,6 +274,24 @@ namespace Engine {
 		{
 			m_commandList->Dispatch(ThreadGroupCountX, ThreadGroupCountY, ThreadGroupCountZ);
 		}
+	public:		//レンダリングステップの設定。
+
+		/// <summary>
+		/// 現在のレンダリングステップを設定する。
+		/// </summary>
+		/// <remarks>エンジン内部で使用する。</remarks>
+		void SetRenderStep(EnRenderStep step)
+		{
+			m_renderStep = step;
+		}
+		/// <summary>
+		/// 現在のレンダリングステップを取得する。
+		/// </summary>
+		const EnRenderStep GetRenderStep()const
+		{
+			return m_renderStep;
+		}
+
 	private:
 
 		/// <summary>
@@ -307,6 +331,8 @@ namespace Engine {
 		ID3D12DescriptorHeap* m_descriptorHeaps[MAX_DESCRIPTOR_HEAP];			//ディスクリプタヒープの配列。
 		ConstantBuffer* m_constantBuffers[MAX_CONSTANT_BUFFER] = { nullptr };	//定数バッファの配列。
 		Texture* m_shaderResources[MAX_SHADER_RESOURCE] = { nullptr };			//シェーダーリソースの配列。
+
+		EnRenderStep m_renderStep = enRenderStep_Undef;							//レンダリングステップ。
 	};
 
 }
