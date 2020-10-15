@@ -2,10 +2,16 @@
 #include "ShadowMap.h"
 
 namespace Engine {
-	void ShadowMap::Init(SShadowMapConfig& config)
+	void CShadowMap::Init(SShadowMapConfig& config)
 	{
 		m_isEnable = config.isEnable;
 		if (!m_isEnable) return;		//無効だったら戻る。
+
+		//シャドウマップの範囲を設定する。
+		for (int i = 0; i < NUM_SHADOW_MAP; i++)
+		{
+			m_shadowAreas[i] = config.shadowAreas[i];
+		}
 
 		//シャドウマップの解像度の設定。
 		int wh[NUM_SHADOW_MAP][2] = {
@@ -25,7 +31,7 @@ namespace Engine {
 				1,						//
 				1,						//
 				DXGI_FORMAT_R32_FLOAT,	//カラーフォーマット。
-				DXGI_FORMAT_R32_FLOAT,	//デプスステンシルフォーマット。
+				DXGI_FORMAT_D32_FLOAT,	//デプスステンシルフォーマット。
 				clearColor				//クリアカラー。
 			);
 		}
@@ -33,12 +39,15 @@ namespace Engine {
 		//定数バッファを初期化する。
 		m_shadowCb.Init(sizeof(m_shadowCbEntity), nullptr);
 	}
-	void ShadowMap::RenderToShadowMap(RenderContext& rc)
+	void CShadowMap::RenderToShadowMap(RenderContext& rc)
 	{
 		//無効だったら返す。
 		if (!m_isEnable) return;
 
-		//rc.SetRenderTarget
+		//シャドウマップ用の定数バッファを更新。
+		m_shadowCb.CopyToVRAM(m_shadowCbEntity);
+		//レンダリングステップをシャドウマップ作成に変更。
+		rc.SetRenderStep(EnRenderStep::enRenderStep_CreateDirectionalShadowMap);
 
 		for (int i = 0; i < NUM_SHADOW_MAP; i++) {
 			//レンダリングターゲットとして使用可能になるまで待つ。
@@ -48,8 +57,11 @@ namespace Engine {
 				caster->Draw(rc);
 			}
 		}
+
+		//シャドウキャスター登録をクリア。
+		ClearShadowCaster();
 	}
-	void ShadowMap::WaitEndRenderToShadowMap(RenderContext& rc)
+	void CShadowMap::WaitEndRenderToShadowMap(RenderContext& rc)
 	{
 
 		//影の描画終わり。
@@ -57,7 +69,7 @@ namespace Engine {
 			rc.WaitUntilFinishDrawingToRenderTarget(m_shadowMaps[i]);
 		}
 	}
-	void ShadowMap::Update()
+	void CShadowMap::Update()
 	{
 		//シャドウマップが無効。
 		if (m_isEnable == false) {
@@ -101,17 +113,16 @@ namespace Engine {
 		lightViewRot.m[2][2] = lightViewForward.z;
 		lightViewRot.m[2][3] = 0.0f;
 
-		//ライトビューの高さを計算。
+		//ライトビューの高さを計算。するようにする。
 		float lightHeight = m_lightHeight;
 
-		SShadowCb shadowCB;		//シャドウ用の定数バッファ
 		float nearPlaneZ = 0.0f;	//近平面。
 		float farPlaneZ;			//遠平面。
 		Vector3 cameraUp;			//カメラの上方向
 		cameraUp.Cross(g_camera3D->GetRight(), g_camera3D->GetForward());
 		//カスケードシャドウのための処理。
 		for (int i = 0; i < NUM_SHADOW_MAP; i++) {
-			farPlaneZ = nearPlaneZ + shadowAreas[i];		//近平面+シャドウの範囲。
+			farPlaneZ = nearPlaneZ + m_shadowAreas[i];		//近平面+シャドウの範囲。
 			Matrix mLightView = Matrix::Identity;			//ライトビュー。
 			float halfViewAngle = g_camera3D->GetViewAngle() * 0.5f;		//画角の半分。
 			//視推台の8頂点をライト空間に変換してAABBを求めて、正射影の幅、高さを求める。
@@ -173,14 +184,14 @@ namespace Engine {
 					far_z
 				);
 				m_LVPMatrix[i] = mLightView * proj;									//ライトビュープロジェクション行列を作成。
-				m_shadowCbEntity.mLVP[i] = m_LVPMatrix[i];							//定数用に記録。
+				m_shadowCbEntity.mLVP[i] = m_LVPMatrix[i];							//定数バッファ用に記録。
 				m_shadowCbEntity.shadowAreaDepthInViewSpace[i] = farPlaneZ * 0.8f;	//境界線辺りを上手く描画するために、エリアを少し狭める？
 				nearPlaneZ = farPlaneZ;
 			}
 		}
 
 	}
-	Vector3 ShadowMap::CalcLightPosition(float lightHeight, Vector3 viewFrustomCenterPosition)
+	Vector3 CShadowMap::CalcLightPosition(float lightHeight, Vector3 viewFrustomCenterPosition)
 	{
 		//分割された視推台を写すためのライト高さを計算する。
 		float alpha = (lightHeight - viewFrustomCenterPosition.y) / m_lightDirection.y;

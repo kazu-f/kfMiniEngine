@@ -9,7 +9,7 @@ namespace Engine {
 	/// カスケードシャドウやってみる。
 	/// </remarks>
 
-	class ShadowMap : Noncopyable
+	class CShadowMap : Noncopyable
 	{
 	public:
 		/// <summary>
@@ -49,7 +49,14 @@ namespace Engine {
 		void RegistShadowCaster(Model* caster) {
 			m_shadowCasters.push_back(caster);
 		}
-
+		/// <summary>
+		/// キャスター登録をクリア。
+		/// </summary>
+		/// <remarks>エンジン内で呼び出す。</remarks>
+		void ClearShadowCaster()
+		{
+			m_shadowCasters.clear();
+		}
 
 
 	private:	//内部的な処理。
@@ -64,7 +71,7 @@ namespace Engine {
 		/// </summary>
 		struct SShadowCb {
 			Matrix mLVP[NUM_SHADOW_MAP];
-			Vector4 texOffset;
+			Vector4 texOffset[NUM_SHADOW_MAP];
 			float depthOffset[NUM_SHADOW_MAP];
 			float pading;
 			float shadowAreaDepthInViewSpace[NUM_SHADOW_MAP];	//カメラ空間での影を落とすエリアの深度テーブル。
@@ -77,7 +84,7 @@ namespace Engine {
 		ConstantBuffer m_shadowCb;								//定数バッファ。
 		RenderTarget m_shadowMaps[NUM_SHADOW_MAP];				//シャドウマップのレンダーターゲット。
 		Vector3 m_lightDirection = { 0.0f,-1.0f,0.0f };			//ライトの方向。
-		float shadowAreas[NUM_SHADOW_MAP] = { 0.0f };			//影が落ちる範囲。
+		float m_shadowAreas[NUM_SHADOW_MAP] = { 0.0f };			//影が落ちる範囲。
 		float m_lightHeight = 100.0f;							//ライトの高さ。
 		bool m_isEnable = true;									//シャドウマップが有効かどうか。
 	};
