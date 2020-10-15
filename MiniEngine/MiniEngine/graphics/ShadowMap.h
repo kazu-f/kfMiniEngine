@@ -64,6 +64,17 @@ namespace Engine {
 		{
 			return m_shadowCb;
 		}
+		/// <summary>
+		/// シャドウマップのレンダリングターゲットのテクスチャを取得。
+		/// </summary>
+		/// <remarks>0～2までの値で取得。</remarks>
+		Texture* GetShadowMapTexture(int i)
+		{
+			if (i < NUM_SHADOW_MAP) {
+				return &m_shadowMaps[i].GetRenderTargetTexture();
+			}
+			return nullptr;
+		}
 
 	private:	//内部的な処理。
 		/// <summary>

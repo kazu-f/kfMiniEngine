@@ -71,6 +71,10 @@ namespace Engine {
 				descriptorHeap.RegistShaderResource(2, mesh->m_materials[matNo]->GetSpecularMap());	//スペキュラマップ。
 				descriptorHeap.RegistShaderResource(3, m_boneMatricesStructureBuffer);				//ボーンの設定。
 				descriptorHeap.RegistShaderResource(4, g_graphicsEngine->GetLightManager()->GetDirectionLightStructuredBuffer());	//ライトの設定。
+				for (int i = 0; i < NUM_SHADOW_MAP; i++) {
+					//シャドウマップ。
+					descriptorHeap.RegistShaderResource(5 + i, *g_graphicsEngine->GetShadowMap()->GetShadowMapTexture(i));
+				}
 				if (m_expandShaderResourceView) {
 					descriptorHeap.RegistShaderResource(EXPAND_SRV_REG__START_NO, *m_expandShaderResourceView);
 				}
