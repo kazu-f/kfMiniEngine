@@ -59,6 +59,7 @@
 #include "graphics/animation/AnimationClip.h"
 #include "graphics/animation/AnimationPlayController.h"
 #include "graphics/light/LightManager.h"
+#include "graphics/ShadowMap.h"
 
 const UINT FRAME_BUFFER_W = 1280;				//フレームバッファの幅。
 const UINT FRAME_BUFFER_H = 720;				//フレームバッファの高さ。

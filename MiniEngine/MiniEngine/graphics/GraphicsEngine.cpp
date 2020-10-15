@@ -172,6 +172,12 @@ namespace Engine {
 		//ライトマネージャーの作成。
 		m_lightManager = std::make_unique<CLightManager>();
 		m_lightManager->Init();
+		//シャドウマップの作成。
+		SShadowMapConfig shadowConfig;
+		shadowConfig.isEnable = true;
+
+		m_shadowMap = std::make_unique<CShadowMap>();
+		m_shadowMap->Init(shadowConfig);
 
 		return true;
 	}
@@ -419,8 +425,13 @@ namespace Engine {
 		m_camera2D.Update();
 		m_camera3D.Update();
 
+	}
+	void GraphicsEngine::PreRenderUpdate()
+	{
 		//ライトの更新処理。
 		m_lightManager->LightUpdate();
+		//シャドウマップの更新処理。
+		m_shadowMap->Update();
 	}
 	void GraphicsEngine::Render(CGameObjectManager* goMgr)
 	{
@@ -437,9 +448,12 @@ namespace Engine {
 		//ライト情報の更新。
 		m_lightManager->Render(m_renderContext);
 		//指向性シャドウ回りの処理。
+		m_shadowMap->RenderToShadowMap(m_renderContext);
 	}
 	void GraphicsEngine::OnRender(CGameObjectManager* goMgr)
 	{
+		//レンダリングステップをフォワードレンダリングにする。
+		m_renderContext.SetRenderStep(EnRenderStep::enRenderStep_ForwardRender);
 		//フォワードレンダリングパス。
 		goMgr->ForwardRender(m_renderContext);
 

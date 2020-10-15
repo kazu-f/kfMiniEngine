@@ -113,6 +113,7 @@ namespace Engine {
 		}
 		//•`‰æŒn‚Ìˆ—B
 		{
+			g_graphicsEngine->PreRenderUpdate();
 			g_graphicsEngine->Render(this);
 		}
 
