@@ -50,6 +50,12 @@ namespace Engine {
 		rc.SetRenderStep(EnRenderStep::enRenderStep_CreateDirectionalShadowMap);
 
 		for (int i = 0; i < NUM_SHADOW_MAP; i++) {
+			//レンダリングターゲットの設定？
+			rc.SetRenderTarget(m_shadowMaps[i].GetRTVCpuDescriptorHandle(), m_shadowMaps[i].GetDSVCpuDescriptorHandle());
+			const float clearColor = 1.0f;
+			const float value[] = { clearColor,clearColor,clearColor,clearColor };
+			rc.ClearRenderTargetView(m_shadowMaps[i].GetRTVCpuDescriptorHandle(), value);
+			rc.ClearDepthStencilView(m_shadowMaps[i].GetDSVCpuDescriptorHandle(), clearColor);
 			//レンダリングターゲットとして使用可能になるまで待つ。
 			rc.WaitUntilToPossibleSetRenderTarget(m_shadowMaps[i]);
 			//影をドロー

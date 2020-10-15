@@ -77,6 +77,7 @@ namespace Engine {
 				descriptorHeap.RegistConstantBuffer(0, m_commonConstantBuffer);
 				descriptorHeap.RegistConstantBuffer(1, g_graphicsEngine->GetLightManager()->GetLightParamConstantBuffer());		//ライトの設定。
 				descriptorHeap.RegistConstantBuffer(2, mesh->m_materials[matNo]->GetConstantBuffer());				//マテリアルの定数バッファ。
+				descriptorHeap.RegistConstantBuffer(3, g_graphicsEngine->GetShadowMap()->GetShadowMapConstantBuffer());		//シャドウマップの定数バッファ。
 				if (m_expandConstantBuffer.IsValid()) {
 					descriptorHeap.RegistConstantBuffer(3, m_expandConstantBuffer);
 				}

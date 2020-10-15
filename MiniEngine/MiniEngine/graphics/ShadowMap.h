@@ -57,7 +57,13 @@ namespace Engine {
 		{
 			m_shadowCasters.clear();
 		}
-
+		/// <summary>
+		/// 定数バッファを取得。
+		/// </summary>
+		ConstantBuffer& GetShadowMapConstantBuffer()
+		{
+			return m_shadowCb;
+		}
 
 	private:	//内部的な処理。
 		/// <summary>

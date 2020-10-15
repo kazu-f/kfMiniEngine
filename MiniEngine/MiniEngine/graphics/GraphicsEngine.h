@@ -153,6 +153,13 @@ namespace Engine {
 		{
 			return m_lightManager.get();
 		}
+		/// <summary>
+		/// シャドウマップクラスの取得。
+		/// </summary>
+		CShadowMap* GetShadowMap()
+		{
+			return m_shadowMap.get();
+		}
 	private:
 		/// <summary>
 		/// D3Dデバイスの作成。

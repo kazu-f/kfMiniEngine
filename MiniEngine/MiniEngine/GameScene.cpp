@@ -51,7 +51,7 @@ bool GameScene::Start()
 	//initData.m_expandConstantBuffer = &light;
 	//initData.m_expandConstantBufferSize = sizeof(light);
 
-	robotModel.Init(initData);
+	m_model.Init(initData);
 	
 	
 	initData.m_vsEntryPointFunc = "VSMain";
@@ -70,7 +70,7 @@ bool GameScene::Start()
 	Quaternion qRot;
 	qRot.SetRotationDegX(90.0f);
 
-	robotModel.UpdateWorldMatrix(pos, qRot, scale);
+	m_model.UpdateWorldMatrix(pos, qRot, scale);
 
 	m_testBox.UpdateWorldMatrix({ 10.0f,0.0f,0.0f }, Quaternion::Identity, scale);
 
@@ -80,7 +80,7 @@ bool GameScene::Start()
 			//ボーンの構築。
 			m_skeleton.BuildBoneMatrices();
 			//モデルと関連付け。
-			robotModel.BindSkeleton(m_skeleton);
+			m_model.BindSkeleton(m_skeleton);
 
 			//アニメーションクリップのロード。
 			auto animClip = std::make_unique<CAnimationClip>();
@@ -104,6 +104,12 @@ bool GameScene::Start()
 
 void GameScene::Release()
 {
+}
+
+void GameScene::PreUpdate()
+{
+	//シャドウキャスター登録。
+	g_graphicsEngine->GetShadowMap()->RegistShadowCaster(&m_model);
 }
 
 void GameScene::Update()
@@ -147,12 +153,12 @@ void GameScene::Update()
 	}
 	if (m_skeleton.IsInited()) {
 		//スケルトンを更新。
-		m_skeleton.Update(robotModel.GetWorldMatrix());
+		m_skeleton.Update(m_model.GetWorldMatrix());
 	}
 }
 
 void GameScene::ForwardRender(RenderContext& rc)
 {
-	robotModel.Draw(rc);
+	m_model.Draw(rc);
 	m_testBox.Draw(rc);
 }

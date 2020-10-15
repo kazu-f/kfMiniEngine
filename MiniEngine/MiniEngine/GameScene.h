@@ -9,12 +9,13 @@ public:
 	~GameScene();
 	bool Start();		//初期化。
 	void Release();		//解放処理が必要ならこれ。
+	void PreUpdate()override;
 	void Update();		//更新処理。
 	void ForwardRender(RenderContext& rc) override;		//描画処理。
 
 private:
 	//Light light;		//ライト。
-	Model	robotModel;			//モデル。
+	Model	m_model;			//モデル。
 	Model	m_testBox;			//テスト用の箱。
 	ModelInitData initData;
 	Skeleton m_skeleton;

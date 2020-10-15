@@ -449,6 +449,10 @@ namespace Engine {
 		m_lightManager->Render(m_renderContext);
 		//指向性シャドウ回りの処理。
 		m_shadowMap->RenderToShadowMap(m_renderContext);
+
+		m_shadowMap->WaitEndRenderToShadowMap(m_renderContext);
+
+		ChangeRenderTargetToFrameBuffer(m_renderContext);
 	}
 	void GraphicsEngine::OnRender(CGameObjectManager* goMgr)
 	{
