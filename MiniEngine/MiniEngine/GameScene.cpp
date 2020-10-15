@@ -48,7 +48,6 @@ bool GameScene::Start()
 	initData.m_tkmFilePath = "Assets/modelData/unityChan2.tkm";
 	initData.m_fxFilePath = "Assets/shader/model.fx";
 	initData.m_vsEntryPointFunc = "VSMainSkin";
-	initData.m_psEntryPointFunc = "PSMainBPR";
 	//initData.m_expandConstantBuffer = &light;
 	//initData.m_expandConstantBufferSize = sizeof(light);
 

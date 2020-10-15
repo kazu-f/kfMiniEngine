@@ -93,9 +93,14 @@ namespace Engine {
 		PipelineState m_skinModelPipelineState;			//スキンありモデル用のパイプラインステート。
 		PipelineState m_transSkinModelPipelineState;	//スキンありモデル用のパイプラインステート(半透明マテリアル)。
 		PipelineState m_transNonSkinModelPipelineState;	//スキンなしモデル用のパイプラインステート(半透明マテリアル)。
+		PipelineState m_nonSkinModelShadowPipelineState;//シャドウマップのスキンなしモデル用のパイプラインステート。
+		PipelineState m_skinModelShadowPipelineState;	//シャドウマップのスキンありモデル用のパイプラインステート。
 		Shader m_vsNonSkinModel;						//スキンなしモデル用の頂点シェーダー。
 		Shader m_vsSkinModel;							//スキンありモデル用の頂点シェーダー。
 		Shader m_psModel;								//モデル用のピクセルシェーダー。
+		Shader m_vsNonSkinModelShadowMap;				//シャドウマップのスキンなしモデル用の頂点シェーダー。
+		Shader m_vsSkinModelShadowMap;					//シャドウマップのスキンありモデル用の頂点シェーダー。
+		Shader m_psModelShadowMap;						//シャドウマップのモデル用のピクセルシェーダー。
 	};
 
 

@@ -32,4 +32,13 @@ struct SPSIn {
 	float3 worldPos : TEXCOORD1;	//ワールド空間でのピクセルの座標。
 };
 
+//シャドウマップ用の頂点シェーダーへの入力。
+struct SShadowMapVSIn {
+	float4 pos : POSITION;
+	SSkinVSIn skinVert;
+};
+//シャドウマップ用のピクセルシェーダーへの入力。
+struct SShadowMapPSIn {
+	float4 pos : SV_POSITION;
+};
 

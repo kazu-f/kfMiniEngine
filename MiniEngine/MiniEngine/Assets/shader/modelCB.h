@@ -28,3 +28,16 @@ cbuffer MaterialParamCb : register(b2) {
 	int hasNormalMap;		//法線マップがある？
 	int hasSpecularMap;		//スペキュラマップがある？
 }
+
+//シャドウマップの数
+static const int NUM_SHADOW_MAP = 3;
+/*
+*	シャドウマップ用の定数バッファ。
+*/
+cbuffer ShadowCb : register(b3) {
+	float4x4 mLVP[NUM_SHADOW_MAP];		//ライトビュープロジェクション行列。
+	float4 texOffset[NUM_SHADOW_MAP];	//シャドウマップのサイズ。
+	float depthOffset[NUM_SHADOW_MAP];	//深度オフセット。シャドウアクネ(チラつき)回避のためのバイアス。
+										//値が大きいほど影が落ちにくくなる。
+	float shadowAreaDepthInViewSpace[NUM_SHADOW_MAP];	//カメラ空間での影を落とすエリアの深度テーブル。
+}

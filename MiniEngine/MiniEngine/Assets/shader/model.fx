@@ -7,16 +7,6 @@
 
 static const float PI = 3.14159265358979323846;
 
-//static const int NUM_DIRECTIONAL_LIGHT = 4;	//ディレクションライトの本数。
-
-////ライト用の定数バッファ。
-//cbuffer LightCb : register(b2) {
-//	SDirectionalLight directionalLight[NUM_DIRECTIONAL_LIGHT];
-//	float3 eyePos;					//カメラの視点。
-//	float specPow;					//スペキュラの絞り。
-//	float3 ambinentLight;			//環境光。
-//};
-
 //モデルテクスチャ。
 Texture2D<float4> g_texture : register(t0);
 Texture2D<float4> g_normalMap : register(t1);
@@ -26,6 +16,9 @@ StructuredBuffer<float4x4> boneMatrix : register(t3);
 //ディレクションライト。
 StructuredBuffer<SDirectionalLight> directionalLight : register(t4);
 
+Texture2D<float4> shadowMap_0 : register(t5);		//シャドウマップ。
+Texture2D<float4> shadowMap_1 : register(t6);		//シャドウマップ。
+Texture2D<float4> shadowMap_2 : register(t7);		//シャドウマップ。
 //サンプラステート。
 sampler g_sampler : register(s0);
 
@@ -188,58 +181,58 @@ SPSIn VSMainSkin(SVSIn vsIn)
 	return VSMainCore(vsIn, true);
 }
 
-/// <summary>
-/// モデル用のピクセルシェーダーのエントリーポイント
-/// </summary>
-float4 PSMain(SPSIn psIn) : SV_Target0
-{
-	float3 lig = 0.0f;
-	float metaric = g_specularMap.Sample(g_sampler, psIn.uv).a;
-	//////////////////////////////////////////////////////
-	// 拡散反射を計算
-	//////////////////////////////////////////////////////
-	{
-		for (int i = 0; i < numDirectionLight; i++) {
-			float NdotL = dot(psIn.normal, -directionalLight[i].direction);	//ライトの逆方向と法線で内積を計算する。
-			if (NdotL < 0.0f) {	//内積の計算結果はマイナスになるので、if文で判定する。
-				NdotL = 0.0f;
-			}
-			float3 diffuse;
-			diffuse = directionalLight[i].color.xyz * (1.0f - metaric) * NdotL; //拡散反射光を足し算する。
-
-			//return float4( diffuse, 1.0f);		//なんか拡散反射レベルを見たかったんかこれ？
-
-			//ライトをあてる物体から視点に向かって伸びるベクトルを計算する。
-			float3 eyeToPixel = eyePos - psIn.worldPos;
-			eyeToPixel = normalize(eyeToPixel);
-
-			//光の物体に当たって、反射したベクトルを求める。
-			float3 reflectVector = reflect(directionalLight[i].direction, psIn.normal);
-			//反射した光が目に飛び込んて来ているかどうかを、内積を使って調べる。
-			float d = dot(eyeToPixel, reflectVector);
-			if (d < 0.0f) {
-				d = 0.0f;
-			}
-			//d = pow(d, specPow) * metaric;
-			d = pow(d, 5.0f) * metaric;		//仮置き。
-			float3 spec = directionalLight[i].color.xyz * d * 5.0f;
-			//スペキュラ反射の光を足し算する。
-			lig += diffuse + spec;
-		}
-	}
-
-	//////////////////////////////////////////////////////
-	// 環境光を計算
-	//////////////////////////////////////////////////////
-	lig += ambientLight; //足し算するだけ
-
-	float4 texColor = g_texture.Sample(g_sampler, psIn.uv);
-	texColor.xyz *= lig; //光をテクスチャカラーに乗算する。
-	return float4(texColor.xyz, 1.0f);
-}
+///// <summary>
+///// モデル用のピクセルシェーダーのエントリーポイント
+///// </summary>
+//float4 PSMain(SPSIn psIn) : SV_Target0
+//{
+//	float3 lig = 0.0f;
+//	float metaric = g_specularMap.Sample(g_sampler, psIn.uv).a;
+//	//////////////////////////////////////////////////////
+//	// 拡散反射を計算
+//	//////////////////////////////////////////////////////
+//	{
+//		for (int i = 0; i < numDirectionLight; i++) {
+//			float NdotL = dot(psIn.normal, -directionalLight[i].direction);	//ライトの逆方向と法線で内積を計算する。
+//			if (NdotL < 0.0f) {	//内積の計算結果はマイナスになるので、if文で判定する。
+//				NdotL = 0.0f;
+//			}
+//			float3 diffuse;
+//			diffuse = directionalLight[i].color.xyz * (1.0f - metaric) * NdotL; //拡散反射光を足し算する。
+//
+//			//return float4( diffuse, 1.0f);		//なんか拡散反射レベルを見たかったんかこれ？
+//
+//			//ライトをあてる物体から視点に向かって伸びるベクトルを計算する。
+//			float3 eyeToPixel = eyePos - psIn.worldPos;
+//			eyeToPixel = normalize(eyeToPixel);
+//
+//			//光の物体に当たって、反射したベクトルを求める。
+//			float3 reflectVector = reflect(directionalLight[i].direction, psIn.normal);
+//			//反射した光が目に飛び込んて来ているかどうかを、内積を使って調べる。
+//			float d = dot(eyeToPixel, reflectVector);
+//			if (d < 0.0f) {
+//				d = 0.0f;
+//			}
+//			//d = pow(d, specPow) * metaric;
+//			d = pow(d, 5.0f) * metaric;		//仮置き。
+//			float3 spec = directionalLight[i].color.xyz * d * 5.0f;
+//			//スペキュラ反射の光を足し算する。
+//			lig += diffuse + spec;
+//		}
+//	}
+//
+//	//////////////////////////////////////////////////////
+//	// 環境光を計算
+//	//////////////////////////////////////////////////////
+//	lig += ambientLight; //足し算するだけ
+//
+//	float4 texColor = g_texture.Sample(g_sampler, psIn.uv);
+//	texColor.xyz *= lig; //光をテクスチャカラーに乗算する。
+//	return float4(texColor.xyz, 1.0f);
+//}
 
 //物理ベースライティングのピクセルシェーダー。
-float4 PSMainBPR(SPSIn psIn) : SV_Target0
+float4 PSMain(SPSIn psIn) : SV_Target0
 {
 	//法線の計算。
 	float3 normal;
@@ -280,4 +273,35 @@ float4 PSMainBPR(SPSIn psIn) : SV_Target0
 	float4 finalColor = 1.0f;
 	finalColor.xyz = albedoColor.xyz * lig;
 	return finalColor;
+}
+
+/*
+*	スキンなしモデルのシャドウマップ書き込み用の頂点シェーダー。
+*/
+SShadowMapPSIn VSMainNonSkinShadowMap(SShadowMapVSIn vsIn)
+{
+	SShadowMapPSIn psIn;
+	psIn.pos = mul(mWorld, vsIn.pos);
+	psIn.pos = mul(mLVP[0], psIn.pos);
+
+	return psIn;
+}
+/*
+*	スキンありモデルのシャドウマップ書き込み用の頂点シェーダー。
+*/
+SShadowMapPSIn VSMainSkinShadowMap(SShadowMapVSIn vsIn)
+{
+	SShadowMapPSIn psIn;
+	float4x4 skinMatrix = CalcSkinMatrix(vsIn.skinVert);
+	psIn.pos = mul(skinMatrix, vsIn.pos);
+	psIn.pos = mul(mLVP[0], psIn.pos);
+
+	return psIn;
+}
+/*
+*	シャドウマップ書き込み用のピクセルシェーダー。
+*/
+float4 PSMainShadowMap(SShadowMapPSIn psIn) :SV_Target0
+{
+	return psIn.pos.z / psIn.pos.w;
 }
