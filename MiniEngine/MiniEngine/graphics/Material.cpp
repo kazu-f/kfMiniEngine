@@ -139,13 +139,32 @@ namespace Engine {
 	{
 		rc.SetRootSignature(m_rootSignature);
 
-		if (hasSkin) {
-			//	rc.SetPipelineState(m_skinModelPipelineState);
-			rc.SetPipelineState(m_transSkinModelPipelineState);
+		const auto renderStep = rc.GetRenderStep();
+
+		switch (renderStep)
+		{
+		case enRenderStep_Undef:
+			break;
+		case enRenderStep_CreateDirectionalShadowMap:
+			//シャドウマップの描画。
+			if (hasSkin) {
+				rc.SetPipelineState(m_skinModelShadowPipelineState);
+			}
+			else {
+				rc.SetPipelineState(m_nonSkinModelShadowPipelineState);
+			}
+			break;
+		case enRenderStep_ForwardRender:
+			if (hasSkin) {
+				rc.SetPipelineState(m_transSkinModelPipelineState);
+			}
+			else {
+				rc.SetPipelineState(m_transNonSkinModelPipelineState);
+			}
+			break;
+		default:
+			break;
 		}
-		else {
-			//	rc.SetPipelineState(m_nonSkinModelPipelineState);
-			rc.SetPipelineState(m_transNonSkinModelPipelineState);
-		}
+
 	}
 }
