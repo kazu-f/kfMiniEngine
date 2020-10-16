@@ -124,7 +124,7 @@ namespace Engine {
 		lightViewRot.m[2][3] = 0.0f;
 
 		//ライトビューの高さを計算。するようにする。
-		float lightHeight = m_lightHeight;
+		float lightHeight = g_camera3D->GetTarget().y + m_lightHeight;
 
 		float nearPlaneZ = 0.0f;	//近平面。
 		float farPlaneZ;			//遠平面。

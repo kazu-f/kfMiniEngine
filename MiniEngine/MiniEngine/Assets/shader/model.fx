@@ -164,7 +164,7 @@ int GetCascadeIndex(float zInView)
 			return i;
 		}
 	}
-	return 0;
+	return -1;
 }
 
 /*
@@ -177,6 +177,9 @@ float CalcShadow(float3 worldPos, float zInView)
 		//影を落とす。
 		//使用するシャドウマップ番号の取得。
 		int cascadeIndex = GetCascadeIndex(zInView);
+		if (cascadeIndex == -1) {
+			return shadow;
+		}
 
 		float4 posInLVP = mul(mLVP[cascadeIndex], float4(worldPos, 1.0f));
 		posInLVP.xyz /= posInLVP.w;
@@ -185,7 +188,6 @@ float CalcShadow(float3 worldPos, float zInView)
 
 		//uv座標変換。
 		float2 shadowMapUV = float2(0.5f, -0.5f) * posInLVP.xy + float2(0.5f, 0.5f);
-		float shadow_val = 1.0f;
 
 		if (cascadeIndex == 0) {
 			shadow = CalcShadowPercent(shadowMap_0, shadowMapUV, texOffset[cascadeIndex], depth, depthOffset.x);
@@ -299,6 +301,7 @@ SShadowMapPSIn VSMainNonSkinShadowMap(SShadowMapVSIn vsIn)
 	SShadowMapPSIn psIn;
 	psIn.pos = mul(mWorld, vsIn.pos);
 	psIn.pos = mul(mView, psIn.pos);
+	psIn.pos = mul(mProj, psIn.pos);
 
 	return psIn;
 }
@@ -311,6 +314,7 @@ SShadowMapPSIn VSMainSkinShadowMap(SShadowMapVSIn vsIn)
 	float4x4 skinMatrix = CalcSkinMatrix(vsIn.skinVert);
 	psIn.pos = mul(skinMatrix, vsIn.pos);
 	psIn.pos = mul(mView, psIn.pos);
+	psIn.pos = mul(mProj, psIn.pos);
 
 	return psIn;
 }
