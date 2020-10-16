@@ -192,6 +192,7 @@ namespace Engine {
 		cb.mWorld = mWorld;
 		cb.mView = mView;
 		cb.mProj = mProj;
+		cb.isShadowReceiver = static_cast<int>(m_isShadowReceiver);
 
 		m_commonConstantBuffer.CopyToVRAM(&cb);
 

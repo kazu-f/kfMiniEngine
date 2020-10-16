@@ -5,6 +5,7 @@ cbuffer ModelCb : register(b0) {
 	float4x4 mWorld;
 	float4x4 mView;
 	float4x4 mProj;
+	int isShadowReceiver;		//シャドウレシーバー。
 };
 
 /*
@@ -33,11 +34,13 @@ cbuffer MaterialParamCb : register(b2) {
 static const int NUM_SHADOW_MAP = 3;
 /*
 *	シャドウマップ用の定数バッファ。
+*	ShadowMap.hのSShadowCbに対応する。
 */
 cbuffer ShadowCb : register(b3) {
 	float4x4 mLVP[NUM_SHADOW_MAP];		//ライトビュープロジェクション行列。
 	float4 texOffset[NUM_SHADOW_MAP];	//シャドウマップのサイズ。
-	float depthOffset[NUM_SHADOW_MAP];	//深度オフセット。シャドウアクネ(チラつき)回避のためのバイアス。
+	float4 depthOffset;	//深度オフセット。シャドウアクネ(チラつき)回避のためのバイアス。
 										//値が大きいほど影が落ちにくくなる。
-	float shadowAreaDepthInViewSpace[NUM_SHADOW_MAP];	//カメラ空間での影を落とすエリアの深度テーブル。
+	float4 shadowAreaDepthInViewSpace;	//カメラ空間での影を落とすエリアの深度テーブル。
+																		//なんか配列だと送れないんですが...
 }

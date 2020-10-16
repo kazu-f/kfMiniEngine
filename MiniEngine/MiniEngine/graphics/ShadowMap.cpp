@@ -11,11 +11,12 @@ namespace Engine {
 		for (int i = 0; i < NUM_SHADOW_MAP; i++)
 		{
 			m_shadowAreas[i] = config.shadowAreas[i];
+			m_depthOffset[i] = config.depthOffset[i];
 		}
 
 		//シャドウマップの解像度の設定。
 		int wh[NUM_SHADOW_MAP][2] = {
-			{config.shadowMapWidth,config.lightHeight},					//近距離
+			{config.shadowMapWidth,config.shadowMapHeight},					//近距離
 			{config.shadowMapWidth,config.shadowMapHeight >> 1},		//中距離。
 			{config.shadowMapWidth >> 1,config.shadowMapHeight >> 1}	//遠距離。
 		};
@@ -60,8 +61,11 @@ namespace Engine {
 			rc.WaitUntilToPossibleSetRenderTarget(m_shadowMaps[i]);
 			//影をドロー
 			for (auto& caster : m_shadowCasters) {
-				caster->Draw(rc);
+				caster->Draw(rc,m_LVPMatrix[i]);
 			}
+			rc.WaitUntilFinishDrawingToRenderTarget(m_shadowMaps[i]);
+			g_graphicsEngine->EndRenderShadowMap();
+			g_graphicsEngine->BeginRenderShadowMap();
 		}
 
 		//シャドウキャスター登録をクリア。
@@ -70,10 +74,10 @@ namespace Engine {
 	void CShadowMap::WaitEndRenderToShadowMap(RenderContext& rc)
 	{
 
-		//影の描画終わり。
-		for (int i = 0; i < NUM_SHADOW_MAP; i++) {
-			rc.WaitUntilFinishDrawingToRenderTarget(m_shadowMaps[i]);
-		}
+		////影の描画終わり。
+		//for (int i = 0; i < NUM_SHADOW_MAP; i++) {
+		//	rc.WaitUntilFinishDrawingToRenderTarget(m_shadowMaps[i]);
+		//}
 	}
 	void CShadowMap::Update()
 	{
@@ -192,6 +196,7 @@ namespace Engine {
 				m_LVPMatrix[i] = mLightView * proj;									//ライトビュープロジェクション行列を作成。
 				m_shadowCbEntity.mLVP[i] = m_LVPMatrix[i];							//定数バッファ用に記録。
 				m_shadowCbEntity.shadowAreaDepthInViewSpace[i] = farPlaneZ * 0.8f;	//境界線辺りを上手く描画するために、エリアを少し狭める？
+				m_shadowCbEntity.depthOffset[i] = m_depthOffset[i];					//深度値オフセット。
 				nearPlaneZ = farPlaneZ;
 			}
 		}

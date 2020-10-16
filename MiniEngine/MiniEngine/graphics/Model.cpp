@@ -49,4 +49,13 @@ namespace Engine {
 			g_camera3D->GetProjectionMatrix()
 		);
 	}
+	void Model::Draw(RenderContext& rc, Matrix mLVP)
+	{
+		m_meshParts.Draw(
+			rc,
+			m_world,
+			mLVP,
+			Matrix::Identity
+		);
+	}
 }

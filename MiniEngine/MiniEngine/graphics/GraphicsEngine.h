@@ -51,6 +51,17 @@ namespace Engine {
 		/// 描画を行う。
 		/// </summary>
 		void Render(CGameObjectManager* goMgr);
+		/// <summary>
+		/// シャドウマップ描画前に呼ぶ処理
+		/// </summary>
+		void BeginRenderShadowMap()
+		{
+			BeginRender();
+		}
+		/// <summary>
+		/// シャドウマップ描画後に呼ぶ処理
+		/// </summary>
+		void EndRenderShadowMap();
 	private:
 		/// <summary>
 		/// プレレンダリング。

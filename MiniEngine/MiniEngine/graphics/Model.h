@@ -52,12 +52,25 @@ namespace Engine {
 		/// <param name="renderContext">レンダリングコンテキスト</param>
 		void Draw(RenderContext& renderContext);
 		/// <summary>
+		/// /シャドウマップ用描画。
+		/// </summary>
+		/// <param name="rc">レンダリングコンテキスト</param>
+		/// <param name="mLVP">ライトビュープロジェクション行列</param>
+		void Draw(RenderContext& rc, Matrix mLVP);
+		/// <summary>
 		/// ワールド行列を取得。
 		/// </summary>
 		/// <returns></returns>
 		const Matrix& GetWorldMatrix() const
 		{
 			return m_world;
+		}
+		/// <summary>
+		/// シャドウレシーバーに設定する。
+		/// </summary>
+		void SetShadowReceiverFlag(bool flag)
+		{
+			m_meshParts.SetShadowReceiverFlag(flag);
 		}
 	private:
 

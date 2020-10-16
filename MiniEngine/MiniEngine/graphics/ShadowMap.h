@@ -102,6 +102,7 @@ namespace Engine {
 		RenderTarget m_shadowMaps[NUM_SHADOW_MAP];				//シャドウマップのレンダーターゲット。
 		Vector3 m_lightDirection = { 0.0f,-1.0f,0.0f };			//ライトの方向。
 		float m_shadowAreas[NUM_SHADOW_MAP] = { 0.0f };			//影が落ちる範囲。
+		float m_depthOffset[NUM_SHADOW_MAP] = { 0.0f };			//深度値オフセット。
 		float m_lightHeight = 100.0f;							//ライトの高さ。
 		bool m_isEnable = true;									//シャドウマップが有効かどうか。
 	};

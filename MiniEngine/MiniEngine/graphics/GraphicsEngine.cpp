@@ -518,4 +518,19 @@ namespace Engine {
 		//描画完了待ち。
 		WaitDraw();
 	}
+
+	void GraphicsEngine::EndRenderShadowMap()
+	{
+		// レンダリングターゲットへの描き込み完了待ち
+		m_renderContext.WaitUntilFinishDrawingToRenderTarget(m_renderTargets[m_frameIndex]);
+
+		//レンダリングコンテキストを閉じる。
+		m_renderContext.Close();
+
+		//コマンドを実行。
+		ID3D12CommandList* ppCommandLists[] = { m_commandList };
+		m_commandQueue->ExecuteCommandLists(_countof(ppCommandLists), ppCommandLists);
+		//描画完了待ち。
+		WaitDraw();
+	}
 }

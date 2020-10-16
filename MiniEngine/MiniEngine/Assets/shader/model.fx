@@ -94,7 +94,7 @@ float SchlickFresnel(float u, float f0, float f90)
 
 /*
 *	正規化Disneyモデル拡散反射。
-*	albedColor	:	ライトの強さかなぁ？
+*	albedColor	:	ライトの強さか？
 *	N			:	法線の正規化ベクトル
 *	L			:	ライトへの正規化ベクトル
 *	V			:	視点の正規化ベクトル
@@ -141,6 +141,65 @@ float4x4 CalcSkinMatrix(SSkinVSIn skinVert)
 	return skinning;
 }
 
+/*
+*	影が落ちているかを計算する。
+*/
+float CalcShadowPercent(Texture2D<float4> tex, float2 uv, float2 offset, float depth, float dOffset)
+{
+	float shadow_val = tex.Sample(g_sampler, uv).r;
+	if (depth > shadow_val + dOffset) {
+		return 1.0f;
+	}
+	return 0.0f;
+}
+
+/*
+*	カスケードインデックスの取得。
+*/
+int GetCascadeIndex(float zInView)
+{
+	[unroll]
+	for (int i = 0; i < NUM_SHADOW_MAP; i++) {
+		if (zInView < shadowAreaDepthInViewSpace[i]) {
+			return i;
+		}
+	}
+	return 0;
+}
+
+/*
+*	カスケードシャドウの処理。
+*/
+float CalcShadow(float3 worldPos, float zInView)
+{
+	float shadow = 0.0f;
+	if (isShadowReceiver) {
+		//影を落とす。
+		//使用するシャドウマップ番号の取得。
+		int cascadeIndex = GetCascadeIndex(zInView);
+
+		float4 posInLVP = mul(mLVP[cascadeIndex], float4(worldPos, 1.0f));
+		posInLVP.xyz /= posInLVP.w;
+
+		float depth = min(posInLVP.z, 1.0f);
+
+		//uv座標変換。
+		float2 shadowMapUV = float2(0.5f, -0.5f) * posInLVP.xy + float2(0.5f, 0.5f);
+		float shadow_val = 1.0f;
+
+		if (cascadeIndex == 0) {
+			shadow = CalcShadowPercent(shadowMap_0, shadowMapUV, texOffset[cascadeIndex], depth, depthOffset.x);
+		}
+		if (cascadeIndex == 1) {
+			shadow = CalcShadowPercent(shadowMap_1, shadowMapUV, texOffset[cascadeIndex], depth, depthOffset.y);
+		}
+		if (cascadeIndex == 2) {
+			shadow = CalcShadowPercent(shadowMap_2, shadowMapUV, texOffset[cascadeIndex], depth, depthOffset.z);
+		}
+	}
+	return shadow;
+}
+
 //頂点シェーダーのコア関数。
 SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
 {
@@ -181,56 +240,6 @@ SPSIn VSMainSkin(SVSIn vsIn)
 	return VSMainCore(vsIn, true);
 }
 
-///// <summary>
-///// モデル用のピクセルシェーダーのエントリーポイント
-///// </summary>
-//float4 PSMain(SPSIn psIn) : SV_Target0
-//{
-//	float3 lig = 0.0f;
-//	float metaric = g_specularMap.Sample(g_sampler, psIn.uv).a;
-//	//////////////////////////////////////////////////////
-//	// 拡散反射を計算
-//	//////////////////////////////////////////////////////
-//	{
-//		for (int i = 0; i < numDirectionLight; i++) {
-//			float NdotL = dot(psIn.normal, -directionalLight[i].direction);	//ライトの逆方向と法線で内積を計算する。
-//			if (NdotL < 0.0f) {	//内積の計算結果はマイナスになるので、if文で判定する。
-//				NdotL = 0.0f;
-//			}
-//			float3 diffuse;
-//			diffuse = directionalLight[i].color.xyz * (1.0f - metaric) * NdotL; //拡散反射光を足し算する。
-//
-//			//return float4( diffuse, 1.0f);		//なんか拡散反射レベルを見たかったんかこれ？
-//
-//			//ライトをあてる物体から視点に向かって伸びるベクトルを計算する。
-//			float3 eyeToPixel = eyePos - psIn.worldPos;
-//			eyeToPixel = normalize(eyeToPixel);
-//
-//			//光の物体に当たって、反射したベクトルを求める。
-//			float3 reflectVector = reflect(directionalLight[i].direction, psIn.normal);
-//			//反射した光が目に飛び込んて来ているかどうかを、内積を使って調べる。
-//			float d = dot(eyeToPixel, reflectVector);
-//			if (d < 0.0f) {
-//				d = 0.0f;
-//			}
-//			//d = pow(d, specPow) * metaric;
-//			d = pow(d, 5.0f) * metaric;		//仮置き。
-//			float3 spec = directionalLight[i].color.xyz * d * 5.0f;
-//			//スペキュラ反射の光を足し算する。
-//			lig += diffuse + spec;
-//		}
-//	}
-//
-//	//////////////////////////////////////////////////////
-//	// 環境光を計算
-//	//////////////////////////////////////////////////////
-//	lig += ambientLight; //足し算するだけ
-//
-//	float4 texColor = g_texture.Sample(g_sampler, psIn.uv);
-//	texColor.xyz *= lig; //光をテクスチャカラーに乗算する。
-//	return float4(texColor.xyz, 1.0f);
-//}
-
 //物理ベースライティングのピクセルシェーダー。
 float4 PSMain(SPSIn psIn) : SV_Target0
 {
@@ -268,6 +277,13 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	}
 	//環境光。
 	lig += ambientLight;
+	//シャドウ。
+	float4 posInView = mul(mView, float4(psIn.worldPos,1.0f));
+	float shadow = CalcShadow(psIn.worldPos, posInView.z);
+	if (shadow == 1.0f)
+	{
+		lig *= 0.5f;
+	}
 
 	//最終的な色を決定する。
 	float4 finalColor = 1.0f;
@@ -282,7 +298,7 @@ SShadowMapPSIn VSMainNonSkinShadowMap(SShadowMapVSIn vsIn)
 {
 	SShadowMapPSIn psIn;
 	psIn.pos = mul(mWorld, vsIn.pos);
-	psIn.pos = mul(mLVP[0], psIn.pos);
+	psIn.pos = mul(mView, psIn.pos);
 
 	return psIn;
 }
@@ -294,7 +310,7 @@ SShadowMapPSIn VSMainSkinShadowMap(SShadowMapVSIn vsIn)
 	SShadowMapPSIn psIn;
 	float4x4 skinMatrix = CalcSkinMatrix(vsIn.skinVert);
 	psIn.pos = mul(skinMatrix, vsIn.pos);
-	psIn.pos = mul(mLVP[0], psIn.pos);
+	psIn.pos = mul(mView, psIn.pos);
 
 	return psIn;
 }

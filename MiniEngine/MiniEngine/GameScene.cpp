@@ -73,6 +73,7 @@ bool GameScene::Start()
 	m_model.UpdateWorldMatrix(pos, qRot, scale);
 
 	m_testBox.UpdateWorldMatrix({ 10.0f,0.0f,0.0f }, Quaternion::Identity, scale);
+	m_testBox.SetShadowReceiverFlag(true);
 
 	//アニメーションのためのロードを行う。
 	if (m_skeleton.Init("Assets/modelData/unityChan2.tks")) {

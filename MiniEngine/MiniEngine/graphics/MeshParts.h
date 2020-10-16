@@ -62,6 +62,13 @@ namespace Engine {
 		/// </summary>
 		/// <param name="skeleton">スケルトン</param>
 		void BindSkeleton(Skeleton& skeleton);
+		/// <summary>
+		/// シャドウレシーバーかどうか。
+		/// </summary>
+		void SetShadowReceiverFlag(bool flag)
+		{
+			m_isShadowReceiver = flag;
+		}
 	private:
 		/// <summary>
 		/// tkmメッシュからメッシュを作成。
@@ -92,9 +99,10 @@ namespace Engine {
 		/// この構造体を変更したら、SimpleModel.fxのCBも変更するように。
 		/// </remarks>
 		struct SConstantBuffer {
-			Matrix mWorld;		//ワールド行列。
-			Matrix mView;		//ビュー行列。
-			Matrix mProj;		//プロジェクション行列。
+			Matrix mWorld;			//ワールド行列。
+			Matrix mView;			//ビュー行列。
+			Matrix mProj;			//プロジェクション行列。
+			int isShadowReceiver = 0;	//シャドウレシーバーフラグ。
 		};
 		ConstantBuffer m_commonConstantBuffer;					//メッシュ共通の定数バッファ。
 		ConstantBuffer m_expandConstantBuffer;					//ユーザー拡張用の定数バッファ
@@ -105,5 +113,6 @@ namespace Engine {
 		Skeleton* m_skeleton = nullptr;							//スケルトン。
 		void* m_expandData = nullptr;							//ユーザー拡張データ。
 		bool m_isCreateDescriptHeap = false;					//ディスクリプタヒープが作成されているか。
+		bool m_isShadowReceiver = false;						//シャドウレシーバーフラグ。
 	};
 }
