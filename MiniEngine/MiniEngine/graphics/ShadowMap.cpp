@@ -129,7 +129,7 @@ namespace Engine {
 		float nearPlaneZ = 0.0f;	//近平面。
 		float farPlaneZ;			//遠平面。
 		Vector3 cameraUp;			//カメラの上方向
-		cameraUp.Cross(g_camera3D->GetRight(), g_camera3D->GetForward());
+		cameraUp.Cross(g_camera3D->GetForward(), g_camera3D->GetRight());
 		//カスケードシャドウのための処理。
 		for (int i = 0; i < NUM_SHADOW_MAP; i++) {
 			farPlaneZ = nearPlaneZ + m_shadowAreas[i];		//近平面+シャドウの範囲。
