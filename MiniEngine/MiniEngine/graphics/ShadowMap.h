@@ -100,6 +100,8 @@ namespace Engine {
 	private:
 		ConstantBuffer m_shadowCb;								//定数バッファ。
 		RenderTarget m_shadowMaps[NUM_SHADOW_MAP];				//シャドウマップのレンダーターゲット。
+		D3D12_VIEWPORT m_shadowView[NUM_SHADOW_MAP];			//ビューポートの設定。
+		D3D12_RECT m_scissorRect[NUM_SHADOW_MAP];				//シザリング矩形。
 		Vector3 m_lightDirection = { 0.0f,-1.0f,0.0f };			//ライトの方向。
 		float m_shadowAreas[NUM_SHADOW_MAP] = { 0.0f };			//影が落ちる範囲。
 		float m_depthOffset[NUM_SHADOW_MAP] = { 0.0f };			//深度値オフセット。

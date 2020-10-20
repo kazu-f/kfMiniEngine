@@ -35,7 +35,26 @@ namespace Engine {
 				DXGI_FORMAT_D32_FLOAT,	//デプスステンシルフォーマット。
 				clearColor				//クリアカラー。
 			);
+
+			D3D12_VIEWPORT view;
+			view.TopLeftX = 0;
+			view.TopLeftY = 0;
+			view.Width = static_cast<FLOAT>(wh[shadowMapNo][0]);
+			view.Height = static_cast<FLOAT>(wh[shadowMapNo][1]);
+			view.MinDepth = D3D12_MIN_DEPTH;
+			view.MaxDepth = D3D12_MAX_DEPTH;
+
+			m_shadowView[shadowMapNo] = view;
+
+			D3D12_RECT rect;
+			rect.top = 0.0f;
+			rect.left = 0.0f;
+			rect.right = static_cast<LONG>(wh[shadowMapNo][0]);
+			rect.bottom = static_cast<LONG>(wh[shadowMapNo][1]);
+
+			m_scissorRect[shadowMapNo] = rect;
 		}
+
 
 		//定数バッファを初期化する。
 		m_shadowCb.Init(sizeof(m_shadowCbEntity), nullptr);
@@ -53,6 +72,9 @@ namespace Engine {
 		for (int i = 0; i < NUM_SHADOW_MAP; i++) {
 			//レンダリングターゲットの設定？
 			rc.SetRenderTarget(m_shadowMaps[i].GetRTVCpuDescriptorHandle(), m_shadowMaps[i].GetDSVCpuDescriptorHandle());
+			rc.SetViewport(m_shadowView[i]);		//ビューポートの設定。
+			rc.SetScissorRect(m_scissorRect[i]);	//シザリング短形の設定。
+
 			const float clearColor = 1.0f;
 			const float value[] = { clearColor,clearColor,clearColor,clearColor };
 			rc.ClearRenderTargetView(m_shadowMaps[i].GetRTVCpuDescriptorHandle(), value);
@@ -195,7 +217,7 @@ namespace Engine {
 				);
 				m_LVPMatrix[i] = mLightView * proj;									//ライトビュープロジェクション行列を作成。
 				m_shadowCbEntity.mLVP[i] = m_LVPMatrix[i];							//定数バッファ用に記録。
-				m_shadowCbEntity.shadowAreaDepthInViewSpace[i] = farPlaneZ * 0.8f;	//境界線辺りを上手く描画するために、エリアを少し狭める？
+				m_shadowCbEntity.shadowAreaDepthInViewSpace[i] = farPlaneZ ;	//境界線辺りを上手く描画するために、エリアを少し狭める？
 				m_shadowCbEntity.depthOffset[i] = m_depthOffset[i];					//深度値オフセット。
 				nearPlaneZ = farPlaneZ;
 			}
