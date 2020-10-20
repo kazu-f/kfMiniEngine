@@ -2,6 +2,8 @@
 
 //機能の試運転用クラス。
 
+class CGameCamera;
+
 class GameScene:public IGameObject
 {
 public:
@@ -14,6 +16,7 @@ public:
 	void ForwardRender(RenderContext& rc) override;		//描画処理。
 
 private:
+	CGameCamera* m_camera = nullptr;
 	//Light light;		//ライト。
 	Model	m_model;			//モデル。
 	Model	m_testBox;			//テスト用の箱。

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "GameScene.h"
 #include "prefab/light/DirectionLight.h"
+#include "GameCamera.h"
 
 GameScene::GameScene()
 {
@@ -58,8 +59,8 @@ bool GameScene::Start()
 	initData.m_tkmFilePath = "Assets/modelData/testbg/bg.tkm";
 	m_testBox.Init(initData);
 
-	g_camera3D->SetPosition({ 0.0f, 50.0f, 100.0f });
-	g_camera3D->SetTarget({ 0.0f,50.0f,0.0f });
+	m_camera = NewGO<CGameCamera>(0);
+
 	Vector3 pos, scale;
 	pos = { 0.0f,0.0f,0.0f };
 
@@ -123,11 +124,6 @@ void GameScene::Update()
 		qRot.SetRotationDegY(-1.0f);
 	}
 
-	//qRot.Apply(m_lightDir);
-	//for (auto& lig : m_lightArray) {
-	//	lig->SetDirection(m_lightDir);
-	//}
-
 	if (g_pad[0]->IsPress(enButtonA)) {
 		m_animation.Play(0, 0.6f);
 	}
@@ -135,16 +131,11 @@ void GameScene::Update()
 		m_animation.Play(1, 0.6f);
 	}
 
-	//環境光の変化をさせる。
-	m_lightPow += g_pad[0]->GetLStickYF() * 0.02f;
-	m_lightPow = min(1.0f, max(0.0f, m_lightPow));
-	g_graphicsEngine->GetLightManager()->SetAmbientLight({ m_lightPow,m_lightPow,m_lightPow });
+	////環境光の変化をさせる。
+	//m_lightPow += g_pad[0]->GetLStickYF() * 0.02f;
+	//m_lightPow = min(1.0f, max(0.0f, m_lightPow));
+	//g_graphicsEngine->GetLightManager()->SetAmbientLight({ m_lightPow,m_lightPow,m_lightPow });
 
-	//カメラも回す。
-	qRot.SetRotationDegY(g_pad[0]->GetLStickXF());
-	auto camPos = g_camera3D->GetPosition();
-	qRot.Apply(camPos);
-	g_camera3D->SetPosition(camPos);
 	if (g_pad[0]->IsTrigger(enButtonA)) {
 		isPBR = !isPBR;
 	}
