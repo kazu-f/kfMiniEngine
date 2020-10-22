@@ -17,7 +17,7 @@ namespace Engine {
 
 	void CGameObjectManager::PreUpdate()
 	{
-		for (auto& objList : m_gameObjectListArray) {
+		for (auto objList : m_gameObjectListArray) {
 			for (auto& obj : objList) {
 				obj->PreUpdateWrapper();
 			}
@@ -35,7 +35,7 @@ namespace Engine {
 
 	void CGameObjectManager::PostUpdate()
 	{
-		for (auto& objList : m_gameObjectListArray) {
+		for (auto objList : m_gameObjectListArray) {
 			for (auto& obj : objList) {
 				obj->PostUpdateWrapper();
 			}
@@ -54,7 +54,7 @@ namespace Engine {
 
 	void CGameObjectManager::ForwardRender(RenderContext& rc)
 	{
-		for (auto& objList : m_gameObjectListArray) {
+		for (auto objList : m_gameObjectListArray) {
 			for (auto& obj : objList) {
 				obj->ForwardRenderWrapper(rc);
 			}
@@ -63,7 +63,7 @@ namespace Engine {
 
 	//void CGameObjectManager::RenderHUD(RenderContext& rc)
 	//{
-	//	for (auto& objList : m_gameObjectListArray) {
+	//	for (auto objList : m_gameObjectListArray) {
 	//		for (auto& obj : objList) {
 
 	//		}
@@ -72,7 +72,7 @@ namespace Engine {
 
 	void CGameObjectManager::RenderToShadowMap(RenderContext& rc, const Matrix& mLightView, const Matrix& mLightProj)
 	{
-		for (auto& objList : m_gameObjectListArray) {
+		for (auto objList : m_gameObjectListArray) {
 			for (auto& obj : objList) {
 				obj->RenderToShadowMapWraper(rc, mLightView, mLightView);
 			}
