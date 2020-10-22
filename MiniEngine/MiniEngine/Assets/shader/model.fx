@@ -282,10 +282,13 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	//シャドウ。
 	float4 posInView = mul(mView, float4(psIn.worldPos,1.0f));
 	float shadow = CalcShadow(psIn.worldPos, posInView.z);
-	if (shadow == 1.0f)
-	{
-		lig *= 0.5f;
-	}
+
+	lig *= lerp(1.0f, 0.5f, shadow);
+
+	//if (shadow == 1.0f)
+	//{
+	//	lig *= 0.5f;
+	//}
 
 	//最終的な色を決定する。
 	float4 finalColor = 1.0f;
