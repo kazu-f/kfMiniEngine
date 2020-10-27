@@ -61,7 +61,7 @@ namespace Engine {
 		/// <summary>
 		/// シャドウマップ描画後に呼ぶ処理
 		/// </summary>
-		void EndRenderShadowMap();
+		void ExecuteCommand();
 	private:
 		/// <summary>
 		/// プレレンダリング。
@@ -160,16 +160,16 @@ namespace Engine {
 		/// <summary>
 		/// ライトマネージャーの取得。
 		/// </summary>
-		CLightManager* GetLightManager()
+		std::unique_ptr<CLightManager>& GetLightManager()
 		{
-			return m_lightManager.get();
+			return m_lightManager;
 		}
 		/// <summary>
 		/// シャドウマップクラスの取得。
 		/// </summary>
-		CShadowMap* GetShadowMap()
+		std::unique_ptr<CShadowMap>& GetShadowMap()
 		{
-			return m_shadowMap.get();
+			return m_shadowMap;
 		}
 	private:
 		/// <summary>

@@ -77,16 +77,16 @@ namespace Engine {
 
 			const float clearColor = 1.0f;
 			const float value[] = { clearColor,clearColor,clearColor,clearColor };
-			rc.ClearRenderTargetView(m_shadowMaps[i].GetRTVCpuDescriptorHandle(), value);
-			rc.ClearDepthStencilView(m_shadowMaps[i].GetDSVCpuDescriptorHandle(), clearColor);
 			//レンダリングターゲットとして使用可能になるまで待つ。
 			rc.WaitUntilToPossibleSetRenderTarget(m_shadowMaps[i]);
+			rc.ClearRenderTargetView(m_shadowMaps[i].GetRTVCpuDescriptorHandle(), value);
+			rc.ClearDepthStencilView(m_shadowMaps[i].GetDSVCpuDescriptorHandle(), clearColor);
 			//影をドロー
 			for (auto& caster : m_shadowCasters) {
 				caster->Draw(rc,m_LVPMatrix[i]);
 			}
 			rc.WaitUntilFinishDrawingToRenderTarget(m_shadowMaps[i]);
-			g_graphicsEngine->EndRenderShadowMap();
+			g_graphicsEngine->ExecuteCommand();
 			g_graphicsEngine->BeginRenderShadowMap();
 		}
 

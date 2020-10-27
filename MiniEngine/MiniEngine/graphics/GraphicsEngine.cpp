@@ -508,18 +508,15 @@ namespace Engine {
 		//コマンドを実行。
 		ID3D12CommandList* ppCommandLists[] = { m_commandList };
 		m_commandQueue->ExecuteCommandLists(_countof(ppCommandLists), ppCommandLists);
-#ifdef SAMPE_16_04
-		// Present the frame.
-		m_swapChain->Present(0, 0);
-#else
+
 		// Present the frame.
 		m_swapChain->Present(1, 0);
-#endif
+
 		//描画完了待ち。
 		WaitDraw();
 	}
 
-	void GraphicsEngine::EndRenderShadowMap()
+	void GraphicsEngine::ExecuteCommand()
 	{
 		// レンダリングターゲットへの描き込み完了待ち
 		m_renderContext.WaitUntilFinishDrawingToRenderTarget(m_renderTargets[m_frameIndex]);
