@@ -58,7 +58,7 @@ namespace Engine {
 		//d
 		D3D12_CPU_DESCRIPTOR_HANDLE rtDSHandleTbl[32];
 		int rtNo = 0;
-		for (int rtNo = 0; rtNo < numRT; rtNo++) {
+		for (int rtNo = 0; rtNo < static_cast<int>(numRT); rtNo++) {
 			rtDSHandleTbl[rtNo] = renderTargets[rtNo]->GetRTVCpuDescriptorHandle();
 		}
 		D3D12_CPU_DESCRIPTOR_HANDLE dsDS = renderTargets[0]->GetDSVCpuDescriptorHandle();
