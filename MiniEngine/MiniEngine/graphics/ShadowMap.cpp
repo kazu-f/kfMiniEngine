@@ -47,8 +47,8 @@ namespace Engine {
 			m_shadowView[shadowMapNo] = view;
 
 			D3D12_RECT rect;
-			rect.top = 0.0f;
-			rect.left = 0.0f;
+			rect.top = static_cast<LONG>(0.0f);
+			rect.left = static_cast<LONG>(0.0f);
 			rect.right = static_cast<LONG>(wh[shadowMapNo][0]);
 			rect.bottom = static_cast<LONG>(wh[shadowMapNo][1]);
 
