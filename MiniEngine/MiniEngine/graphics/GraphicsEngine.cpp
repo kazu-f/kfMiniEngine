@@ -437,22 +437,24 @@ namespace Engine {
 	{
 		BeginRender();
 
-		PreRender();
+		PreRender(goMgr);
 		
+		//ライト情報の更新。
+		m_lightManager->Render(m_renderContext);
 		OnRender(goMgr);
 
 		EndRender();
 	}
-	void GraphicsEngine::PreRender()
+	void GraphicsEngine::PreRender(CGameObjectManager* goMgr)
 	{
-		//ライト情報の更新。
-		m_lightManager->Render(m_renderContext);
 		//指向性シャドウ回りの処理。
 		m_shadowMap->RenderToShadowMap(m_renderContext);
-
 		m_shadowMap->WaitEndRenderToShadowMap(m_renderContext);
-
 		ChangeRenderTargetToFrameBuffer(m_renderContext);
+
+		m_renderContext.SetRenderStep(enRenderStep_PreRender);
+		goMgr->PreRender(m_renderContext);
+
 	}
 	void GraphicsEngine::OnRender(CGameObjectManager* goMgr)
 	{

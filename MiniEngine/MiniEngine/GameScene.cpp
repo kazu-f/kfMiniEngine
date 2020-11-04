@@ -149,7 +149,7 @@ void GameScene::Update()
 	}
 }
 
-void GameScene::ForwardRender(RenderContext& rc)
+void GameScene::PreRender(RenderContext& rc)
 {
 	m_model.Draw(rc);
 	m_testBox.Draw(rc);

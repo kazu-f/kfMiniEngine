@@ -13,7 +13,7 @@ public:
 	void Release();		//解放処理が必要ならこれ。
 	void PreUpdate()override;
 	void Update();		//更新処理。
-	void ForwardRender(RenderContext& rc) override;		//描画処理。
+	void PreRender(RenderContext& rc) override;		//描画処理。
 
 private:
 	CGameCamera* m_camera = nullptr;

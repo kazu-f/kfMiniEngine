@@ -206,7 +206,7 @@ namespace Engine {
 		void Draw();
 		void ForwardRender(RenderContext& rc);
 		//void RenderHUD(RenderContext& rc);
-		void RenderToShadowMap(RenderContext& rc,const Matrix& mLightView,const Matrix& mLightProj);
+		void PreRender(RenderContext& rc);
 
 	private:
 		typedef std::list<IGameObject*> GameObjectList;			//!<ゲームオブジェクト*のリスト。

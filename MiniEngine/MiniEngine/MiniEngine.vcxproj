@@ -24,7 +24,7 @@
     <ClCompile Include="gameObject\IGameObject.cpp" />
     <ClCompile Include="graphics\PreRender\GBufferRender.cpp" />
     <ClCompile Include="graphics\light\LightManager.cpp" />
-    <ClCompile Include="graphics\ShadowMap.cpp" />
+    <ClCompile Include="graphics\PreRender\ShadowMap.cpp" />
     <ClCompile Include="prefab\light\DirectionLight.cpp" />
     <ClCompile Include="prefab\light\LightBase.cpp" />
     <ClCompile Include="util\CGameTime.cpp" />
@@ -75,7 +75,7 @@
     <ClInclude Include="graphics\GraphicsConfig.h" />
     <ClInclude Include="graphics\light\LightData.h" />
     <ClInclude Include="graphics\light\LightManager.h" />
-    <ClInclude Include="graphics\ShadowMap.h" />
+    <ClInclude Include="graphics\PreRender\ShadowMap.h" />
     <ClInclude Include="prefab\light\DirectionLight.h" />
     <ClInclude Include="prefab\light\LightBase.h" />
     <ClInclude Include="util\CGameTime.h" />

@@ -154,6 +154,14 @@ namespace Engine {
 				rc.SetPipelineState(m_nonSkinModelShadowPipelineState);
 			}
 			break;
+		case enRenderStep_PreRender:
+			if (hasSkin) {
+				rc.SetPipelineState(m_skinModelPipelineState);
+			}
+			else {
+				rc.SetPipelineState(m_nonSkinModelPipelineState);
+			}
+			break;
 		case enRenderStep_ForwardRender:
 			if (hasSkin) {
 				rc.SetPipelineState(m_transSkinModelPipelineState);

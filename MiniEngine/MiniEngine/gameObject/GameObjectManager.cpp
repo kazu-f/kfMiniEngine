@@ -70,11 +70,11 @@ namespace Engine {
 	//	}
 	//}
 
-	void CGameObjectManager::RenderToShadowMap(RenderContext& rc, const Matrix& mLightView, const Matrix& mLightProj)
+	void CGameObjectManager::PreRender(RenderContext& rc)
 	{
 		for (auto objList : m_gameObjectListArray) {
 			for (auto& obj : objList) {
-				obj->RenderToShadowMapWraper(rc, mLightView, mLightView);
+				obj->PreRenderWrapper(rc);
 			}
 		}
 	}

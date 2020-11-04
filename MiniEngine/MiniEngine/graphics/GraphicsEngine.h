@@ -66,7 +66,7 @@ namespace Engine {
 		/// <summary>
 		/// プレレンダリング。
 		/// </summary>
-		void PreRender();
+		void PreRender(CGameObjectManager* goMgr);
 		/// <summary>
 		/// 描画時に呼ばれる処理。
 		/// </summary>

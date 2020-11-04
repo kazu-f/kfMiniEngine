@@ -85,8 +85,9 @@ namespace Engine {
 		/// <summary>
 		/// シャドウマップへのレンダリングパスから呼ばれる描画処理。
 		/// </summary>
-		virtual void RenderToShadowMap(RenderContext& rc, const Matrix& mLightViwe, const Matrix& mLightProj)
+		virtual void PreRender(RenderContext& rc)
 		{
+			(void)rc;
 		}
 		/// <summary>
 		/// フォワードレンダリング。
@@ -254,10 +255,10 @@ namespace Engine {
 				Draw();
 			}
 		}
-		void RenderToShadowMapWraper(RenderContext& rc, const Matrix& mLightView, const Matrix& mLightProj)
+		void PreRenderWrapper(RenderContext& rc)
 		{
 			if (m_isActive && m_isStart && !m_isDead && !m_isRegistDeadList) {
-				RenderToShadowMap(rc, mLightView, mLightProj);
+				PreRender(rc);
 			}
 		}
 		void ForwardRenderWrapper(RenderContext& rc)

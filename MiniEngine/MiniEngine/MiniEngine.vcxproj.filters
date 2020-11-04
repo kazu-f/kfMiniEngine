@@ -183,14 +183,14 @@
     <ClCompile Include="prefab\light\DirectionLight.cpp">
       <Filter>prefab\light</Filter>
     </ClCompile>
-    <ClCompile Include="graphics\ShadowMap.cpp">
-      <Filter>graphics</Filter>
-    </ClCompile>
     <ClCompile Include="GameCamera.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="graphics\PreRender\GBufferRender.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\PreRender\ShadowMap.cpp">
+      <Filter>graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -341,9 +341,6 @@
     <ClInclude Include="graphics\light\LightData.h">
       <Filter>graphics\light</Filter>
     </ClInclude>
-    <ClInclude Include="graphics\ShadowMap.h">
-      <Filter>graphics</Filter>
-    </ClInclude>
     <ClInclude Include="graphics\GraphicsConfig.h">
       <Filter>graphics</Filter>
     </ClInclude>
@@ -352,6 +349,9 @@
     </ClInclude>
     <ClInclude Include="graphics\PreRender\GBufferRender.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\PreRender\ShadowMap.h">
+      <Filter>graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

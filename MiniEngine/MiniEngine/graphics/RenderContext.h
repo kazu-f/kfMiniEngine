@@ -4,6 +4,7 @@ namespace Engine {
 	enum EnRenderStep {
 		enRenderStep_Undef,							//とりあえず未定義
 		enRenderStep_CreateDirectionalShadowMap,	//指向性シャドウマップ作成。
+		enRenderStep_PreRender,						//事前レンダリング。
 		enRenderStep_ForwardRender,					//フォワードレンダリング。
 	};
 
