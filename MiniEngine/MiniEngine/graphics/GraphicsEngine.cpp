@@ -178,6 +178,9 @@ namespace Engine {
 
 		m_shadowMap = std::make_unique<CShadowMap>();
 		m_shadowMap->Init(shadowConfig);
+		//GBuffer‚Ìì¬B
+		m_gBuffer = std::make_unique<CGBufferRender>();
+		m_gBuffer->Init();
 
 		return true;
 	}
@@ -453,8 +456,10 @@ namespace Engine {
 		ChangeRenderTargetToFrameBuffer(m_renderContext);
 
 		m_renderContext.SetRenderStep(enRenderStep_PreRender);
+		//Gbuffer‚É‘‚«‚İ‚ğs‚¤B
+		m_gBuffer->BeginRender(m_renderContext);
 		goMgr->PreRender(m_renderContext);
-
+		m_gBuffer->EndRender(m_renderContext);
 	}
 	void GraphicsEngine::OnRender(CGameObjectManager* goMgr)
 	{

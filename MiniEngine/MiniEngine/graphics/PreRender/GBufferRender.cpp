@@ -10,11 +10,13 @@ namespace Engine {
 	}
 	void CGBufferRender::Init()
 	{
+		const int Width = static_cast<int>(g_graphicsEngine->GetFrameBufferWidth());
+		const int Height = static_cast<int>(g_graphicsEngine->GetFrameBufferHeight());
 		//アルベドバッファの初期化。
 		auto& albedo = GetRenderTarget(EnGBuffer::enGBufferAlbed);
 		albedo.Create(
-			g_graphicsEngine->GetFrameBufferWidth(),
-			g_graphicsEngine->GetFrameBufferHeight(),
+			Width,
+			Height,
 			1,
 			1,
 			DXGI_FORMAT_R8G8B8A8_UNORM,
@@ -23,8 +25,8 @@ namespace Engine {
 		//法線バッファの初期化。
 		auto& normal = GetRenderTarget(EnGBuffer::enGBufferNormal);
 		normal.Create(
-			g_graphicsEngine->GetFrameBufferWidth(),
-			g_graphicsEngine->GetFrameBufferWidth(),
+			Width,
+			Height,
 			1,
 			1,
 			DXGI_FORMAT_R16G16B16A16_FLOAT,
@@ -33,18 +35,28 @@ namespace Engine {
 		//接ベクトルバッファの初期化。
 		auto& tangent = GetRenderTarget(EnGBuffer::enGBufferTangent);
 		tangent.Create(
-			g_graphicsEngine->GetFrameBufferWidth(),
-			g_graphicsEngine->GetFrameBufferHeight(),
+			Width,
+			Height,
 			1,
 			1,
 			DXGI_FORMAT_R16G16B16A16_FLOAT,
 			DXGI_FORMAT_UNKNOWN
 		);
+		//ワールド座標マップの初期化。
+		auto& worldPos = GetRenderTarget(EnGBuffer::enGBufferWorldPos);
+		worldPos.Create(
+			Width,
+			Height,
+			1,
+			1,
+			DXGI_FORMAT_R32G32B32A32_FLOAT,
+			DXGI_FORMAT_UNKNOWN
+		);
 		//スペキュラバッファの初期化。
 		auto& spec = GetRenderTarget(EnGBuffer::enGBufferSpecular);
 		spec.Create(
-			g_graphicsEngine->GetFrameBufferWidth(),
-			g_graphicsEngine->GetFrameBufferHeight(),
+			Width,
+			Height,
 			1,
 			1,
 			DXGI_FORMAT_R32_FLOAT,
@@ -53,8 +65,8 @@ namespace Engine {
 		//影マップの初期化。
 		auto& shadow = GetRenderTarget(EnGBuffer::enGBufferShadow);
 		shadow.Create(
-			g_graphicsEngine->GetFrameBufferWidth(),
-			g_graphicsEngine->GetFrameBufferHeight(),
+			Width,
+			Height,
 			1,
 			1,
 			DXGI_FORMAT_R32_FLOAT,

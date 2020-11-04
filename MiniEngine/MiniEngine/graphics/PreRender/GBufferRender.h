@@ -5,9 +5,10 @@ namespace Engine {
 	enum class EnGBuffer {
 		enGBufferAlbed,			//アルベド。
 		enGBufferNormal,		//法線。
+		enGBufferTangent,		//接法線。
+		enGBufferWorldPos,		//ワールド座標。
 		enGBufferSpecular,		//スペキュラ。
 		enGBufferShadow,		//影マップ。
-		enGBufferTangent,		//接法線。
 		enGBufferNum,			//GBufferの数。
 	};
 
@@ -49,7 +50,7 @@ namespace Engine {
 		}
 	private:
 		RenderTarget m_GBuffer[static_cast<int>(EnGBuffer::enGBufferNum)];		//GBuffer。
-		ConstantBuffer m_cb;				//定数バッファ。
+		//ConstantBuffer m_cb;				//定数バッファ。
 	};	//////class CGBufferRender
 }
 

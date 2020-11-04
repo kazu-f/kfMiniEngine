@@ -18,6 +18,7 @@ namespace Engine {
 	class CGameObjectManager;
 	class CLightManager;
 	class CShadowMap;
+	class CGBufferRender;
 
 	/// <summary>
 	/// DirectX12に依存するグラフィックスエンジン
@@ -277,6 +278,7 @@ namespace Engine {
 		Camera m_camera3D;					//3Dカメラ。
 		std::unique_ptr<CLightManager> m_lightManager;		//ライトマネージャー。
 		std::unique_ptr<CShadowMap> m_shadowMap;			//指向性シャドウマップ。
+		std::unique_ptr<CGBufferRender> m_gBuffer;			//GBuffer。
 	};
 	extern GraphicsEngine* g_graphicsEngine;	//グラフィックスエンジン
 	extern Camera* g_camera2D;					//2Dカメラ。
