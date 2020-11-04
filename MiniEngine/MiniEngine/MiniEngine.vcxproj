@@ -22,6 +22,7 @@
     <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="gameObject\GameObjectManager.cpp" />
     <ClCompile Include="gameObject\IGameObject.cpp" />
+    <ClCompile Include="graphics\PreRender\GBufferRender.cpp" />
     <ClCompile Include="graphics\light\LightManager.cpp" />
     <ClCompile Include="graphics\ShadowMap.cpp" />
     <ClCompile Include="prefab\light\DirectionLight.cpp" />
@@ -70,6 +71,7 @@
     <ClInclude Include="GameCamera.h" />
     <ClInclude Include="gameObject\GameObjectManager.h" />
     <ClInclude Include="gameObject\IGameObject.h" />
+    <ClInclude Include="graphics\PreRender\GBufferRender.h" />
     <ClInclude Include="graphics\GraphicsConfig.h" />
     <ClInclude Include="graphics\light\LightData.h" />
     <ClInclude Include="graphics\light\LightManager.h" />

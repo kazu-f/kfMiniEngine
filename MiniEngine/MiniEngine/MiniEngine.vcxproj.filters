@@ -58,6 +58,9 @@
     <Filter Include="prefab\light">
       <UniqueIdentifier>{0ff9d23b-fa30-4a08-b2db-b38cba3951f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="graphics\PreRender">
+      <UniqueIdentifier>{522912f5-7cbe-4b9d-ae7d-25971c5cf7be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tkEngine.cpp">
@@ -184,6 +187,9 @@
       <Filter>graphics</Filter>
     </ClCompile>
     <ClCompile Include="GameCamera.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\PreRender\GBufferRender.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -342,6 +348,9 @@
       <Filter>graphics</Filter>
     </ClInclude>
     <ClInclude Include="GameCamera.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\PreRender\GBufferRender.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
