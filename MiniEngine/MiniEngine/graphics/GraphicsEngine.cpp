@@ -181,6 +181,9 @@ namespace Engine {
 		//GBufferの作成。
 		m_gBuffer = std::make_unique<CGBufferRender>();
 		m_gBuffer->Init();
+		//ディファード用クラス作成。
+		m_defferd = std::make_unique<CDefferdShading>();
+		m_defferd->Init(m_gBuffer.get());
 
 		return true;
 	}
@@ -465,6 +468,9 @@ namespace Engine {
 	{
 		//レンダリングステップをフォワードレンダリングにする。
 		m_renderContext.SetRenderStep(EnRenderStep::enRenderStep_ForwardRender);
+
+		m_defferd->Render(m_renderContext);
+
 		//フォワードレンダリングパス。
 		goMgr->ForwardRender(m_renderContext);
 

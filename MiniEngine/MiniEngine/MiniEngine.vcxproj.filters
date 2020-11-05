@@ -61,15 +61,15 @@
     <Filter Include="graphics\PreRender">
       <UniqueIdentifier>{522912f5-7cbe-4b9d-ae7d-25971c5cf7be}</UniqueIdentifier>
     </Filter>
+    <Filter Include="graphics\defferd">
+      <UniqueIdentifier>{dbfd0d83-2bdf-457d-bede-bb8545c3b500}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tkEngine.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="graphics\DescriptorHeap.cpp">
-      <Filter>graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics\GraphicsEngine.cpp">
       <Filter>graphics</Filter>
     </ClCompile>
     <ClCompile Include="graphics\Material.cpp">
@@ -186,11 +186,17 @@
     <ClCompile Include="GameCamera.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="graphics\PreRender\GBufferRender.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="graphics\PreRender\ShadowMap.cpp">
+      <Filter>graphics\PreRender</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\GraphicsEngine.cpp">
       <Filter>graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\PreRender\GBufferRender.cpp">
+      <Filter>graphics\PreRender</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\deferrd\DefferdShading.cpp">
+      <Filter>graphics\defferd</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -207,9 +213,6 @@
       <Filter>graphics</Filter>
     </ClInclude>
     <ClInclude Include="graphics\DescriptorHeap_inline.h">
-      <Filter>graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\GraphicsEngine.h">
       <Filter>graphics</Filter>
     </ClInclude>
     <ClInclude Include="graphics\IShaderResource.h">
@@ -341,17 +344,23 @@
     <ClInclude Include="graphics\light\LightData.h">
       <Filter>graphics\light</Filter>
     </ClInclude>
-    <ClInclude Include="graphics\GraphicsConfig.h">
-      <Filter>graphics</Filter>
-    </ClInclude>
     <ClInclude Include="GameCamera.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="graphics\PreRender\GBufferRender.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="graphics\PreRender\ShadowMap.h">
+      <Filter>graphics\PreRender</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\GraphicsEngine.h">
       <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\GraphicsConfig.h">
+      <Filter>graphics\PreRender</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\PreRender\GBufferRender.h">
+      <Filter>graphics\PreRender</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\deferrd\DefferdShading.h">
+      <Filter>graphics\defferd</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

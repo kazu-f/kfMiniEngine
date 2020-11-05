@@ -69,6 +69,10 @@ namespace Engine {
 				m_descriptorHeap.RegistShaderResource(texNo, m_textures[texNo]);
 			}
 		}
+		auto& ligMgr = g_graphicsEngine->GetLightManager();
+
+		m_descriptorHeap.RegistShaderResource(9, ligMgr->GetDirectionLightStructuredBuffer());
+
 		if (initData.m_expandShaderResoruceView != nullptr) {
 			//拡張シェーダーリソースビュー。
 			m_descriptorHeap.RegistShaderResource(
@@ -77,9 +81,10 @@ namespace Engine {
 			);
 		}
 		m_descriptorHeap.RegistConstantBuffer(0, m_constantBufferGPU);
+		m_descriptorHeap.RegistConstantBuffer(1, ligMgr->GetLightParamConstantBuffer());
 		if (m_userExpandConstantBufferCPU != nullptr) {
 			//ユーザー拡張の定数バッファはb1に関連付けする。
-			m_descriptorHeap.RegistConstantBuffer(1, m_userExpandConstantBufferGPU);
+			m_descriptorHeap.RegistConstantBuffer(2, m_userExpandConstantBufferGPU);
 		}
 		m_descriptorHeap.Commit();
 	}
@@ -144,7 +149,6 @@ namespace Engine {
 		psoDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;
 		psoDesc.DSVFormat = DXGI_FORMAT_D32_FLOAT;
 		psoDesc.SampleDesc.Count = 1;
-		psoDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;
 		m_pipelineState.Init(psoDesc);
 	}
 	void Sprite::InitConstantBuffer(const SpriteInitData& initData)

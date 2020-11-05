@@ -38,6 +38,13 @@ namespace Engine {
 		/// <param name="descriptorHandle"></param>
 		void RegistConstantBufferView(D3D12_CPU_DESCRIPTOR_HANDLE descriptorHandle);
 		void RegistConstantBufferView(D3D12_CPU_DESCRIPTOR_HANDLE descriptorHandle, int bufferNo);
+		/// <summary>
+		/// 定数バッファのサイズを取得。
+		/// </summary>
+		const int GetSize() const
+		{
+			return m_size;
+		}
 	private:
 		ID3D12Resource* m_constantBuffer[2] = { nullptr };//定数バッファ。
 		void* m_constBufferCPU[2] = { nullptr };		//CPU側からアクセスできるする定数バッファのアドレス。

@@ -19,6 +19,7 @@ namespace Engine {
 	class CLightManager;
 	class CShadowMap;
 	class CGBufferRender;
+	class CDefferdShading;
 
 	/// <summary>
 	/// DirectX12に依存するグラフィックスエンジン
@@ -279,6 +280,7 @@ namespace Engine {
 		std::unique_ptr<CLightManager> m_lightManager;		//ライトマネージャー。
 		std::unique_ptr<CShadowMap> m_shadowMap;			//指向性シャドウマップ。
 		std::unique_ptr<CGBufferRender> m_gBuffer;			//GBuffer。
+		std::unique_ptr<CDefferdShading> m_defferd;			//ディファード。
 	};
 	extern GraphicsEngine* g_graphicsEngine;	//グラフィックスエンジン
 	extern Camera* g_camera2D;					//2Dカメラ。

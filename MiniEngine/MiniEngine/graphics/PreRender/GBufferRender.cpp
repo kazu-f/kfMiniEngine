@@ -64,7 +64,7 @@ namespace Engine {
 			DXGI_FORMAT_UNKNOWN
 		);
 
-
+		
 	}
 	void CGBufferRender::BeginRender(RenderContext& rc)
 	{
@@ -83,6 +83,14 @@ namespace Engine {
 	}
 	void CGBufferRender::EndRender(RenderContext& rc)
 	{
+		const int arraySize = ARRAYSIZE(m_GBuffer);
+		RenderTarget* rts[arraySize] = { nullptr };
+		//レンダリングターゲットを設定。
+		for (int i = 0; i < arraySize; i++) {
+			rts[i] = &m_GBuffer[i];
+		}
+		//書き込みが終わるまで待つ。
+		rc.WaitUntilFinishDrawingToRenderTargets(arraySize, rts);
 		g_graphicsEngine->ChangeRenderTargetToFrameBuffer(rc);
 	}
 }

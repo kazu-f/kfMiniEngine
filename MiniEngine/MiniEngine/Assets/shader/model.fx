@@ -210,7 +210,7 @@ PSOut_GBuffer PSMain_RenderGBuffer (SPSIn psIn){
 	else {
 		normal = psIn.normal;
 	}
-	Out.normal = float4(normal, 0.0f);
+	Out.normal.xyz = (normal / 2.0f) + 0.5f;
 
 	//ワールド座標。
 	Out.worldPos = float4(psIn.worldPos, 0.0f);
