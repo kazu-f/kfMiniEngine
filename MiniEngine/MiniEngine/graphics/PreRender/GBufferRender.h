@@ -5,7 +5,6 @@ namespace Engine {
 	enum class EnGBuffer {
 		enGBufferAlbed,			//アルベド。
 		enGBufferNormal,		//法線。
-		enGBufferTangent,		//接法線。
 		enGBufferWorldPos,		//ワールド座標。
 		enGBufferSpecular,		//スペキュラ。
 		enGBufferShadow,		//影マップ。

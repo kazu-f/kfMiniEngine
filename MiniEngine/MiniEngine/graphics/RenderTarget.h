@@ -86,6 +86,13 @@ namespace Engine {
 		{
 			return m_dsvClearValue;
 		}
+		void SetRTVClearColor(const Vector4 color)
+		{
+			m_rtvClearColor[0] = color.x;
+			m_rtvClearColor[1] = color.y;
+			m_rtvClearColor[2] = color.z;
+			m_rtvClearColor[3] = color.w;
+		}
 	private:
 		/// <summary>
 		/// ディスクリプタヒープを作成。

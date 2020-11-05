@@ -32,16 +32,6 @@ namespace Engine {
 			DXGI_FORMAT_R16G16B16A16_FLOAT,
 			DXGI_FORMAT_UNKNOWN
 		);
-		//接ベクトルバッファの初期化。
-		auto& tangent = GetRenderTarget(EnGBuffer::enGBufferTangent);
-		tangent.Create(
-			Width,
-			Height,
-			1,
-			1,
-			DXGI_FORMAT_R16G16B16A16_FLOAT,
-			DXGI_FORMAT_UNKNOWN
-		);
 		//ワールド座標マップの初期化。
 		auto& worldPos = GetRenderTarget(EnGBuffer::enGBufferWorldPos);
 		worldPos.Create(
@@ -62,6 +52,7 @@ namespace Engine {
 			DXGI_FORMAT_R32_FLOAT,
 			DXGI_FORMAT_UNKNOWN
 		);
+		//spec.SetRTVClearColor({ 0.0f,0.0f,0.0f,0.0f });		//クリアカラーを設定。
 		//影マップの初期化。
 		auto& shadow = GetRenderTarget(EnGBuffer::enGBufferShadow);
 		shadow.Create(

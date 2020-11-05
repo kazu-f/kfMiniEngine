@@ -107,7 +107,7 @@ namespace Engine {
 
 		//続いて半透明マテリアル用。
 		psoDesc.VS = CD3DX12_SHADER_BYTECODE(m_vsSkinModel.GetCompiledBlob());
-		psoDesc.PS = CD3DX12_SHADER_BYTECODE(m_psModel.GetCompiledBlob());
+		psoDesc.PS = CD3DX12_SHADER_BYTECODE(m_psTransModel.GetCompiledBlob());
 		psoDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;		//アルベドカラー出力用。
 		psoDesc.BlendState.IndependentBlendEnable = TRUE;
 		psoDesc.BlendState.RenderTarget[0].BlendEnable = TRUE;
@@ -130,10 +130,11 @@ namespace Engine {
 	{
 		m_vsNonSkinModel.LoadVS(fxFilePath, vsEntryPointFunc);
 		m_vsSkinModel.LoadVS(fxFilePath, vsEntryPointFunc);
-		m_psModel.LoadPS(fxFilePath, psEntryPointFunc);
+		m_psModel.LoadPS(fxFilePath, "PSMain_RenderGBuffer");
 		m_vsNonSkinModelShadowMap.LoadVS(fxFilePath, "VSMainNonSkinShadowMap");
 		m_vsSkinModelShadowMap.LoadVS(fxFilePath, "VSMainSkinShadowMap");
 		m_psModelShadowMap.LoadPS(fxFilePath, "PSMainShadowMap");
+		m_psTransModel.LoadPS(fxFilePath, psEntryPointFunc);
 	}
 	void Material::BeginRender(RenderContext& rc, int hasSkin)
 	{

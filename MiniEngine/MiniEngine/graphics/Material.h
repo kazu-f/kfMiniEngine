@@ -101,6 +101,7 @@ namespace Engine {
 		Shader m_vsNonSkinModelShadowMap;				//シャドウマップのスキンなしモデル用の頂点シェーダー。
 		Shader m_vsSkinModelShadowMap;					//シャドウマップのスキンありモデル用の頂点シェーダー。
 		Shader m_psModelShadowMap;						//シャドウマップのモデル用のピクセルシェーダー。
+		Shader m_psTransModel;						//半透明のモデル用のピクセルシェーダー。
 	};
 
 

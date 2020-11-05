@@ -32,6 +32,15 @@ struct SPSIn {
 	float3 worldPos : TEXCOORD1;	//ワールド空間でのピクセルの座標。
 };
 
+//GBufferに書き込むための構造体。
+struct PSOut_GBuffer {
+	float4 albedo : SV_Target0;		//アルベドカラー。
+	float4 normal : SV_Target1;		//法線。
+	float4 worldPos : SV_Target2;	//ワールド座標。
+	float spec : SV_Target3;		//スペキュラ。
+	float shadow : SV_Target4;		//シャドウ。
+};
+
 //シャドウマップ用の頂点シェーダーへの入力。
 struct SShadowMapVSIn {
 	float4 pos : POSITION;
