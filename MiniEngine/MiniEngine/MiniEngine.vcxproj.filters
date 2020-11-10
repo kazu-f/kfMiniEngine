@@ -198,6 +198,9 @@
     <ClCompile Include="graphics\deferrd\DefferdShading.cpp">
       <Filter>graphics\defferd</Filter>
     </ClCompile>
+    <ClCompile Include="prefab\ModelRender.cpp">
+      <Filter>prefab</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MiniEngine.h">
@@ -361,6 +364,9 @@
     </ClInclude>
     <ClInclude Include="graphics\deferrd\DefferdShading.h">
       <Filter>graphics\defferd</Filter>
+    </ClInclude>
+    <ClInclude Include="prefab\ModelRender.h">
+      <Filter>prefab</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
