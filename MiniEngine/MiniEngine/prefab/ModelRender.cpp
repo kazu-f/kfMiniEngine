@@ -14,7 +14,7 @@ namespace Engine {
 			case enInitStatus_WaitInitModel:	//ƒ‚ƒfƒ‹‚ÌInitˆ—‘Ò‚¿B
 				if (m_model.IsInited()) {
 					std::string skeletonFilePath = m_tkmFilePath;
-					int pos = skeletonFilePath.find(".tkm");
+					int pos = static_cast<int>(skeletonFilePath.find(".tkm"));
 					skeletonFilePath.replace(pos, 4, ".tks");
 					std::ifstream ifs(skeletonFilePath.c_str());
 					if (ifs.is_open()) {
