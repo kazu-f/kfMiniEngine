@@ -3,6 +3,7 @@
 //機能の試運転用クラス。
 
 class CGameCamera;
+class Player;
 
 class GameScene:public IGameObject
 {
@@ -17,13 +18,9 @@ public:
 
 private:
 	CGameCamera* m_camera = nullptr;
-	//Light light;		//ライト。
-	Model	m_model;			//モデル。
-	Model	m_testBox;			//テスト用の箱。
+	Player* m_player = nullptr;
+	prefab::ModelRender* m_testBox = nullptr;			//テスト用の箱。
 	ModelInitData initData;
-	Skeleton m_skeleton;
-	CAnimation m_animation;
-	std::vector<CAnimationClipPtr> m_animationClips;	//アニメーションクリップの配列。
 	std::vector<prefab::CDirectionLight*> m_lightArray;
 	Vector3 m_lightDir = Vector3::Zero;
 	float m_lightPow = 0.5f;

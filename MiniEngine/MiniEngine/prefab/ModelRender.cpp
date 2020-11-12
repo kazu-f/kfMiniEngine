@@ -5,6 +5,7 @@ namespace Engine {
 	namespace prefab {
 		bool ModelRender::Start()
 		{
+			bool inited = false;
 			switch (m_initStatus)
 			{
 			case enInitStatus_NotCallInitFunc:
@@ -50,17 +51,16 @@ namespace Engine {
 					}
 				}
 				break;
-			case enInitStatus_WaitInitAnimationClips:
+			case enInitStatus_WaitInitAnimationClips:{
 				bool isLoaded = true;
 				for (auto& animClip : m_animClips) {
-					if (animClip->IsLoaded() == false)
-					{
+					if (animClip->IsLoaded() == false) {
 						//アニメーションのロードがまだできていない。
 						isLoaded = false;
 						break;
 					}
 				}
-				if (isLoaded == true) {
+				if (isLoaded) {
 					//アニメーションクリップが全部ロードできた。
 					//キーフレームとかアニメーションイベントの設定とか。
 					for (int i = 0; i < static_cast<int>(m_animClips.size()); i++) {
@@ -71,13 +71,15 @@ namespace Engine {
 					m_animation.Init(m_skeleton, m_animClips);
 					m_initStatus = enInitStatus_Completed;
 				}
-				break;
+			}	break;
+			
 			case enInitStatus_Completed:
 				//初期化完了。
-				return true;
+				inited = true;
 				break;
 			}
-			return false;
+
+			return inited;
 		}
 		void ModelRender::OnDestroy()
 		{

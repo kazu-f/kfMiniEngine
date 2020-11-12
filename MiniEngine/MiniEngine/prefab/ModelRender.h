@@ -60,6 +60,7 @@ namespace Engine {
 				m_initStatus = enInitStatus_WaitInitModel;
 			}
 
+		public:		//座標などの変更を行う関数。
 			/// <summary>
 			/// モデルを移動させる。
 			/// </summary>
@@ -139,6 +140,17 @@ namespace Engine {
 			void SetShadowReceiverFlag(bool flag)
 			{
 				m_isShadowReceiver = flag;
+			}
+			/// <summary>
+			/// 再生するアニメーションを変更する。
+			/// </summary>
+			/// <param name="animNo">アニメーション番号</param>
+			/// <param name="interpolateTime">補完時間</param>
+			void PlayAnimation(int animNo, float interpolateTime)
+			{
+				if (m_animation.IsInited()) {
+					m_animation.Play(animNo, interpolateTime);
+				}
 			}
 			/// <summary>
 			/// モデルを取得。
