@@ -52,7 +52,7 @@ namespace Engine {
 		{
 			::QueryPerformanceFrequency((LARGE_INTEGER*)&freq);
 			::QueryPerformanceCounter((LARGE_INTEGER*)&end);
-			elapsed = double(end - begin) / freq;
+			elapsed = static_cast<double>(end - begin) / freq;
 			elapsedMill = elapsed * 1000.0;
 			elapsedMicro = elapsedMill * 1000.0;
 		}

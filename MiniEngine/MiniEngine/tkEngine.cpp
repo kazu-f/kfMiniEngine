@@ -52,6 +52,19 @@ namespace Engine {
 	void TkEngine::EndFrame()
 	{
 		m_sw.Stop();
+		const double MIN_FRAME_TIME = 1.0 / 60.0;
+		double currentTime = m_sw.GetElapsed();
+		if (currentTime < MIN_FRAME_TIME)
+		{
+			//眠らせる時間(ミリ秒)
+			DWORD sleepTime = static_cast<DWORD>((MIN_FRAME_TIME - currentTime) * 1000);
+			
+			Sleep(sleepTime);   //眠らせる。
+
+			//fps計測のためにもう一度経過時間を図る。
+			m_sw.Stop();
+		}
+
 		m_gameTime.PushFrameDeltaTime(static_cast<float>(m_sw.GetElapsed()));
 	}
 }

@@ -18,8 +18,10 @@ void CGameCamera::Update()
 	//適当にカメラを近づけたり遠ざけたり。
 	const auto& targetPos = g_camera3D->GetTarget();
 	Vector3 vCamera = g_camera3D->GetPosition() - targetPos;
+	const float deltaTime = static_cast<float>(GameTime().GetFrameDeltaTime());
+	const float cameraSpeed = 100.0f;
 		
-	m_targetToPosLen -= g_pad[0]->GetLStickYF();
+	m_targetToPosLen -= g_pad[0]->GetLStickYF() * deltaTime * cameraSpeed;
 	m_targetToPosLen = min(500.0f, max(50.0f, m_targetToPosLen));
 
 	auto vDir = vCamera;
@@ -29,7 +31,7 @@ void CGameCamera::Update()
 
 	Quaternion qRot;
 	//カメラを回す。
-	qRot.SetRotationDegY(g_pad[0]->GetLStickXF());
+	qRot.SetRotationDegY(g_pad[0]->GetLStickXF() * deltaTime * cameraSpeed);
 	auto camPos = g_camera3D->GetPosition();
 	qRot.Apply(camPos);
 	g_camera3D->SetPosition(camPos);

@@ -15,7 +15,10 @@ namespace Engine {
 		const float GetFrameDeltaTime()const
 		{
 			//固定FPS
-			return 1.0f / 60.0f;
+			//return 1.0f / 60.0f;
+
+			//可変フレームレート
+			return m_frameDeltaTime;
 		}
 		/// <summary>
 		/// 1フレームあたりの経過時間の平均を取る。
