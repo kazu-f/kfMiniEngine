@@ -20,6 +20,7 @@
 #include <Xinput.h>
 #include <array>
 #include <queue>
+#include <fstream>
 
 #include "d3dx12.h"
 

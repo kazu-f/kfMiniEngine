@@ -94,6 +94,13 @@ namespace Engine {
 		{
 			return (int)(m_meshParts.size());
 		}
+		/// <summary>
+		/// 読み込み済み？
+		/// </summary>
+		bool IsLoaded()
+		{
+			return m_isLoaded;
+		}
 	private:
 		/// <summary>
 		/// テクスチャ名をロード。
@@ -120,5 +127,6 @@ namespace Engine {
 		void BuildTangentAndBiNormal();
 	private:
 		std::vector< SMesh>	m_meshParts;		//メッシュパーツ。
+		bool m_isLoaded = false;
 	};
 }

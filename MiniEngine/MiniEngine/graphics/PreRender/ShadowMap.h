@@ -50,6 +50,17 @@ namespace Engine {
 			m_shadowCasters.push_back(caster);
 		}
 		/// <summary>
+		/// キャスター登録を解除する。
+		/// </summary>
+		void RemoveShadowCaster(Model* caster)
+		{
+			auto it = std::find(m_shadowCasters.begin(), m_shadowCasters.end(), caster);
+			if (it != m_shadowCasters.end()){
+				m_shadowCasters.erase(it);
+			}
+		}
+
+		/// <summary>
 		/// キャスター登録をクリア。
 		/// </summary>
 		/// <remarks>エンジン内で呼び出す。</remarks>

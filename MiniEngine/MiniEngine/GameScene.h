@@ -27,6 +27,5 @@ private:
 	std::vector<prefab::CDirectionLight*> m_lightArray;
 	Vector3 m_lightDir = Vector3::Zero;
 	float m_lightPow = 0.5f;
-	bool isPBR = true;
 };
 

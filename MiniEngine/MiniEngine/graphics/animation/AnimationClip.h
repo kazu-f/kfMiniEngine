@@ -26,6 +26,13 @@ namespace Engine {
 	//	Vector3 transform[4];	//トランスフォーム。
 	//};
 
+	//アニメーションクリップの初期化データ。
+	struct AnimClipInitData
+	{
+		std::string tkaFilePath;		//tkaファイルのパス。
+		bool isLoop = false;			//ループフラグ。
+	};
+
 	/// <summary>
 	/// アニメーションイベント。
 	/// </summary>
@@ -93,15 +100,6 @@ namespace Engine {
 		/// </summary>
 		/// <param name="filePath">ファイルパス。</param>
 		void Load(const char* filePath);
-		/// <summary>
-		/// アニメーションクリップの非同期ロード。
-		/// IsLoadead関数を使用して同期を取る。
-		/// </summary>
-		/// <param name="filePath">ファイルパス。</param>
-		void LoadAsync(const char* filePath)
-		{
-			//よくわからんから後回し。
-		}
 		/// <summary>
 		/// 読み込みが終わっているか判定。
 		/// </summary>

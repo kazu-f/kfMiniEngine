@@ -67,7 +67,8 @@ namespace Engine {
 		/// <returns></returns>
 		bool IsPlaying() const
 		{
-			
+			int lastIndex = GetLastAnimationControllerIndex();
+			return m_animationPlayController[lastIndex].IsPlaying();
 		}
 		/// <summary>
 		/// アニメーションを進める。

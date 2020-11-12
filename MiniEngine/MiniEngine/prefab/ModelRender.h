@@ -17,14 +17,49 @@ namespace Engine {
 			/// <returns></returns>
 			bool Start() override;
 			/// <summary>
+			/// 死亡時の処理。
+			/// </summary>
+			void OnDestroy()override;
+			/// <summary>
 			/// 更新処理。
 			/// </summary>
 			void Update() override;
 			/// <summary>
+			/// 事前レンダリング。
+			/// </summary>
+			void PreRender(RenderContext& rc)override;
+			/// <summary>
 			/// フォワードレンダリングのパスで呼ばれる処理。
 			/// </summary>
 			/// <param name="renderContext"></param>
-			void ForwardRender(RenderContext& renderContext) override;
+			void ForwardRender(RenderContext& rc) override;
+
+		public:
+			/// <summary>
+			/// モデルの初期化処理。
+			/// </summary>
+			/// <param name="modelData">Modelのデータ。</param>
+			/// <param name="animClipDatas">アニメーションクリップの初期化データの配列。</param>
+			/// <param name="animClipsNum">配列のサイズ。</param>
+			void Init(ModelInitData& modelData, AnimClipInitData animClipDatas[] = nullptr,int animClipsNum = 0)
+			{
+				//初期化処理を呼び出す。
+				m_model.Init(modelData);
+				//ファイルパスをメモ。
+				m_tkmFilePath = modelData.m_tkmFilePath;
+				//アニメーションの初期化データをコピー。
+				if (animClipDatas != nullptr)
+				{
+					for (int i = 0; i < animClipsNum; i++)
+					{
+						m_animClipInitDatas.push_back(animClipDatas[i]);
+					}
+				}
+
+				//初期化ステップを開始する。
+				m_initStatus = enInitStatus_WaitInitModel;
+			}
+
 			/// <summary>
 			/// モデルを移動させる。
 			/// </summary>
@@ -130,7 +165,10 @@ namespace Engine {
 			Quaternion	m_rotation = Quaternion::Identity;	//回転。
 			Vector3 m_scale = Vector3::One;					//拡大率。
 			Skeleton m_skeleton;							//スケルトン。
+			CAnimation m_animation;							//アニメーション。
 			std::string m_tkmFilePath;						//tkmファイルのファイルパス。
+			std::vector <AnimClipInitData> m_animClipInitDatas;	//アニメーションクリップの初期化データ。
+			std::vector <CAnimationClipPtr> m_animClips;	//アニメーションクリップの配列。
 			bool m_isShadowCaster = false;					//シャドウキャスタ―フラグ。
 			bool m_isShadowReceiver = false;				//シャドウレシーバーフラグ。
 		};

@@ -58,6 +58,13 @@ namespace Engine {
 		/// <param name="mLVP">ライトビュープロジェクション行列</param>
 		void Draw(RenderContext& rc, Matrix mLVP);
 		/// <summary>
+		/// 初期化済みか？
+		/// </summary>
+		bool IsInited()
+		{
+			return m_tkmFile.IsLoaded();
+		}
+		/// <summary>
 		/// ワールド行列を取得。
 		/// </summary>
 		/// <returns></returns>

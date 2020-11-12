@@ -180,7 +180,9 @@ namespace Engine {
 		/// <summary>
 		/// tksファイルをロード済みか判定。
 		/// </summary>
-		/// <returns></returns>
+		/// <remarks>
+		/// 基本、バインドポーズを作成するときに判定する。
+		/// </remarks>
 		bool IsLoaded()const
 		{
 			return m_tksFile.IsLoaded();
@@ -188,7 +190,9 @@ namespace Engine {
 		/// <summary>
 		/// 初期化済みか判定。
 		/// </summary>
-		/// <returns></returns>
+		/// <remarks>
+		/// 基本、スケルトンの更新処理を呼ぶときに判定する。
+		/// </remarks>
 		bool IsInited() const
 		{
 			return m_isInited;

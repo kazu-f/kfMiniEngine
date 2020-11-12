@@ -136,9 +136,7 @@ void GameScene::Update()
 	//m_lightPow = min(1.0f, max(0.0f, m_lightPow));
 	//g_graphicsEngine->GetLightManager()->SetAmbientLight({ m_lightPow,m_lightPow,m_lightPow });
 
-	if (g_pad[0]->IsTrigger(enButtonA)) {
-		isPBR = !isPBR;
-	}
+
 	if (m_animation.IsInited()) {
 		//アニメーションを再生。
 		m_animation.Progress(GameTime().GetFrameDeltaTime());
