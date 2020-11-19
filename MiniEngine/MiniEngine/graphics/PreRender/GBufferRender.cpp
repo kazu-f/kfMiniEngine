@@ -29,9 +29,10 @@ namespace Engine {
 			Height,
 			1,
 			1,
-			DXGI_FORMAT_R16G16B16A16_FLOAT,
+			DXGI_FORMAT_R8G8B8A8_UNORM,
 			DXGI_FORMAT_UNKNOWN
 		);
+		
 		//ワールド座標マップの初期化。
 		auto& worldPos = GetRenderTarget(EnGBuffer::enGBufferWorldPos);
 		worldPos.Create(
