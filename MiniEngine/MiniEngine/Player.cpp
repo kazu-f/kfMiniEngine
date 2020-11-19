@@ -33,8 +33,12 @@ void Player::Update()
 	if (g_pad[0]->IsPress(enButtonB)) {
 		m_model->PlayAnimation(en_animRun, 0.3f);
 	}
+	if (g_pad[0]->IsTrigger(enButtonX)) {
+		DeleteGO(this);
+	}
 }
 
 void Player::OnDestroy()
 {
+	DeleteGO(m_model);
 }
