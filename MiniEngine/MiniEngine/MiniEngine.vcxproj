@@ -26,6 +26,10 @@
     <ClCompile Include="graphics\PreRender\GBufferRender.cpp" />
     <ClCompile Include="graphics\light\LightManager.cpp" />
     <ClCompile Include="graphics\PreRender\ShadowMap.cpp" />
+    <ClCompile Include="level\Level.cpp" />
+    <ClCompile Include="level\MapChip.cpp" />
+    <ClCompile Include="level\MapChipRender.cpp" />
+    <ClCompile Include="level\TklFile.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="prefab\light\DirectionLight.cpp" />
     <ClCompile Include="prefab\light\LightBase.cpp" />
@@ -80,6 +84,10 @@
     <ClInclude Include="graphics\light\LightData.h" />
     <ClInclude Include="graphics\light\LightManager.h" />
     <ClInclude Include="graphics\PreRender\ShadowMap.h" />
+    <ClInclude Include="level\Level.h" />
+    <ClInclude Include="level\MapChip.h" />
+    <ClInclude Include="level\MapChipRender.h" />
+    <ClInclude Include="level\TklFile.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="prefab\light\DirectionLight.h" />
     <ClInclude Include="prefab\light\LightBase.h" />

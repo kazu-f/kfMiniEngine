@@ -64,6 +64,9 @@
     <Filter Include="graphics\defferd">
       <UniqueIdentifier>{dbfd0d83-2bdf-457d-bede-bb8545c3b500}</UniqueIdentifier>
     </Filter>
+    <Filter Include="level">
+      <UniqueIdentifier>{d862d0d3-883b-4e18-987f-160fa98ca636}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tkEngine.cpp">
@@ -204,6 +207,18 @@
     <ClCompile Include="Player.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="level\Level.cpp">
+      <Filter>level</Filter>
+    </ClCompile>
+    <ClCompile Include="level\MapChip.cpp">
+      <Filter>level</Filter>
+    </ClCompile>
+    <ClCompile Include="level\MapChipRender.cpp">
+      <Filter>level</Filter>
+    </ClCompile>
+    <ClCompile Include="level\TklFile.cpp">
+      <Filter>level</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MiniEngine.h">
@@ -314,9 +329,6 @@
     <ClInclude Include="graphics\animation\Animation.h">
       <Filter>graphics\animation</Filter>
     </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="graphics\animation\AnimationClip.h">
       <Filter>graphics\animation</Filter>
     </ClInclude>
@@ -373,6 +385,21 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="level\Level.h">
+      <Filter>level</Filter>
+    </ClInclude>
+    <ClInclude Include="level\MapChip.h">
+      <Filter>level</Filter>
+    </ClInclude>
+    <ClInclude Include="level\MapChipRender.h">
+      <Filter>level</Filter>
+    </ClInclude>
+    <ClInclude Include="level\TklFile.h">
+      <Filter>level</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
