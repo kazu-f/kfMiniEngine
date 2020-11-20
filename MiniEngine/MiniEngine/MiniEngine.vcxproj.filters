@@ -401,5 +401,11 @@
     <ClInclude Include="level\TklFile.h">
       <Filter>level</Filter>
     </ClInclude>
+    <ClInclude Include="util\NameKey.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="system\debugLog.h">
+      <Filter>system</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

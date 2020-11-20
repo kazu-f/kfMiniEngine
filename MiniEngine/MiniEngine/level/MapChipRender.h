@@ -10,6 +10,7 @@ namespace Engine {
 	/// </summary>
 	class CMapChipRender  :public IGameObject
 	{
+	public:
 		CMapChipRender();
 		~CMapChipRender();
 		void OnDestroy() override;	//DeleteGO‚³‚ê‚é‚Æ‚«‚ÉŒÄ‚Ño‚³‚ê‚éŠÖ”B

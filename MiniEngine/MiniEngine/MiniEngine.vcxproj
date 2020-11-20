@@ -92,6 +92,7 @@
     <ClInclude Include="prefab\light\DirectionLight.h" />
     <ClInclude Include="prefab\light\LightBase.h" />
     <ClInclude Include="prefab\ModelRender.h" />
+    <ClInclude Include="system\debugLog.h" />
     <ClInclude Include="util\CGameTime.h" />
     <ClInclude Include="graphics\animation\AnimationPlayController.h" />
     <ClInclude Include="graphics\animation\AnimationClip.h" />
@@ -133,6 +134,7 @@
     <ClInclude Include="tkFile\TkaFile.h" />
     <ClInclude Include="tkFile\TkmFile.h" />
     <ClInclude Include="tkFile\TksFile.h" />
+    <ClInclude Include="util\NameKey.h" />
     <ClInclude Include="util\Stopwatch.h" />
     <ClInclude Include="util\Util.h" />
   </ItemGroup>

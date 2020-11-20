@@ -25,6 +25,7 @@
 #include "d3dx12.h"
 
 #include "policy/Noncopyable.h"
+#include "system/debugLog.h"
 #include "math/Math.h"
 #include "math/Vector.h"
 #include "math/Matrix.h"
@@ -51,6 +52,7 @@
 #include "graphics/2D/Sprite.h"
 #include "graphics/Model.h"
 #include "HID/GamePad.h"
+#include "util/NameKey.h"
 #include "util/CGameTime.h"
 
 #include "tkEngine.h"

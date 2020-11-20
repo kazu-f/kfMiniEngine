@@ -47,6 +47,7 @@ namespace Engine {
 		int m_tklVersion = 100;		//tklファイルのバージョン。
 		int m_numObject = 0;		//オブジェクトの数。
 		std::vector<SObject> m_objects;		//オブジェクトのリスト。
+		bool m_isLoaded = false;	//読み込み済みか？
 	};
 }
 
