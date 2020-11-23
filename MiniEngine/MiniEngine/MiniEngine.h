@@ -21,6 +21,7 @@
 #include <array>
 #include <queue>
 #include <fstream>
+#include <mbstring.h>
 
 #include "d3dx12.h"
 
