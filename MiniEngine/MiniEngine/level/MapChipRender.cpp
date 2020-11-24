@@ -36,7 +36,6 @@ namespace Engine {
 		initData.m_fxFilePath = "Assets/shader/model.fx";
 		initData.m_vsEntryPointFunc = "VSMain";
 		initData.m_tkmFilePath = nString;
-		delete[] nString;			//‰ð•ú‚µ‚Ä‚¨‚­B
 
 		m_modelRender->Init(initData);
 		m_modelRender->SetPosition(m_renderObjDatas[0].position);

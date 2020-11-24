@@ -17,6 +17,7 @@ bool Player::Start()
 
 	m_model = NewGO<prefab::ModelRender>(0);
 	m_model->Init(initData, animInitData, en_animNum);
+	m_model->SetPosition(m_position);
 
 	Quaternion qRot;
 	qRot.SetRotationDegX(90.0f);

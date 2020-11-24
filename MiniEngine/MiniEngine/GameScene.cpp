@@ -43,16 +43,25 @@ bool GameScene::Start()
 
 	m_lightArray.push_back(light3);	
 
-	//地面のモデルを読み込む。
-	initData.m_fxFilePath = "Assets/shader/model.fx";
-	initData.m_vsEntryPointFunc = "VSMain";
-	initData.m_tkmFilePath = "Assets/modelData/testbg/bg.tkm";
-	m_testBox = NewGO<prefab::ModelRender>(0);
-	m_testBox->Init(initData);
-	m_testBox->SetShadowReceiverFlag(true);
+	m_level.Init("Assets/level/testLevel.tkl", [&](SLevelObjectData& objData) {
+		if (wcscmp(objData.name, L"unityChan") == 0) {
+			m_player = NewGO<Player>(0);
+
+			return true;
+		}
+
+		return false;
+		});
+
+	////地面のモデルを読み込む。
+	//initData.m_fxFilePath = "Assets/shader/model.fx";
+	//initData.m_vsEntryPointFunc = "VSMain";
+	//initData.m_tkmFilePath = "Assets/modelData/testbg/bg.tkm";
+	//m_testBox = NewGO<prefab::ModelRender>(0);
+	//m_testBox->Init(initData);
+	//m_testBox->SetShadowReceiverFlag(true);
 
 	m_camera = NewGO<CGameCamera>(0);
-	m_player = NewGO<Player>(0);
 
 
 	return true;

@@ -63,6 +63,7 @@
 #include "graphics/animation/AnimationClip.h"
 #include "graphics/animation/AnimationPlayController.h"
 #include "prefab/ModelRender.h"
+#include "level/Level.h"
 #include "graphics/light/LightManager.h"
 #include "graphics/PreRender/ShadowMap.h"
 #include "graphics/PreRender/GBufferRender.h"

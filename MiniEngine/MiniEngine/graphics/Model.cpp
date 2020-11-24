@@ -8,8 +8,9 @@ namespace Engine {
 		//wchar_t型の文字列なので、ここで変換しておく。
 		wchar_t wfxFilePath[256];
 		if (initData.m_fxFilePath == nullptr) {
-			MessageBoxA(nullptr, "fxファイルパスが指定されていません。", "エラー", MB_OK);
-			std::abort();
+			ASSERT("fxファイルパスが指定されていません。")
+			//MessageBoxA(nullptr, "fxファイルパスが指定されていません。", "エラー", MB_OK);
+			//std::abort();
 		}
 		mbstowcs(wfxFilePath, initData.m_fxFilePath, 256);
 

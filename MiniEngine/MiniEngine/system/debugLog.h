@@ -28,7 +28,7 @@ namespace Engine {
 	/// </summary>
 	inline static void DebugAssert(const char* text)
 	{
-		MessageBoxA(NULL, text, "Warning!!!", MB_OK);
+		MessageBoxA(NULL, text, "Erorr!!!", MB_OK);
 		std::abort();
 	}
 }

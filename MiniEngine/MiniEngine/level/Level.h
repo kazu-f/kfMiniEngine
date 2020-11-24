@@ -49,6 +49,7 @@ namespace Engine {
 		using CMapChipPtr = std::unique_ptr<CMapChip>;
 		using CMapChipRenderPtr = std::unique_ptr<CMapChipRender>;
 	public:
+		CLevel();
 		~CLevel();
 		/// <summary>
 		/// ƒŒƒxƒ‹‚ğ‰Šú‰»‚·‚éB

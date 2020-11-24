@@ -17,6 +17,7 @@ public:
 	void PreRender(RenderContext& rc) override;		//描画処理。
 
 private:
+	CLevel m_level;
 	CGameCamera* m_camera = nullptr;
 	Player* m_player = nullptr;
 	prefab::ModelRender* m_testBox = nullptr;			//テスト用の箱。

@@ -4,6 +4,9 @@
 #include "MapChipRender.h"
 
 namespace Engine {
+	CLevel::CLevel()
+	{
+	}
 	CLevel::~CLevel()
 	{
 		for (auto mapChipRender : m_mapChipRenderPtrs) {
@@ -51,7 +54,7 @@ namespace Engine {
 
 		for (int i = 1; i < m_bones.size(); i++) {
 			auto bone = m_bones[i].get();
-			if (bone->GetParentBoneNo == 0) {	//親がルートの場合のみマップチップ生成。
+			if (bone->GetParentBoneNo() == 0) {	//親がルートの場合のみマップチップ生成。
 				SLevelObjectData objData;
 				bone->CalcWorldTRS(objData.position, objData.rotation, objData.scale);
 				//3dsMaxと軸が違うため、補正を入れる。
