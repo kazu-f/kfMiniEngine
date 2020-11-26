@@ -18,6 +18,8 @@ StructuredBuffer<SDirectionalLight> directionalLight : register(t4);
 Texture2D<float4> shadowMap_0 : register(t5);		//シャドウマップ。
 Texture2D<float4> shadowMap_1 : register(t6);		//シャドウマップ。
 Texture2D<float4> shadowMap_2 : register(t7);		//シャドウマップ。
+
+StructuredBuffer<float4x4> instancingDatas : register(t8);		//インスタンシング描画用のデータ。
 //サンプラステート。
 sampler g_sampler : register(s0);
 
@@ -99,7 +101,7 @@ float CalcShadow(float3 worldPos, float zInView)
 }
 
 //頂点シェーダーのコア関数。
-SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
+SPSIn VSMainCore(SVSIn vsIn, float4x4 wMat,uniform bool hasSkin)
 {
 	SPSIn psIn;
 	float4x4 m;
@@ -107,7 +109,7 @@ SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
 		m = CalcSkinMatrix(vsIn.skinVert);
 	}
 	else {
-		m = mWorld;
+		m = wMat;
 	}
 
 	psIn.pos = mul(m, vsIn.pos);						//モデルの頂点をワールド座標系に変換。
@@ -125,9 +127,16 @@ SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
 /// <summary>
 /// モデル用の頂点シェーダーのエントリーポイント。
 /// </summary>
-SPSIn VSMain(SVSIn vsIn, uniform bool hasSkin)
+SPSIn VSMain(SVSIn vsIn)
 {
-	return VSMainCore(vsIn, false);
+	return VSMainCore(vsIn, mWorld, false);
+}
+/// <summary>
+/// インスタンモデル用の頂点シェーダーのエントリーポイント。
+/// </summary>
+SPSIn VSMainInstancing(SVSIn vsIn, uint instanceID : SV_InstanceID)
+{
+	return VSMainCore(vsIn, instancingDatas[instanceID], false);
 }
 
 /*!--------------------------------------------------------------------------------------
@@ -135,7 +144,7 @@ SPSIn VSMain(SVSIn vsIn, uniform bool hasSkin)
 -------------------------------------------------------------------------------------- */
 SPSIn VSMainSkin(SVSIn vsIn)
 {
-	return VSMainCore(vsIn, true);
+	return VSMainCore(vsIn, mWorld, true);
 }
 
 //物理ベースライティングのピクセルシェーダー。
@@ -237,6 +246,18 @@ SShadowMapPSIn VSMainNonSkinShadowMap(SShadowMapVSIn vsIn)
 {
 	SShadowMapPSIn psIn;
 	psIn.pos = mul(mWorld, vsIn.pos);
+	psIn.pos = mul(mView, psIn.pos);
+	psIn.pos = mul(mProj, psIn.pos);
+
+	return psIn;
+}
+/*
+*	スキンなしインスタンシング描画モデルのシャドウマップ書き込み用の頂点シェーダー。
+*/
+SShadowMapPSIn VSMainNonSkinInstancingShadowMap(SShadowMapVSIn vsIn, uint instanceID : SV_InstanceID)
+{
+	SShadowMapPSIn psIn;
+	psIn.pos = mul(instancingDatas[SV_InstanceID], vsIn.pos);
 	psIn.pos = mul(mView, psIn.pos);
 	psIn.pos = mul(mProj, psIn.pos);
 

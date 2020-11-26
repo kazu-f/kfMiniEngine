@@ -19,6 +19,7 @@ namespace Engine {
 		if (tkmMat.specularMap != nullptr) {
 			m_specularMap.InitFromMemory(tkmMat.specularMap.get(), tkmMat.specularMapSize);
 		}
+		//TODO:リフレクションマップと屈折率マップの初期化。
 	}
 	void Material::InitFromTkmMaterila(
 		const TkmFile::SMaterial& tkmMat,

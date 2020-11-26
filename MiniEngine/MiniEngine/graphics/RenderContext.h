@@ -258,9 +258,10 @@ namespace Engine {
 		/// インデックスつきプリミティブを描画。
 		/// </summary>
 		/// <param name="indexCount">インデックスの数。</param>
-		void DrawIndexed(UINT indexCount)
+		/// <param name="maxInstance">インスタンスの最大数</param>
+		void DrawIndexed(UINT indexCount,UINT maxInstance = 1)
 		{
-			m_commandList->DrawIndexedInstanced(indexCount, 1, 0, 0, 0);
+			m_commandList->DrawIndexedInstanced(indexCount, maxInstance, 0, 0, 0);
 		}
 		/// <summary>
 		/// コンピュートシェーダーをディスパッチ。

@@ -14,6 +14,12 @@ namespace Engine {
 	}
 	void CMapChipRender::Update()
 	{
+		if (m_renderObjDatas.size() > 1 && m_numRenderObject < m_renderObjDatas.size()) {
+			for (auto& objData : m_renderObjDatas) {
+				m_modelRender->UpdateInstancingData(objData.position, objData.rotation, objData.scale);
+				m_numRenderObject++;
+			}
+		}
 	}
 	void CMapChipRender::InitAfterAddAllRenderObjects()
 	{
@@ -34,12 +40,21 @@ namespace Engine {
 
 		ModelInitData initData;
 		initData.m_fxFilePath = "Assets/shader/model.fx";
-		initData.m_vsEntryPointFunc = "VSMain";
 		initData.m_tkmFilePath = nString;
 
-		m_modelRender->Init(initData);
-		m_modelRender->SetPosition(m_renderObjDatas[0].position);
-		m_modelRender->SetRotation(m_renderObjDatas[0].rotation);
-		m_modelRender->SetScale(m_renderObjDatas[0].scale);
+		if (m_renderObjDatas.size() > 1) {
+			//インスタンシング描画。
+			initData.m_vsEntryPointFunc = "VSMainInstancing";
+			m_modelRender->Init(initData, nullptr, 0, m_renderObjDatas.size());
+		}
+		else {
+			//通常描画。
+			m_modelRender->Init(initData);
+			m_modelRender->SetPosition(m_renderObjDatas[0].position);
+			m_modelRender->SetRotation(m_renderObjDatas[0].rotation);
+			m_modelRender->SetScale(m_renderObjDatas[0].scale);
+		}
+		m_modelRender->SetShadowCasterFlag(true);
+		m_modelRender->SetShadowReceiverFlag(true);
 	}
 }

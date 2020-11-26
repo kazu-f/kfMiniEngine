@@ -23,6 +23,8 @@ bool Player::Start()
 	qRot.SetRotationDegX(90.0f);
 	m_model->SetRotation(qRot);
 
+	m_model->SetShadowCasterFlag(true);
+
 	return true;
 }
 

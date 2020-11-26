@@ -39,6 +39,8 @@ namespace Engine {
 		/// /// <param name="fxFilePath">fxファイルのファイルパス</param>
 		/// <param name="vsEntryPointFunc">頂点シェーダーのエントリーポイントの関数名</param>
 		/// <param name="psEntryPointFunc">ピクセルシェーダーのエントリーポイントの関数名</param>
+		/// <param name="instancingDataSB">インスタンシング描画要のデータのSB</param>
+		/// <param name="maxInstance">インスタンスの最大数</param>
 		void InitFromTkmFile(
 			const TkmFile& tkmFile,
 			const wchar_t* fxFilePath,
@@ -46,7 +48,9 @@ namespace Engine {
 			const char* psEntryPointFunc,
 			void* expandData,
 			int expandDataSize,
-			IShaderResource* expandShaderResourceView
+			IShaderResource* expandShaderResourceView,
+			StructuredBuffer* instancingDataSB = nullptr,
+			int maxInstance = 1
 		);
 		/// <summary>
 		/// 描画。
@@ -111,6 +115,8 @@ namespace Engine {
 		std::vector< SMesh* > m_meshs;							//メッシュ。
 		std::vector< DescriptorHeap > m_descriptorHeap;			//ディスクリプタヒープ。
 		Skeleton* m_skeleton = nullptr;							//スケルトン。
+		StructuredBuffer* m_instancingDataPtr = nullptr;		//インスタンシング用描画のデータが格納されたSBのポインタ。
+		int m_maxInstance = 1;									//インスタンスの最大数。
 		void* m_expandData = nullptr;							//ユーザー拡張データ。
 		bool m_isCreateDescriptHeap = false;					//ディスクリプタヒープが作成されているか。
 		bool m_isShadowReceiver = false;						//シャドウレシーバーフラグ。

@@ -25,9 +25,15 @@ namespace Engine {
 		const char* psEntryPointFunc,
 		void* expandData,
 		int expandDataSize,
-		IShaderResource* expandShaderResourceView
+		IShaderResource* expandShaderResourceView,
+		StructuredBuffer* instancingDataSB,
+		int maxInstance
 	)
 	{
+		//インスタンシング描画用のデータ。
+		m_instancingDataPtr = instancingDataSB;
+		m_maxInstance = maxInstance;
+		
 		m_meshs.resize(tkmFile.GetNumMesh());
 		int meshNo = 0;
 		tkmFile.QueryMeshParts([&](const TkmFile::SMesh& mesh) {
@@ -74,6 +80,9 @@ namespace Engine {
 				for (int i = 0; i < NUM_SHADOW_MAP; i++) {
 					//シャドウマップ。5～7番を使う
 					descriptorHeap.RegistShaderResource(5 + i, *g_graphicsEngine->GetShadowMap()->GetShadowMapTexture(i));
+				}
+				if (m_instancingDataPtr != nullptr) {
+					descriptorHeap.RegistShaderResource(8, *m_instancingDataPtr);			//インスタンシング描画用のデータ(8番)。
 				}
 				if (m_expandShaderResourceView) {
 					//ユーザー拡張のシェーダーリソース。(10番)
@@ -194,7 +203,7 @@ namespace Engine {
 		cb.mWorld = mWorld;
 		cb.mView = mView;
 		cb.mProj = mProj;
-		cb.isShadowReceiver = static_cast<int>(m_isShadowReceiver);
+		cb.isShadowReceiver = m_isShadowReceiver ? 1 : 0;
 
 		m_commonConstantBuffer.CopyToVRAM(&cb);
 
@@ -220,7 +229,10 @@ namespace Engine {
 				rc.SetIndexBuffer(*ib);
 
 				//ドロー。
-				rc.DrawIndexed(ib->GetCount());
+				rc.DrawIndexed(
+					ib->GetCount(), 
+					m_maxInstance > 1 ? m_maxInstance : 1
+				);
 				descriptorHeapNo++;
 			}
 		}
