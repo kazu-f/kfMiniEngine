@@ -257,7 +257,7 @@ SShadowMapPSIn VSMainNonSkinShadowMap(SShadowMapVSIn vsIn)
 SShadowMapPSIn VSMainNonSkinInstancingShadowMap(SShadowMapVSIn vsIn, uint instanceID : SV_InstanceID)
 {
 	SShadowMapPSIn psIn;
-	psIn.pos = mul(instancingDatas[SV_InstanceID], vsIn.pos);
+	psIn.pos = mul(instancingDatas[instanceID], vsIn.pos);
 	psIn.pos = mul(mView, psIn.pos);
 	psIn.pos = mul(mProj, psIn.pos);
 
