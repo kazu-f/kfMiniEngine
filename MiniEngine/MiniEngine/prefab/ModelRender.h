@@ -41,10 +41,10 @@ namespace Engine {
 			/// <param name="modelData">Modelのデータ。</param>
 			/// <param name="animClipDatas">アニメーションクリップの初期化データの配列。</param>
 			/// <param name="animClipsNum">配列のサイズ。</param>
-			void Init(ModelInitData& modelData, AnimClipInitData animClipDatas[] = nullptr,int animClipsNum = 0)
+			void Init(ModelInitData& modelData, AnimClipInitData animClipDatas[] = nullptr,int animClipsNum = 0,int maxInstance = 1)
 			{
 				//初期化処理を呼び出す。
-				m_model.Init(modelData);
+				m_model.Init(modelData,maxInstance);
 				//ファイルパスをメモ。
 				m_tkmFilePath = modelData.m_tkmFilePath;
 				//アニメーションの初期化データをコピー。
@@ -139,7 +139,12 @@ namespace Engine {
 			/// <param name="flag"></param>
 			void SetShadowReceiverFlag(bool flag)
 			{
-				m_isShadowReceiver = flag;
+				m_model.SetShadowReceiverFlag(flag);
+			}
+
+			void UpdateInstancingData(const Vector3& pos, const Quaternion& rot, const Vector3& scale)
+			{
+				m_model.UpdateInstancingData(pos, rot, scale);
 			}
 			/// <summary>
 			/// 再生するアニメーションを変更する。
@@ -182,7 +187,6 @@ namespace Engine {
 			std::vector <AnimClipInitData> m_animClipInitDatas;	//アニメーションクリップの初期化データ。
 			std::vector <CAnimationClipPtr> m_animClips;	//アニメーションクリップの配列。
 			bool m_isShadowCaster = false;					//シャドウキャスタ―フラグ。
-			bool m_isShadowReceiver = false;				//シャドウレシーバーフラグ。
 		};
 	}
 }

@@ -29,7 +29,7 @@ namespace Engine {
 		/// tkmファイルから初期化。
 		/// </summary>
 		/// <param name="initData">初期化データ</param>
-		void Init(const ModelInitData& initData);
+		void Init(const ModelInitData& initData,int maxInstance = 1);
 		/// <summary>
 		/// ワールド行列の更新。
 		/// </summary>
@@ -37,6 +37,12 @@ namespace Engine {
 		/// <param name="rot">回転</param>
 		/// <param name="scale">拡大率</param>
 		void UpdateWorldMatrix(Vector3 pos, Quaternion rot, Vector3 scale);
+
+		void UpdateInstancingData(
+			const Vector3& pos,
+			const Quaternion& rot,
+			const Vector3& scale
+		);
 
 		/// <summary>
 		/// スケルトンを関連付ける。
@@ -46,6 +52,7 @@ namespace Engine {
 		{
 			m_meshParts.BindSkeleton(skeleton);
 		}
+
 		/// <summary>
 		/// 描画
 		/// </summary>
@@ -79,11 +86,15 @@ namespace Engine {
 		{
 			m_meshParts.SetShadowReceiverFlag(flag);
 		}
+
 	private:
 
 		Matrix m_world;			//ワールド行列。
 		TkmFile m_tkmFile;		//tkmファイル。
-		//Skeleton m_skeleton;	//スケルトン。
 		MeshParts m_meshParts;	//メッシュパーツ。
+		std::unique_ptr<Matrix[]> m_instancingData;	//インスタンシング描画用のデータ。
+		StructuredBuffer m_instancingDataSB;		//インスタンシング描画用のバッファ。
+		int m_maxInstance = 1;		//インスタンシング描画の最大数。
+		int m_numInstance = 0;		//インスタンスの数。
 	};
 }
