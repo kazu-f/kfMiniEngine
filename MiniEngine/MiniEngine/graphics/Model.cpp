@@ -65,9 +65,6 @@ namespace Engine {
 	}
 	void Model::Draw(RenderContext& rc)
 	{
-		if (m_maxInstance > 1) {
-			m_instancingDataSB.Update(m_instancingData.get());
-		}
 		m_meshParts.Draw(
 			rc,
 			m_world,
@@ -77,9 +74,6 @@ namespace Engine {
 	}
 	void Model::Draw(RenderContext& rc, Matrix mLVP)
 	{
-		if (m_maxInstance > 1) {
-			m_instancingDataSB.Update(m_instancingData.get());
-		}
 		m_meshParts.Draw(
 			rc,
 			m_world,

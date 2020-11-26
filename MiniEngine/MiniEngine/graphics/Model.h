@@ -37,12 +37,26 @@ namespace Engine {
 		/// <param name="rot">回転</param>
 		/// <param name="scale">拡大率</param>
 		void UpdateWorldMatrix(Vector3 pos, Quaternion rot, Vector3 scale);
-
+		/// <summary>
+		/// インスタンシング描画用の行列データを更新する。
+		/// </summary>
+		/// <param name="pos">座標</param>
+		/// <param name="rot">回転</param>
+		/// <param name="scale">拡大率</param>
 		void UpdateInstancingData(
 			const Vector3& pos,
 			const Quaternion& rot,
 			const Vector3& scale
 		);
+		/// <summary>
+		/// GPUにインスタンシング描画用のデータを送る。
+		/// </summary>
+		void SendGPUInstancingDatas()
+		{
+			if (m_maxInstance > 1) {
+				m_instancingDataSB.Update(m_instancingData.get());
+			}
+		}
 
 		/// <summary>
 		/// スケルトンを関連付ける。
