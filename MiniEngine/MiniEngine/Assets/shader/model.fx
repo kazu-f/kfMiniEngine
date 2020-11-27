@@ -171,16 +171,18 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 		//スペキュラマップがある。
 		metaric = g_specularMap.Sample(g_sampler, psIn.uv).a;
 	}
-	float roughness = 0.5f;			//拡散反射の面の粗さ。
+	float roughness = 1.0f;			//拡散反射の面の粗さ。
 	for (int ligNo = 0; ligNo < numDirectionLight; ligNo++)
 	{
-		float3 baseColor = max(dot(normal, -directionalLight[ligNo].direction), 0.0f) * directionalLight[ligNo].color;
+		//ディファード拡散反射の色。
+		float3 baseColor = max(dot(normal, -directionalLight[ligNo].direction), 0.0f) * directionalLight[ligNo].color.xyz;
 		//DisneyModel拡散反射
-		lig += NormalizedDisneyDiffuse(baseColor, normal, -directionalLight[ligNo].direction, toEye, roughness);
-		//スペキュラ反射
-		lig += BRDF(-directionalLight[ligNo].direction, toEye, normal)
-			* directionalLight[ligNo].color.xyz
-			* metaric * directionalLight[ligNo].color.w;
+		float disneyDiffuse = NormalizedDisneyDiffuse(normal, -directionalLight[ligNo].direction, toEye, roughness);
+		float3 diffuse = baseColor * disneyDiffuse / PI;
+		//クックトランスモデルの鏡面反射
+		float3 specCol = CookTrranceSpecular(-directionalLight[ligNo].direction, toEye, normal, metaric) * directionalLight[ligNo].color.xyz;
+		//拡散反射光と鏡面反射光を線形補完。
+		lig += lerp(diffuse, specCol, metaric);
 	}
 	//環境光。
 	lig += ambientLight;
@@ -251,6 +253,11 @@ SShadowMapPSIn VSMainNonSkinShadowMap(SShadowMapVSIn vsIn)
 
 	return psIn;
 }
+
+/*TODO:インスタンシング描画用のシャドウマップの頂点シェーダー作成。*/
+
+
+
 /*
 *	スキンなしインスタンシング描画モデルのシャドウマップ書き込み用の頂点シェーダー。
 */
