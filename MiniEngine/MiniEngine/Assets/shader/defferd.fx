@@ -48,7 +48,6 @@ PSDefferdInput VSMain(VSDefferdInput In)
 
 float4 PSMain(PSDefferdInput psIn) : SV_Target0
 {
-	float4 albedoColor = g_albedoMap.Sample(g_sampler, psIn.uv);		//アルベド。
 	float3 normal = g_normalMap.Sample(g_sampler, psIn.uv).xyz;	//法線。
 	normal = normal * 2.0f - 1.0f;
 	float3 worldPos = g_worldPosMap.Sample(g_sampler, psIn.uv).xyz;	//ワールド座標。
@@ -57,16 +56,18 @@ float4 PSMain(PSDefferdInput psIn) : SV_Target0
 
 	float3 lig = 0;		//ライト
 	float3 toEye = normalize(eyePos - worldPos);		//点から視点までの正規化ベクトル
-	float roughness = 0.5f;			//拡散反射の面の粗さ。
+	float roughness = 1.0f;			//拡散反射の面の粗さ。
 	for (int ligNo = 0; ligNo < numDirectionLight; ligNo++)
 	{
-		float3 baseColor = max(dot(normal, -directionalLight[ligNo].direction), 0.0f) * directionalLight[ligNo].color;
+		//ディファード拡散反射の色。
+		float3 baseColor = max(dot(normal, -directionalLight[ligNo].direction), 0.0f) * directionalLight[ligNo].color.xyz;
 		//DisneyModel拡散反射
-		lig += NormalizedDisneyDiffuse(baseColor, normal, -directionalLight[ligNo].direction, toEye, roughness);
-		//スペキュラ反射
-		lig += BRDF(-directionalLight[ligNo].direction, toEye, normal)
-			* directionalLight[ligNo].color.xyz
-			* metaric * directionalLight[ligNo].color.w;
+		float disneyDiffuse = NormalizedDisneyDiffuse(normal, -directionalLight[ligNo].direction, toEye, roughness);
+		float3 diffuse = baseColor * disneyDiffuse / PI;
+		//クックトランスモデルの鏡面反射
+		float3 specCol = CookTrranceSpecular(-directionalLight[ligNo].direction, toEye, normal, metaric) * directionalLight[ligNo].color.xyz;
+		//拡散反射光と鏡面反射光を線形補完。
+		lig += lerp(diffuse, specCol, metaric);
 	}
 	//環境光。
 	lig += ambientLight;
@@ -79,6 +80,7 @@ float4 PSMain(PSDefferdInput psIn) : SV_Target0
 	//}
 
 	//最終的な色を決定する。
+	float4 albedoColor = g_albedoMap.Sample(g_sampler, psIn.uv);		//アルベド。
 	float4 finalColor = 1.0f;
 	finalColor.xyz = albedoColor.xyz * lig;
 	return finalColor;

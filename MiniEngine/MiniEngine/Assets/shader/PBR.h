@@ -22,33 +22,33 @@ float specFresnel(float f0, float u)
 }
 
 /*
-*	BRDF(双方向反射率分布関数)
+*	クックトランスモデルの鏡面反射を計算。
 *	スペキュラの計算に使ってる。？
 *	Lがライト
 *	Vが視点
 *	Nが法線
 */
-float BRDF(float3 L, float3 V, float3 N)
+float CookTrranceSpecular(float3 L, float3 V, float3 N, float metaric)
 {
 	float microfacet = 0.3f;		//マイクロファセット
 									//表面の凸凹具合を表す的な？
 									//面の粗さとかを調整するパラメータらしい？
-	float f0 = 0.5f;				//謎の数字。
+	float f0 = metaric;				//謎の数字。
 									//垂直入射時のフレネル反射係数???
 
 	float3 H = normalize(L + V);		//ライト+視点のハーフベクトル。
 
 	//色々内積取ってる。
-	float NdotH = dot(N, H);		//法線とハーフベクトル
-	float VdotH = dot(V, H);		//視点とハーフベクトル
-	float NdotL = dot(N, L);		//法線とライト
-	float NdotV = dot(N, V);		//法線と視点
+	float NdotH = max(0.0f,dot(N, H));		//法線とハーフベクトル
+	float VdotH = max(0.0f, dot(V, H));		//視点とハーフベクトル
+	float NdotL = max(0.0f, dot(N, L));		//法線とライト
+	float NdotV = max(0.0f, dot(N, V));		//法線と視点
 
 	float D = Beckmann(microfacet, NdotH);	//微小面分布関数。
 	float F = specFresnel(f0, VdotH);		//フレネル項の近似式。
 
 	float t = 2.0 * NdotH / VdotH;			//計算の共通項を取っておく感じ。
-	float G = max(0.0f, min(1.0f, min(t * NdotV, t * NdotL)));		//幾何学的減衰係数？
+	float G = min(1.0f, min(t * NdotV, t * NdotL));		//幾何学的減衰係数？
 																	//最大値を1.0、最小値を0.0の間で
 																	//値の小さいほうを取る
 
@@ -80,7 +80,7 @@ float SchlickFresnel(float u, float f0, float f90)
 *	V			:	視点の正規化ベクトル
 *	roughness	:	表面の粗さを表すパラメータらしい
 */
-float3 NormalizedDisneyDiffuse(float3 baseColor, float3 N, float3 L, float3 V, float roughness)
+float NormalizedDisneyDiffuse(float3 N, float3 L, float3 V, float roughness)
 {
 	float3 H = normalize(L + V);		//ハーフベクトル。
 
@@ -102,5 +102,5 @@ float3 NormalizedDisneyDiffuse(float3 baseColor, float3 N, float3 L, float3 V, f
 	*	よくわからん係数 * ライトの強さ？
 	*	* フレネル係数(N・L) * フレネル係数(N・V) / PI
 	*/
-	return (energyFactor * baseColor * FL * FV) / PI;
+	return (energyFactor * FL * FV) / PI;
 }
