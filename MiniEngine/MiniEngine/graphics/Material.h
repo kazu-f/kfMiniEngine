@@ -22,7 +22,7 @@ namespace Engine {
 		/// </summary>
 		/// <param name="rc">レンダリングコンテキスト</param>
 		/// <param name="hasSkin">スキンがあるかどうかのフラグ</param>
-		void BeginRender(RenderContext& rc, int hasSkin);
+		void BeginRender(RenderContext& rc, int hasSkin, int maxInstance = 1);
 
 		/// <summary>
 		/// アルベドマップを取得。
@@ -95,11 +95,13 @@ namespace Engine {
 		PipelineState m_transNonSkinModelPipelineState;	//スキンなしモデル用のパイプラインステート(半透明マテリアル)。
 		PipelineState m_nonSkinModelShadowPipelineState;//シャドウマップのスキンなしモデル用のパイプラインステート。
 		PipelineState m_skinModelShadowPipelineState;	//シャドウマップのスキンありモデル用のパイプラインステート。
+		PipelineState m_nonSkinShadowInstancingPSO;		//シャドウマップのスキン無しインスタンスモデル用。
 		Shader m_vsNonSkinModel;						//スキンなしモデル用の頂点シェーダー。
 		Shader m_vsSkinModel;							//スキンありモデル用の頂点シェーダー。
 		Shader m_psModel;								//モデル用のピクセルシェーダー。
 		Shader m_vsNonSkinModelShadowMap;				//シャドウマップのスキンなしモデル用の頂点シェーダー。
 		Shader m_vsSkinModelShadowMap;					//シャドウマップのスキンありモデル用の頂点シェーダー。
+		Shader m_vsNonSkinModelShadowInstancing;		//シャドウマップのスキン無しインスタンスモデル用。
 		Shader m_psModelShadowMap;						//シャドウマップのモデル用のピクセルシェーダー。
 		Shader m_psTransModel;						//半透明のモデル用のピクセルシェーダー。
 	};

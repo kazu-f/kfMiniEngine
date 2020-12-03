@@ -107,6 +107,8 @@ namespace Engine {
 		//スキンなし。
 		psoDesc.VS = CD3DX12_SHADER_BYTECODE(m_vsNonSkinModelShadowMap.GetCompiledBlob());
 		m_nonSkinModelShadowPipelineState.Init(psoDesc);
+		psoDesc.VS = CD3DX12_SHADER_BYTECODE(m_vsNonSkinModelShadowInstancing.GetCompiledBlob());
+		m_nonSkinShadowInstancingPSO.Init(psoDesc);
 
 		//続いて半透明マテリアル用。
 		psoDesc.VS = CD3DX12_SHADER_BYTECODE(m_vsSkinModel.GetCompiledBlob());
@@ -136,10 +138,11 @@ namespace Engine {
 		m_psModel.LoadPS(fxFilePath, "PSMain_RenderGBuffer");
 		m_vsNonSkinModelShadowMap.LoadVS(fxFilePath, "VSMainNonSkinShadowMap");
 		m_vsSkinModelShadowMap.LoadVS(fxFilePath, "VSMainSkinShadowMap");
+		m_vsNonSkinModelShadowInstancing.LoadVS(fxFilePath, "VSMainNonSkinInstancingShadowMap");
 		m_psModelShadowMap.LoadPS(fxFilePath, "PSMainShadowMap");
 		m_psTransModel.LoadPS(fxFilePath, psEntryPointFunc);
 	}
-	void Material::BeginRender(RenderContext& rc, int hasSkin)
+	void Material::BeginRender(RenderContext& rc, int hasSkin, int maxInstance)
 	{
 		rc.SetRootSignature(m_rootSignature);
 
@@ -155,7 +158,12 @@ namespace Engine {
 				rc.SetPipelineState(m_skinModelShadowPipelineState);
 			}
 			else {
-				rc.SetPipelineState(m_nonSkinModelShadowPipelineState);
+				if (maxInstance > 1) {
+					rc.SetPipelineState(m_nonSkinShadowInstancingPSO);
+				}
+				else {
+					rc.SetPipelineState(m_nonSkinModelShadowPipelineState);
+				}
 			}
 			break;
 		case enRenderStep_PreRender:

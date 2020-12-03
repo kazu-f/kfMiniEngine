@@ -221,7 +221,7 @@ namespace Engine {
 			//マテリアルごとにドロー。
 			for (int matNo = 0; matNo < mesh->m_materials.size(); matNo++) {
 				//このマテリアルが貼られているメッシュの描画開始。
-				mesh->m_materials[matNo]->BeginRender(rc, mesh->skinFlags[matNo]);
+				mesh->m_materials[matNo]->BeginRender(rc, mesh->skinFlags[matNo], m_maxInstance);
 				//ディスクリプタヒープを登録。
 				rc.SetDescriptorHeap(m_descriptorHeap.at(descriptorHeapNo));
 				//インデックスバッファを設定。
