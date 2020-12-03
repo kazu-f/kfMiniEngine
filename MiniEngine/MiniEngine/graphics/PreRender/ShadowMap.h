@@ -42,6 +42,14 @@ namespace Engine {
 		{
 			m_isEnable = false;
 		}
+		/// <summary>
+		/// ライトの向きを変更する。
+		/// </summary>
+		void SetLightDirection(const Vector3& dir)
+		{
+			m_lightDirection = dir;
+			m_lightDirection.Normalize();
+		}
 	public:
 		/// <summary>
 		/// キャスターへ登録する。
@@ -116,7 +124,7 @@ namespace Engine {
 		Vector3 m_lightDirection = { 0.0f,-1.0f,0.0f };			//ライトの方向。
 		float m_shadowAreas[NUM_SHADOW_MAP] = { 0.0f };			//影が落ちる範囲。
 		float m_depthOffset[NUM_SHADOW_MAP] = { 0.0f };			//深度値オフセット。
-		float m_lightHeight = 100.0f;							//ライトの高さ。
+		float m_lightHeight = 500.0f;							//ライトの高さ。
 		bool m_isEnable = true;									//シャドウマップが有効かどうか。
 	};
 }
