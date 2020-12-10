@@ -54,7 +54,7 @@ namespace Engine {
 			m_modelRender->SetRotation(m_renderObjDatas[0].rotation);
 			m_modelRender->SetScale(m_renderObjDatas[0].scale);
 		}
-		m_modelRender->SetShadowCasterFlag(true);
-		m_modelRender->SetShadowReceiverFlag(true);
+		m_modelRender->SetShadowCasterFlag(m_renderObjDatas[0].isShadowCaster);
+		m_modelRender->SetShadowReceiverFlag(m_renderObjDatas[0].isShadowReceiver);
 	}
 }

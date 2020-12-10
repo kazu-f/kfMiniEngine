@@ -41,7 +41,7 @@ bool GameScene::Start()
 	light3->SetColor(color);
 	light3->SetDirection(m_lightDir);
 
-	m_lightArray.push_back(light3);	
+	m_lightArray.push_back(light3);
 
 	m_level.Init("Assets/level/testLevel.tkl", [&](SLevelObjectData& objData) {
 		if (wcscmp(objData.name, L"unityChan") == 0) {
@@ -60,6 +60,8 @@ bool GameScene::Start()
 	//m_testBox = NewGO<prefab::ModelRender>(0);
 	//m_testBox->Init(initData);
 	//m_testBox->SetShadowReceiverFlag(true);
+
+	//g_graphicsEngine->GetShadowMap()->SetLightDirection({1.0f, -1.0f, 1.0f});
 
 	m_camera = NewGO<CGameCamera>(0);
 
