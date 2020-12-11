@@ -3,6 +3,7 @@
 #include "prefab/light/DirectionLight.h"
 #include "GameCamera.h"
 #include "Player.h"
+#include "Car/Car.h"
 
 GameScene::GameScene()
 {
@@ -45,7 +46,8 @@ bool GameScene::Start()
 
 	m_level.Init("Assets/level/testLevel.tkl", [&](SLevelObjectData& objData) {
 		if (wcscmp(objData.name, L"unityChan") == 0) {
-			m_player = NewGO<Player>(0);
+			//m_player = NewGO<Player>(0);
+			m_car = NewGO<Car>(0);
 
 			return true;
 		}

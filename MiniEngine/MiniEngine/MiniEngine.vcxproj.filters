@@ -67,6 +67,9 @@
     <Filter Include="level">
       <UniqueIdentifier>{d862d0d3-883b-4e18-987f-160fa98ca636}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Car">
+      <UniqueIdentifier>{a388ed18-2f72-437d-87e9-27c5f0c98aa4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tkEngine.cpp">
@@ -218,6 +221,9 @@
     </ClCompile>
     <ClCompile Include="level\TklFile.cpp">
       <Filter>level</Filter>
+    </ClCompile>
+    <ClCompile Include="Car\Car.cpp">
+      <Filter>Car</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -406,6 +412,9 @@
     </ClInclude>
     <ClInclude Include="system\debugLog.h">
       <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="Car\Car.h">
+      <Filter>Car</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
