@@ -6,6 +6,7 @@ bool Player::Start()
 	//3Dモデルを作成。
 	ModelInitData initData;
 	initData.m_tkmFilePath = "Assets/modelData/unityChan2.tkm";
+	//initData.m_tkmFilePath = "Assets/modelData/Human/suitWoman/suitWoman.tkm";
 	initData.m_fxFilePath = "Assets/shader/model.fx";
 	initData.m_vsEntryPointFunc = "VSMainSkin";
 	//アニメーションの初期化データ。
@@ -17,6 +18,7 @@ bool Player::Start()
 
 	m_model = NewGO<prefab::ModelRender>(0);
 	m_model->Init(initData, animInitData, en_animNum);
+	//m_model->Init(initData);
 	m_model->SetPosition(m_position);
 
 	Quaternion qRot;
