@@ -5,6 +5,7 @@ bool Player::Start()
 {
 	//3Dƒ‚ƒfƒ‹‚ğì¬B
 	ModelInitData initData;
+	//initData.m_tkmFilePath = "Assets/modelData/unityChan2.tkm";
 	initData.m_tkmFilePath = "Assets/modelData/unityChan2.tkm";
 	initData.m_fxFilePath = "Assets/shader/model.fx";
 	initData.m_vsEntryPointFunc = "VSMainSkin";
@@ -16,7 +17,8 @@ bool Player::Start()
 	animInitData[en_animRun].isLoop = true;
 
 	m_model = NewGO<prefab::ModelRender>(0);
-	m_model->Init(initData, animInitData, en_animNum);
+	//m_model->Init(initData, animInitData, en_animNum);
+	m_model->Init(initData);
 	m_model->SetPosition(m_position);
 
 	Quaternion qRot;
