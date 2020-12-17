@@ -18,13 +18,24 @@ bool Player::Start()
 	//qRot.SetRotationDegX(90.0f);
 	//m_model->SetRotation(qRot);
 
+	//ModelInitData initData;
+	//initData.m_tkmFilePath = "Assets/modelData/Human/suitWoman/suitWoman.tkm";
+	//initData.m_fxFilePath = "Assets/shader/model.fx";
+	//initData.m_vsEntryPointFunc = "VSMainSkin";
+	////アニメーションの初期化データ。
+	//AnimClipInitData animInitData[en_animNum];
+	//animInitData[en_animIdle].tkaFilePath = "Assets/animData/Human/Clap.tka";
+	//animInitData[en_animIdle].isLoop = true;
+	//animInitData[en_animRun].tkaFilePath = "Assets/animData/Human/Cheering.tka";
+	//animInitData[en_animRun].isLoop = true;
+
 	ModelInitData initData;
-	initData.m_tkmFilePath = "Assets/modelData/Human/suitWoman/suitWoman.tkm";
+	initData.m_tkmFilePath = "Assets/modelData/Human/shirtMale/shirtMale.tkm";
 	initData.m_fxFilePath = "Assets/shader/model.fx";
 	initData.m_vsEntryPointFunc = "VSMainSkin";
 	//アニメーションの初期化データ。
 	AnimClipInitData animInitData[en_animNum];
-	animInitData[en_animIdle].tkaFilePath = "Assets/animData/Human/Clap.tka";
+	animInitData[en_animIdle].tkaFilePath = "Assets/animData/Human/StandingClap.tka";
 	animInitData[en_animIdle].isLoop = true;
 	animInitData[en_animRun].tkaFilePath = "Assets/animData/Human/Cheering.tka";
 	animInitData[en_animRun].isLoop = true;

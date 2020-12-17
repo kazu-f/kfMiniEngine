@@ -76,7 +76,14 @@ bool GameScene::Start()
 	//g_graphicsEngine->GetShadowMap()->SetLightDirection({1.0f, -1.0f, 1.0f});
 
 	m_camera = NewGO<CGameCamera>(0);
-	m_car->SetCamera(m_camera);
+	if (m_car != nullptr)
+	{
+		m_car->SetCamera(m_camera);
+	}
+	else
+	{
+		DEBUG_LOG("ƒŒƒxƒ‹‚ÅÔ‚ªŒ©‚Â‚©‚ç‚È‚©‚Á‚½B")
+	}
 
 
 	return true;
