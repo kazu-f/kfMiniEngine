@@ -1,5 +1,11 @@
 #include "stdafx.h"
 #include "Car.h"
+#include "GameCamera.h"
+
+namespace {
+	const float MOVE_SPEED = 720.0f;
+}
+
 
 bool Car::Start()
 {
@@ -10,6 +16,7 @@ bool Car::Start()
 	m_model = NewGO<prefab::ModelRender>(0);
 	m_model->Init(initData);
 	m_model->SetPosition(m_position);
+	m_camera->SetTarget(m_position);
 
 	m_model->SetShadowCasterFlag(true);
 
@@ -18,9 +25,19 @@ bool Car::Start()
 
 void Car::Update()
 {
-	if (g_pad[0]->IsTrigger(enButtonX)) {
-		DeleteGO(this);
-	}
+	const float PadX = g_pad[0]->GetLStickXF();
+	const float PadY = g_pad[0]->GetLStickYF();
+	const float DeltaTime = GameTime().GetFrameDeltaTime();
+
+	m_position.x += PadX * MOVE_SPEED * DeltaTime;
+	m_position.z += PadY * MOVE_SPEED * DeltaTime;
+
+	m_model->SetPosition(m_position);
+	m_camera->SetTarget(m_position);
+
+	//if (g_pad[0]->IsTrigger(enButtonX)) {
+	//	DeleteGO(this);
+	//}
 }
 
 void Car::OnDestroy()

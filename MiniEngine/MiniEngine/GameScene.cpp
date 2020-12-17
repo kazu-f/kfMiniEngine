@@ -44,10 +44,21 @@ bool GameScene::Start()
 
 	m_lightArray.push_back(light3);
 
-	m_level.Init("Assets/level/testLevel.tkl", [&](SLevelObjectData& objData) {
-		if (wcscmp(objData.name, L"unityChan") == 0) {
-			m_player = NewGO<Player>(0);
-			//m_car = NewGO<Car>(0);
+	//m_level.Init("Assets/level/testLevel.tkl", [&](SLevelObjectData& objData) {
+	//	if (wcscmp(objData.name, L"unityChan") == 0) {
+	//		m_player = NewGO<Player>(0);
+	//		//m_car = NewGO<Car>(0);
+
+	//		return true;
+	//	}
+
+	//	return false;
+	//	});
+	m_level.Init("Assets/level/RaceLevel.tkl", [&](SLevelObjectData& objData) {
+		if (wcscmp(objData.name, L"Sup") == 0) {
+			//m_player = NewGO<Player>(0);
+			m_car = NewGO<Car>(0);
+			m_car->SetPosition(objData.position);
 
 			return true;
 		}
@@ -66,6 +77,7 @@ bool GameScene::Start()
 	//g_graphicsEngine->GetShadowMap()->SetLightDirection({1.0f, -1.0f, 1.0f});
 
 	m_camera = NewGO<CGameCamera>(0);
+	m_car->SetCamera(m_camera);
 
 
 	return true;

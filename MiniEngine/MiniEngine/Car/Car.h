@@ -1,4 +1,7 @@
 #pragma once
+
+class CGameCamera;
+
 class Car : public IGameObject
 {
 public:
@@ -9,6 +12,10 @@ public:
 	void OnDestroy() override;
 
 public:		//Setä÷êîÇ∆Ç©
+	void SetCamera(CGameCamera* camera)
+	{
+		m_camera = camera;
+	}
 	void SetPosition(const Vector3& pos)
 	{
 		m_position = pos;
@@ -16,6 +23,7 @@ public:		//Setä÷êîÇ∆Ç©
 
 
 private:
+	CGameCamera* m_camera = nullptr;
 	prefab::ModelRender* m_model = nullptr;
 
 	Vector3 m_position = Vector3::Zero;		//ç¿ïWÅB
