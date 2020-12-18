@@ -165,6 +165,17 @@ namespace Engine {
 			{
 				return m_model;
 			}
+			/// <summary>
+			/// アニメーションのfootstepの移動量を取得する。
+			/// </summary>
+			/// <returns></returns>
+			const Vector3& GetFootstepMove() const
+			{
+				if (m_animation.IsInited()) {
+					return m_animation.CalsFootstepDeltaInWorldSpace(m_rotation, m_scale);
+				}
+				return Vector3::Zero;
+			}
 		private:
 			/// <summary>
 			/// 初期化ステータス。

@@ -72,6 +72,9 @@ void Player::Update()
 	if (g_pad[0]->IsTrigger(enButtonX)) {
 		DeleteGO(this);
 	}
+
+	m_position += m_model->GetFootstepMove();
+	m_model->SetPosition(m_position);
 }
 
 void Player::OnDestroy()

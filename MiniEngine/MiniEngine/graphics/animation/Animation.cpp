@@ -94,6 +94,8 @@ namespace Engine {
 			const auto& localBoneMatrix = m_animationPlayController[index].GetBoneLocalMatrix();
 			//footstep‚ÌˆÚ“®—Ê‚ğæ“¾B
 			auto deltaValueFootStep = m_animationPlayController[index].GetFootStepDeltaValueOnUpdate();
+			//footstep‚ÌˆÚ“®—Ê‚Ì•âŠ®
+			m_footstepDeltaValue.Lerp(interpolateRate, m_footstepDeltaValue, deltaValueFootStep);
 
 			for (int boneNo = 0; boneNo < numBone; boneNo++){
 				//•½sˆÚ“®‚Ì•âŠ®B
