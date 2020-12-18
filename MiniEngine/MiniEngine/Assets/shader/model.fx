@@ -207,7 +207,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 PSOut_GBuffer PSMain_RenderGBuffer (SPSIn psIn){
 	PSOut_GBuffer Out = (PSOut_GBuffer)0;
 
-	Out.albedo = g_texture.Sample(g_sampler, psIn.uv);		//アルベド。
+	Out.albedo = g_texture.SampleLevel(g_sampler, psIn.uv, 0);		//アルベド。
 	//法線マップ。
 	float3 normal;
 	if (hasNormalMap) {
@@ -230,7 +230,7 @@ PSOut_GBuffer PSMain_RenderGBuffer (SPSIn psIn){
 	Out.spec = 0.0f;
 	if (hasSpecularMap) {
 		//スペキュラマップがある。
-		Out.spec = g_specularMap.Sample(g_sampler, psIn.uv).a;
+		Out.spec = g_specularMap.Sample(g_sampler, psIn.uv).r;
 	}
 
 	//シャドウ。

@@ -44,26 +44,26 @@ bool GameScene::Start()
 
 	m_lightArray.push_back(light3);
 
-	m_level.Init("Assets/level/testLevel.tkl", [&](SLevelObjectData& objData) {
-		if (wcscmp(objData.name, L"unityChan") == 0) {
-			m_player = NewGO<Player>(0);
-
-			return true;
-		}
-
-		return false;
-		});
-	//m_level.Init("Assets/level/RaceLevel.tkl", [&](SLevelObjectData& objData) {
-	//	if (wcscmp(objData.name, L"Sup") == 0) {
-	//		//m_player = NewGO<Player>(0);
-	//		m_car = NewGO<Car>(0);
-	//		m_car->SetPosition(objData.position);
+	//m_level.Init("Assets/level/testLevel.tkl", [&](SLevelObjectData& objData) {
+	//	if (wcscmp(objData.name, L"unityChan") == 0) {
+	//		m_player = NewGO<Player>(0);
 
 	//		return true;
 	//	}
 
 	//	return false;
 	//	});
+	m_level.Init("Assets/level/RaceLevel.tkl", [&](SLevelObjectData& objData) {
+		if (wcscmp(objData.name, L"Sup") == 0) {
+			//m_player = NewGO<Player>(0);
+			m_car = NewGO<Car>(0);
+			m_car->SetPosition(objData.position);
+
+			return true;
+		}
+
+		return false;
+		});
 
 	////ínñ ÇÃÉÇÉfÉãÇì«Ç›çûÇﬁÅB
 	//initData.m_fxFilePath = "Assets/shader/model.fx";

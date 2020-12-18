@@ -63,7 +63,7 @@ float4 PSMain(PSDefferdInput psIn) : SV_Target0
 		float3 baseColor = max(dot(normal, -directionalLight[ligNo].direction), 0.0f) * directionalLight[ligNo].color.xyz;
 		//DisneyModel拡散反射
 		float disneyDiffuse = NormalizedDisneyDiffuse(normal, -directionalLight[ligNo].direction, toEye, roughness);
-		float3 diffuse = baseColor * disneyDiffuse / PI;
+		float3 diffuse = baseColor  * disneyDiffuse / PI;
 		//クックトランスモデルの鏡面反射
 		float3 specCol = CookTrranceSpecular(-directionalLight[ligNo].direction, toEye, normal, metaric) * directionalLight[ligNo].color.xyz;
 		//拡散反射光と鏡面反射光を線形補完。
@@ -81,6 +81,7 @@ float4 PSMain(PSDefferdInput psIn) : SV_Target0
 
 	//最終的な色を決定する。
 	float4 albedoColor = g_albedoMap.Sample(g_sampler, psIn.uv);		//アルベド。
+	
 	float4 finalColor = 1.0f;
 	finalColor.xyz = albedoColor.xyz * lig;
 	return finalColor;
