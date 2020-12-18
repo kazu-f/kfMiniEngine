@@ -46,9 +46,10 @@ bool GameScene::Start()
 
 	m_camera = NewGO<CGameCamera>(0);
 
-#if 0
+#if 1
 	m_level.Init("Assets/level/testLevel.tkl", [&](SLevelObjectData& objData) {
 		if (wcscmp(objData.name, L"unityChan") == 0) {
+
 			m_player = NewGO<Player>(0);
 
 			return true;
