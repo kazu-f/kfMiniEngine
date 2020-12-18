@@ -29,13 +29,24 @@ bool Player::Start()
 	//animInitData[en_animRun].tkaFilePath = "Assets/animData/Human/Cheering.tka";
 	//animInitData[en_animRun].isLoop = true;
 
+	//ModelInitData initData;
+	//initData.m_tkmFilePath = "Assets/modelData/Human/shirtMale/shirtMale.tkm";
+	//initData.m_fxFilePath = "Assets/shader/model.fx";
+	//initData.m_vsEntryPointFunc = "VSMainSkin";
+	////アニメーションの初期化データ。
+	//AnimClipInitData animInitData[en_animNum];
+	//animInitData[en_animIdle].tkaFilePath = "Assets/animData/Human/StandingClap.tka";
+	//animInitData[en_animIdle].isLoop = true;
+	//animInitData[en_animRun].tkaFilePath = "Assets/animData/Human/Cheering.tka";
+	//animInitData[en_animRun].isLoop = true;
+
 	ModelInitData initData;
-	initData.m_tkmFilePath = "Assets/modelData/Human/shirtMale/shirtMale.tkm";
+	initData.m_tkmFilePath = "Assets/modelData/Human/suitMale/suitMale.tkm";
 	initData.m_fxFilePath = "Assets/shader/model.fx";
 	initData.m_vsEntryPointFunc = "VSMainSkin";
 	//アニメーションの初期化データ。
 	AnimClipInitData animInitData[en_animNum];
-	animInitData[en_animIdle].tkaFilePath = "Assets/animData/Human/StandingClap.tka";
+	animInitData[en_animIdle].tkaFilePath = "Assets/animData/Human/walk.tka";
 	animInitData[en_animIdle].isLoop = true;
 	animInitData[en_animRun].tkaFilePath = "Assets/animData/Human/Cheering.tka";
 	animInitData[en_animRun].isLoop = true;
