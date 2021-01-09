@@ -3,7 +3,7 @@
 #include "GameCamera.h"
 
 namespace {
-	const float MOVE_SPEED = 1920.0f;
+	const float MOVE_SPEED = 4000.0f;
 }
 
 
