@@ -63,6 +63,7 @@ bool GameScene::Start()
 			//m_player = NewGO<Player>(0);
 			m_car = NewGO<Car>(0);
 			m_car->SetPosition(objData.position);
+			m_car->SetRotation(objData.rotation);
 
 			return true;
 		}

@@ -20,12 +20,16 @@ public:		//Setä÷êîÇ∆Ç©
 	{
 		m_position = pos;
 	}
-
+	void SetRotation(const Quaternion& rot)
+	{
+		m_rotation = rot;
+	}
 
 private:
 	CGameCamera* m_camera = nullptr;
 	prefab::ModelRender* m_model = nullptr;
 
 	Vector3 m_position = Vector3::Zero;		//ç¿ïWÅB
+	Quaternion m_rotation = Quaternion::Identity;	//âÒì]ÅB
 };
 

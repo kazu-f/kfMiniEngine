@@ -15,6 +15,10 @@ namespace Engine {
 		if (stride == 2) {
 			m_sizeInBytes = size * 2;
 		}
+		else {
+			//stride = 4‚ÌŽžsize‚ª‚È‚­‚È‚Á‚Ä‚½‚µ‚±‚ê‚Å‚¨‚‹H
+			m_sizeInBytes = size;
+		}
 		auto d3dDevice = g_graphicsEngine->GetD3DDevice();
 		auto hr = d3dDevice->CreateCommittedResource(
 			&CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD),

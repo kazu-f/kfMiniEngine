@@ -16,6 +16,7 @@ bool Car::Start()
 	m_model = NewGO<prefab::ModelRender>(0);
 	m_model->Init(initData);
 	m_model->SetPosition(m_position);
+	m_model->SetRotation(m_rotation);
 	m_camera->SetTarget(m_position);
 
 	m_model->SetShadowCasterFlag(true);

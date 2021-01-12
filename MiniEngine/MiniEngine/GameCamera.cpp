@@ -40,14 +40,14 @@ void CGameCamera::Update()
 	//vCamera = vDir * m_targetToPosLen;
 	//g_camera3D->SetPosition(targetPos + vCamera);
 
-	//Quaternion qRot;
-	////カメラを回す。
-	//qRot.SetRotationDegY(g_pad[0]->GetLStickXF() * deltaTime * cameraSpeed);
-	//auto camPos = g_camera3D->GetPosition();
-	//qRot.Apply(camPos);
-	//g_camera3D->SetPosition(camPos);
+	Quaternion qRot;
+	//カメラを回す。
+	const float cameraSpeed = 20.0f;
+	qRot.SetRotationDegY(g_pad[0]->GetRStickXF() * GameTime().GetFrameDeltaTime() * cameraSpeed);
+	auto camPos = g_camera3D->GetPosition() - g_camera3D->GetTarget();
+	qRot.Apply(camPos);
 
-	Vector3 cameraPos = m_target + CAMERA_DISTANCE;
+	Vector3 cameraPos = m_target + camPos;
 
 	g_camera3D->SetPosition(cameraPos);
 	g_camera3D->SetTarget(m_target);
