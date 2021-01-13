@@ -35,6 +35,7 @@
     <ClCompile Include="prefab\light\DirectionLight.cpp" />
     <ClCompile Include="prefab\light\LightBase.cpp" />
     <ClCompile Include="prefab\ModelRender.cpp" />
+    <ClCompile Include="Spectator\Spectator.cpp" />
     <ClCompile Include="util\CGameTime.cpp" />
     <ClCompile Include="graphics\animation\AnimationPlayController.cpp" />
     <ClCompile Include="graphics\animation\AnimationClip.cpp" />
@@ -94,6 +95,7 @@
     <ClInclude Include="prefab\light\DirectionLight.h" />
     <ClInclude Include="prefab\light\LightBase.h" />
     <ClInclude Include="prefab\ModelRender.h" />
+    <ClInclude Include="Spectator\Spectator.h" />
     <ClInclude Include="system\debugLog.h" />
     <ClInclude Include="util\CGameTime.h" />
     <ClInclude Include="graphics\animation\AnimationPlayController.h" />

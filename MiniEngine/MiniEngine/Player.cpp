@@ -69,7 +69,7 @@ bool Player::Start()
 	m_model = NewGO<prefab::ModelRender>(0);
 	m_model->Init(initData, animInitData, 1);
 #endif
-
+	m_position.z = 100.0f;
 	m_model->SetPosition(m_position);
 	m_model->SetShadowCasterFlag(true);
 

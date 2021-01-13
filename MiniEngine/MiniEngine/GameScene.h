@@ -5,6 +5,7 @@
 class CGameCamera;
 class Player;
 class Car;
+class Spectator;
 
 class GameScene:public IGameObject
 {
@@ -22,6 +23,7 @@ private:
 	CGameCamera* m_camera = nullptr;
 	Player* m_player = nullptr;
 	Car* m_car = nullptr;
+	Spectator* m_spectator = nullptr;
 	prefab::ModelRender* m_testBox = nullptr;			//テスト用の箱。
 	ModelInitData initData;
 	std::vector<prefab::CDirectionLight*> m_lightArray;

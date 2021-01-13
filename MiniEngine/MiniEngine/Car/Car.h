@@ -7,9 +7,9 @@ class Car : public IGameObject
 public:
 	Car() {};
 	~Car() {};
-	bool Start() override;
-	void Update() override;
-	void OnDestroy() override;
+	bool Start() override;			//初期化処理。
+	void Update() override;			//更新処理。
+	void OnDestroy() override;		//削除時処理。
 
 public:		//Set関数とか
 	void SetCamera(CGameCamera* camera)

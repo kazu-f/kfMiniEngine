@@ -4,6 +4,7 @@
 #include "GameCamera.h"
 #include "Player.h"
 #include "Car/Car.h"
+#include "Spectator/Spectator.h"
 
 GameScene::GameScene()
 {
@@ -58,6 +59,8 @@ bool GameScene::Start()
 		return false;
 		});
 #else
+	m_spectator = NewGO<Spectator>(0);
+
 	m_level.Init("Assets/level/RaceLevel.tkl", [&](SLevelObjectData& objData) {
 		if (wcscmp(objData.name, L"Sup") == 0) {
 			//m_player = NewGO<Player>(0);
@@ -66,6 +69,15 @@ bool GameScene::Start()
 			m_car->SetRotation(objData.rotation);
 
 			return true;
+		}
+		if (objData.EqualObjectName(L"womanSuit")) {
+			m_spectator->AddObjectData(
+				objData.position, 
+				objData.rotation, 
+				objData.scale
+			);
+			m_spectator->SetShadowCasterFlag(objData.isShadowCaster);
+			m_spectator->SetShadowReceiverFlag(objData.isShadowReceiver);
 		}
 
 		return false;
