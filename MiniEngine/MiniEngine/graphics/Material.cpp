@@ -8,7 +8,7 @@ namespace Engine {
 		enNumDescriptorHeap
 	};
 
-	void Material::InitTexture(const TkmFile::SMaterial& tkmMat)
+	void IMaterial::InitTexture(const TkmFile::SMaterial& tkmMat)
 	{
 		if (tkmMat.albedoMap != nullptr) {
 			m_albedoMap.InitFromMemory(tkmMat.albedoMap.get(), tkmMat.albedoMapSize);
@@ -21,7 +21,7 @@ namespace Engine {
 		}
 		//TODO:リフレクションマップと屈折率マップの初期化。
 	}
-	void Material::InitFromTkmMaterila(
+	void IMaterial::InitFromTkmMaterila(
 		const TkmFile::SMaterial& tkmMat,
 		const wchar_t* fxFilePath,
 		const char* vsEntryPointFunc,
@@ -44,13 +44,13 @@ namespace Engine {
 			D3D12_TEXTURE_ADDRESS_MODE_WRAP);
 
 		//シェーダーを初期化。
-		InitShaders(fxFilePath, vsEntryPointFunc, psEntryPointFunc);
+		InitShaders(fxFilePath);
 
 		//パイプラインステートを初期化。
 		InitPipelineState();
 
 	}
-	void Material::InitPipelineState()
+	void IMaterial::InitPipelineState()
 	{
 		// 頂点レイアウトを定義する。
 		D3D12_INPUT_ELEMENT_DESC inputElementDescs[] =
@@ -68,7 +68,7 @@ namespace Engine {
 		D3D12_GRAPHICS_PIPELINE_STATE_DESC psoDesc = { 0 };
 		psoDesc.InputLayout = { inputElementDescs, _countof(inputElementDescs) };
 		psoDesc.pRootSignature = m_rootSignature.Get();
-		psoDesc.VS = CD3DX12_SHADER_BYTECODE(m_vsSkinModel.GetCompiledBlob());
+		psoDesc.VS = CD3DX12_SHADER_BYTECODE(m_vsModel.GetCompiledBlob());
 		psoDesc.PS = CD3DX12_SHADER_BYTECODE(m_psModel.GetCompiledBlob());
 		psoDesc.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
 		psoDesc.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT);
@@ -92,26 +92,24 @@ namespace Engine {
 		psoDesc.DSVFormat = DXGI_FORMAT_D32_FLOAT;
 		psoDesc.SampleDesc.Count = 1;
 
-		m_skinModelPipelineState.Init(psoDesc);
+		m_ModelPipelineState.Init(psoDesc);
 
-		//続いてスキンなしモデル用を作成。
-		psoDesc.VS = CD3DX12_SHADER_BYTECODE(m_vsNonSkinModel.GetCompiledBlob());
-		m_nonSkinModelPipelineState.Init(psoDesc);
+		//続いてインスタンシングモデル用を作成。
+		psoDesc.VS = CD3DX12_SHADER_BYTECODE(m_vsModelInstancing.GetCompiledBlob());
+		m_ModelInstancingPipelineState.Init(psoDesc);
 
 		//シャドウマップ用のパイプラインステートを作成。
-		//スキンあり。
-		psoDesc.VS = CD3DX12_SHADER_BYTECODE(m_vsSkinModelShadowMap.GetCompiledBlob());
+		//通常描画。
+		psoDesc.VS = CD3DX12_SHADER_BYTECODE(m_vsModelShadowMap.GetCompiledBlob());
 		psoDesc.PS = CD3DX12_SHADER_BYTECODE(m_psModelShadowMap.GetCompiledBlob());
 		psoDesc.RTVFormats[0] = DXGI_FORMAT_R32_FLOAT;
-		m_skinModelShadowPipelineState.Init(psoDesc);
-		//スキンなし。
-		psoDesc.VS = CD3DX12_SHADER_BYTECODE(m_vsNonSkinModelShadowMap.GetCompiledBlob());
-		m_nonSkinModelShadowPipelineState.Init(psoDesc);
-		psoDesc.VS = CD3DX12_SHADER_BYTECODE(m_vsNonSkinModelShadowInstancing.GetCompiledBlob());
-		m_nonSkinShadowInstancingPSO.Init(psoDesc);
+		m_ModelShadowPipelineState.Init(psoDesc);
+		//インスタンシング描画。
+		psoDesc.VS = CD3DX12_SHADER_BYTECODE(m_vsModelShadowInstancing.GetCompiledBlob());
+		m_ModelShadowInstancingPipelineState.Init(psoDesc);
 
 		//続いて半透明マテリアル用。
-		psoDesc.VS = CD3DX12_SHADER_BYTECODE(m_vsSkinModel.GetCompiledBlob());
+		psoDesc.VS = CD3DX12_SHADER_BYTECODE(m_vsModel.GetCompiledBlob());
 		psoDesc.PS = CD3DX12_SHADER_BYTECODE(m_psTransModel.GetCompiledBlob());
 		psoDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;		//アルベドカラー出力用。
 		psoDesc.BlendState.IndependentBlendEnable = TRUE;
@@ -120,29 +118,10 @@ namespace Engine {
 		psoDesc.BlendState.RenderTarget[0].DestBlend = D3D12_BLEND_INV_SRC_ALPHA;
 		psoDesc.BlendState.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
 
-
-		m_transSkinModelPipelineState.Init(psoDesc);
-
-		psoDesc.VS = CD3DX12_SHADER_BYTECODE(m_vsNonSkinModel.GetCompiledBlob());
-		m_transNonSkinModelPipelineState.Init(psoDesc);
+		m_transModelPipelineState.Init(psoDesc);
 
 	}
-	void Material::InitShaders(
-		const wchar_t* fxFilePath,
-		const char* vsEntryPointFunc,
-		const char* psEntryPointFunc
-	)
-	{
-		m_vsNonSkinModel.LoadVS(fxFilePath, vsEntryPointFunc);
-		m_vsSkinModel.LoadVS(fxFilePath, vsEntryPointFunc);
-		m_psModel.LoadPS(fxFilePath, "PSMain_RenderGBuffer");
-		m_vsNonSkinModelShadowMap.LoadVS(fxFilePath, "VSMainNonSkinShadowMap");
-		m_vsSkinModelShadowMap.LoadVS(fxFilePath, "VSMainSkinShadowMap");
-		m_vsNonSkinModelShadowInstancing.LoadVS(fxFilePath, "VSMainNonSkinInstancingShadowMap");
-		m_psModelShadowMap.LoadPS(fxFilePath, "PSMainShadowMap");
-		m_psTransModel.LoadPS(fxFilePath, psEntryPointFunc);
-	}
-	void Material::BeginRender(RenderContext& rc, int hasSkin, int maxInstance)
+	void IMaterial::BeginRender(RenderContext& rc, int maxInstance)
 	{
 		rc.SetRootSignature(m_rootSignature);
 
@@ -154,37 +133,55 @@ namespace Engine {
 			break;
 		case enRenderStep_CreateDirectionalShadowMap:
 			//シャドウマップの描画。
-			if (hasSkin) {
-				rc.SetPipelineState(m_skinModelShadowPipelineState);
+			if (maxInstance > 1) {
+				rc.SetPipelineState(m_ModelShadowInstancingPipelineState);
 			}
 			else {
-				if (maxInstance > 1) {
-					rc.SetPipelineState(m_nonSkinShadowInstancingPSO);
-				}
-				else {
-					rc.SetPipelineState(m_nonSkinModelShadowPipelineState);
-				}
+				rc.SetPipelineState(m_ModelShadowPipelineState);
 			}
 			break;
 		case enRenderStep_PreRender:
-			if (hasSkin) {
-				rc.SetPipelineState(m_skinModelPipelineState);
+			if (maxInstance > 1) {
+				rc.SetPipelineState(m_ModelInstancingPipelineState);
 			}
 			else {
-				rc.SetPipelineState(m_nonSkinModelPipelineState);
+				rc.SetPipelineState(m_ModelPipelineState);
 			}
+
 			break;
 		case enRenderStep_ForwardRender:
-			if (hasSkin) {
-				rc.SetPipelineState(m_transSkinModelPipelineState);
-			}
-			else {
-				rc.SetPipelineState(m_transNonSkinModelPipelineState);
-			}
+			rc.SetPipelineState(m_transModelPipelineState);
+
 			break;
 		default:
 			break;
 		}
 
+	}
+	/// <summary>
+	/// スキン無しマテリアル用のシェーダーをロードする。
+	/// </summary>
+	void NonSkinMaterial::InitShaders(const wchar_t* fxFilePath)
+	{
+		m_vsModel.LoadVS(fxFilePath, "VSMain");
+		m_vsModelInstancing.LoadVS(fxFilePath, "VSMainInstancing");
+		m_psModel.LoadPS(fxFilePath, "PSMain_RenderGBuffer");
+		m_vsModelShadowMap.LoadVS(fxFilePath, "VSMainNonSkinShadowMap");
+		m_vsModelShadowInstancing.LoadVS(fxFilePath, "VSMainNonSkinInstancingShadowMap");
+		m_psModelShadowMap.LoadPS(fxFilePath, "PSMainShadowMap");
+		m_psTransModel.LoadPS(fxFilePath, "PSMain_RenderGBuffer");
+	}
+	/// <summary>
+	/// スキンありマテリアル用のシェーダーをロードする。
+	/// </summary>
+	void SkinMaterial::InitShaders(const wchar_t* fxFilePath)
+	{
+		m_vsModel.LoadVS(fxFilePath, "VSMainSkin");
+		m_vsModelInstancing.LoadVS(fxFilePath, "VSMainSkinInstancing");
+		m_psModel.LoadPS(fxFilePath, "PSMain_RenderGBuffer");
+		m_vsModelShadowMap.LoadVS(fxFilePath, "VSMainSkinShadowMap");
+		m_vsModelShadowInstancing.LoadVS(fxFilePath, "VSMainSkinInstancingShadowMap");
+		m_psModelShadowMap.LoadPS(fxFilePath, "PSMainShadowMap");
+		m_psTransModel.LoadPS(fxFilePath, "PSMain_RenderGBuffer");
 	}
 }

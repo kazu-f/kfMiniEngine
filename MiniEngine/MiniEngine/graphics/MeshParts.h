@@ -9,7 +9,7 @@
 namespace Engine {
 	class RenderContext;
 	class Skeleton;
-	class Material;
+	class IMaterial;
 	class IShaderResource;
 
 
@@ -19,7 +19,7 @@ namespace Engine {
 	struct SMesh {
 		VertexBuffer m_vertexBuffer;						//頂点バッファ。
 		std::vector< IndexBuffer* >		m_indexBufferArray;	//インデックスバッファ。
-		std::vector< Material* >		m_materials;			//マテリアル。
+		std::vector< IMaterial* >		m_materials;			//マテリアル。
 		std::vector<int>				skinFlags;				//スキンを持っているかどうかのフラグ。
 	};
 

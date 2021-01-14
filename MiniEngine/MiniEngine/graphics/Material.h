@@ -6,7 +6,7 @@ namespace Engine {
 	/// <summary>
 	/// マテリアル。
 	/// </summary>
-	class Material {
+	class IMaterial {
 	public:
 		/// <summary>
 		/// tkmファイルのマテリアル情報から初期化する。
@@ -21,8 +21,8 @@ namespace Engine {
 		/// レンダリングを開始するときに呼び出す関数。
 		/// </summary>
 		/// <param name="rc">レンダリングコンテキスト</param>
-		/// <param name="hasSkin">スキンがあるかどうかのフラグ</param>
-		void BeginRender(RenderContext& rc, int hasSkin, int maxInstance = 1);
+		/// <param name="maxInstance">インスタンスの数</param>
+		virtual void BeginRender(RenderContext& rc, int maxInstance = 1);
 
 		/// <summary>
 		/// アルベドマップを取得。
@@ -56,7 +56,7 @@ namespace Engine {
 		{
 			return m_constantBuffer;
 		}
-	private:
+	protected:
 		/// <summary>
 		/// パイプラインステートの初期化。
 		/// </summary>
@@ -67,16 +67,14 @@ namespace Engine {
 		/// <param name="fxFilePath">fxファイルのファイルパス</param>
 		/// <param name="vsEntryPointFunc">頂点シェーダーのエントリーポイントの関数名</param>
 		/// <param name="psEntryPointFunc">ピクセルシェーダーのエントリーポイントの関数名</param>
-		void InitShaders(
-			const wchar_t* fxFilePath,
-			const char* vsEntryPointFunc,
-			const char* psEntryPointFunc);
+		virtual void InitShaders(const wchar_t* fxFilePath) = 0;
 		/// <summary>
 		/// テクスチャを初期化。
 		/// </summary>
 		/// <param name="tkmMat"></param>
 		void InitTexture(const TkmFile::SMaterial& tkmMat);
-	private:
+
+	protected:
 		/// <summary>
 		/// マテリアルパラメータ。
 		/// </summary>
@@ -89,22 +87,44 @@ namespace Engine {
 		Texture	m_specularMap;							//スペキュラマップ。
 		ConstantBuffer m_constantBuffer;				//定数バッファ。
 		RootSignature m_rootSignature;					//ルートシグネチャ。
-		PipelineState m_nonSkinModelPipelineState;		//スキンなしモデル用のパイプラインステート。
-		PipelineState m_skinModelPipelineState;			//スキンありモデル用のパイプラインステート。
-		PipelineState m_transSkinModelPipelineState;	//スキンありモデル用のパイプラインステート(半透明マテリアル)。
-		PipelineState m_transNonSkinModelPipelineState;	//スキンなしモデル用のパイプラインステート(半透明マテリアル)。
-		PipelineState m_nonSkinModelShadowPipelineState;//シャドウマップのスキンなしモデル用のパイプラインステート。
-		PipelineState m_skinModelShadowPipelineState;	//シャドウマップのスキンありモデル用のパイプラインステート。
-		PipelineState m_nonSkinShadowInstancingPSO;		//シャドウマップのスキン無しインスタンスモデル用。
-		Shader m_vsNonSkinModel;						//スキンなしモデル用の頂点シェーダー。
-		Shader m_vsSkinModel;							//スキンありモデル用の頂点シェーダー。
+		PipelineState m_ModelPipelineState;				//モデル用のパイプラインステート。
+		PipelineState m_ModelInstancingPipelineState;	//インスタンシングモデル用のパイプラインステート。
+		PipelineState m_transModelPipelineState;		//モデル用のパイプラインステート(半透明マテリアル)。
+		PipelineState m_ModelShadowPipelineState;		//シャドウマップのモデル用のパイプラインステート。
+		PipelineState m_ModelShadowInstancingPipelineState;		//シャドウマップのインスタンスモデル用。
+
+		Shader m_vsModel;								//モデル用の頂点シェーダー。
+		Shader m_vsModelInstancing;						//インスタンシングモデル用の頂点シェーダー。
 		Shader m_psModel;								//モデル用のピクセルシェーダー。
-		Shader m_vsNonSkinModelShadowMap;				//シャドウマップのスキンなしモデル用の頂点シェーダー。
-		Shader m_vsSkinModelShadowMap;					//シャドウマップのスキンありモデル用の頂点シェーダー。
-		Shader m_vsNonSkinModelShadowInstancing;		//シャドウマップのスキン無しインスタンスモデル用。
+		Shader m_vsModelShadowMap;						//シャドウマップのモデル用の頂点シェーダー。
+		Shader m_vsModelShadowInstancing;				//シャドウマップのインスタンスモデル用。
 		Shader m_psModelShadowMap;						//シャドウマップのモデル用のピクセルシェーダー。
-		Shader m_psTransModel;						//半透明のモデル用のピクセルシェーダー。
+		Shader m_psTransModel;							//半透明のモデル用のピクセルシェーダー。
 	};
+	/// <summary>
+	/// スキン無しマテリアル。
+	/// </summary>
+	class NonSkinMaterial : public IMaterial {
+	private:
+		/// <summary>
+		/// シェーダーの初期化。
+		/// </summary>
+		/// <param name="fxFilePath">fxファイルのファイルパス</param>
+		void InitShaders(const wchar_t* fxFilePath)override final;
 
+	private:
 
+	};
+	/// <summary>
+	/// スキンありマテリアル。
+	/// </summary>
+	class SkinMaterial :public IMaterial{
+	private:
+		/// <summary>
+		/// シェーダーの初期化。
+		/// </summary>
+		/// <param name="fxFilePath">fxファイルのファイルパス</param>
+		void InitShaders(const wchar_t* fxFilePath)override final;
+
+	};
 }

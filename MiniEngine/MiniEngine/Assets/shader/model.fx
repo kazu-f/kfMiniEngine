@@ -289,10 +289,6 @@ SShadowMapPSIn VSMainNonSkinShadowMap(SShadowMapVSIn vsIn)
 	return psIn;
 }
 
-/*TODO:インスタンシング描画用のシャドウマップの頂点シェーダー作成。*/
-
-
-
 /*
 *	スキンなしインスタンシング描画モデルのシャドウマップ書き込み用の頂点シェーダー。
 */
@@ -313,6 +309,22 @@ SShadowMapPSIn VSMainSkinShadowMap(SShadowMapVSIn vsIn)
 	SShadowMapPSIn psIn;
 	float4x4 skinMatrix = CalcSkinMatrix(vsIn.skinVert);
 	psIn.pos = mul(skinMatrix, vsIn.pos);
+	psIn.pos = mul(mView, psIn.pos);
+	psIn.pos = mul(mProj, psIn.pos);
+
+	return psIn;
+}
+/*
+*	スキンありインスタンシング描画モデルのシャドウマップ書き込み用の頂点シェーダー。
+*/
+SShadowMapPSIn VSMainSkinInstancingShadowMap(SShadowMapVSIn vsIn, uint instanceID : SV_InstanceID)
+{
+	SShadowMapPSIn psIn;
+	float4x4 skinMatrix = CalcSkinMatrix(vsIn.skinVert);
+	float4x4 m = instancingDatas[instanceID];
+	m = mul(m, skinMatrix);
+
+	psIn.pos = mul(m, vsIn.pos);
 	psIn.pos = mul(mView, psIn.pos);
 	psIn.pos = mul(mProj, psIn.pos);
 

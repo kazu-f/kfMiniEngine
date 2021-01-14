@@ -78,6 +78,8 @@ bool GameScene::Start()
 			);
 			m_spectator->SetShadowCasterFlag(objData.isShadowCaster);
 			m_spectator->SetShadowReceiverFlag(objData.isShadowReceiver);
+
+			return true;
 		}
 
 		return false;

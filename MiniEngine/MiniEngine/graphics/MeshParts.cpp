@@ -160,10 +160,18 @@ namespace Engine {
 		}
 		//マテリアルを作成。
 		mesh->m_materials.reserve(tkmMesh.materials.size());
+		int matNo = 0;
 		for (auto& tkmMat : tkmMesh.materials) {
-			auto mat = new Material;
+			IMaterial* mat = nullptr;
+			if (mesh->skinFlags[matNo]) {
+				mat = new SkinMaterial;
+			}
+			else {
+				mat = new NonSkinMaterial;
+			}
 			mat->InitFromTkmMaterila(tkmMat, fxFilePath, vsEntryPointFunc, psEntryPointFunc);
 			mesh->m_materials.push_back(mat);
+			matNo++;
 		}
 
 		m_meshs[meshNo] = mesh;
@@ -221,7 +229,7 @@ namespace Engine {
 			//マテリアルごとにドロー。
 			for (int matNo = 0; matNo < mesh->m_materials.size(); matNo++) {
 				//このマテリアルが貼られているメッシュの描画開始。
-				mesh->m_materials[matNo]->BeginRender(rc, mesh->skinFlags[matNo], m_maxInstance);
+				mesh->m_materials[matNo]->BeginRender(rc, m_maxInstance);
 				//ディスクリプタヒープを登録。
 				rc.SetDescriptorHeap(m_descriptorHeap.at(descriptorHeapNo));
 				//インデックスバッファを設定。
