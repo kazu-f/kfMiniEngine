@@ -27,14 +27,17 @@
     <ClCompile Include="graphics\PreRender\GBufferRender.cpp" />
     <ClCompile Include="graphics\light\LightManager.cpp" />
     <ClCompile Include="graphics\PreRender\ShadowMap.cpp" />
+    <ClCompile Include="physics\ICollider.cpp" />
     <ClCompile Include="level\Level.cpp" />
     <ClCompile Include="level\MapChip.cpp" />
     <ClCompile Include="level\MapChipRender.cpp" />
     <ClCompile Include="level\TklFile.cpp" />
+    <ClCompile Include="physics\PhysicsWorld.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="prefab\light\DirectionLight.cpp" />
     <ClCompile Include="prefab\light\LightBase.cpp" />
     <ClCompile Include="prefab\ModelRender.cpp" />
+    <ClCompile Include="physics\RigidBody.cpp" />
     <ClCompile Include="Spectator\Spectator.cpp" />
     <ClCompile Include="util\CGameTime.cpp" />
     <ClCompile Include="graphics\animation\AnimationPlayController.cpp" />
@@ -91,6 +94,9 @@
     <ClInclude Include="level\MapChip.h" />
     <ClInclude Include="level\MapChipRender.h" />
     <ClInclude Include="level\TklFile.h" />
+    <ClInclude Include="physics\ICollider.h" />
+    <ClInclude Include="physics\PhysicsWorld.h" />
+    <ClInclude Include="physics\RigidBody.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="prefab\light\DirectionLight.h" />
     <ClInclude Include="prefab\light\LightBase.h" />
@@ -199,7 +205,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir);$(ProjectDir)/bulletPhysics/src;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)DirectXTK/Bin/Desktop_2019_Win10/x64/Debug;$(LibraryPath);$(ProjectDir)/exlib/x64</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -207,7 +213,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir);$(ProjectDir)/bulletPhysics/src;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)DirectXTK/Bin/Desktop_2019_Win10/x64/Release;$(LibraryPath);$(ProjectDir)/exlib/x64</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

@@ -25,6 +25,9 @@
 
 #include "d3dx12.h"
 
+#include "btBulletDynamicsCommon.h"
+#include "BulletCollision\CollisionDispatch\btGhostObject.h"
+
 #include "policy/Noncopyable.h"
 #include "system/debugLog.h"
 #include "math/Math.h"

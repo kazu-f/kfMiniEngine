@@ -73,6 +73,9 @@
     <Filter Include="Spectator">
       <UniqueIdentifier>{a87fff65-f7a8-4225-b224-ddcf76966c1b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="physics">
+      <UniqueIdentifier>{d00e304a-89ea-4faa-a921-87549da2760e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tkEngine.cpp">
@@ -230,6 +233,15 @@
     </ClCompile>
     <ClCompile Include="Spectator\Spectator.cpp">
       <Filter>Spectator</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\PhysicsWorld.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\RigidBody.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\ICollider.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -424,6 +436,15 @@
     </ClInclude>
     <ClInclude Include="Spectator\Spectator.h">
       <Filter>Spectator</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\PhysicsWorld.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\RigidBody.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\ICollider.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
