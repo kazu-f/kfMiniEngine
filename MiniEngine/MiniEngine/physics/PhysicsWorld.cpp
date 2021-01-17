@@ -39,7 +39,7 @@ namespace Engine {
 		Release();
 		//•¨—ƒGƒ“ƒWƒ“‚Ì‰Šú‰»B
 		m_collisionConfig = std::make_unique<btDefaultCollisionConfiguration>();
-		m_collisionDispatcher = std::make_unique<btCollisionDispatcher>();
+		m_collisionDispatcher = std::make_unique<btCollisionDispatcher>(m_collisionConfig.get());
 		m_overlappingPairCache = std::make_unique<btDbvtBroadphase>();
 		m_constraintSolver = std::make_unique<btSequentialImpulseConstraintSolver>();
 
