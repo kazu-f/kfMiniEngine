@@ -38,7 +38,7 @@ namespace Engine {
 		{
 			return m_gameTime;
 		}
-		const CPhysicsWorld& GetPhyshicsWorld()
+		CPhysicsWorld& GetPhyshicsWorld()
 		{
 			return m_physicsWorld;
 		}
@@ -63,7 +63,7 @@ namespace Engine {
 	/// <summary>
 	/// •¨—ƒ[ƒ‹ƒh‚ğæ“¾B
 	/// </summary>
-	static inline const CPhysicsWorld& PhysicsWorld()
+	static inline CPhysicsWorld& PhysicsWorld()
 	{
 		return g_engine->GetPhyshicsWorld();
 	}

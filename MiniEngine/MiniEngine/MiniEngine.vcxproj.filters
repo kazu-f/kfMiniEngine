@@ -247,7 +247,13 @@
       <Filter>physics</Filter>
     </ClCompile>
     <ClCompile Include="physics\PhysicsStaticObject.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\BoxCollider.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\CapsuleCollider.cpp">
+      <Filter>physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -456,7 +462,13 @@
       <Filter>physics</Filter>
     </ClInclude>
     <ClInclude Include="physics\PhysicsStaticObject.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\BoxCollider.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\CapsuleCollider.h">
+      <Filter>physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
