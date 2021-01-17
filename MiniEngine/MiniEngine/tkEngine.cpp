@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "tkEngine.h"
 #include "graphics/GraphicsEngine.h"
+#include "physics/PhysicsWorld.h"
 
 namespace Engine {
 	TkEngine* g_engine = nullptr;
@@ -21,6 +22,8 @@ namespace Engine {
 		m_graphicsEngine = new GraphicsEngine();
 		g_graphicsEngine = m_graphicsEngine;
 		m_graphicsEngine->Init(hwnd, frameBufferWidth, frameBufferHeight);
+		//物理エンジンの初期化。
+		m_physicsWorld.Init();
 		//ゲームパッドの初期化。
 		for (int i = 0; i < GamePad::CONNECT_PAD_MAX; i++) {
 			g_pad[i] = &m_pad[i];
@@ -32,6 +35,9 @@ namespace Engine {
 	{
 
 		BeginFrame();
+
+		//	物理エンジンの更新。
+		m_physicsWorld.Update(GameTime().GetFrameDeltaTime());
 		//グラフィックエンジンの更新。
 		m_graphicsEngine->Update();
 

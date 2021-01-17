@@ -1,7 +1,6 @@
 #pragma once
 
 #include "util/Stopwatch.h"
-#include "HID/GamePad.h"
 #include "graphics/GraphicsConfig.h"
 
 namespace Engine {
@@ -39,9 +38,14 @@ namespace Engine {
 		{
 			return m_gameTime;
 		}
+		const CPhysicsWorld& GetPhyshicsWorld()
+		{
+			return m_physicsWorld;
+		}
 
 	private:
 		GraphicsEngine* m_graphicsEngine = nullptr;		//グラフィックエンジン。
+		CPhysicsWorld m_physicsWorld;					//物理ワールド。
 		GamePad m_pad[GamePad::CONNECT_PAD_MAX];		//ゲームパッド。
 		CGameTime			m_gameTime;					//ゲームタイム。
 	public:
@@ -55,5 +59,12 @@ namespace Engine {
 	static inline const CGameTime& GameTime()
 	{
 		return g_engine->GetGameTime();
+	}
+	/// <summary>
+	/// 物理ワールドを取得。
+	/// </summary>
+	static inline const CPhysicsWorld& PhysicsWorld()
+	{
+		return g_engine->GetPhyshicsWorld();
 	}
 }

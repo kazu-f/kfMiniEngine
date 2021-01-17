@@ -59,6 +59,7 @@
 #include "util/NameKey.h"
 #include "util/CGameTime.h"
 
+#include "physics/PhysicsWorld.h"
 #include "tkEngine.h"
 
 #include "graphics/Skeleton.h"
