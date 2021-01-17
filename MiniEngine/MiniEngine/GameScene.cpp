@@ -58,6 +58,10 @@ bool GameScene::Start()
 
 		return false;
 		});
+
+	Vector3 phyPos = { 0.0f,-5.0f,0.0f };
+	Vector3 phySize = { 30.0f,5.0f,30.0f };
+	m_phyStaticObject.CreateBox(phyPos, Quaternion::Identity, phySize);
 #else
 	m_spectator = NewGO<Spectator>(0);
 
@@ -93,7 +97,6 @@ bool GameScene::Start()
 			DEBUG_LOG("ƒŒƒxƒ‹‚ÅÔ‚ªŒ©‚Â‚©‚ç‚È‚©‚Á‚½B")
 		}
 #endif
-
 
 	return true;
 }

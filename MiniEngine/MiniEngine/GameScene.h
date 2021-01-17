@@ -2,6 +2,8 @@
 
 //機能の試運転用クラス。
 
+#include "physics\PhysicsStaticObject.h"
+
 class CGameCamera;
 class Player;
 class Car;
@@ -20,6 +22,7 @@ public:
 
 private:
 	CLevel m_level;
+	CPhysicsStaticObject m_phyStaticObject;
 	CGameCamera* m_camera = nullptr;
 	Player* m_player = nullptr;
 	Car* m_car = nullptr;
