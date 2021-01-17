@@ -149,6 +149,17 @@ namespace Engine {
 			dst.z = z;
 		}
 		/// <summary>
+		/// ベクトルのコピー。BulletPhysics変換。
+		/// </summary>
+		template<>
+		void CopyTo(btVector3& dst) const
+		{
+			dst.setX(x);
+			dst.setY(y);
+			dst.setZ(z);
+		}
+
+		/// <summary>
 		/// ベクトルの設定。
 		/// </summary>
 		/// <param name="_x"></param>
@@ -465,6 +476,17 @@ namespace Engine {
 			dst.y = y;
 			dst.z = z;
 			dst.w = w;
+		}
+		/// <summary>
+		/// ベクトルのコピー。BulletPhysics変換。
+		/// </summary>
+		template<>
+		void CopyTo(btQuaternion& dst) const
+		{
+			dst.setX(x);
+			dst.setY(y);
+			dst.setZ(z);
+			dst.setW(w);
 		}
 
 		/// <summary>
