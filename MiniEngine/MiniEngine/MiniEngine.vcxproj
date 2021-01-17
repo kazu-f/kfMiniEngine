@@ -32,6 +32,8 @@
     <ClCompile Include="level\MapChip.cpp" />
     <ClCompile Include="level\MapChipRender.cpp" />
     <ClCompile Include="level\TklFile.cpp" />
+    <ClCompile Include="physics\PhysicsObjectBase.cpp" />
+    <ClCompile Include="physics\PhysicsStaticObject.cpp" />
     <ClCompile Include="physics\PhysicsWorld.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="prefab\light\DirectionLight.cpp" />
@@ -95,6 +97,8 @@
     <ClInclude Include="level\MapChipRender.h" />
     <ClInclude Include="level\TklFile.h" />
     <ClInclude Include="physics\ICollider.h" />
+    <ClInclude Include="physics\PhysicsObjectBase.h" />
+    <ClInclude Include="physics\PhysicsStaticObject.h" />
     <ClInclude Include="physics\PhysicsWorld.h" />
     <ClInclude Include="physics\RigidBody.h" />
     <ClInclude Include="Player.h" />
@@ -270,6 +274,7 @@
       <PreprocessorDefinitions>_WINDOWS;_CRT_SECURE_NO_WARNINGS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

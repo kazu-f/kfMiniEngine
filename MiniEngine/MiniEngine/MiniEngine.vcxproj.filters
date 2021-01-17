@@ -234,13 +234,19 @@
     <ClCompile Include="Spectator\Spectator.cpp">
       <Filter>Spectator</Filter>
     </ClCompile>
-    <ClCompile Include="physics\PhysicsWorld.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="physics\RigidBody.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\PhysicsWorld.cpp">
+      <Filter>physics</Filter>
     </ClCompile>
     <ClCompile Include="physics\ICollider.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\PhysicsObjectBase.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\PhysicsStaticObject.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -437,13 +443,19 @@
     <ClInclude Include="Spectator\Spectator.h">
       <Filter>Spectator</Filter>
     </ClInclude>
+    <ClInclude Include="physics\ICollider.h">
+      <Filter>physics</Filter>
+    </ClInclude>
     <ClInclude Include="physics\PhysicsWorld.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>physics</Filter>
     </ClInclude>
     <ClInclude Include="physics\RigidBody.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>physics</Filter>
     </ClInclude>
-    <ClInclude Include="physics\ICollider.h">
+    <ClInclude Include="physics\PhysicsObjectBase.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\PhysicsStaticObject.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
