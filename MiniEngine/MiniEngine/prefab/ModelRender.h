@@ -2,6 +2,9 @@
 /// <summary>
 /// ƒ‚ƒfƒ‹ƒŒƒ“ƒ_[
 /// </summary>
+#include "graphics/Model.h"
+#include "graphics/Animation/Animation.h"
+
 
 namespace Engine {
 	namespace prefab {
