@@ -76,6 +76,9 @@
     <Filter Include="physics">
       <UniqueIdentifier>{d00e304a-89ea-4faa-a921-87549da2760e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="characterController">
+      <UniqueIdentifier>{69d57548-594e-4c96-88cb-6030e2f9a5a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tkEngine.cpp">
@@ -254,6 +257,9 @@
     </ClCompile>
     <ClCompile Include="physics\CapsuleCollider.cpp">
       <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="characterController\CharacterController.cpp">
+      <Filter>characterController</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -468,6 +474,12 @@
       <Filter>physics</Filter>
     </ClInclude>
     <ClInclude Include="physics\CapsuleCollider.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="characterController\CharacterController.h">
+      <Filter>characterController</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\CollisionAttr.h">
       <Filter>physics</Filter>
     </ClInclude>
   </ItemGroup>
