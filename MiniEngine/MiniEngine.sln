@@ -6,8 +6,10 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MiniEngine", "MiniEngine\MiniEngine.vcxproj", "{2D3EA6DA-4878-40F4-A02B-65F5732B7B86}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3E0E8608-CD9B-4C76-AF33-29CA38F2C9F0} = {3E0E8608-CD9B-4C76-AF33-29CA38F2C9F0}
+		{08443C1F-C16B-3808-A19A-1D5D6C7BFA51} = {08443C1F-C16B-3808-A19A-1D5D6C7BFA51}
 		{28EF574A-84DB-3CB0-9B45-DB3545B2D05C} = {28EF574A-84DB-3CB0-9B45-DB3545B2D05C}
 		{4DCE52A5-106C-3D94-815D-C8EBC6133B5E} = {4DCE52A5-106C-3D94-815D-C8EBC6133B5E}
+		{20C9ABBF-2E6D-3A7D-9EF6-55618767A498} = {20C9ABBF-2E6D-3A7D-9EF6-55618767A498}
 		{9BF1ADF3-EB57-35E8-B156-ADE8FFC7E2F0} = {9BF1ADF3-EB57-35E8-B156-ADE8FFC7E2F0}
 	EndProjectSection
 EndProject
@@ -23,6 +25,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BulletDynamics", "MiniEngine\bulletPhysics\src\BulletDynamics\BulletDynamics.vcxproj", "{9BF1ADF3-EB57-35E8-B156-ADE8FFC7E2F0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LinearMath", "MiniEngine\bulletPhysics\src\LinearMath\LinearMath.vcxproj", "{4DCE52A5-106C-3D94-815D-C8EBC6133B5E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Effekseer", "MiniEngine\effekseerRuntime\src\Effekseer\Effekseer.vcxproj", "{20C9ABBF-2E6D-3A7D-9EF6-55618767A498}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EffekseerRendererDX12", "MiniEngine\effekseerRuntime\src\EffekseerRendererDX12\EffekseerRendererDX12.vcxproj", "{08443C1F-C16B-3808-A19A-1D5D6C7BFA51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -94,6 +100,26 @@ Global
 		{4DCE52A5-106C-3D94-815D-C8EBC6133B5E}.Release|x64.Build.0 = Release|x64
 		{4DCE52A5-106C-3D94-815D-C8EBC6133B5E}.Release|x86.ActiveCfg = Release|Win32
 		{4DCE52A5-106C-3D94-815D-C8EBC6133B5E}.Release|x86.Build.0 = Release|Win32
+		{20C9ABBF-2E6D-3A7D-9EF6-55618767A498}.Debug|x64.ActiveCfg = Debug|x64
+		{20C9ABBF-2E6D-3A7D-9EF6-55618767A498}.Debug|x64.Build.0 = Debug|x64
+		{20C9ABBF-2E6D-3A7D-9EF6-55618767A498}.Debug|x86.ActiveCfg = Debug|x64
+		{20C9ABBF-2E6D-3A7D-9EF6-55618767A498}.Preview|x64.ActiveCfg = Release|x64
+		{20C9ABBF-2E6D-3A7D-9EF6-55618767A498}.Preview|x64.Build.0 = Release|x64
+		{20C9ABBF-2E6D-3A7D-9EF6-55618767A498}.Preview|x86.ActiveCfg = Release|x64
+		{20C9ABBF-2E6D-3A7D-9EF6-55618767A498}.Preview|x86.Build.0 = Release|x64
+		{20C9ABBF-2E6D-3A7D-9EF6-55618767A498}.Release|x64.ActiveCfg = Release|x64
+		{20C9ABBF-2E6D-3A7D-9EF6-55618767A498}.Release|x64.Build.0 = Release|x64
+		{20C9ABBF-2E6D-3A7D-9EF6-55618767A498}.Release|x86.ActiveCfg = Release|x64
+		{08443C1F-C16B-3808-A19A-1D5D6C7BFA51}.Debug|x64.ActiveCfg = Debug|x64
+		{08443C1F-C16B-3808-A19A-1D5D6C7BFA51}.Debug|x64.Build.0 = Debug|x64
+		{08443C1F-C16B-3808-A19A-1D5D6C7BFA51}.Debug|x86.ActiveCfg = Debug|x64
+		{08443C1F-C16B-3808-A19A-1D5D6C7BFA51}.Preview|x64.ActiveCfg = Release|x64
+		{08443C1F-C16B-3808-A19A-1D5D6C7BFA51}.Preview|x64.Build.0 = Release|x64
+		{08443C1F-C16B-3808-A19A-1D5D6C7BFA51}.Preview|x86.ActiveCfg = Release|x64
+		{08443C1F-C16B-3808-A19A-1D5D6C7BFA51}.Preview|x86.Build.0 = Release|x64
+		{08443C1F-C16B-3808-A19A-1D5D6C7BFA51}.Release|x64.ActiveCfg = Release|x64
+		{08443C1F-C16B-3808-A19A-1D5D6C7BFA51}.Release|x64.Build.0 = Release|x64
+		{08443C1F-C16B-3808-A19A-1D5D6C7BFA51}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
