@@ -25,6 +25,10 @@
 
 #include "d3dx12.h"
 
+//Effekseerのヘッダーファイルをインクルード。
+#include "Effekseer.h"
+#include "EffekseerRendererDX12.h"
+
 #include "btBulletDynamicsCommon.h"
 #include "BulletCollision\CollisionDispatch\btGhostObject.h"
 
