@@ -53,6 +53,29 @@ namespace Engine {
 				rb.SetUnMarkAddPhysicsWorld();
 			}
 		}
+		/// <summary>
+		/// 衝突検出を行う。
+		/// </summary>
+		/// <param name="castShape">検出を行う剛体</param>
+		/// <param name="convexFromWorld">移動の始点。</param>
+		/// <param name="convextoWorld">移動の終点</param>
+		/// <param name="resultCallback">コールバック用関数オブジェクト</param>
+		/// <param name="allowedCcdPenetration">なんだろ?</param>
+		void ConvexSweepTest(
+			const btConvexShape* castShape,
+			const btTransform& convexFromWorld,
+			const btTransform& convextoWorld,
+			btCollisionWorld::ConvexResultCallback& resultCallback,
+			btScalar allowedCcdPenetration = 0.0f
+		) {
+			m_dynamicWorld->convexSweepTest(
+				castShape,
+				convexFromWorld,
+				convextoWorld,
+				resultCallback,
+				allowedCcdPenetration
+			);
+		}
 
 	};///class CPhysicsWorld
 
