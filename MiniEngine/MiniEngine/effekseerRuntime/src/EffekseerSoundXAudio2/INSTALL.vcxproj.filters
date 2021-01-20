@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\CMakeFiles\983a6ef7e599b44b21c6fdb836183a11\INSTALL_force.rule">
+    <CustomBuild Include="C:\Users\kbc19\Desktop\Engine\kfMiniEngine\MiniEngine\MiniEngine\effekseerRuntime\src\EffekseerSoundXAudio2\CMakeFiles\169950f7bc05aa66962ea7816eefe636\INSTALL_force.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{9817F5CC-6173-3C5E-A5E8-DEA86CB519FD}</UniqueIdentifier>
+      <UniqueIdentifier>{C9500318-C033-35DA-9EED-2E8680C918D4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

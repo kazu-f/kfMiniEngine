@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\src_test\main.cpp" />
+    <ClCompile Include="..\src_test\test_simple.cpp" />
+    <ClCompile Include="..\src_test\test_texture2d.cpp" />
+    <ClCompile Include="..\src_test\common.cpp" />
+    <ClCompile Include="..\src_test\test_renderTarget.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src_test\common.h" />
+  </ItemGroup>
+</Project>

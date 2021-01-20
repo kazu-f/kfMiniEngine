@@ -1,0 +1,4 @@
+C:/Users/kbc19/Desktop/Engine/kfMiniEngine/MiniEngine/MiniEngine/effekseerRuntime/src/EffekseerSoundXAudio2/CMakeFiles/EffekseerSoundXAudio2.dir
+C:/Users/kbc19/Desktop/Engine/kfMiniEngine/MiniEngine/MiniEngine/effekseerRuntime/src/EffekseerSoundXAudio2/CMakeFiles/INSTALL.dir
+C:/Users/kbc19/Desktop/Engine/kfMiniEngine/MiniEngine/MiniEngine/effekseerRuntime/src/EffekseerSoundXAudio2/CMakeFiles/ALL_BUILD.dir
+C:/Users/kbc19/Desktop/Engine/kfMiniEngine/MiniEngine/MiniEngine/effekseerRuntime/src/EffekseerSoundXAudio2/CMakeFiles/ZERO_CHECK.dir

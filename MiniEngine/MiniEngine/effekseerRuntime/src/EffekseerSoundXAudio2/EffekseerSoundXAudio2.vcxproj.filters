@@ -1,25 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerSoundXAudio2\EffekseerSound\EffekseerSoundXAudio2.Sound.cpp">
+    <ClCompile Include="C:\Users\kbc19\Desktop\Engine\kfMiniEngine\MiniEngine\MiniEngine\effekseerRuntime\src\EffekseerSoundXAudio2\EffekseerSound\EffekseerSoundXAudio2.Sound.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerSoundXAudio2\EffekseerSound\EffekseerSoundXAudio2.SoundLoader.cpp">
+    <ClCompile Include="C:\Users\kbc19\Desktop\Engine\kfMiniEngine\MiniEngine\MiniEngine\effekseerRuntime\src\EffekseerSoundXAudio2\EffekseerSound\EffekseerSoundXAudio2.SoundLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerSoundXAudio2\EffekseerSound\EffekseerSoundXAudio2.SoundPlayer.cpp">
+    <ClCompile Include="C:\Users\kbc19\Desktop\Engine\kfMiniEngine\MiniEngine\MiniEngine\effekseerRuntime\src\EffekseerSoundXAudio2\EffekseerSound\EffekseerSoundXAudio2.SoundPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerSoundXAudio2\EffekseerSound\EffekseerSoundXAudio2.SoundVoice.cpp">
+    <ClCompile Include="C:\Users\kbc19\Desktop\Engine\kfMiniEngine\MiniEngine\MiniEngine\effekseerRuntime\src\EffekseerSoundXAudio2\EffekseerSound\EffekseerSoundXAudio2.SoundVoice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerSoundXAudio2\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\kbc19\Desktop\Engine\kfMiniEngine\MiniEngine\MiniEngine\effekseerRuntime\src\EffekseerSoundXAudio2\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{DBF2B363-CA58-35C6-8BD5-9F53AA7F6323}</UniqueIdentifier>
+      <UniqueIdentifier>{E363D6D7-3357-3B15-9B15-395606274F33}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -163,12 +163,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\ZERO_CHECK.vcxproj">
-      <Project>{D925F4DF-CD07-3B61-9919-179E39B0992A}</Project>
-      <Name>ZERO_CHECK</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </ProjectReference>
     <ProjectReference Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRendererDX12.vcxproj">
       <Project>{08443C1F-C16B-3808-A19A-1D5D6C7BFA51}</Project>
       <Name>EffekseerRendererDX12</Name>

@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/kbc19/Desktop/game/effekseerRun/Effekseer/Dev/Cpp/EffekseerSoundXAudio2
+# Install script for directory: C:/Users/kbc19/Desktop/Engine/kfMiniEngine/MiniEngine/MiniEngine/effekseerRuntime/src/EffekseerSoundXAudio2
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files/Effekseer")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files/EffekseerSoundXAudio2")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,13 +34,23 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   if("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/Users/kbc19/Desktop/game/effekseerRun/Effekseer/Dev/Cpp/EffekseerSoundXAudio2/Debug/EffekseerSoundXAudio2.lib")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/Users/kbc19/Desktop/Engine/kfMiniEngine/MiniEngine/MiniEngine/effekseerRuntime/src/EffekseerSoundXAudio2/Debug/EffekseerSoundXAudio2.lib")
   elseif("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/Users/kbc19/Desktop/game/effekseerRun/Effekseer/Dev/Cpp/EffekseerSoundXAudio2/Release/EffekseerSoundXAudio2.lib")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/Users/kbc19/Desktop/Engine/kfMiniEngine/MiniEngine/MiniEngine/effekseerRuntime/src/EffekseerSoundXAudio2/Release/EffekseerSoundXAudio2.lib")
   elseif("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/Users/kbc19/Desktop/game/effekseerRun/Effekseer/Dev/Cpp/EffekseerSoundXAudio2/MinSizeRel/EffekseerSoundXAudio2.lib")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/Users/kbc19/Desktop/Engine/kfMiniEngine/MiniEngine/MiniEngine/effekseerRuntime/src/EffekseerSoundXAudio2/MinSizeRel/EffekseerSoundXAudio2.lib")
   elseif("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/Users/kbc19/Desktop/game/effekseerRun/Effekseer/Dev/Cpp/EffekseerSoundXAudio2/RelWithDebInfo/EffekseerSoundXAudio2.lib")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/Users/kbc19/Desktop/Engine/kfMiniEngine/MiniEngine/MiniEngine/effekseerRuntime/src/EffekseerSoundXAudio2/RelWithDebInfo/EffekseerSoundXAudio2.lib")
   endif()
 endif()
 
+if(CMAKE_INSTALL_COMPONENT)
+  set(CMAKE_INSTALL_MANIFEST "install_manifest_${CMAKE_INSTALL_COMPONENT}.txt")
+else()
+  set(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
+endif()
+
+string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
+       "${CMAKE_INSTALL_MANIFEST_FILES}")
+file(WRITE "C:/Users/kbc19/Desktop/Engine/kfMiniEngine/MiniEngine/MiniEngine/effekseerRuntime/src/EffekseerSoundXAudio2/${CMAKE_INSTALL_MANIFEST}"
+     "${CMAKE_INSTALL_MANIFEST_CONTENT}")

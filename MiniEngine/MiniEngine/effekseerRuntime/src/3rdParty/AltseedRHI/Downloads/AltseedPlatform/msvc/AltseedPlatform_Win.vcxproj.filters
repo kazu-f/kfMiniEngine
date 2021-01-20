@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\src\ap.Joystick.cpp" />
+    <ClCompile Include="..\src\ap.Keyboard.cpp" />
+    <ClCompile Include="..\src\ap.Mouse.cpp" />
+    <ClCompile Include="..\src\ap.Sensor.cpp" />
+    <ClCompile Include="..\src\ap.Touch.cpp" />
+    <ClCompile Include="..\src\ap.Window.cpp" />
+    <ClCompile Include="..\src\PC\ap.Window_Impl_PC.cpp">
+      <Filter>PC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PC\ap.Keyboard_Impl_PC.cpp">
+      <Filter>PC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PC\ap.Mouse_Impl_PC.cpp">
+      <Filter>PC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PC\ap.Joystick_Impl_PC.cpp">
+      <Filter>PC</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\ap.Joystick.h" />
+    <ClInclude Include="..\src\ap.Keyboard.h" />
+    <ClInclude Include="..\src\ap.Mouse.h" />
+    <ClInclude Include="..\src\ap.Sensor.h" />
+    <ClInclude Include="..\src\ap.Touch.h" />
+    <ClInclude Include="..\src\ap.Window.h" />
+    <ClInclude Include="..\src\ap.Base.h" />
+    <ClInclude Include="..\src\PC\ap.Window_Impl_PC.h">
+      <Filter>PC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\PC\ap.Keyboard_Impl_PC.h">
+      <Filter>PC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\PC\ap.Mouse_Impl_PC.h">
+      <Filter>PC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\PC\ap.Joystick_Impl_PC.h">
+      <Filter>PC</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="PC">
+      <UniqueIdentifier>{38551a50-e4cc-4eed-ac66-c55a553ee1e9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -117,133 +117,90 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\CMakeLists.txt">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/kbc19/Desktop/game/effekseerRun/Effekseer/Dev/Cpp/EffekseerRendererDX12/CMakeLists.txt</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/kbc19/Desktop/game/effekseerRun/Effekseer -BC:/Users/kbc19/Desktop/game/effekseerRun/Effekseer --check-stamp-file C:/Users/kbc19/Desktop/game/effekseerRun/Effekseer/Dev/Cpp/EffekseerRendererDX12/CMakeFiles/generate.stamp
-if %errorlevel% neq 0 goto :cmEnd
-:cmEnd
-endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
-:cmErrorLevel
-exit /b %1
-:cmDone
-if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\CMakeFiles\generate.stamp</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/kbc19/Desktop/game/effekseerRun/Effekseer/Dev/Cpp/EffekseerRendererDX12/CMakeLists.txt</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/kbc19/Desktop/game/effekseerRun/Effekseer -BC:/Users/kbc19/Desktop/game/effekseerRun/Effekseer --check-stamp-file C:/Users/kbc19/Desktop/game/effekseerRun/Effekseer/Dev/Cpp/EffekseerRendererDX12/CMakeFiles/generate.stamp
-if %errorlevel% neq 0 goto :cmEnd
-:cmEnd
-endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
-:cmErrorLevel
-exit /b %1
-:cmDone
-if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\CMakeFiles\generate.stamp</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-    </CustomBuild>
+    <ClCompile Include="..\EffekseerMaterialCompiler\DirectX12\EffekseerMaterialCompilerDX12.cpp" />
+    <ClCompile Include="..\EffekseerRendererCommon\EffekseerRenderer.CommonUtils.cpp" />
+    <ClCompile Include="..\EffekseerRendererCommon\EffekseerRenderer.DDSTextureLoader.cpp" />
+    <ClCompile Include="..\EffekseerRendererCommon\EffekseerRenderer.IndexBufferBase.cpp" />
+    <ClCompile Include="..\EffekseerRendererCommon\EffekseerRenderer.ModelRendererBase.cpp" />
+    <ClCompile Include="..\EffekseerRendererCommon\EffekseerRenderer.PngTextureLoader.cpp" />
+    <ClCompile Include="..\EffekseerRendererCommon\EffekseerRenderer.Renderer.cpp" />
+    <ClCompile Include="..\EffekseerRendererCommon\EffekseerRenderer.Renderer_Impl.cpp" />
+    <ClCompile Include="..\EffekseerRendererCommon\EffekseerRenderer.RenderStateBase.cpp" />
+    <ClCompile Include="..\EffekseerRendererCommon\EffekseerRenderer.RibbonRendererBase.cpp" />
+    <ClCompile Include="..\EffekseerRendererCommon\EffekseerRenderer.RingRendererBase.cpp" />
+    <ClCompile Include="..\EffekseerRendererCommon\EffekseerRenderer.SpriteRendererBase.cpp" />
+    <ClCompile Include="..\EffekseerRendererCommon\EffekseerRenderer.TGATextureLoader.cpp" />
+    <ClCompile Include="..\EffekseerRendererCommon\EffekseerRenderer.TrackRendererBase.cpp" />
+    <ClCompile Include="..\EffekseerRendererCommon\EffekseerRenderer.VertexBufferBase.cpp" />
+    <ClCompile Include="..\EffekseerRendererCommon\ModelLoader.cpp" />
+    <ClCompile Include="..\EffekseerRendererCommon\TextureLoader.cpp" />
+    <ClCompile Include="..\EffekseerRendererLLGI\EffekseerRendererLLGI.DeviceObject.cpp" />
+    <ClCompile Include="..\EffekseerRendererLLGI\EffekseerRendererLLGI.IndexBuffer.cpp" />
+    <ClCompile Include="..\EffekseerRendererLLGI\EffekseerRendererLLGI.MaterialLoader.cpp" />
+    <ClCompile Include="..\EffekseerRendererLLGI\EffekseerRendererLLGI.ModelRenderer.cpp" />
+    <ClCompile Include="..\EffekseerRendererLLGI\EffekseerRendererLLGI.Renderer.cpp" />
+    <ClCompile Include="..\EffekseerRendererLLGI\EffekseerRendererLLGI.RenderState.cpp" />
+    <ClCompile Include="..\EffekseerRendererLLGI\EffekseerRendererLLGI.Shader.cpp" />
+    <ClCompile Include="..\EffekseerRendererLLGI\EffekseerRendererLLGI.VertexBuffer.cpp" />
+    <ClCompile Include="..\EffekseerRendererLLGI\GraphicsDevice.cpp" />
+    <ClCompile Include="EffekseerRenderer\EffekseerRendererDX12.Renderer.cpp" />
+    <ClInclude Include="..\EffekseerMaterialCompiler\DirectX12\EffekseerMaterialCompilerDX12.h" />
+    <ClInclude Include="..\EffekseerRendererCommon\EffekseerRenderer.CommonUtils.h" />
+    <ClInclude Include="..\EffekseerRendererCommon\EffekseerRenderer.DDSTextureLoader.h" />
+    <ClInclude Include="..\EffekseerRendererCommon\EffekseerRenderer.IndexBufferBase.h" />
+    <ClInclude Include="..\EffekseerRendererCommon\EffekseerRenderer.ModelRendererBase.h" />
+    <ClInclude Include="..\EffekseerRendererCommon\EffekseerRenderer.PngTextureLoader.h" />
+    <ClInclude Include="..\EffekseerRendererCommon\EffekseerRenderer.Renderer.h" />
+    <ClInclude Include="..\EffekseerRendererCommon\EffekseerRenderer.Renderer_Impl.h" />
+    <ClInclude Include="..\EffekseerRendererCommon\EffekseerRenderer.RenderStateBase.h" />
+    <ClInclude Include="..\EffekseerRendererCommon\EffekseerRenderer.RibbonRendererBase.h" />
+    <ClInclude Include="..\EffekseerRendererCommon\EffekseerRenderer.RingRendererBase.h" />
+    <ClInclude Include="..\EffekseerRendererCommon\EffekseerRenderer.ShaderBase.h" />
+    <ClInclude Include="..\EffekseerRendererCommon\EffekseerRenderer.SpriteRendererBase.h" />
+    <ClInclude Include="..\EffekseerRendererCommon\EffekseerRenderer.StandardRenderer.h" />
+    <ClInclude Include="..\EffekseerRendererCommon\EffekseerRenderer.TGATextureLoader.h" />
+    <ClInclude Include="..\EffekseerRendererCommon\EffekseerRenderer.TrackRendererBase.h" />
+    <ClInclude Include="..\EffekseerRendererCommon\EffekseerRenderer.VertexBufferBase.h" />
+    <ClInclude Include="..\EffekseerRendererCommon\ModelLoader.h" />
+    <ClInclude Include="..\EffekseerRendererCommon\TextureLoader.h" />
+    <ClInclude Include="..\EffekseerRendererLLGI\EffekseerRendererLLGI.Base.h" />
+    <ClInclude Include="..\EffekseerRendererLLGI\EffekseerRendererLLGI.Base.Pre.h" />
+    <ClInclude Include="..\EffekseerRendererLLGI\EffekseerRendererLLGI.DeviceObject.h" />
+    <ClInclude Include="..\EffekseerRendererLLGI\EffekseerRendererLLGI.IndexBuffer.h" />
+    <ClInclude Include="..\EffekseerRendererLLGI\EffekseerRendererLLGI.MaterialLoader.h" />
+    <ClInclude Include="..\EffekseerRendererLLGI\EffekseerRendererLLGI.ModelRenderer.h" />
+    <ClInclude Include="..\EffekseerRendererLLGI\EffekseerRendererLLGI.Renderer.h" />
+    <ClInclude Include="..\EffekseerRendererLLGI\EffekseerRendererLLGI.RendererImplemented.h" />
+    <ClInclude Include="..\EffekseerRendererLLGI\EffekseerRendererLLGI.RenderState.h" />
+    <ClInclude Include="..\EffekseerRendererLLGI\EffekseerRendererLLGI.Shader.h" />
+    <ClInclude Include="..\EffekseerRendererLLGI\EffekseerRendererLLGI.VertexBuffer.h" />
+    <ClInclude Include="..\EffekseerRendererLLGI\GraphicsDevice.h" />
+    <ClInclude Include="EffekseerRendererDX12.h" />
+    <ClInclude Include="EffekseerRenderer\EffekseerRendererDX12.Base.h" />
+    <ClInclude Include="EffekseerRenderer\EffekseerRendererDX12.Base.Pre.h" />
+    <ClInclude Include="EffekseerRenderer\EffekseerRendererDX12.Renderer.h" />
+    <ClInclude Include="EffekseerRenderer\EffekseerRendererDX12.RendererImplemented.h" />
+    <ClInclude Include="EffekseerRenderer\ShaderHeader\ad_model_distortion_ps.h" />
+    <ClInclude Include="EffekseerRenderer\ShaderHeader\ad_model_distortion_vs.h" />
+    <ClInclude Include="EffekseerRenderer\ShaderHeader\ad_model_lit_ps.h" />
+    <ClInclude Include="EffekseerRenderer\ShaderHeader\ad_model_lit_vs.h" />
+    <ClInclude Include="EffekseerRenderer\ShaderHeader\ad_model_unlit_ps.h" />
+    <ClInclude Include="EffekseerRenderer\ShaderHeader\ad_model_unlit_vs.h" />
+    <ClInclude Include="EffekseerRenderer\ShaderHeader\ad_sprite_distortion_vs.h" />
+    <ClInclude Include="EffekseerRenderer\ShaderHeader\ad_sprite_lit_vs.h" />
+    <ClInclude Include="EffekseerRenderer\ShaderHeader\ad_sprite_unlit_vs.h" />
+    <ClInclude Include="EffekseerRenderer\ShaderHeader\model_distortion_ps.h" />
+    <ClInclude Include="EffekseerRenderer\ShaderHeader\model_distortion_vs.h" />
+    <ClInclude Include="EffekseerRenderer\ShaderHeader\model_lit_ps.h" />
+    <ClInclude Include="EffekseerRenderer\ShaderHeader\model_lit_vs.h" />
+    <ClInclude Include="EffekseerRenderer\ShaderHeader\model_unlit_ps.h" />
+    <ClInclude Include="EffekseerRenderer\ShaderHeader\model_unlit_vs.h" />
+    <ClInclude Include="EffekseerRenderer\ShaderHeader\sprite_distortion_vs.h" />
+    <ClInclude Include="EffekseerRenderer\ShaderHeader\sprite_lit_vs.h" />
+    <ClInclude Include="EffekseerRenderer\ShaderHeader\sprite_unlit_vs.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.CommonUtils.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.CommonUtils.h" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.DDSTextureLoader.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.DDSTextureLoader.h" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.IndexBufferBase.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.IndexBufferBase.h" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.ModelRendererBase.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.ModelRendererBase.h" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.PngTextureLoader.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.PngTextureLoader.h" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.RenderStateBase.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.RenderStateBase.h" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.Renderer.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.Renderer.h" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.Renderer_Impl.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.Renderer_Impl.h" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.RibbonRendererBase.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.RibbonRendererBase.h" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.RingRendererBase.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.RingRendererBase.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.ShaderBase.h" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.SpriteRendererBase.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.SpriteRendererBase.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.StandardRenderer.h" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.TGATextureLoader.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.TGATextureLoader.h" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.TrackRendererBase.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.TrackRendererBase.h" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.VertexBufferBase.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.VertexBufferBase.h" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\ModelLoader.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\ModelLoader.h" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\TextureLoader.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererCommon\TextureLoader.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRenderer\EffekseerRendererDX12.Base.Pre.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRenderer\EffekseerRendererDX12.Base.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRenderer\EffekseerRendererDX12.Renderer.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRenderer\EffekseerRendererDX12.RendererImplemented.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRenderer\ShaderHeader\ad_model_distortion_ps.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRenderer\ShaderHeader\ad_model_distortion_vs.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRenderer\ShaderHeader\ad_model_lit_ps.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRenderer\ShaderHeader\ad_model_lit_vs.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRenderer\ShaderHeader\ad_model_unlit_ps.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRenderer\ShaderHeader\ad_model_unlit_vs.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRenderer\ShaderHeader\ad_sprite_distortion_vs.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRenderer\ShaderHeader\ad_sprite_lit_vs.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRenderer\ShaderHeader\ad_sprite_unlit_vs.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRenderer\ShaderHeader\model_distortion_ps.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRenderer\ShaderHeader\model_distortion_vs.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRenderer\ShaderHeader\model_lit_ps.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRenderer\ShaderHeader\model_lit_vs.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRenderer\ShaderHeader\model_unlit_ps.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRenderer\ShaderHeader\model_unlit_vs.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRenderer\ShaderHeader\sprite_distortion_vs.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRenderer\ShaderHeader\sprite_lit_vs.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRenderer\ShaderHeader\sprite_unlit_vs.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRendererDX12.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerMaterialCompiler\DirectX12\EffekseerMaterialCompilerDX12.h" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRenderer\EffekseerRendererDX12.Renderer.cpp" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerMaterialCompiler\DirectX12\EffekseerMaterialCompilerDX12.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.Base.Pre.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.Base.h" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.DeviceObject.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.DeviceObject.h" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.IndexBuffer.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.IndexBuffer.h" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.MaterialLoader.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.MaterialLoader.h" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.ModelRenderer.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.ModelRenderer.h" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.RenderState.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.RenderState.h" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.Renderer.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.Renderer.h" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.RendererImplemented.h" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.Shader.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.Shader.h" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.VertexBuffer.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.VertexBuffer.h" />
-    <ClCompile Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererLLGI\GraphicsDevice.cpp" />
-    <ClInclude Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererLLGI\GraphicsDevice.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\ZERO_CHECK.vcxproj">
-      <Project>{D925F4DF-CD07-3B61-9919-179E39B0992A}</Project>
-      <Name>ZERO_CHECK</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </ProjectReference>
-    <ProjectReference Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\Effekseer\Effekseer.vcxproj">
-      <Project>{20C9ABBF-2E6D-3A7D-9EF6-55618767A498}</Project>
-      <Name>Effekseer</Name>
-    </ProjectReference>
-    <ProjectReference Include="C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\3rdParty\LLGI\src\LLGI.vcxproj">
-      <Project>{A3438589-75DB-3DAE-A812-960C599A3385}</Project>
-      <Name>LLGI</Name>
-    </ProjectReference>
+    <Text Include="CMakeLists.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
