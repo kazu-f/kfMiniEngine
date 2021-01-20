@@ -5,6 +5,9 @@
 namespace Engine {
 
 	namespace {
+		//1mのスケールを設定する。
+		const float SCALE_1M = 100.0f;		//100.0cm
+
 		//衝突したときに呼ばれる関数オブジェクト(地面用)
 		struct SweepResultGround : public btCollisionWorld::ConvexResultCallback
 		{
@@ -136,9 +139,110 @@ namespace Engine {
 			_WARNING_MESSAGE("キャラコンの初期化がされていない。");
 			return Vector3::Zero;
 		}
+		if (moveSpeed.y > 0.0f) {
+			//吹っ飛び中。
+			m_isJump = true;
+			m_isOnGround = false;
+		}
+		//次の移動先の座標を計算する。
+		Vector3 nextPosition = m_position;
+		//速度からこのフレームでの移動量を求める。
+		Vector3 moveVec = moveSpeed;
+		moveVec.Scale(deltaTime);
+		nextPosition.Add(moveVec);
+		Vector3 originalXYDir = moveVec;
+		originalXYDir.y = 0.0f;
+		originalXYDir.Normalize();
+		//XZ平面上での衝突検出と解決を行う。
+		{
 
-		// TODO: return ステートメントをここに挿入します
-		return Vector3::Zero;
+		}
+		//XZの移動は確定する。
+		m_position.x = nextPosition.x;
+		m_position.z = nextPosition.z;
+
+		//下方向の衝突検出と解決。
+		{
+			Vector3 addPos;
+			addPos.Subtract(nextPosition, m_position);
+
+			m_position = nextPosition;		//移動を仮確定。
+
+			//レイを作成
+			btTransform start, end;
+			start.setIdentity();
+			end.setIdentity();
+			//始点はカプセルコライダーの中心。
+			start.setOrigin(
+				btVector3(
+					m_position.x,
+					m_position.y + m_height * 0.5f + m_radius, 
+					m_position.z)
+			);
+			//終点は地面上にいないなら1m下を見る。
+			//地面上にいなくてジャンプで上昇中の場合は上昇量の0.01倍下を見る。
+			//地面上にいなくて降下中の場合はそのまま落下先を調べる。
+			Vector3 endPos;
+			endPos.Set(start.getOrigin());
+			if (m_isOnGround == false) {
+				if (addPos.y > 0.0f) {
+					//ジャンプ中とかで上昇中。
+					//上昇中でもXZに移動した結果めり込んでいる可能性を調べる。
+					endPos.y -= addPos.y * 0.01f;
+				}
+				else {
+					//落下している場合はそのまま下を調べる。
+					endPos.y += addPos.y;
+				}
+			}
+			else {
+				//地面上にいない場合は1m下を見る。
+				endPos.y -= SCALE_1M;
+			}
+			//レイの終点の座標を設定。
+			end.setOrigin(btVector3(endPos.x, endPos.y, endPos.z));
+
+			//レイの判定を行う。
+			SweepResultGround callback;
+			callback.me = m_rigidBody.GetBody();
+			callback.startPos.Set(start.getOrigin());
+			//衝突検出。
+			//Y座標に変化がある。
+			if (fabsf(endPos.y - callback.startPos.y) > FLT_EPSILON) {
+				//衝突判定。
+				PhysicsWorld().ConvexSweepTest(
+					(const btConvexShape*)m_collider.GetBody(),
+					start, end, callback
+				);
+				if (callback.isHit) {
+					//当たった。
+					moveSpeed.y = 0.0f;
+					m_isJump = false;
+					m_isOnGround = true;
+					nextPosition.y = callback.hitPos.y;
+				}
+				else {
+					//地面上にいない。
+					m_isOnGround = false;
+				}
+			}
+		}
+
+		//移動確定。
+		m_position = nextPosition;
+		btRigidBody* btBody = m_rigidBody.GetBody();
+		//剛体も動かす。
+		btBody->setActivationState(DISABLE_DEACTIVATION);
+		btTransform& trans = btBody->getWorldTransform();
+		//剛体の位置を更新。
+		trans.setOrigin(btVector3(
+			m_position.x,
+			m_position.y + m_height * 0.5f + m_radius,		//コライダーの中心の位置まで高くする。	
+			m_position.z
+		));
+
+		//移動先の座標を返す。
+		return m_position;
 	}
 	void CCharacterController::RemoveRigidBody()
 	{
