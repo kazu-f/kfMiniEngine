@@ -176,6 +176,13 @@ namespace Engine {
 		{
 			Set(_v.x, _v.y, _v.z);
 		}
+		//BulletPhysicsのベクトルを使ってセット。
+		void Set(btVector3& _v)
+		{
+			this->x = _v.x();
+			this->y = _v.y();
+			this->z = _v.z();
+		}
 
 		/// <summary>
 		/// ベクトルの加算。

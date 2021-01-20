@@ -28,7 +28,8 @@ namespace Engine {
 					return 0.0f;
 				}
 				//衝突点の法線を引っ張ってくる。
-				Vector3 hitNormalTmp = *(Vector3*)&convexResult.m_hitNormalLocal;
+				Vector3 hitNormalTmp;
+				hitNormalTmp.Set(convexResult.m_hitNormalLocal);
 				//上方向と法線のなす角度を求める。
 				float angle = hitNormalTmp.Dot(Vector3::Up);	//上ベクトルと内積を取る。
 				angle = fabsf(acosf(angle));					//ラジアン単位の角度に直す。
@@ -46,7 +47,7 @@ namespace Engine {
 					if (dist > distTmp){
 						//この衝突点の方が近いため、更新。
 						hitPos = hitPosTmp;
-						hitNormal = *(Vector3*)&convexResult.m_hitNormalLocal;
+						hitNormal = hitNormalTmp;
 						dist = distTmp;
 					}
 				}
@@ -96,8 +97,8 @@ namespace Engine {
 					if (distTmp < dist) {
 						//この衝突点のほうが近いため更新。
 						hitPos = hitPosTmp;
-						dist = distTmp;
 						hitNormal = hitNormalTmp;
+						dist = distTmp;
 					}
 				}
 				return 0.0f;
@@ -130,6 +131,12 @@ namespace Engine {
 	}
 	const Vector3& CCharacterController::Execute(Vector3& moveSpeed, float deltaTime)
 	{
+		if (m_isInited == false)
+		{
+			_WARNING_MESSAGE("キャラコンの初期化がされていない。");
+			return Vector3::Zero;
+		}
+
 		// TODO: return ステートメントをここに挿入します
 		return Vector3::Zero;
 	}
