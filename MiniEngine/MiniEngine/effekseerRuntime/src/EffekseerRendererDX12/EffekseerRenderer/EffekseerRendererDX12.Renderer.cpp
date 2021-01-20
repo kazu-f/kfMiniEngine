@@ -1,6 +1,6 @@
 ﻿#include "EffekseerRendererDX12.Renderer.h"
-#include "../../3rdParty/LLGI/src/DX12/LLGI.CommandListDX12.h"
-#include "../../3rdParty/LLGI/src/DX12/LLGI.GraphicsDX12.h"
+#include "../../LLGI/DX12/LLGI.CommandListDX12.h"							//#include "../../3rdParty/LLGI/src/DX12/LLGI.CommandListDX12.h"
+#include "../../LLGI/DX12/LLGI.GraphicsDX12.h"								//#include "../../3rdParty/LLGI/src/DX12/LLGI.GraphicsDX12.h"
 #include "../EffekseerMaterialCompiler/DirectX12/EffekseerMaterialCompilerDX12.h"
 #include "../EffekseerRendererLLGI/EffekseerRendererLLGI.RendererImplemented.h"
 

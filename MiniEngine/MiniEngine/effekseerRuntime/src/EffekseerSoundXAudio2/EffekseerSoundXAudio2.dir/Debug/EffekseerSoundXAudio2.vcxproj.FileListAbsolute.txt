@@ -1,2 +1,0 @@
-C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerSoundXAudio2\Debug\EffekseerSoundXAudio2.pdb
-C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerSoundXAudio2\EffekseerSoundXAudio2.dir\Debug\EffekseerSoundXAudio2.pdb

@@ -1,2 +1,0 @@
-C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\Debug\EffekseerRendererDX12.pdb
-C:\Users\kbc19\Desktop\game\effekseerRun\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRendererDX12.dir\Debug\EffekseerRendererDX12.pdb
