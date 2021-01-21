@@ -6,7 +6,7 @@
 #define MALE_SHIRT 2
 #define MALE_SUIT 3
 
-#define MODEL WOMAN_SUIT
+#define MODEL UNITY
 
 bool Player::Start()
 {
@@ -22,12 +22,14 @@ bool Player::Start()
 	animInitData[en_animIdle].isLoop = true;
 	animInitData[en_animRun].tkaFilePath = "Assets/animData/run.tka";
 	animInitData[en_animRun].isLoop = true;
+
+	m_model = NewGO<prefab::ModelRender>(0);
+	m_model->Init(initData, animInitData, en_animNum);
+	
 	Quaternion qRot;
 	qRot.SetRotationDegX(90.0f);
 	m_model->SetRotation(qRot);
 
-	m_model = NewGO<prefab::ModelRender>(0);
-	m_model->Init(initData, animInitData, en_animNum);
 #elif MODEL == WOMAN_SUIT
 	ModelInitData initData;
 	initData.m_tkmFilePath = "Assets/modelData/Human/suitWoman/suitWoman.tkm";
@@ -69,9 +71,15 @@ bool Player::Start()
 	m_model = NewGO<prefab::ModelRender>(0);
 	m_model->Init(initData, animInitData, 1);
 #endif
-	m_position.z = 100.0f;
 	m_model->SetPosition(m_position);
 	m_model->SetShadowCasterFlag(true);
+
+	//ƒLƒƒƒ‰ƒRƒ“‚ÌÝ’èB
+	m_chara.Init(
+		20.0f,
+		80.0f,
+		m_position
+	);
 
 	return true;
 }
@@ -88,7 +96,22 @@ void Player::Update()
 		DeleteGO(this);
 	}
 
-	m_position += m_model->GetFootstepMove();
+	Vector3 camRight = g_camera3D->GetRight();
+	camRight.y = 0.0f;
+	camRight.Normalize();
+	Vector3 camForward = g_camera3D->GetForward();
+	camForward.y = 0.0f;
+	camForward.Normalize();
+
+	Vector3 moveVec = Vector3::Zero;
+	float speed = 100.0f;
+	moveVec += camRight * g_pad[0]->GetLStickXF() * speed;
+	moveVec += camForward * g_pad[0]->GetLStickYF() * speed;
+	moveVec.y = -980.0;
+
+	m_position = m_chara.Execute(moveVec);
+
+	//m_position += m_model->GetFootstepMove();
 	m_model->SetPosition(m_position);
 }
 

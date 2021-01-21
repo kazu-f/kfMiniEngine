@@ -1,4 +1,7 @@
 #pragma once
+
+#include "characterController\CharacterController.h"
+
 class Player : public IGameObject
 {
 public:
@@ -23,6 +26,7 @@ private:
 		en_animNum
 	};
 
+	CCharacterController m_chara;
 	prefab::ModelRender* m_model = nullptr;
 
 	Vector3 m_position = Vector3::Zero;		//ç¿ïWÅB
