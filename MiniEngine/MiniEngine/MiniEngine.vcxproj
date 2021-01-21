@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="characterController\CharacterController.cpp" />
+    <ClCompile Include="physics\MeshCollider.cpp" />
     <ClCompile Include="physics\CapsuleCollider.cpp" />
     <ClCompile Include="Car\Car.cpp" />
     <ClCompile Include="GameCamera.cpp" />
@@ -87,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="characterController\CharacterController.h" />
+    <ClInclude Include="physics\MeshCollider.h" />
     <ClInclude Include="physics\CollisionAttr.h" />
     <ClInclude Include="physics\CapsuleCollider.h" />
     <ClInclude Include="Car\Car.h" />

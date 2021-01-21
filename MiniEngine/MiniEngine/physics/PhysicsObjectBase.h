@@ -63,6 +63,13 @@ namespace Engine {
 		/// <param name="rot">回転。</param>
 		/// <param name="tkmFile">tkmファイル。</param>
 		void CreateMesh(const Vector3& pos, const Quaternion& rot,const TkmFile& tkmFile);
+		/// <summary>
+		/// メッシュ形状のゴーストオブジェクトを作成。
+		/// </summary>
+		/// <param name="pos">座標。</param>
+		/// <param name="rot">回転。</param>
+		/// <param name="model">スキンモデル。</param>
+		void CreateMesh(const Vector3& pos, const Quaternion& rot, const Vector3 & scale, const Model& model);
 
 	protected:
 		std::unique_ptr<ICollider> m_collider;		//コライダー。

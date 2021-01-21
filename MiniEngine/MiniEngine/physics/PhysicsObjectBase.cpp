@@ -3,6 +3,7 @@
 #include "physics/BoxCollider.h"
 #include "physics/CapsuleCollider.h"
 #include "physics/SphereCollider.h"
+#include "physics/MeshCollider.h"
 #include "graphics/Model.h"
 #include "prefab/ModelRender.h"
 
@@ -37,5 +38,20 @@ namespace Engine {
 	}
 	void CPhysicsObjectBase::CreateMesh(const Vector3& pos, const Quaternion& rot, const TkmFile& tkmFile)
 	{
+		Release();
+		auto meshCollider = std::make_unique<CMeshCollider>();
+		meshCollider->CreateFromTkmFile(tkmFile, nullptr);
+		m_collider = std::move(meshCollider);
+		CreateCommon(pos, rot);
+	}
+	void CPhysicsObjectBase::CreateMesh(const Vector3& pos, const Quaternion& rot, const Vector3 & scale, const Model& model)
+	{
+		Release();
+		Matrix mScale;
+		mScale.MakeScaling(scale);
+		auto meshCollider = std::make_unique<CMeshCollider>();
+		meshCollider->CreateFromModel(model, &mScale);
+		m_collider = std::move(meshCollider);
+		CreateCommon(pos, rot);
 	}
 }

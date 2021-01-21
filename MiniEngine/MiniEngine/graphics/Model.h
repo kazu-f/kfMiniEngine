@@ -113,6 +113,13 @@ namespace Engine {
 			m_meshParts.SetShadowReceiverFlag(flag);
 		}
 
+		/// <summary>
+		/// tkmファイルを取得。
+		/// </summary>
+		const TkmFile& GetTkmFile()const
+		{
+			return m_tkmFile;
+		}
 	private:
 
 		Matrix m_world;			//ワールド行列。
