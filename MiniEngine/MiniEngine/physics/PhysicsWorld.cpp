@@ -4,8 +4,8 @@
 namespace Engine {
 	namespace {
 		struct MyContactResultCallback :public btCollisionWorld::ContactResultCallback {
-			using ContantTaskCallback = std::function<void(const btCollisionObject& contactCollisionObject)>;
-			ContantTaskCallback m_cb;
+			using ContactTaskCallback = std::function<void(const btCollisionObject& contactCollisionObject)>;
+			ContactTaskCallback m_cb;
 			btCollisionObject* m_me = nullptr;
 			virtual btScalar	addSingleResult(
 				btManifoldPoint& cp, 
@@ -55,5 +55,12 @@ namespace Engine {
 	void CPhysicsWorld::Update(const float time)
 	{
 		m_dynamicWorld->stepSimulation(time);
+	}
+	void CPhysicsWorld::ConactTest(btCollisionObject* colObj, std::function<void(const btCollisionObject& contactCollisionObject)> cb)
+	{
+		MyContactResultCallback myContactResultCallback;
+		myContactResultCallback.m_cb = cb;
+		myContactResultCallback.m_me = colObj;
+		m_dynamicWorld->contactTest(colObj, myContactResultCallback);
 	}
 }

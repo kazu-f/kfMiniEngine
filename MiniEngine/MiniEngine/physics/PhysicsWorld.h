@@ -76,6 +76,15 @@ namespace Engine {
 				allowedCcdPenetration
 			);
 		}
+		/// <summary>
+		/// ÚG‚µ‚Ä‚¢‚é‚©”»’èB
+		/// </summary>
+		/// <param name="colObj"></param>
+		/// <param name="cb"></param>
+		void ConactTest(
+			btCollisionObject* colObj,
+			std::function<void(const btCollisionObject& contactCollisionObject)> cb
+		);
 
 	};///class CPhysicsWorld
 
