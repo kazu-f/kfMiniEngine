@@ -27,6 +27,9 @@ bool Spectator::Start()
 	modelInitData.m_tkmFilePath = "Assets/modelData/Human/suitWoman/suitWoman.tkm";
 	modelInitData.m_fxFilePath = "Assets/shader/model.fx";
 	modelInitData.m_vsEntryPointFunc = "VSMainSkinInstancing";
+	modelInitData.m_modelUpAxis = enModelUpAxis_Z;
+
+
 	//アニメーション情報。
 	AnimClipInitData animInitData[1];
 	animInitData[0].tkaFilePath = "Assets/animData/Human/Clap.tka";
@@ -38,9 +41,19 @@ bool Spectator::Start()
 		1,
 		static_cast<int>(m_objectsData.size())
 	);
+
+	m_testModel = NewGO<prefab::ModelRender>(0);
+	modelInitData.m_vsEntryPointFunc = "VSMainSkin";
+
+	m_testModel->Init(
+		modelInitData,
+		animInitData,
+		1
+	);
+
 	//影の設定。
 	m_model->SetShadowCasterFlag(m_isShadowCaster);
-	m_model->SetShadowReceiverFlag(m_isShadowReceiverFlag);
+	m_model->SetShadowReceiverFlag(false);
 
 	return true;
 }

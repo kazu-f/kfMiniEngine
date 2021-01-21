@@ -34,17 +34,17 @@ namespace Engine {
 			m_instancingDataSB.IsInited() ? &m_instancingDataSB : nullptr,
 			m_maxInstance
 		);
-
+		m_modelUpAxis = initData.m_modelUpAxis;
 		UpdateWorldMatrix(g_vec3Zero, g_quatIdentity, g_vec3One);
 	}
 
 	void Model::UpdateWorldMatrix(Vector3 pos, Quaternion rot, Vector3 scale)
 	{
 		Matrix mBias;
-		//todo	if (enUpdateAxis == enFbxUpAxisZ) {
-				//Z-up
-		mBias.MakeRotationX(Math::PI * -0.5f);
-		//	}
+		if (enModelUpAxis_Z == m_modelUpAxis) {
+			//Z-up
+			mBias.MakeRotationX(Math::PI * -0.5f);
+		}
 		Matrix mTrans, mRot, mScale;
 		mTrans.MakeTranslation(pos);
 		mRot.MakeRotationFromQuaternion(rot);

@@ -56,6 +56,7 @@ public:
 
 private:
 	prefab::ModelRender* m_model = nullptr;	//モデル。
+	prefab::ModelRender* m_testModel = nullptr;
 	std::vector<LowObjctData> m_objectsData;	//インスタンシング描画用のデータ。
 	int m_numRenderObjects = 0;					//オブジェクトの数。
 

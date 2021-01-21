@@ -108,7 +108,12 @@ namespace Engine {
 
 			if (m_skeleton.IsInited()) {
 				//スケルトンを更新。
-				m_skeleton.Update(m_model.GetWorldMatrix());
+				if (m_model.IsInstancing()) {
+					m_skeleton.Update(g_matIdentity);
+				}
+				else {
+					m_skeleton.Update(m_model.GetWorldMatrix());
+				}
 			}
 
 		}

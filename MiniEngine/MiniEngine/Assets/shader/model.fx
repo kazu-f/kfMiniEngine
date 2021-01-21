@@ -157,6 +157,7 @@ SPSIn VSMainSkinCore(SVSIn vsIn, float4x4 wMat)
 -------------------------------------------------------------------------------------- */
 SPSIn VSMainSkin(SVSIn vsIn)
 {
+	
 	SPSIn psIn;
 
 	float4x4 m;

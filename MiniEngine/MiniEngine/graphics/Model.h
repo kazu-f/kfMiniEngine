@@ -4,6 +4,10 @@
 #include "MeshParts.h"
 #include "Skeleton.h"
 namespace Engine {
+	enum ModelUpAxis {
+		enModelUpAxis_Z,	//Zアップ
+		enModelUpAxis_Y,	//Yアップ。
+	};
 	class IShaderResource;
 
 	/// <summary>
@@ -16,7 +20,8 @@ namespace Engine {
 		const char* m_fxFilePath = nullptr;			//.fxファイルのファイルパス。
 		void* m_expandConstantBuffer = nullptr;		//ユーザー拡張の定数バッファ。
 		int m_expandConstantBufferSize = 0;			//ユーザー拡張の定数バッファのサイズ。
-		IShaderResource* m_expandShaderResoruceView = nullptr;	//ユーザー拡張のシェーダーリソース。
+		IShaderResource* m_expandShaderResoruceView = nullptr;	//ユーザー拡張のシェーダーリソース。1111
+		ModelUpAxis m_modelUpAxis = enModelUpAxis_Z;	//モデルの上方向。
 	};
 	/// <summary>
 	/// モデルクラス。
@@ -86,6 +91,13 @@ namespace Engine {
 			return m_tkmFile.IsLoaded();
 		}
 		/// <summary>
+		/// インスタンシング描画か？
+		/// </summary>
+		bool IsInstancing()
+		{
+			return m_maxInstance > 1;
+		}
+		/// <summary>
 		/// ワールド行列を取得。
 		/// </summary>
 		/// <returns></returns>
@@ -110,5 +122,6 @@ namespace Engine {
 		StructuredBuffer m_instancingDataSB;		//インスタンシング描画用のバッファ。
 		int m_maxInstance = 1;		//インスタンシング描画の最大数。
 		int m_numInstance = 0;		//インスタンスの数。
+		ModelUpAxis m_modelUpAxis = enModelUpAxis_Z;	//モデルの上方向。
 	};
 }

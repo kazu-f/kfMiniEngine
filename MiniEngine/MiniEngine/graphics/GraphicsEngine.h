@@ -281,6 +281,9 @@ namespace Engine {
 		std::unique_ptr<CShadowMap> m_shadowMap;			//指向性シャドウマップ。
 		std::unique_ptr<CGBufferRender> m_gBuffer;			//GBuffer。
 		std::unique_ptr<CDefferdShading> m_defferd;			//ディファード。
+
+		////エフェクト関係
+		//EffekseerRenderer::RendererRef m_renderer;
 	};
 	extern GraphicsEngine* g_graphicsEngine;	//グラフィックスエンジン
 	extern Camera* g_camera2D;					//2Dカメラ。

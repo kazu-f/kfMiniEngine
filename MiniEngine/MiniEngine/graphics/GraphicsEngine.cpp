@@ -185,6 +185,22 @@ namespace Engine {
 		m_defferd = std::make_unique<CDefferdShading>();
 		m_defferd->Init(m_gBuffer.get());
 
+		DXGI_FORMAT effectFormat[] =
+		{
+			DXGI_FORMAT_R8G8B8A8_UNORM
+		};
+
+		//m_renderer = EffekseerRendererDX12::Create(
+		//	GetD3DDevice(),
+		//	m_commandQueue,
+		//	static_cast<int32_t>(2),
+		//	effectFormat,
+		//	static_cast<int32_t>(1),
+		//	DXGI_FORMAT_D32_FLOAT,
+		//	true,
+		//	static_cast < int32_t>(2000)
+		//);
+
 		return true;
 	}
 
