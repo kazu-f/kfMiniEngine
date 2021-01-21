@@ -23,6 +23,7 @@ public:
 private:
 	CLevel m_level;
 	CPhysicsStaticObject m_phyStaticObject;
+	CPhysicsStaticObject m_wallPhyOnj;
 	CGameCamera* m_camera = nullptr;
 	Player* m_player = nullptr;
 	Car* m_car = nullptr;

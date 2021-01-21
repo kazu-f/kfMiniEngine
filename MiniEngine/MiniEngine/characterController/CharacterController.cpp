@@ -155,7 +155,82 @@ namespace Engine {
 		originalXYDir.Normalize();
 		//XZ平面上での衝突検出と解決を行う。
 		{
+			int loopCount = 0;
+			while (true) {
+				//現在の座標から次の移動先へ向かうベクトルを求める。
+				Vector3 addPos;
+				addPos.Subtract(nextPosition, m_position);
+				Vector3 addPosXZ = addPos;
+				addPosXZ.y = 0.0f;
+				if (addPosXZ.Length() < FLT_EPSILON) {
+					//XZ平面で動きがないため検出不要。
+					break;
+				}
 
+				//カプセルコライダーの中心座標 + 高さ*0.1の座標。
+				Vector3 posTmp = m_position;
+				posTmp.y += m_height * 0.6f + m_radius;
+				//レイを作成。
+				btTransform start, end;
+				start.setIdentity();
+				end.setIdentity();
+				//始点はカプセルコライダーの中心より少し上。
+				start.setOrigin(btVector3(posTmp.x, posTmp.y, posTmp.z));
+				//終点は次の移動先とする。XZ平面での検出のためyは始点と同じ。
+				end.setOrigin(btVector3(nextPosition.x, posTmp.y, nextPosition.z));
+
+				SweepResultWall callback;
+				callback.me = m_rigidBody.GetBody();
+				callback.startPos = posTmp;
+				//衝突検出。
+				PhysicsWorld().ConvexSweepTest(
+					static_cast<const btConvexShape*>(m_collider.GetBody()),
+					start, end, callback
+				);
+
+				if (callback.isHit) {
+					//当たった。
+					Vector3 vT0, vT1;
+					vT0.Set(nextPosition.x, 0.0f, nextPosition.z);			//移動後の座標。
+					vT1.Set(callback.hitPos.x, 0.0f, callback.hitPos.z);	//衝突点。
+					//めり込みが発生している移動ベクトル。
+					Vector3 vMerikomi;
+					vMerikomi.Subtract(vT0, vT1);
+					//XZ平面での衝突した壁の法線を求める。
+					Vector3 hitNormalXZ = callback.hitNormal;
+					hitNormalXZ.y = 0.0f;
+					hitNormalXZ.Normalize();
+					//めり込みベクトルを壁の法線に射影する。
+					float fT0 = hitNormalXZ.Dot(vMerikomi);
+					//押し戻すベクトルを求める。
+					//押し戻すベクトル = hitNormalXZ * (fT0 + radius)
+					Vector3 vOffset;
+					vOffset = hitNormalXZ;
+					vOffset.Scale(-fT0 + m_radius);
+					nextPosition.Add(vOffset);
+					//移動方向。
+					Vector3 currentDir;
+					currentDir.Subtract(nextPosition, m_position);
+					currentDir.Normalize();
+					if (currentDir.Dot(originalXYDir) < 0.0f) {
+						//角に入ったときのキャラの振動を防止。
+						//移動先が逆向きになったら移動をキャンセル。
+						nextPosition.x = m_position.x;
+						nextPosition.z = m_position.z;
+						break;
+					}
+				}
+				else {
+					//どことも当たらないので終わる。
+					break;
+				}
+				//一定数以上は行わない。
+				loopCount++;
+				if (loopCount == 5) {
+					break;
+				}
+
+			}
 		}
 		//XZの移動は確定する。
 		m_position.x = nextPosition.x;

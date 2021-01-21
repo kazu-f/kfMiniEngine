@@ -47,7 +47,7 @@ bool GameScene::Start()
 
 	m_camera = NewGO<CGameCamera>(0);
 
-#if 0
+#if 1
 	m_level.Init("Assets/level/testLevel.tkl", [&](SLevelObjectData& objData) {
 		if (wcscmp(objData.name, L"unityChan") == 0) {
 
@@ -60,8 +60,11 @@ bool GameScene::Start()
 		});
 
 	Vector3 phyPos = { 0.0f,-50.0f,0.0f };
-	Vector3 phySize = { 300.0f,5.0f,300.0f };
+	Vector3 phySize = { 500.0f,5.0f,500.0f };
 	m_phyStaticObject.CreateBox(phyPos, Quaternion::Identity, phySize);
+
+	Vector3 wallSize = { 50.0f,50.0f,50.0f };
+	m_wallPhyOnj.CreateBox({ 150.0f,0.0f,0.0f }, Quaternion::Identity, wallSize);
 #else
 	m_spectator = NewGO<Spectator>(0);
 
