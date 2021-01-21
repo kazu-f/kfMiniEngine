@@ -12,5 +12,3 @@ x64/
 *.idb
 .vscode
 /MiniEngine/MiniEngine/Debug
-/MiniEngine/MiniEngine/effekseerRuntime/src/3rdParty/LLGI/LLGI.vcxproj.filters
-/MiniEngine/MiniEngine/effekseerRuntime/src/3rdParty/LLGI/LLGI.vcxproj

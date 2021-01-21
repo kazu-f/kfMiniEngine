@@ -1,7 +1,7 @@
 #include "EffekseerMaterialCompilerDX12.h"
 #include <iostream>
 
-#include "../LLGI/DX12/LLGI.CompilerDX12.h"		//"../3rdParty/LLGI/src/DX12/LLGI.CompilerDX12.h"
+#include "../3rdParty/LLGI/src/DX12/LLGI.CompilerDX12.h"
 #include "../DirectX/ShaderGenerator.h"
 
 #undef min
