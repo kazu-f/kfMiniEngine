@@ -24,10 +24,10 @@ namespace Engine {
 		/// </summary>
 		btCollisionShape* GetBody()const override
 		{
-			return shape;
+			return shape.get();
 		}
 	private:
-		btBoxShape* shape = nullptr;		//シェイプ。
+		std::unique_ptr<btBoxShape> shape;		//シェイプ。
 
 	};///class CBoxCollider;
 
