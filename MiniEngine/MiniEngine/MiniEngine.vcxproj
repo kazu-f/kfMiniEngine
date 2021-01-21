@@ -44,6 +44,7 @@
     <ClCompile Include="prefab\ModelRender.cpp" />
     <ClCompile Include="physics\RigidBody.cpp" />
     <ClCompile Include="Spectator\Spectator.cpp" />
+    <ClCompile Include="physics\SphereCollider.cpp" />
     <ClCompile Include="util\CGameTime.cpp" />
     <ClCompile Include="graphics\animation\AnimationPlayController.cpp" />
     <ClCompile Include="graphics\animation\AnimationClip.cpp" />
@@ -113,6 +114,7 @@
     <ClInclude Include="prefab\light\LightBase.h" />
     <ClInclude Include="prefab\ModelRender.h" />
     <ClInclude Include="Spectator\Spectator.h" />
+    <ClInclude Include="physics\SphereCollider.h" />
     <ClInclude Include="system\debugLog.h" />
     <ClInclude Include="util\CGameTime.h" />
     <ClInclude Include="graphics\animation\AnimationPlayController.h" />

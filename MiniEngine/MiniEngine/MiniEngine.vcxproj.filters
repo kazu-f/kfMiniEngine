@@ -261,6 +261,9 @@
     <ClCompile Include="characterController\CharacterController.cpp">
       <Filter>characterController</Filter>
     </ClCompile>
+    <ClCompile Include="physics\SphereCollider.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MiniEngine.h">
@@ -480,6 +483,9 @@
       <Filter>characterController</Filter>
     </ClInclude>
     <ClInclude Include="physics\CollisionAttr.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\SphereCollider.h">
       <Filter>physics</Filter>
     </ClInclude>
   </ItemGroup>

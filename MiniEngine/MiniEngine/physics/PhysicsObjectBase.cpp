@@ -2,6 +2,7 @@
 #include "PhysicsObjectBase.h"
 #include "physics/BoxCollider.h"
 #include "physics/CapsuleCollider.h"
+#include "physics/SphereCollider.h"
 #include "graphics/Model.h"
 #include "prefab/ModelRender.h"
 
@@ -28,6 +29,11 @@ namespace Engine {
 	}
 	void CPhysicsObjectBase::CreateSphere(const Vector3& pos, const Quaternion& rot, const float radius)
 	{
+		Release();
+		auto sphereCollider = std::make_unique<CSphereCollider>();
+		sphereCollider->Create(radius);
+		m_collider = std::move(sphereCollider);
+		CreateCommon(pos, rot);
 	}
 	void CPhysicsObjectBase::CreateMesh(const Vector3& pos, const Quaternion& rot, const TkmFile& tkmFile)
 	{
