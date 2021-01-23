@@ -64,12 +64,21 @@ namespace Engine {
 		/// <param name="tkmFile">tkmファイル。</param>
 		void CreateMesh(const Vector3& pos, const Quaternion& rot,const TkmFile& tkmFile);
 		/// <summary>
-		/// メッシュ形状のゴーストオブジェクトを作成。
+		/// メッシュ形状のゴーストオブジェクトを作成。(Modelクラス。)
 		/// </summary>
 		/// <param name="pos">座標。</param>
 		/// <param name="rot">回転。</param>
+		/// <param name="scale">スケール。</param>
 		/// <param name="model">スキンモデル。</param>
 		void CreateMesh(const Vector3& pos, const Quaternion& rot, const Vector3 & scale, const Model& model);
+		/// <summary>
+		/// メッシュ形状のゴーストオブジェクトを作成。(ModelRenderクラス。)
+		/// </summary>
+		/// <param name="pos">座標。</param>
+		/// <param name="rot">回転。</param>
+		/// <param name="scale">スケール。</param>
+		/// <param name="model">モデルレンダー。</param>
+		void CreateMesh(const Vector3& pos, const Quaternion& rot, const Vector3& scale, prefab::ModelRender* model);
 
 	protected:
 		std::unique_ptr<ICollider> m_collider;		//コライダー。

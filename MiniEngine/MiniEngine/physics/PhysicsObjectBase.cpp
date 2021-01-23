@@ -54,4 +54,8 @@ namespace Engine {
 		m_collider = std::move(meshCollider);
 		CreateCommon(pos, rot);
 	}
+	void CPhysicsObjectBase::CreateMesh(const Vector3& pos, const Quaternion& rot, const Vector3& scale, prefab::ModelRender* modelRender)
+	{
+		CreateMesh(pos, rot, scale, modelRender->GetModel());
+	}
 }
