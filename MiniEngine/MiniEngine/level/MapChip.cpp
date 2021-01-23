@@ -11,6 +11,12 @@ namespace Engine {
 		//wchar_t filePath[256];
 		//swprintf_s(filePath, L"Assets/modelData/%s.tkm", objData.name);
 		m_mapChipRender = mapChipRender;
+		m_physicsStaticObject.CreateMesh(
+			objData.position,
+			objData.rotation,
+			objData.scale,
+			mapChipRender->GetModelRender()
+		);
 	}
 	CMapChip::~CMapChip()
 	{

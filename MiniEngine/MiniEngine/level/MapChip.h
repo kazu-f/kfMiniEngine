@@ -1,5 +1,6 @@
 #pragma once
 #include "MapChipRender.h"
+#include "physics/PhysicsStaticObject.h"
 
 namespace Engine {
 	struct SLevelObjectData;
@@ -15,7 +16,7 @@ namespace Engine {
 
 	private:
 		CMapChipRender* m_mapChipRender = nullptr;		//マップチップレンダー。
-
+		CPhysicsStaticObject m_physicsStaticObject;		//静的物理オブジェクト。
 	};	//class CMapChip;
 }	//namespace Engine;
 
