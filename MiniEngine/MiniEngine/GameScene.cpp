@@ -59,12 +59,12 @@ bool GameScene::Start()
 		return false;
 		});
 
-	Vector3 phyPos = { 0.0f,-50.0f,0.0f };
-	Vector3 phySize = { 500.0f,5.0f,500.0f };
-	m_phyStaticObject.CreateBox(phyPos, Quaternion::Identity, phySize);
+	//Vector3 phyPos = { 0.0f,-50.0f,0.0f };
+	//Vector3 phySize = { 500.0f,5.0f,500.0f };
+	//m_phyStaticObject.CreateBox(phyPos, Quaternion::Identity, phySize);
 
-	Vector3 wallSize = { 50.0f,50.0f,50.0f };
-	m_wallPhyOnj.CreateBox({ 150.0f,0.0f,0.0f }, Quaternion::Identity, wallSize);
+	//Vector3 wallSize = { 50.0f,50.0f,50.0f };
+	//m_wallPhyOnj.CreateBox({ 150.0f,0.0f,0.0f }, Quaternion::Identity, wallSize);
 #else
 	m_spectator = NewGO<Spectator>(0);
 
