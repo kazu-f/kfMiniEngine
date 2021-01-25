@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "PhysicsWorld.h"
+#include "characterController/CharacterController.h"
 
 namespace Engine {
 	namespace {
@@ -56,11 +57,19 @@ namespace Engine {
 	{
 		m_dynamicWorld->stepSimulation(time);
 	}
-	void CPhysicsWorld::ConactTest(btCollisionObject* colObj, std::function<void(const btCollisionObject& contactCollisionObject)> cb)
+	void CPhysicsWorld::ContactTest(btCollisionObject* colObj, std::function<void(const btCollisionObject& contactCollisionObject)> cb)
 	{
 		MyContactResultCallback myContactResultCallback;
 		myContactResultCallback.m_cb = cb;
 		myContactResultCallback.m_me = colObj;
 		m_dynamicWorld->contactTest(colObj, myContactResultCallback);
+	}
+	void CPhysicsWorld::ContactTest(CRigidBody& rb, std::function<void(const btCollisionObject& contactCollisionObject)> cb)
+	{
+		ContactTest(rb.GetBody(), cb);
+	}
+	void CPhysicsWorld::ContactTest(CCharacterController& charaCon, std::function<void(const btCollisionObject& contactCollisionObject)> cb)
+	{
+		ContactTest(*charaCon.GetBody(), cb);
 	}
 }

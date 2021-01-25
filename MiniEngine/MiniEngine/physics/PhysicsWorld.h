@@ -3,6 +3,7 @@
 #include "RigidBody.h"
 
 namespace Engine {
+	class CCharacterController;
 
 	class CPhysicsWorld
 	{
@@ -79,11 +80,29 @@ namespace Engine {
 		/// <summary>
 		/// 接触しているか判定。
 		/// </summary>
-		/// <param name="colObj"></param>
-		/// <param name="cb"></param>
-		void ConactTest(
+		/// <param name="colObj">コリジョン。</param>
+		/// <param name="cb">判定後の関数。</param>
+		void ContactTest(
 			btCollisionObject* colObj,
 			std::function<void(const btCollisionObject& contactCollisionObject)> cb
+		);
+		/// <summary>
+		/// 接触しているか判定。
+		/// </summary>
+		/// <param name="rb">リジッドボディ。</param>
+		/// <param name="cb">判定後の関数。</param>
+		void ContactTest(
+			CRigidBody& rb,
+			std::function<void(const btCollisionObject& contactCollisionObject)> cb
+		);
+		/// <summary>
+		/// 接触しているか判定。
+		/// </summary>
+		/// <param name="charaCon">キャラコン。</param>
+		/// <param name="cb">判定後の関数。</param>
+		void ContactTest(
+			CCharacterController& charaCon,
+			std::function<void(const btCollisionObject& contactCollisionObject)> cb	
 		);
 
 	};///class CPhysicsWorld
