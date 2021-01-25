@@ -267,6 +267,9 @@
     <ClCompile Include="physics\MeshCollider.cpp">
       <Filter>physics</Filter>
     </ClCompile>
+    <ClCompile Include="physics\PhysicsGhostobject.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MiniEngine.h">
@@ -492,6 +495,9 @@
       <Filter>physics</Filter>
     </ClInclude>
     <ClInclude Include="physics\MeshCollider.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\PhysicsGhostobject.h">
       <Filter>physics</Filter>
     </ClInclude>
   </ItemGroup>
