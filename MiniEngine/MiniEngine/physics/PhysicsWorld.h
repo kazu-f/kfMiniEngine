@@ -55,6 +55,22 @@ namespace Engine {
 			}
 		}
 		/// <summary>
+		/// コリジョンオブジェクトをワールドに登録。
+		/// </summary>
+		/// <param name="colliObj">コリジョンオブジェクト。</param>
+		void AddCollisionObject(btCollisionObject& colliObj)
+		{
+			m_dynamicWorld->addCollisionObject(&colliObj);
+		}
+		/// <summary>
+		/// コリジョンオブジェクトをワールドから削除。
+		/// </summary>
+		/// <param name="colliObj">コリジョンオブジェクト。</param>
+		void RemoveCollisionObject(btCollisionObject& colliObj)
+		{
+			m_dynamicWorld->removeCollisionObject(&colliObj);
+		}
+		/// <summary>
 		/// 衝突検出を行う。
 		/// </summary>
 		/// <param name="castShape">検出を行う剛体</param>
