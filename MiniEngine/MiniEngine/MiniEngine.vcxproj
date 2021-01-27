@@ -123,6 +123,7 @@
     <ClInclude Include="GameLight\SceneLight.h" />
     <ClInclude Include="Spectator\Spectator.h" />
     <ClInclude Include="physics\SphereCollider.h" />
+    <ClInclude Include="Spectator\SpectatorNames.h" />
     <ClInclude Include="system\debugLog.h" />
     <ClInclude Include="util\CGameTime.h" />
     <ClInclude Include="graphics\animation\AnimationPlayController.h" />
