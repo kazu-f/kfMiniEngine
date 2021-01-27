@@ -11,6 +11,10 @@ namespace {
 	}
 	namespace AnimPath {
 		const char* clapAnim = "Assets/animData/Human/Clap.tka";
+		const char* shirtMaleAnim = "Assets/animData/Human/shirtMaleClap.tka";
+		const char* nathanMaleAnim = "Assets/animData/Human/nathanCheering.tka";
+		const char* sophiaWomanAnim = "Assets/animData/Human/sophiaClap.tka";
+		const char* claudiaWomanAnim = "Assets/animData/Human/claudiaClap.tka";
 
 	}
 }

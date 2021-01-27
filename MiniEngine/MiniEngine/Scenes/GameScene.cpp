@@ -123,23 +123,19 @@ bool GameScene::Start()
 
 		//モデルとアニメーションの指定。
 		m_spectator[enNathanMale]->SetModelFilePath(FilePath::nathanMale);
-		m_spectator[enNathanMale]->SetAnimFilePath(AnimPath::clapAnim);
+		m_spectator[enNathanMale]->SetAnimFilePath(AnimPath::nathanMaleAnim);
 
 		m_spectator[enShirtMale]->SetModelFilePath(FilePath::shirtMale);
-		m_spectator[enShirtMale]->SetAnimFilePath(AnimPath::clapAnim);
+		m_spectator[enShirtMale]->SetAnimFilePath(AnimPath::shirtMaleAnim);
 
 		m_spectator[enSophiaWoman]->SetModelFilePath(FilePath::sophiaWoman);
-		m_spectator[enSophiaWoman]->SetAnimFilePath(AnimPath::clapAnim);
+		m_spectator[enSophiaWoman]->SetAnimFilePath(AnimPath::sophiaWomanAnim);
 
 		m_spectator[enClaudiaWoman]->SetModelFilePath(FilePath::claudiaWoman);
-		m_spectator[enClaudiaWoman]->SetAnimFilePath(AnimPath::clapAnim);
+		m_spectator[enClaudiaWoman]->SetAnimFilePath(AnimPath::claudiaWomanAnim);
 
 		m_spectator[enSuitWoman]->SetModelFilePath(FilePath::suitWoman);
 		m_spectator[enSuitWoman]->SetAnimFilePath(AnimPath::clapAnim);
-
-		for (int i = 0; i < enSpectatorNum; i++)
-		{
-		}
 
 		ret = true;
 		break;
