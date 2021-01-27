@@ -3,6 +3,7 @@
 #include "GameCamera/GameCamera.h"
 #include "Car/Car.h"
 #include "Spectator/Spectator.h"
+#include "Spectator/SpectatorNames.h"
 #include "GameLight/SceneLight.h"
 
 GameScene::GameScene()
@@ -15,36 +16,30 @@ GameScene::~GameScene()
 
 bool GameScene::Start()
 {
+	bool ret = false;
 
-	m_camera = NewGO<CGameCamera>(0);
+	switch (m_initState)
+	{
+	case GameScene::enInit_Athor:
+		m_camera = NewGO<CGameCamera>(0);		//カメラ。
 
-	m_spectator = NewGO<Spectator>(0);
+		m_light = NewGO<SceneLight>(0);			//照明。
 
-	m_light = NewGO<SceneLight>(0);
+		m_initState = enInit_Course;
+		break;
+	case GameScene::enInit_Course:
+		m_courseLevel.Init("Assets/level/RaceLevel.tkl", [&](SLevelObjectData& objData) {
+			if (wcscmp(objData.name, L"Sup") == 0) {
+				//m_player = NewGO<Player>(0);
+				m_car = NewGO<Car>(0);
+				m_car->SetPosition(objData.position);
+				m_car->SetRotation(objData.rotation);
 
-	m_level.Init("Assets/level/RaceLevel.tkl", [&](SLevelObjectData& objData) {
-		if (wcscmp(objData.name, L"Sup") == 0) {
-			//m_player = NewGO<Player>(0);
-			m_car = NewGO<Car>(0);
-			m_car->SetPosition(objData.position);
-			m_car->SetRotation(objData.rotation);
+				return true;
+			}
 
-			return true;
-		}
-		if (objData.EqualObjectName(L"womanSuit")) {
-			m_spectator->AddObjectData(
-				objData.position, 
-				objData.rotation, 
-				objData.scale
-			);
-			m_spectator->SetShadowCasterFlag(objData.isShadowCaster);
-			m_spectator->SetShadowReceiverFlag(objData.isShadowReceiver);
-
-			return true;
-		}
-
-		return false;
-		});
+			return false;
+			});
 		if (m_car != nullptr)
 		{
 			m_car->SetCamera(m_camera);
@@ -53,8 +48,104 @@ bool GameScene::Start()
 		{
 			DEBUG_LOG("レベルで車が見つからなかった。")
 		}
+		m_initState = enInit_Spectator;
 
-	return true;
+		break;
+	case GameScene::enInit_Spectator:
+		//観客をロード。
+		for (int i = 0; i < enSpectatorNum; i++) {
+			m_spectator[i] = NewGO<Spectator>(0);
+		}
+
+		m_spectatorLevel.Init("Assets/level/spectatorLevel.tkl", [&](SLevelObjectData& objData) {
+			if (objData.EqualObjectName(L"nathanMale")) {
+				//オブジェクトの情報を追加。
+				m_spectator[enNathanMale]->AddObjectData(
+					objData.position,
+					objData.rotation,
+					objData.scale
+				);
+				m_spectator[enNathanMale]->SetShadowCasterFlag(objData.isShadowCaster);
+				m_spectator[enNathanMale]->SetShadowReceiverFlag(objData.isShadowReceiver);
+
+				return true;
+			}
+			if (objData.EqualObjectName(L"ShirtMale")) {
+				//オブジェクトの情報を追加。
+				m_spectator[enShirtMale]->AddObjectData(
+					objData.position,
+					objData.rotation,
+					objData.scale
+				);
+				m_spectator[enShirtMale]->SetShadowCasterFlag(objData.isShadowCaster);
+				m_spectator[enShirtMale]->SetShadowReceiverFlag(objData.isShadowReceiver);
+
+				return true;
+			}
+			if (objData.EqualObjectName(L"womanSuit")) {
+				m_spectator[enSuitWoman]->AddObjectData(
+					objData.position,
+					objData.rotation,
+					objData.scale
+				);
+				m_spectator[enSuitWoman]->SetShadowCasterFlag(objData.isShadowCaster);
+				m_spectator[enSuitWoman]->SetShadowReceiverFlag(objData.isShadowReceiver);
+
+				return true;
+			}
+			if (objData.EqualObjectName(L"sophiaWoman")) {
+				//オブジェクトの情報を追加。
+				m_spectator[enSophiaWoman]->AddObjectData(
+					objData.position,
+					objData.rotation,
+					objData.scale
+				);
+				m_spectator[enSophiaWoman]->SetShadowCasterFlag(objData.isShadowCaster);
+				m_spectator[enSophiaWoman]->SetShadowReceiverFlag(objData.isShadowReceiver);
+
+				return true;
+			}
+			if (objData.EqualObjectName(L"whiteWoman")) {
+				//オブジェクトの情報を追加。
+				m_spectator[enClaudiaWoman]->AddObjectData(
+					objData.position,
+					objData.rotation,
+					objData.scale
+				);
+				m_spectator[enClaudiaWoman]->SetShadowCasterFlag(objData.isShadowCaster);
+				m_spectator[enClaudiaWoman]->SetShadowReceiverFlag(objData.isShadowReceiver);
+
+				return true;
+			}
+
+			return false;
+			});
+
+		//モデルとアニメーションの指定。
+		m_spectator[enNathanMale]->SetModelFilePath(FilePath::nathanMale);
+		m_spectator[enNathanMale]->SetAnimFilePath(AnimPath::clapAnim);
+
+		m_spectator[enShirtMale]->SetModelFilePath(FilePath::shirtMale);
+		m_spectator[enShirtMale]->SetAnimFilePath(AnimPath::clapAnim);
+
+		m_spectator[enSophiaWoman]->SetModelFilePath(FilePath::sophiaWoman);
+		m_spectator[enSophiaWoman]->SetAnimFilePath(AnimPath::clapAnim);
+
+		m_spectator[enClaudiaWoman]->SetModelFilePath(FilePath::claudiaWoman);
+		m_spectator[enClaudiaWoman]->SetAnimFilePath(AnimPath::clapAnim);
+
+		m_spectator[enSuitWoman]->SetModelFilePath(FilePath::suitWoman);
+		m_spectator[enSuitWoman]->SetAnimFilePath(AnimPath::clapAnim);
+
+		for (int i = 0; i < enSpectatorNum; i++)
+		{
+		}
+
+		ret = true;
+		break;
+	}
+
+	return ret;
 }
 
 void GameScene::Release()

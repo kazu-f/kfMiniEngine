@@ -11,20 +11,20 @@ Spectator::~Spectator()
 
 bool Spectator::Start()
 {
-	////ファイルパス未設定。
-	//if (m_modelFilePath == nullptr)
-	//{
-	//	return false;
-	//}
-	//if (m_animFilePath == nullptr)
-	//{
-	//	return false;
-	//}
+	//ファイルパス未設定。
+	if (m_modelFilePath == nullptr)
+	{
+		return false;
+	}
+	if (m_animFilePath == nullptr)
+	{
+		return false;
+	}
 
 	//モデル初期化。
 	m_model = NewGO<prefab::ModelRender>(0);
 	ModelInitData modelInitData;
-	modelInitData.m_tkmFilePath = "Assets/modelData/Human/suitWoman/suitWoman.tkm";
+	modelInitData.m_tkmFilePath = m_modelFilePath;
 	modelInitData.m_fxFilePath = "Assets/shader/model.fx";
 	modelInitData.m_vsEntryPointFunc = "VSMainSkinInstancing";
 	modelInitData.m_modelUpAxis = enModelUpAxis_Z;
@@ -32,7 +32,7 @@ bool Spectator::Start()
 
 	//アニメーション情報。
 	AnimClipInitData animInitData[1];
-	animInitData[0].tkaFilePath = "Assets/animData/Human/Clap.tka";
+	animInitData[0].tkaFilePath = m_animFilePath;
 	animInitData[0].isLoop = true;
 	//初期化。
 	m_model->Init(

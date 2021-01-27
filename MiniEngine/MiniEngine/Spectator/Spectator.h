@@ -37,7 +37,7 @@ public:
 	/// </summary>
 	void SetAnimFilePath(const char* filePath)
 	{
-		m_modelFilePath = filePath;
+		m_animFilePath = filePath;
 	}
 	/// <summary>
 	/// シャドウキャスターフラグ。

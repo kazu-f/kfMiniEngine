@@ -14,7 +14,7 @@ public:
 	void OnDestroy() override final;
 
 private:
-	CLevel m_level;
+	CLevel m_courseLevel;
 	Player* m_player = nullptr;
 	CGameCamera* m_camera = nullptr;
 	SceneLight* m_light = nullptr;
