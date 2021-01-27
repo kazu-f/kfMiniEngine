@@ -168,9 +168,6 @@
     <ClCompile Include="graphics\animation\Animation.cpp">
       <Filter>graphics\animation</Filter>
     </ClCompile>
-    <ClCompile Include="GameScene.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="graphics\animation\AnimationClip.cpp">
       <Filter>graphics\animation</Filter>
     </ClCompile>
@@ -198,9 +195,6 @@
     <ClCompile Include="prefab\light\DirectionLight.cpp">
       <Filter>prefab\light</Filter>
     </ClCompile>
-    <ClCompile Include="GameCamera.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="graphics\PreRender\ShadowMap.cpp">
       <Filter>graphics\PreRender</Filter>
     </ClCompile>
@@ -215,9 +209,6 @@
     </ClCompile>
     <ClCompile Include="prefab\ModelRender.cpp">
       <Filter>prefab</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="level\Level.cpp">
       <Filter>level</Filter>
@@ -269,6 +260,21 @@
     </ClCompile>
     <ClCompile Include="physics\PhysicsGhostobject.cpp">
       <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\DebugScene.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\GameScene.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLight\SceneLight.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCamera\GameCamera.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\Player.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -413,9 +419,6 @@
     <ClInclude Include="graphics\light\LightData.h">
       <Filter>graphics\light</Filter>
     </ClInclude>
-    <ClInclude Include="GameCamera.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="graphics\PreRender\ShadowMap.h">
       <Filter>graphics\PreRender</Filter>
     </ClInclude>
@@ -433,12 +436,6 @@
     </ClInclude>
     <ClInclude Include="prefab\ModelRender.h">
       <Filter>prefab</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="level\Level.h">
       <Filter>level</Filter>
@@ -499,6 +496,21 @@
     </ClInclude>
     <ClInclude Include="physics\PhysicsGhostobject.h">
       <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\DebugScene.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\GameScene.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLight\SceneLight.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCamera\GameCamera.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\Player.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -5,9 +5,9 @@
 #include "physics\PhysicsStaticObject.h"
 
 class CGameCamera;
-class Player;
 class Car;
 class Spectator;
+class SceneLight;
 
 class GameScene:public IGameObject
 {
@@ -18,20 +18,13 @@ public:
 	void Release();		//解放処理が必要ならこれ。
 	void PreUpdate()override;
 	void Update();		//更新処理。
-	void PreRender(RenderContext& rc) override;		//描画処理。
 
 private:
 	CLevel m_level;
-	CPhysicsStaticObject m_phyStaticObject;
-	CPhysicsStaticObject m_wallPhyOnj;
 	CGameCamera* m_camera = nullptr;
-	Player* m_player = nullptr;
 	Car* m_car = nullptr;
 	Spectator* m_spectator = nullptr;
-	prefab::ModelRender* m_testBox = nullptr;			//テスト用の箱。
-	ModelInitData initData;
-	std::vector<prefab::CDirectionLight*> m_lightArray;
-	Vector3 m_lightDir = Vector3::Zero;
+	SceneLight* m_light = nullptr;
 	float m_lightPow = 0.5f;
 };
 

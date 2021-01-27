@@ -20,11 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="characterController\CharacterController.cpp" />
+    <ClCompile Include="Scenes\DebugScene.cpp" />
     <ClCompile Include="physics\PhysicsGhostobject.cpp" />
     <ClCompile Include="physics\MeshCollider.cpp" />
     <ClCompile Include="physics\CapsuleCollider.cpp" />
     <ClCompile Include="Car\Car.cpp" />
-    <ClCompile Include="GameCamera.cpp" />
+    <ClCompile Include="GameCamera\GameCamera.cpp" />
     <ClCompile Include="gameObject\GameObjectManager.cpp" />
     <ClCompile Include="gameObject\IGameObject.cpp" />
     <ClCompile Include="graphics\deferrd\DefferdShading.cpp" />
@@ -40,17 +41,18 @@
     <ClCompile Include="physics\PhysicsObjectBase.cpp" />
     <ClCompile Include="physics\PhysicsStaticObject.cpp" />
     <ClCompile Include="physics\PhysicsWorld.cpp" />
-    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Player\Player.cpp" />
     <ClCompile Include="prefab\light\DirectionLight.cpp" />
     <ClCompile Include="prefab\light\LightBase.cpp" />
     <ClCompile Include="prefab\ModelRender.cpp" />
     <ClCompile Include="physics\RigidBody.cpp" />
+    <ClCompile Include="GameLight\SceneLight.cpp" />
     <ClCompile Include="Spectator\Spectator.cpp" />
     <ClCompile Include="physics\SphereCollider.cpp" />
     <ClCompile Include="util\CGameTime.cpp" />
     <ClCompile Include="graphics\animation\AnimationPlayController.cpp" />
     <ClCompile Include="graphics\animation\AnimationClip.cpp" />
-    <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="Scenes\GameScene.cpp" />
     <ClCompile Include="graphics\animation\Animation.cpp" />
     <ClCompile Include="camera\Camera.cpp" />
     <ClCompile Include="graphics\2D\Sprite.cpp" />
@@ -89,12 +91,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="characterController\CharacterController.h" />
+    <ClInclude Include="Scenes\DebugScene.h" />
     <ClInclude Include="physics\PhysicsGhostobject.h" />
     <ClInclude Include="physics\MeshCollider.h" />
     <ClInclude Include="physics\CollisionAttr.h" />
     <ClInclude Include="physics\CapsuleCollider.h" />
     <ClInclude Include="Car\Car.h" />
-    <ClInclude Include="GameCamera.h" />
+    <ClInclude Include="GameCamera\GameCamera.h" />
     <ClInclude Include="gameObject\GameObjectManager.h" />
     <ClInclude Include="gameObject\IGameObject.h" />
     <ClInclude Include="graphics\deferrd\DefferdShading.h" />
@@ -113,17 +116,18 @@
     <ClInclude Include="physics\PhysicsStaticObject.h" />
     <ClInclude Include="physics\PhysicsWorld.h" />
     <ClInclude Include="physics\RigidBody.h" />
-    <ClInclude Include="Player.h" />
+    <ClInclude Include="Player\Player.h" />
     <ClInclude Include="prefab\light\DirectionLight.h" />
     <ClInclude Include="prefab\light\LightBase.h" />
     <ClInclude Include="prefab\ModelRender.h" />
+    <ClInclude Include="GameLight\SceneLight.h" />
     <ClInclude Include="Spectator\Spectator.h" />
     <ClInclude Include="physics\SphereCollider.h" />
     <ClInclude Include="system\debugLog.h" />
     <ClInclude Include="util\CGameTime.h" />
     <ClInclude Include="graphics\animation\AnimationPlayController.h" />
     <ClInclude Include="graphics\animation\AnimationClip.h" />
-    <ClInclude Include="GameScene.h" />
+    <ClInclude Include="Scenes\GameScene.h" />
     <ClInclude Include="graphics\animation\Animation.h" />
     <ClInclude Include="camera\Camera.h" />
     <ClInclude Include="d3dx12.h" />

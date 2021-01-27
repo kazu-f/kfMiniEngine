@@ -1,10 +1,9 @@
 #include "stdafx.h"
 #include "GameScene.h"
-#include "prefab/light/DirectionLight.h"
-#include "GameCamera.h"
-#include "Player.h"
+#include "GameCamera/GameCamera.h"
 #include "Car/Car.h"
 #include "Spectator/Spectator.h"
+#include "GameLight/SceneLight.h"
 
 GameScene::GameScene()
 {
@@ -16,57 +15,12 @@ GameScene::~GameScene()
 
 bool GameScene::Start()
 {
-	//ライトを用意する。
-	prefab::CDirectionLight* light = NewGO<prefab::CDirectionLight>(0);
-
-	Vector4 color = Vector4::Gray * 1.0f;
-	m_lightDir = { 0.0f,0.0f,-1.0f };
-	//color = { 1.0f,1.0f,0.0f,1.0f };
-	light->SetColor(color);
-	light->SetDirection(m_lightDir);
-
-	m_lightArray.push_back(light);
-
-	prefab::CDirectionLight* light2 = NewGO<prefab::CDirectionLight>(0);
-
-	m_lightDir = { 0.0f,0.0f,1.0f };
-	//color = { 0.0f,1.0f,1.0f,1.0f };
-	light2->SetColor(color);
-	light2->SetDirection(m_lightDir);
-
-	m_lightArray.push_back(light2);
-
-	prefab::CDirectionLight* light3 = NewGO<prefab::CDirectionLight>(0);
-
-	m_lightDir = { 0.0f,-1.0f,0.0f };
-	//color = { 0.0f,1.0f,1.0f,1.0f };
-	light3->SetColor(color);
-	light3->SetDirection(m_lightDir);
-
-	m_lightArray.push_back(light3);
 
 	m_camera = NewGO<CGameCamera>(0);
 
-#if 1
-	m_level.Init("Assets/level/testLevel.tkl", [&](SLevelObjectData& objData) {
-		if (wcscmp(objData.name, L"unityChan") == 0) {
-
-			m_player = NewGO<Player>(0);
-
-			return true;
-		}
-
-		return false;
-		});
-
-	//Vector3 phyPos = { 0.0f,-50.0f,0.0f };
-	//Vector3 phySize = { 500.0f,5.0f,500.0f };
-	//m_phyStaticObject.CreateBox(phyPos, Quaternion::Identity, phySize);
-
-	//Vector3 wallSize = { 50.0f,50.0f,50.0f };
-	//m_wallPhyOnj.CreateBox({ 150.0f,0.0f,0.0f }, Quaternion::Identity, wallSize);
-#else
 	m_spectator = NewGO<Spectator>(0);
+
+	m_light = NewGO<SceneLight>(0);
 
 	m_level.Init("Assets/level/RaceLevel.tkl", [&](SLevelObjectData& objData) {
 		if (wcscmp(objData.name, L"Sup") == 0) {
@@ -99,7 +53,6 @@ bool GameScene::Start()
 		{
 			DEBUG_LOG("レベルで車が見つからなかった。")
 		}
-#endif
 
 	return true;
 }
@@ -131,7 +84,3 @@ void GameScene::Update()
 
 }
 
-void GameScene::PreRender(RenderContext& rc)
-{
-
-}

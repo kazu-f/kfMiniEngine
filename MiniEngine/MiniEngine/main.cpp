@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "system/system.h"
-#include "GameScene.h"
-
+#include "Scenes/GameScene.h"
+#include "Scenes/DebugScene.h"
 
 
 
@@ -25,8 +25,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	// ここから初期化を行うコードを記述する。
 	//////////////////////////////////////
 
+#if 1
+	NewGO<DebugScene>(0);
+#else
 	NewGO<GameScene>(0);
-
+#endif
 	//////////////////////////////////////
 	// 初期化を行うコードを書くのはここまで！！！
 	//////////////////////////////////////

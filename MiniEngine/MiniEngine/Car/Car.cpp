@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Car.h"
-#include "GameCamera.h"
+#include "GameCamera/GameCamera.h"
 
 namespace {
 	const float MOVE_SPEED = 4000.0f;

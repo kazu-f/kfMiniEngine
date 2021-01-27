@@ -42,15 +42,6 @@ bool Spectator::Start()
 		static_cast<int>(m_objectsData.size())
 	);
 
-	m_testModel = NewGO<prefab::ModelRender>(0);
-	modelInitData.m_vsEntryPointFunc = "VSMainSkin";
-
-	m_testModel->Init(
-		modelInitData,
-		animInitData,
-		1
-	);
-
 	//‰e‚ÌÝ’èB
 	m_model->SetShadowCasterFlag(m_isShadowCaster);
 	m_model->SetShadowReceiverFlag(false);
