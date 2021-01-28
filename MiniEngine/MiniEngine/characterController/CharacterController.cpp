@@ -211,6 +211,7 @@ namespace Engine {
 					//ˆÚ“®•ûŒüB
 					Vector3 currentDir;
 					currentDir.Subtract(nextPosition, m_position);
+					currentDir.y = 0.0f;
 					currentDir.Normalize();
 					if (currentDir.Dot(originalXYDir) < 0.0f) {
 						//Šp‚É“ü‚Á‚½‚Æ‚«‚ÌƒLƒƒƒ‰‚ÌU“®‚ğ–h~B

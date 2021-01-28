@@ -29,7 +29,9 @@ private:
 	CGameCamera* m_camera = nullptr;
 	prefab::ModelRender* m_model = nullptr;
 
+	CCharacterController m_charaCon;		//キャラコン。
 	Vector3 m_position = Vector3::Zero;		//座標。
+	Vector3 m_moveSpeed = Vector3::Zero;	//移動速度。
 	Quaternion m_rotation = Quaternion::Identity;	//回転。
 };
 

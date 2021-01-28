@@ -21,7 +21,7 @@ bool GameScene::Start()
 	switch (m_initState)
 	{
 	case GameScene::enInit_Athor:
-		m_camera = NewGO<CGameCamera>(0);		//カメラ。
+		m_camera = NewGO<CGameCamera>(5);		//カメラ。
 
 		m_light = NewGO<SceneLight>(0);			//照明。
 
