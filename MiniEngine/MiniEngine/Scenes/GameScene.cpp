@@ -82,17 +82,6 @@ bool GameScene::Start()
 
 				return true;
 			}
-			if (objData.EqualObjectName(L"womanSuit")) {
-				m_spectator[enSuitWoman]->AddObjectData(
-					objData.position,
-					objData.rotation,
-					objData.scale
-				);
-				m_spectator[enSuitWoman]->SetShadowCasterFlag(objData.isShadowCaster);
-				m_spectator[enSuitWoman]->SetShadowReceiverFlag(objData.isShadowReceiver);
-
-				return true;
-			}
 			if (objData.EqualObjectName(L"sophiaWoman")) {
 				//オブジェクトの情報を追加。
 				m_spectator[enSophiaWoman]->AddObjectData(
@@ -117,6 +106,10 @@ bool GameScene::Start()
 
 				return true;
 			}
+			//使わなくなったもの。存在している可能性考慮して残しとくが、そのうち消す。
+			if (objData.EqualObjectName(L"womanSuit")) {
+				return true;
+			}
 
 			return false;
 			});
@@ -133,9 +126,6 @@ bool GameScene::Start()
 
 		m_spectator[enClaudiaWoman]->SetModelFilePath(FilePath::claudiaWoman);
 		m_spectator[enClaudiaWoman]->SetAnimFilePath(AnimPath::claudiaWomanAnim);
-
-		m_spectator[enSuitWoman]->SetModelFilePath(FilePath::suitWoman);
-		m_spectator[enSuitWoman]->SetAnimFilePath(AnimPath::clapAnim);
 
 		ret = true;
 		break;

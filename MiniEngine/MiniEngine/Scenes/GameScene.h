@@ -31,7 +31,6 @@ private:
 		enNathanMale,
 		enSophiaWoman,
 		enClaudiaWoman,
-		enSuitWoman,
 		enSpectatorNum
 	};
 	EnInitStep m_initState = enInit_Athor;	//初期化ステップ。
