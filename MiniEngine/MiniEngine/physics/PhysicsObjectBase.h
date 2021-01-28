@@ -3,6 +3,9 @@
 namespace Engine {
 	class Model;
 	class TkmFile;
+	namespace prefab {
+		class ModelRender;
+	}
 
 	/// <summary>
 	/// 物理オブジェクトのベースクラス。

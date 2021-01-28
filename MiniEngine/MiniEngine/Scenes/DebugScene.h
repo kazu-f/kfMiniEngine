@@ -1,4 +1,7 @@
 #pragma once
+/// <summary>
+/// 機能の試運転を行うクラス。
+/// </summary>
 
 class Player;
 class SceneLight;

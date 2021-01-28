@@ -1,8 +1,7 @@
 #pragma once
-
-//機能の試運転用クラス。
-
-#include "physics\PhysicsStaticObject.h"
+/// <summary>
+/// ゲームクラス。
+/// </summary>
 
 class CGameCamera;
 class Car;

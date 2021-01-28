@@ -65,6 +65,8 @@
 
 #include "physics/PhysicsWorld.h"
 #include "tkEngine.h"
+#include "physics/PhysicsStaticObject.h"
+#include "characterController/CharacterController.h"
 
 #include "graphics/Skeleton.h"
 #include "graphics/animation/Animation.h"

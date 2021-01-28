@@ -6,6 +6,7 @@
 namespace Engine {
 
 	class GraphicsEngine;
+	class CPhysicsWorld;
 
 	class TkEngine : Noncopyable {
 	public:

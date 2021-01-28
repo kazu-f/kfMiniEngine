@@ -1,6 +1,7 @@
 #pragma once
-
-#include "characterController\CharacterController.h"
+/// <summary>
+/// デバッグ用のキャラクタ。
+/// </summary>
 
 class Player : public IGameObject
 {

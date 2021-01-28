@@ -31,31 +31,39 @@ namespace Engine {
 	void CPhysicsObjectBase::CreateSphere(const Vector3& pos, const Quaternion& rot, const float radius)
 	{
 		Release();
+		//球体コライダーの作成。
 		auto sphereCollider = std::make_unique<CSphereCollider>();
 		sphereCollider->Create(radius);
 		m_collider = std::move(sphereCollider);
+		//物理オブジェクトの作成、登録。
 		CreateCommon(pos, rot);
 	}
 	void CPhysicsObjectBase::CreateMesh(const Vector3& pos, const Quaternion& rot, const TkmFile& tkmFile)
 	{
 		Release();
+		//メッシュコライダーの作成。
 		auto meshCollider = std::make_unique<CMeshCollider>();
 		meshCollider->CreateFromTkmFile(tkmFile, nullptr);
 		m_collider = std::move(meshCollider);
+		//物理オブジェクト作成、登録。
 		CreateCommon(pos, rot);
 	}
 	void CPhysicsObjectBase::CreateMesh(const Vector3& pos, const Quaternion& rot, const Vector3 & scale, const Model& model)
 	{
 		Release();
+		//スケールを調整するための行列作成。
 		Matrix mScale;
 		mScale.MakeScaling(scale);
+		//メッシュコライダーの作成。
 		auto meshCollider = std::make_unique<CMeshCollider>();
 		meshCollider->CreateFromModel(model, &mScale);
 		m_collider = std::move(meshCollider);
+		//物理オブジェクトの作成、登録。
 		CreateCommon(pos, rot);
 	}
 	void CPhysicsObjectBase::CreateMesh(const Vector3& pos, const Quaternion& rot, const Vector3& scale, prefab::ModelRender* modelRender)
 	{
+		//モデルから作成。
 		CreateMesh(pos, rot, scale, modelRender->GetModel());
 	}
 }
