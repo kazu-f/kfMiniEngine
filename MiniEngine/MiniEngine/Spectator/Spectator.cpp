@@ -14,11 +14,18 @@ bool Spectator::Start()
 	//ファイルパス未設定。
 	if (m_modelFilePath == nullptr)
 	{
-		return false;
+		WARNING_MESSAGE_BOX("観客のモデルのファイルパスが未設定。");
+		return true;
 	}
 	if (m_animFilePath == nullptr)
 	{
-		return false;
+		WARNING_MESSAGE_BOX("観客のアニメーションのファイルパスが未設定。");
+		return true;
+	}
+	if (m_objectsData.size() <= 1)
+	{
+		WARNING_MESSAGE_BOX("観客のインスタンシング描画のデータが足りていない。");
+		return true;
 	}
 
 	//モデル初期化。
