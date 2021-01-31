@@ -1,5 +1,8 @@
 #include "stdafx.h"
 #include "Car.h"
+#include "State/ICarState.h"
+#include "State/CarStateIdle.h"
+#include "State/CarStateAccele.h"
 #include "GameCamera/GameCamera.h"
 
 namespace {
@@ -7,6 +10,16 @@ namespace {
 	const float GRAVITY = 980.0f;
 }
 
+
+Car::Car():
+	m_stateIdle(this),
+	m_stateAccele(this)
+{
+}
+
+Car::~Car()
+{
+}
 
 bool Car::Start()
 {
@@ -65,4 +78,15 @@ void Car::Update()
 void Car::OnDestroy()
 {
 	DeleteGO(m_model);
+}
+
+void Car::CalcDirection()
+{
+	//クオータニオンから向きを求める。
+	Matrix mRot;
+	mRot.MakeRotationFromQuaternion(m_rotation);
+	//向きを代入する。
+	m_forward = { mRot.m[2][0],mRot.m[2][1] ,mRot.m[2][2] };
+	m_right = { mRot.m[0][0],mRot.m[0][1] ,mRot.m[0][2] };
+	m_forward = { mRot.m[1][0],mRot.m[1][1] ,mRot.m[1][2] };
 }

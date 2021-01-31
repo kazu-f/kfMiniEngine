@@ -19,7 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Car\State\CarStateIdle.cpp" />
+    <ClCompile Include="Car\State\CarStateAccele.cpp" />
     <ClCompile Include="characterController\CharacterController.cpp" />
+    <ClCompile Include="Car\State\ICarState.cpp" />
     <ClCompile Include="Scenes\DebugScene.cpp" />
     <ClCompile Include="physics\PhysicsGhostobject.cpp" />
     <ClCompile Include="physics\MeshCollider.cpp" />
@@ -90,7 +93,10 @@
     <ClCompile Include="util\Stopwatch.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Car\State\CarStateIdle.h" />
+    <ClInclude Include="Car\State\CarStateAccele.h" />
     <ClInclude Include="characterController\CharacterController.h" />
+    <ClInclude Include="Car\State\ICarState.h" />
     <ClInclude Include="Scenes\DebugScene.h" />
     <ClInclude Include="physics\PhysicsGhostobject.h" />
     <ClInclude Include="physics\MeshCollider.h" />

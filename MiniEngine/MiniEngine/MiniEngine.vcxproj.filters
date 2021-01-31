@@ -79,6 +79,9 @@
     <Filter Include="characterController">
       <UniqueIdentifier>{69d57548-594e-4c96-88cb-6030e2f9a5a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Car\State">
+      <UniqueIdentifier>{df3bc0ae-0ac5-4329-a3a2-9301b6c22533}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tkEngine.cpp">
@@ -275,6 +278,15 @@
     </ClCompile>
     <ClCompile Include="Player\Player.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Car\State\CarStateAccele.cpp">
+      <Filter>Car\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Car\State\ICarState.cpp">
+      <Filter>Car\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Car\State\CarStateIdle.cpp">
+      <Filter>Car\State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -514,6 +526,15 @@
     </ClInclude>
     <ClInclude Include="Spectator\SpectatorNames.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Car\State\CarStateAccele.h">
+      <Filter>Car\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Car\State\ICarState.h">
+      <Filter>Car\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Car\State\CarStateIdle.h">
+      <Filter>Car\State</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
