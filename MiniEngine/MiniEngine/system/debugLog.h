@@ -19,24 +19,48 @@ namespace Engine {
 	/// <summary>
 	/// 警告のメッセージボックス。
 	/// </summary>
-	inline static void WarningMessageBox(const char* text)
+	static inline void WarningMessageBox(const char* file, long line, const char* format, ...)
 	{
-		MessageBoxA(NULL, text, "Warning!!!", MB_OK);
+		static char log[1024 * 10];
+		va_list va;
+		va_start(va, format);
+		char fileLineInfo[256];
+		sprintf_s(fileLineInfo, "\n\n%s,%d行目", file, line);
+		vsprintf_s(log, format, va);
+		strcat_s(log, fileLineInfo);
+		va_end(va);
+
+		MessageBox(NULL, log, "Warning!!", MB_OK);
 	}
 	/// <summary>
 	/// 警告のメッセージボックス。
 	/// </summary>
-	inline static void DebugAssert(const char* text)
+	/// <remarks>
+	/// flagが偽の時にアサートが発生する。
+	/// </remarks>
+	static inline void DebugAssert(bool flag,const char* format,const char* file, long line, ...)
 	{
-		MessageBoxA(NULL, text, "Erorr!!!", MB_OK);
-		std::abort();
+		if (!flag)
+		{
+			va_list va;
+			va_start(va, flag);
+			vprintf(format, va);
+			char fileLineInfo[256];
+			sprintf_s(fileLineInfo, "%s,%d行目", file, line);
+			char assertMessage[256];
+			vsprintf_s(assertMessage, format, va);
+			strcat_s(assertMessage, fileLineInfo);
+			MessageBox(NULL, assertMessage, "Erorr!!!", MB_OK);
+			va_end(va);
+			std::abort();
+		}
 	}
 }
 
 #if _DEBUG
-	#define DEBUG_LOG(text)				DebugLog(text);				//デバッグ用のログを出力する。
-	#define WARNING_MESSAGE_BOX(text)	WarningMessageBox(text);	//メッセージボックスを表示。
-	#define ASSERT(text)				DebugAssert(text);			//アサートする。
+	#define ENGINE_LOG(format,...)				DebugLog(format,__VA_ARGS__);								//デバッグ用のログを出力する。
+	#define ENGINE_MESSAGE_BOX(format,...)		WarningMessageBox(__FILE__,__LINE__,format,__VA_ARGS__);	//メッセージボックスを表示。
+	#define ENGINE_ASSERT(flag,format,...)		DebugAssert(flag,format,__FILE__,__LINE__,__VA_ARGS__);		//アサートする。
 #else
 	#define DEBUG_LOG(text)
 	#define WARNING_MESSAGE_BOX(text)

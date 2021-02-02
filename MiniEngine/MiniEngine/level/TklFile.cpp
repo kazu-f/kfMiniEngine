@@ -7,7 +7,10 @@ namespace Engine {
 		auto fp = fopen(filePath, "rb");
 		if (fp == nullptr)
 		{
-			WARNING_MESSAGE_BOX("tklファイルが読み込めませんでした。");
+			ENGINE_MESSAGE_BOX(
+				"tklファイルが読み込めませんでした。\n"
+				"ファイルパスを確認してください。\n"
+			);
 			return;
 		}
 		//tklファイルのバージョンを読み込み。

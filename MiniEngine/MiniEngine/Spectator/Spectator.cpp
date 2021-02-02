@@ -14,18 +14,27 @@ bool Spectator::Start()
 	//ファイルパス未設定。
 	if (m_modelFilePath == nullptr)
 	{
-		WARNING_MESSAGE_BOX("観客のモデルのファイルパスが未設定。");
-		return true;
+		ENGINE_MESSAGE_BOX(
+			"観客のモデルのファイルパスが未設定。"
+			"SetModelFilePath関数で指定してください。"
+		);
+		return false;
 	}
 	if (m_animFilePath == nullptr)
 	{
-		WARNING_MESSAGE_BOX("観客のアニメーションのファイルパスが未設定。");
-		return true;
+		ENGINE_MESSAGE_BOX(
+			"観客のアニメーションのファイルパスが未設定。"
+			"SetAnimFilePath関数で指定してください。"
+		);
+		return false;
 	}
 	if (m_objectsData.size() <= 1)
 	{
-		WARNING_MESSAGE_BOX("観客のインスタンシング描画のデータが足りていない。");
-		return true;
+		ENGINE_MESSAGE_BOX(
+			"観客のインスタンシング描画のデータが足りていない。"
+			"インスタンシング描画には2個以上必要です。"
+		);
+		return false;
 	}
 
 	//モデル初期化。

@@ -29,7 +29,7 @@ namespace Engine {
 				}
 			}
 			else {
-				MessageBox(nullptr, L"DescriptorHeap::RegistShaderResource() レジスタ番号が範囲外です。", L"エラー", MB_OK);
+				MessageBox(nullptr, "DescriptorHeap::RegistShaderResource() レジスタ番号が範囲外です。", "エラー", MB_OK);
 				std::abort();
 			}
 		}
@@ -47,7 +47,7 @@ namespace Engine {
 				}
 			}
 			else {
-				MessageBox(nullptr, L"DescriptorHeap::RegistShaderResource() レジスタ番号が範囲外です。", L"エラー", MB_OK);
+				MessageBox(nullptr, "DescriptorHeap::RegistShaderResource() レジスタ番号が範囲外です。", "エラー", MB_OK);
 				std::abort();
 			}
 		}
@@ -65,7 +65,7 @@ namespace Engine {
 				}
 			}
 			else {
-				MessageBox(nullptr, L"DescriptorHeap::RegistConstantBuffer() レジスタ番号が範囲外です。", L"エラー", MB_OK);
+				MessageBox(nullptr, "DescriptorHeap::RegistConstantBuffer() レジスタ番号が範囲外です。", "エラー", MB_OK);
 				std::abort();
 			}
 		}

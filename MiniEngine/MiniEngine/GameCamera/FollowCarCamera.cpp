@@ -15,7 +15,10 @@ bool FollowCarCamera::Start()
 	//nullの場合は始まらない。
 	if (m_car == nullptr)
 	{
-		WARNING_MESSAGE_BOX("車を指定していない。");
+		ENGINE_MESSAGE_BOX(
+			"車のアドレスがnullでした。\n"
+			"SetTargetCar関数で指定してください。\n"
+		);
 		return false;
 	}
 

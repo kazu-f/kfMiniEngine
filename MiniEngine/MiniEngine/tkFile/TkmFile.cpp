@@ -274,8 +274,11 @@ namespace Engine {
 						fclose(texFileFp);
 					}
 					else {
-						WARNING_MESSAGE_BOX("テクスチャのロードに失敗しました。");
-						//MessageBoxA(nullptr, "テクスチャのロードに失敗しました。%s", "エラー", MB_OK);
+						ENGINE_MESSAGE_BOX(
+							"テクスチャのロードに失敗しました。\n"
+							"ファイルパスを確認してください。\n"
+							"モデルのフォルダと同じフォルダにあるか確認してください。\n"
+						);
 					}
 				}
 		};
@@ -305,8 +308,10 @@ namespace Engine {
 	{
 		FILE* fp = fopen(filePath, "rb");
 		if (fp == nullptr) {
-			WARNING_MESSAGE_BOX("tkmファイルが開けません。");
-			//MessageBoxA(nullptr, "tkmファイルが開けません。", "エラー", MB_OK);
+			ENGINE_MESSAGE_BOX(
+				"tkmファイルが開けません。\n"
+				"ファイルパスを確認してください。\n"
+			);
 			return;
 		}
 		//tkmファイルのヘッダーを読み込み。
@@ -314,8 +319,7 @@ namespace Engine {
 		fread(&header, sizeof(header), 1, fp);
 		if (header.version != tkmFileFormat::VERSION) {
 			//tkmファイルのバージョンが違う。
-			WARNING_MESSAGE_BOX("tkmファイルのバージョンが異なっています。");
-			//MessageBoxA(nullptr, "tkmファイルのバージョンが異なっています。", "エラー", MB_OK);
+			ENGINE_MESSAGE_BOX("tkmファイルのバージョンが異なっています。\n");
 		}
 		//メッシュ情報をロードしていく。
 		m_meshParts.resize(header.numMeshParts);

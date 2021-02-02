@@ -7,11 +7,7 @@ namespace Engine {
 		//内部のシェーダーをロードする処理が求めているのが
 		//wchar_t型の文字列なので、ここで変換しておく。
 		wchar_t wfxFilePath[256];
-		if (initData.m_fxFilePath == nullptr) {
-			ASSERT("fxファイルパスが指定されていません。")
-			//MessageBoxA(nullptr, "fxファイルパスが指定されていません。", "エラー", MB_OK);
-			//std::abort();
-		}
+		ENGINE_ASSERT(initData.m_fxFilePath != nullptr,"fxファイルパスが指定されていません。")
 
 		//インスタンシング描画を行う？
 		if (maxInstance > 1) {
@@ -60,7 +56,7 @@ namespace Engine {
 			m_numInstance++;
 		}
 		else {
-			DEBUG_LOG("Model::UpdateInstancingData	invalid UpdateInstancingData.");
+			ENGINE_LOG("Model::UpdateInstancingData	invalid UpdateInstancingData.");
 		}
 	}
 	void Model::Draw(RenderContext& rc)
