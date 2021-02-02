@@ -12,8 +12,8 @@ namespace Engine {
 		va_list va;
 		va_start(va, format);
 		vsprintf_s(log, format, va);
-		OutputDebugStringA(log);
-		OutputDebugStringA("\n");
+		OutputDebugString(log);
+		OutputDebugString("\n");
 		va_end(va);
 	}
 	/// <summary>
