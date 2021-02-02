@@ -273,9 +273,6 @@
     <ClCompile Include="GameLight\SceneLight.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="GameCamera\GameCamera.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Player\Player.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -287,6 +284,12 @@
     </ClCompile>
     <ClCompile Include="Car\State\CarStateIdle.cpp">
       <Filter>Car\State</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCamera\GameCamera.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCamera\FollowCarCamera.cpp">
+      <Filter>camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -518,9 +521,6 @@
     <ClInclude Include="GameLight\SceneLight.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="GameCamera\GameCamera.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Player\Player.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -535,6 +535,12 @@
     </ClInclude>
     <ClInclude Include="Car\State\CarStateIdle.h">
       <Filter>Car\State</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCamera\GameCamera.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCamera\FollowCarCamera.h">
+      <Filter>camera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

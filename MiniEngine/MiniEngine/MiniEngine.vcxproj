@@ -23,6 +23,7 @@
     <ClCompile Include="Car\State\CarStateAccele.cpp" />
     <ClCompile Include="characterController\CharacterController.cpp" />
     <ClCompile Include="Car\State\ICarState.cpp" />
+    <ClCompile Include="GameCamera\FollowCarCamera.cpp" />
     <ClCompile Include="Scenes\DebugScene.cpp" />
     <ClCompile Include="physics\PhysicsGhostobject.cpp" />
     <ClCompile Include="physics\MeshCollider.cpp" />
@@ -97,6 +98,7 @@
     <ClInclude Include="Car\State\CarStateAccele.h" />
     <ClInclude Include="characterController\CharacterController.h" />
     <ClInclude Include="Car\State\ICarState.h" />
+    <ClInclude Include="GameCamera\FollowCarCamera.h" />
     <ClInclude Include="Scenes\DebugScene.h" />
     <ClInclude Include="physics\PhysicsGhostobject.h" />
     <ClInclude Include="physics\MeshCollider.h" />
