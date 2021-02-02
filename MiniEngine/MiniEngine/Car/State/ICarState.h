@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Car/Car.h"
+class CarStateIdle;
 class CarStateAccele;
 
 /// <summary>
@@ -12,6 +13,7 @@ public:
 	ICarState(Car* car);			//コンストラクタ。
 	virtual ~ICarState();			//デストラクタ。
 
+	friend class Car;
 protected:
 	virtual void Enter() = 0;		//事前処理。
 	virtual void Leave() = 0;		//事後処理。

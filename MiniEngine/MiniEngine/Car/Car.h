@@ -16,6 +16,9 @@ public:
 
 	friend class ICarState;
 	friend class CarStateAccele;
+	friend class CarStateIdle;
+public:
+	void ChangeState(ICarState* state);
 public:		//Set関数とか
 	void SetCamera(CGameCamera* camera)
 	{
@@ -45,9 +48,9 @@ public:		//車の移動などの処理
 	/// 加速度を速度に加算する。
 	/// </summary>
 	/// <param name="accele">加速度。</param>
-	void AddAcceleration(const Vector3& accele)
+	void AddAcceleration(const float accele)
 	{
-		m_moveSpeed += accele;
+		m_speed = min(MAX_SPEED, m_speed + accele);
 	}
 	/// <summary>
 	/// 車の向きを計算する。
@@ -58,13 +61,16 @@ private:
 	CGameCamera* m_camera = nullptr;
 protected:
 	ICarState* m_currentState = nullptr;
-	CarStateIdle m_stateIdle;
-	CarStateAccele m_stateAccele;
+	std::unique_ptr<CarStateIdle> m_stateIdle;
+	std::unique_ptr<CarStateAccele> m_stateAccele;
 protected:
 	prefab::ModelRender* m_model = nullptr;
+	//移動関係。
 	CCharacterController m_charaCon;		//キャラコン。
 	Vector3 m_position = Vector3::Zero;		//座標。
 	Vector3 m_moveSpeed = Vector3::Zero;	//移動速度。
+	float m_speed = 0.0f;					//速度。
+	//車の向き
 	Vector3 m_forward = Vector3::AxisZ;		//車の前方向。
 	Vector3 m_right = Vector3::AxisX;		//車の右方向。
 	Vector3 m_up = Vector3::AxisY;			//車の上方向。

@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #include "CarStateAccele.h"
+#include "CarStateIdle.h"
 
 namespace {
-	const float ACCELE_SPEED = 100.0f;
+	const float ACCELE_SPEED = 400.0f;
 }
 
 CarStateAccele::CarStateAccele(Car* car):
@@ -24,10 +25,16 @@ void CarStateAccele::Leave()
 
 void CarStateAccele::Execute()
 {
-	m_car->CalcDirection();
+	const float PadX = g_pad[0]->GetLStickXF();
+	const float PadY = g_pad[0]->GetLStickYF();
+	const float DeltaTime = GameTime().GetFrameDeltaTime();
 
-	Vector3 accele = Vector3::Zero;
-	accele += m_car->GetForward() * ACCELE_SPEED;
+	float accele = 0.0f;
+	accele += ACCELE_SPEED * DeltaTime;
 	m_car->AddAcceleration(accele);
 
+	if (!g_pad[0]->IsPress(enButtonA))
+	{
+		m_car->ChangeState(m_car->m_stateIdle.get());
+	}
 }
