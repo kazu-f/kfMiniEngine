@@ -1,6 +1,5 @@
 #pragma once
 
-class CGameCamera;
 class ICarState;
 class CarStateIdle;
 class CarStateAccele;
@@ -20,10 +19,6 @@ public:
 public:
 	void ChangeState(ICarState* state);
 public:		//SetŠÖ”‚Æ‚©
-	void SetCamera(CGameCamera* camera)
-	{
-		m_camera = camera;
-	}
 	void SetPosition(const Vector3& pos)
 	{
 		m_position = pos;
@@ -58,7 +53,6 @@ public:		//Ô‚ÌˆÚ“®‚È‚Ç‚Ìˆ—
 	void CalcDirection();
 
 private:
-	CGameCamera* m_camera = nullptr;
 	const float MAX_SPEED = 3400.0f;
 protected:
 	ICarState* m_currentState = nullptr;

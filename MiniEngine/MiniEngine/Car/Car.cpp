@@ -36,8 +36,6 @@ bool Car::Start()
 	m_model->SetPosition(m_position);
 	m_model->SetRotation(m_rotation);
 	m_model->SetShadowCasterFlag(true);
-	//カメラにポジションを渡す。
-	m_camera->SetTarget(m_position);
 
 	//キャラコンの初期化。
 	m_charaCon.Init(
@@ -90,7 +88,6 @@ void Car::Update()
 
 	m_model->SetPosition(m_position);
 	m_model->SetRotation(m_rotation);
-	m_camera->SetTarget(m_position);
 
 	//if (g_pad[0]->IsTrigger(enButtonX)) {
 	//	DeleteGO(this);

@@ -3,7 +3,7 @@
 /// ゲームクラス。
 /// </summary>
 
-class CGameCamera;
+class FollowCarCamera;
 class Car;
 class Spectator;
 class SceneLight;
@@ -37,7 +37,7 @@ private:
 
 	CLevel m_courseLevel;					//コースのレベル。
 	CLevel m_spectatorLevel;				//観客のレベル。
-	CGameCamera* m_camera = nullptr;		//カメラ。
+	FollowCarCamera* m_camera = nullptr;		//カメラ。
 	Car* m_car = nullptr;					//車。
 	Spectator* m_spectator[enSpectatorNum] = { nullptr };		//観客。
 	SceneLight* m_light = nullptr;			//照明。

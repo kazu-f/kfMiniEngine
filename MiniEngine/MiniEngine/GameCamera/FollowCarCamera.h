@@ -24,7 +24,7 @@ public:
 
 private:
 	Car* m_car = nullptr;
-
-
+	Vector3 m_position = Vector3::Zero;
+	Vector3 m_target = Vector3::Zero;
 };
 

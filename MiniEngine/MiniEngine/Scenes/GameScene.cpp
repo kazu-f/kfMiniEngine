@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "GameScene.h"
-#include "GameCamera/GameCamera.h"
+#include "GameCamera/FollowCarCamera.h"
 #include "Car/Car.h"
 #include "Spectator/Spectator.h"
 #include "Spectator/SpectatorNames.h"
@@ -21,7 +21,7 @@ bool GameScene::Start()
 	switch (m_initState)
 	{
 	case GameScene::enInit_Athor:
-		m_camera = NewGO<CGameCamera>(5);		//カメラ。
+		m_camera = NewGO<FollowCarCamera>(5);		//カメラ。
 
 		m_light = NewGO<SceneLight>(0);			//照明。
 
@@ -41,7 +41,7 @@ bool GameScene::Start()
 			});
 		if (m_car != nullptr)
 		{
-			m_car->SetCamera(m_camera);
+			m_camera->SetTargetCar(m_car);
 		}
 		else
 		{
