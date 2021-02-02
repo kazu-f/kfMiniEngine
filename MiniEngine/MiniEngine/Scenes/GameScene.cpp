@@ -30,7 +30,6 @@ bool GameScene::Start()
 	case GameScene::enInit_Course:
 		m_courseLevel.Init("Assets/level/RaceLevel.tkl", [&](SLevelObjectData& objData) {
 			if (wcscmp(objData.name, L"Sup") == 0) {
-				//m_player = NewGO<Player>(0);
 				m_car = NewGO<Car>(0);
 				m_car->SetPosition(objData.position);
 				m_car->SetRotation(objData.rotation);
@@ -46,7 +45,10 @@ bool GameScene::Start()
 		}
 		else
 		{
-			DEBUG_LOG("レベルで車が見つからなかった。")
+			ENGINE_LOG(
+				"レベルで車が見つからなかった。"
+				":tklファイルのデータを確認。"
+			)
 		}
 		m_initState = enInit_Spectator;
 

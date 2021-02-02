@@ -7,7 +7,6 @@
 
 namespace {
 	const float GRAVITY = 980.0f;
-	const float MAX_SPEED = 3400.0f;
 }
 
 

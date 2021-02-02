@@ -59,6 +59,7 @@ public:		//Ô‚ÌˆÚ“®‚È‚Ç‚Ìˆ—
 
 private:
 	CGameCamera* m_camera = nullptr;
+	const float MAX_SPEED = 3400.0f;
 protected:
 	ICarState* m_currentState = nullptr;
 	std::unique_ptr<CarStateIdle> m_stateIdle;
