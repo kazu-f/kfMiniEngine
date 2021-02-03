@@ -48,12 +48,20 @@ public:		//車の移動などの処理
 		m_speed = min(MAX_SPEED, m_speed + accele);
 	}
 	/// <summary>
+	/// 減速度を与える。
+	/// </summary>
+	/// <param name="diccele">減速度。</param>
+	void AddDicceleration(const float diccele)
+	{
+		m_speed = max(0.0f, m_speed - diccele);
+	}
+	/// <summary>
 	/// 車の向きを計算する。
 	/// </summary>
 	void CalcDirection();
 
 private:
-	const float MAX_SPEED = 3400.0f;
+	const float MAX_SPEED = 6800.0f;
 protected:
 	ICarState* m_currentState = nullptr;
 	std::unique_ptr<CarStateIdle> m_stateIdle;
