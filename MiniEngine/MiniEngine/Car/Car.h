@@ -3,6 +3,7 @@
 class ICarState;
 class CarStateIdle;
 class CarStateAccele;
+class CarStateBrake;
 
 class Car : public IGameObject
 {
@@ -16,6 +17,7 @@ public:
 	friend class ICarState;
 	friend class CarStateAccele;
 	friend class CarStateIdle;
+	friend class CarStateBrake;
 public:
 	void ChangeState(ICarState* state);
 public:		//SetŠÖ”‚Æ‚©
@@ -66,6 +68,7 @@ protected:
 	ICarState* m_currentState = nullptr;
 	std::unique_ptr<CarStateIdle> m_stateIdle;
 	std::unique_ptr<CarStateAccele> m_stateAccele;
+	std::unique_ptr<CarStateBrake> m_stateBrake;
 protected:
 	prefab::ModelRender* m_model = nullptr;
 	//ˆÚ“®ŠÖŒWB

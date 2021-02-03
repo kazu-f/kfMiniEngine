@@ -291,6 +291,9 @@
     <ClCompile Include="GameCamera\FollowCarCamera.cpp">
       <Filter>camera</Filter>
     </ClCompile>
+    <ClCompile Include="Car\State\CarStateBrake.cpp">
+      <Filter>Car\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MiniEngine.h">
@@ -541,6 +544,9 @@
     </ClInclude>
     <ClInclude Include="GameCamera\FollowCarCamera.h">
       <Filter>camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Car\State\CarStateBrake.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

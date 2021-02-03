@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CarStateIdle.h"
 #include "CarStateAccele.h"
+#include "CarStateBrake.h"
 
 namespace {
 	const float DICCELATION = 30.0f;
@@ -31,5 +32,9 @@ void CarStateIdle::Execute()
 	if (g_pad[0]->IsPress(enButtonA))
 	{
 		m_car->ChangeState(m_car->m_stateAccele.get());
+	}
+	if (g_pad[0]->IsPress(enButtonB))
+	{
+		m_car->ChangeState(m_car->m_stateBrake.get());
 	}
 }

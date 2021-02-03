@@ -3,6 +3,7 @@
 #include "State/ICarState.h"
 #include "State/CarStateIdle.h"
 #include "State/CarStateAccele.h"
+#include "State/CarStateBrake.h"
 #include "GameCamera/GameCamera.h"
 
 namespace {
@@ -15,6 +16,7 @@ Car::Car()
 	//ステートを初期化。
 	m_stateIdle = std::make_unique<CarStateIdle>(this);
 	m_stateAccele = std::make_unique<CarStateAccele>(this);
+	m_stateBrake = std::make_unique<CarStateBrake>(this);
 
 	//現在のステートを初期化。
 	ChangeState(m_stateIdle.get());
