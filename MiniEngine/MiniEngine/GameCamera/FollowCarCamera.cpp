@@ -3,10 +3,12 @@
 #include "Car/Car.h"
 
 namespace {
-	const Vector3 CAMERA_DISTANCE = { 0.0f,100.0f,-500.0f };		//カメラの最初のターゲットからの位置。
+	const Vector3 CAMERA_DISTANCE = { 0.0f,150.0f,-800.0f };		//カメラの最初のターゲットからの位置。
 	const float CAMERA_FAR = 10000.0f;							//カメラの遠平面。
 	const float TARGET_HIGHT = 80.0f;							//カメラのターゲットの座標からの高さ。
 	const float FOLLOW_WEIGHT = 0.7f;							//追従する強さ(0.0～1.0)。1.0に近いほど追従が強い。
+	const float MAX_LENGTH = 1000.0f;							//追従する際の最大距離。
+	const float MIN_LENGTH = 600.0f;							//追従する時の最小距離。
 }
 
 FollowCarCamera::FollowCarCamera()
@@ -63,7 +65,7 @@ void FollowCarCamera::Update()
 	float toCameraPosY = toCameraPosXZ.y;
 	toCameraPosXZ.y = 0.0f;
 	//ベクトルの長さを記録しておく。
-	float toCameraPosXZLen = toCameraPosXZ.Length();
+	//float toCameraPosXZLen = toCameraPosXZ.Length();
 	toCameraPosXZ.Normalize();		//正規化。
 
 	//ターゲットの新しい座標を取得。
@@ -73,13 +75,18 @@ void FollowCarCamera::Update()
 	//新しい注視点と現在のカメラの視点を使ってXZ平面でのベクトルを求める。
 	Vector3 toNewCameraPos = m_position - targetPos;
 	toNewCameraPos.y = 0.0f;
+	//長さを記録する。
+	float toNewCameraPosXZLen = toNewCameraPos.Length();
 	toNewCameraPos.Normalize();
 
 	//視点の位置を計算していく。
 	toNewCameraPos = toNewCameraPos * FOLLOW_WEIGHT + toCameraPosXZ * (1.0f - FOLLOW_WEIGHT);
 	toNewCameraPos.Normalize();			//正規化。
-	//記録しておいたベクトルの長さを掛けて視点までのベクトルを出す。
-	toNewCameraPos *= toCameraPosXZLen;
+	//ばねカメラ的な挙動のための距離を計算。
+	float finalLen = toNewCameraPosXZLen * FOLLOW_WEIGHT + MIN_LENGTH * (1.0f - FOLLOW_WEIGHT);
+	finalLen = min(MAX_LENGTH, max(MIN_LENGTH, finalLen));
+	//ベクトルの長さを掛けて視点までのベクトルを出す。
+	toNewCameraPos *= finalLen;
 	//高さを戻す。
 	toNewCameraPos.y = toCameraPosY;
 
