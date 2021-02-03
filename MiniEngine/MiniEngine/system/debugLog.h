@@ -62,9 +62,9 @@ namespace Engine {
 	#define ENGINE_MESSAGE_BOX(format,...)		WarningMessageBox(__FILE__,__LINE__,format,__VA_ARGS__);	//メッセージボックスを表示。
 	#define ENGINE_ASSERT(flag,format,...)		DebugAssert(flag,format,__FILE__,__LINE__,__VA_ARGS__);		//アサートする。
 #else
-	#define DEBUG_LOG(text)
-	#define WARNING_MESSAGE_BOX(text)
-	#define ASSERT(text)
+	#define ENGINE_LOG(format,...)
+	#define ENGINE_MESSAGE_BOX(format,...)
+	#define ENGINE_ASSERT(flag,format,...)
 #endif // _DEBUG
 
 #endif // _DEBUG_LOG_H_
