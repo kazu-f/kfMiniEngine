@@ -100,6 +100,25 @@ float CalcShadow(float3 worldPos, float zInView)
 	return shadow;
 }
 
+//法線を計算。
+float3 CalcNormal(float3 normal, float3 biNormal, float3 tangent, float2 uv)
+{
+	//法線の計算。
+	float3 ret;
+	if (hasNormalMap) {
+		//法線マップから法線を引っ張ってくる。
+		float3 binSpaceNormal = g_normalMap.Sample(g_sampler, uv).xyz;
+		binSpaceNormal = (binSpaceNormal * 2.0f) - 1.0f;	//-1.0f～1.0fに調整。
+		ret = tangent * binSpaceNormal.x		//接線(法線に対して右？)
+			+ biNormal * binSpaceNormal.y			//従法線(法線に対して上)
+			+ normal * binSpaceNormal.z;			//法線方向
+	}
+	else {
+		ret = normal;
+	}
+	return ret;
+}
+
 //頂点シェーダーのコア関数。
 SPSIn VSMainCore(SVSIn vsIn, float4x4 wMat)
 {
@@ -187,18 +206,7 @@ SPSIn VSMainSkinInstancing(SVSIn vsIn, uint instanceID : SV_InstanceID)
 float4 PSMain(SPSIn psIn) : SV_Target0
 {
 	//法線の計算。
-	float3 normal;
-	if (hasNormalMap) {
-		//法線マップから法線を引っ張ってくる。
-		float3 binSpaceNormal = g_normalMap.Sample(g_sampler, psIn.uv).xyz;
-		binSpaceNormal = (binSpaceNormal * 2.0f) - 1.0f;	//-1.0f～1.0fに調整。
-		normal = psIn.Tangent * binSpaceNormal.x		//接線(法線に対して右？)
-			+ psIn.biNormal * binSpaceNormal.y			//従法線(法線に対して上)
-			+ psIn.normal * binSpaceNormal.z;			//法線方向
-	}
-	else {
-		normal = psIn.normal;
-	}
+	float3 normal = CalcNormal(psIn.normal,psIn.biNormal,psIn.Tangent,psIn.uv);
 	float3 lig = 0;		//ライト
 	float3 toEye = normalize(eyePos - psIn.worldPos);		//点から視点までの正規化ベクトル
 	float metaric = 0.0f;			//スペキュラ
@@ -228,11 +236,6 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 
 	lig *= lerp(1.0f, 0.5f, shadow);
 
-	//if (shadow == 1.0f)
-	//{
-	//	lig *= 0.5f;
-	//}
-
 	//最終的な色を決定する。
 	float4 finalColor = 1.0f;
 	finalColor.xyz = albedoColor.xyz * lig;
@@ -245,18 +248,7 @@ PSOut_GBuffer PSMain_RenderGBuffer (SPSIn psIn){
 
 	Out.albedo = g_texture.SampleLevel(g_sampler, psIn.uv, 0);		//アルベド。
 	//法線マップ。
-	float3 normal;
-	if (hasNormalMap) {
-		//法線マップから法線を引っ張ってくる。
-		float3 binSpaceNormal = g_normalMap.Sample(g_sampler, psIn.uv).xyz;
-		binSpaceNormal = (binSpaceNormal * 2.0f) - 1.0f;	//-1.0f～1.0fに調整。
-		normal = psIn.Tangent * binSpaceNormal.x		//接線(法線に対して右？)
-			+ psIn.biNormal * binSpaceNormal.y			//従法線(法線に対して上)
-			+ psIn.normal * binSpaceNormal.z;			//法線方向
-	}
-	else {
-		normal = psIn.normal;
-	}
+	float3 normal = CalcNormal(psIn.normal, psIn.biNormal, psIn.Tangent, psIn.uv);
 	Out.normal.xyz = (normal / 2.0f) + 0.5f;
 
 	//ワールド座標。

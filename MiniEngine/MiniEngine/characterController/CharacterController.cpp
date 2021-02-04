@@ -272,7 +272,7 @@ namespace Engine {
 				}
 			}
 			else {
-				//地面上にいない場合は1m下を見る。
+				//地面上にいる場合は1m下を見る。
 				endPos.y -= SCALE_1M;
 			}
 			//レイの終点の座標を設定。

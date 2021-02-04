@@ -74,11 +74,6 @@ float4 PSMain(PSDefferdInput psIn) : SV_Target0
 
 	lig *= lerp(1.0f, 0.5f, shadow);
 
-	//if (shadow == 1.0f)
-	//{
-	//	lig *= 0.5f;
-	//}
-
 	//最終的な色を決定する。
 	float4 albedoColor = g_albedoMap.Sample(g_sampler, psIn.uv);		//アルベド。
 	
