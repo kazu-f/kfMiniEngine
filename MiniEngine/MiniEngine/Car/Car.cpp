@@ -7,7 +7,9 @@
 #include "GameCamera/GameCamera.h"
 
 namespace {
-	const float GRAVITY = 980.0f;
+	const float GRAVITY = 980.0f;			//重力加速度。
+	const float HANDLE_WEIGHT = 0.3f;		//ハンドルの効き。
+	const float CURVE_DEG = 20.0f;			//カーブの角度。
 }
 
 
@@ -55,15 +57,17 @@ void Car::Update()
 	const float PadY = g_pad[0]->GetLStickYF();
 	const float DeltaTime = GameTime().GetFrameDeltaTime();
 
+
+
+#if 0
 	//回転を軽くかける。
 	Quaternion carRot;
-	carRot.SetRotationDegY(Math::PI * 20.0f * PadX * DeltaTime);
+	carRot.SetRotationDegY(Math::PI * CURVE_DEG * PadX * DeltaTime);
 	m_rotation.Multiply(carRot);
 
 	//車の方向を求める。
 	CalcDirection();
 
-#if 0
 	const float MOVE_SPEED = 4000.0f;
 	Vector3 camRight = g_camera3D->GetRight();
 	camRight.y = 0.0f;
@@ -79,9 +83,39 @@ void Car::Update()
 #else
 	//ステート実行。
 	m_currentState->Execute();
+	//方向を求める。
+	Vector3 vMove = m_moveSpeed;
+	vMove.y = 0.0f;
+	//回転を軽くかける。
+	Quaternion dirRot;
+	dirRot.SetRotationDegY(Math::PI * CURVE_DEG * PadX * DeltaTime);
+	dirRot.Apply(vMove);
+	vMove.Normalize();
+	//移動方向を求める。
+	vMove = m_forward * HANDLE_WEIGHT + vMove * (1.0f - HANDLE_WEIGHT);
 	//移動速度を求める。
-	m_moveSpeed.x = m_forward.x * m_speed;
-	m_moveSpeed.z = m_forward.z * m_speed;
+	m_moveSpeed.x = vMove.x * m_speed;
+	m_moveSpeed.z = vMove.z * m_speed;
+
+	//車への回転を計算。
+	vMove.Normalize();
+	float angle = m_forward.Dot(vMove);
+	float radian = acosf(angle);
+	float RtoV = m_right.Dot(vMove);
+	if (RtoV < 0.0f)
+	{
+		//逆にする。
+		radian *= -1.0f;
+	}
+
+	if (angle < 0.9998f
+		&& angle > -0.9998f)
+	{
+		m_rotation.AddRotationY(radian);
+	}
+
+	//回転から方向を計算。
+	CalcDirection();
 #endif
 
 	m_moveSpeed.y -= GRAVITY;
