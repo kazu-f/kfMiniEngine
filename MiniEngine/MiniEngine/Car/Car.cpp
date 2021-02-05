@@ -137,6 +137,12 @@ void Car::OnDestroy()
 
 void Car::ChangeState(ICarState* state)
 {
+	//変化なし。
+	if (m_currentState == state)
+	{
+		return;
+	}
+
 	if (m_currentState != nullptr)
 	{
 		//現在ステートの事後処理。
