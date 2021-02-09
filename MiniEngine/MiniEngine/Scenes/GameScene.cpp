@@ -6,6 +6,11 @@
 #include "Spectator/SpectatorNames.h"
 #include "GameLight/SceneLight.h"
 
+#define ON 1
+#define OFF 0
+#define IS_SPECTATOR ON			//観客を出すかどうか。
+
+
 GameScene::GameScene()
 {
 }
@@ -54,6 +59,7 @@ bool GameScene::Start()
 
 		break;
 	case GameScene::enInit_Spectator:
+#if IS_SPECTATOR
 		//観客をロード。
 		for (int i = 0; i < enSpectatorNum; i++) {
 			m_spectator[i] = NewGO<Spectator>(0);
@@ -128,6 +134,7 @@ bool GameScene::Start()
 
 		m_spectator[enClaudiaWoman]->SetModelFilePath(FilePath::claudiaWoman);
 		m_spectator[enClaudiaWoman]->SetAnimFilePath(AnimPath::claudiaWomanAnim);
+#endif
 
 		ret = true;
 		break;
