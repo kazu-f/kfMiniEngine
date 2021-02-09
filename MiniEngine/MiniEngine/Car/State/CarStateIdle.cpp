@@ -27,7 +27,7 @@ void CarStateIdle::Leave()
 void CarStateIdle::Execute()
 {
 	//‰½‚à‚µ‚Ä‚È‚¢‚Æ‚«‚Í­‚µ‚¸‚Â‘¬“x‚ð—Ž‚Æ‚·B
-	m_car->AddDicceleration(DICCELATION * 60.0f * GameTime().GetFrameDeltaTime());
+	m_car->AddDicceleration(DICCELATION);
 
 	if (g_pad[0]->IsPress(enButtonA))
 	{

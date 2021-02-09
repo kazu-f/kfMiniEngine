@@ -97,20 +97,21 @@ void Car::Update()
 	m_moveSpeed.x = vMove.x * m_speed;
 	m_moveSpeed.z = vMove.z * m_speed;
 
-	//Ô‚Ö‚Ì‰ñ“]‚ğŒvZB
-	vMove.Normalize();
-	float angle = m_forward.Dot(vMove);
-	float radian = acosf(angle);
-	float RtoV = m_right.Dot(vMove);
-	if (RtoV < 0.0f)
+	Vector3 moveScaler = m_moveSpeed;
+	moveScaler.y = 0.0f;
+	if (moveScaler.Length() > 1.0f)
 	{
-		//‹t‚É‚·‚éB
-		radian *= -1.0f;
-	}
+		//Ô‚Ö‚Ì‰ñ“]‚ğŒvZB
+		vMove.Normalize();
+		float angle = m_forward.Dot(vMove);
+		float radian = acosf(angle);
+		float RtoV = m_right.Dot(vMove);
+		if (RtoV < 0.0f)
+		{
+			//‹t‚É‚·‚éB
+			radian *= -1.0f;
+		}
 
-	if (angle < 0.9998f
-		&& angle > -0.9998f)
-	{
 		m_rotation.AddRotationY(radian);
 	}
 
@@ -120,7 +121,7 @@ void Car::Update()
 
 	m_moveSpeed.y -= GRAVITY;
 
-	m_position = m_charaCon.Execute(m_moveSpeed);
+	m_position = m_charaCon.Execute(m_moveSpeed, DeltaTime);
 
 	m_model->SetPosition(m_position);
 	m_model->SetRotation(m_rotation);

@@ -18,7 +18,7 @@ CarStateAccele::~CarStateAccele()
 
 void CarStateAccele::Enter()
 {
-	m_car->AddAcceleration(FIRST_SPEED * 60.0f * GameTime().GetFrameDeltaTime());
+	m_car->AddAcceleration(FIRST_SPEED);
 }
 
 void CarStateAccele::Leave()
@@ -31,7 +31,7 @@ void CarStateAccele::Execute()
 	//const float PadY = g_pad[0]->GetLStickYF();
 	//const float DeltaTime = GameTime().GetFrameDeltaTime();
 
-	m_car->AddAcceleration(ACCELE_SPEED * 60.0f * GameTime().GetFrameDeltaTime());
+	m_car->AddAcceleration(ACCELE_SPEED);
 
 	if (!g_pad[0]->IsPress(enButtonA))
 	{

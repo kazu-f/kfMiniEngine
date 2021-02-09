@@ -26,7 +26,7 @@ void CarStateBrake::Leave()
 void CarStateBrake::Execute()
 {
 	//ブレーキで減速する。
-	m_car->AddDicceleration(BRAKE_POWER * 60.0f * GameTime().GetFrameDeltaTime());
+	m_car->AddDicceleration(BRAKE_POWER);
 
 	if (!g_pad[0]->IsPress(enButtonB))
 	{

@@ -47,7 +47,7 @@ public:		//車の移動などの処理
 	/// <param name="accele">加速度。</param>
 	void AddAcceleration(const float accele)
 	{
-		m_speed = min(MAX_SPEED, m_speed + accele);
+		m_speed = min(MAX_SPEED, m_speed + (accele * 60.0f * GameTime().GetFrameDeltaTime()));
 	}
 	/// <summary>
 	/// 減速度を与える。
@@ -55,7 +55,7 @@ public:		//車の移動などの処理
 	/// <param name="diccele">減速度。</param>
 	void AddDicceleration(const float diccele)
 	{
-		m_speed = max(0.0f, m_speed - diccele);
+		m_speed = max(0.0f, m_speed - (diccele * 60.0f * GameTime().GetFrameDeltaTime()));
 	}
 	/// <summary>
 	/// 車の向きを計算する。
