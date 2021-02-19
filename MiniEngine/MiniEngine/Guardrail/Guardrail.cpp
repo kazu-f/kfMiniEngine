@@ -35,6 +35,9 @@ bool Guardrail::Start()
 		0,
 		static_cast<int>(m_objectsData.size())
 	);
+	//‰e‚ÌÝ’èB
+	m_model->SetShadowCasterFlag(true);
+	m_model->SetShadowReceiverFlag(true);
 
 	return true;
 }

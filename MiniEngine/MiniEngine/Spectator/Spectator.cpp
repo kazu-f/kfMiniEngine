@@ -1,6 +1,10 @@
 #include "stdafx.h"
 #include "Spectator.h"
 
+#define ON 1
+#define OFF 0
+#define ISBOX ON
+
 Spectator::Spectator()
 {
 }
@@ -40,23 +44,35 @@ bool Spectator::Start()
 	//モデル初期化。
 	m_model = NewGO<prefab::ModelRender>(0);
 	ModelInitData modelInitData;
+#ifdef ISBOX
+	modelInitData.m_tkmFilePath = "Assets/modelData/testbg/testBox.tkm";
+	modelInitData.m_fxFilePath = "Assets/shader/model.fx";
+	modelInitData.m_vsEntryPointFunc = "VSMainInstancing";
+
+	//初期化。
+	m_model->Init(
+		modelInitData,
+		nullptr,
+		0,
+		static_cast<int>(m_objectsData.size())
+	);
+#else
 	modelInitData.m_tkmFilePath = m_modelFilePath;
 	modelInitData.m_fxFilePath = "Assets/shader/model.fx";
 	modelInitData.m_vsEntryPointFunc = "VSMainSkinInstancing";
 	modelInitData.m_modelUpAxis = enModelUpAxis_Z;
-
-
 	//アニメーション情報。
 	AnimClipInitData animInitData[1];
 	animInitData[0].tkaFilePath = m_animFilePath;
 	animInitData[0].isLoop = true;
 	//初期化。
 	m_model->Init(
-		modelInitData, 
-		animInitData, 
+		modelInitData,
+		animInitData,
 		1,
 		static_cast<int>(m_objectsData.size())
 	);
+#endif
 
 	//影の設定。
 	m_model->SetShadowCasterFlag(m_isShadowCaster);

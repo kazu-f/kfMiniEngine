@@ -36,7 +36,7 @@ private:
 private:
 	using ColliderPtr = std::unique_ptr<CPhysicsStaticObject>;
 	std::vector<ColliderPtr> m_colliders;
-	const Vector3 BOX_SIZE = { 27.0f,75.0f,120.0f };
+	const Vector3 BOX_SIZE = { 27.0f,75.0f,100.0f };
 
 	prefab::ModelRender* m_model = nullptr;	//モデル。
 	std::vector<LowObjctData> m_objectsData;	//インスタンシング描画用のデータ。
