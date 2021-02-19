@@ -5,6 +5,7 @@
 #include "Spectator/Spectator.h"
 #include "Spectator/SpectatorNames.h"
 #include "GameLight/SceneLight.h"
+#include "Guardrail/Guardrail.h"
 
 #define ON 1
 #define OFF 0
@@ -17,6 +18,8 @@ namespace {
 	const char* COURSE_PATH = "Assets/level/CourseLevel2.tkl";
 	const char* SPECTATOR_PATH = "Assets/level/spectatorLevel2.tkl";
 #endif
+	const char* GUARDRAIL_ROAD = "Assets/level/RoadGuardrailLevel.tkl";
+	const char* GUARDRAIL_TURNROAD = "Assets/level/RoadTurnGuardrailLevel.tkl";
 }
 
 
@@ -42,6 +45,8 @@ bool GameScene::Start()
 		m_initState = enInit_Course;
 		break;
 	case GameScene::enInit_Course:
+		m_guardrail = NewGO<Guardrail>(0);		//ガードレール。
+
 		m_courseLevel.Init(COURSE_PATH, [&](SLevelObjectData& objData) {
 			if (wcscmp(objData.name, L"Sup") == 0) {
 				m_car = NewGO<Car>(0);
@@ -50,6 +55,18 @@ bool GameScene::Start()
 
 				return true;
 			}
+
+			if (objData.EqualObjectName(L"Road/SM_Road"))
+			{
+				//ガードレールを読み込んでいく。
+				m_guardrail->LoadGuardrail(GUARDRAIL_ROAD, objData.position, objData.rotation);
+			}
+			if (objData.EqualObjectName(L"Road/SM_TurnRoad"))
+			{
+				//ガードレールを読み込んでいく。
+				m_guardrail->LoadGuardrail(GUARDRAIL_TURNROAD, objData.position, objData.rotation);
+			}
+
 
 			return false;
 			});

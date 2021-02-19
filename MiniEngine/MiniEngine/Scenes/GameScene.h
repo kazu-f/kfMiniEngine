@@ -6,6 +6,7 @@
 class FollowCarCamera;
 class Car;
 class Spectator;
+class Guardrail;
 class SceneLight;
 
 class GameScene:public IGameObject
@@ -40,6 +41,7 @@ private:
 	FollowCarCamera* m_camera = nullptr;		//カメラ。
 	Car* m_car = nullptr;					//車。
 	Spectator* m_spectator[enSpectatorNum] = { nullptr };		//観客。
+	Guardrail* m_guardrail = nullptr;		//ガードレール。
 	SceneLight* m_light = nullptr;			//照明。
 };
 

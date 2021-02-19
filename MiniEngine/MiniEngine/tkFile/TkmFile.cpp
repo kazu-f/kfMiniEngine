@@ -309,7 +309,7 @@ namespace Engine {
 		FILE* fp = fopen(filePath, "rb");
 		if (fp == nullptr) {
 			ENGINE_MESSAGE_BOX(
-				"tkmファイルが開けません。\n"
+				"tkmファイル%sが開けません。\n",filePath,
 				"ファイルパスを確認してください。\n"
 			);
 			return;

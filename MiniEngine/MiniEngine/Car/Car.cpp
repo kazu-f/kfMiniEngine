@@ -81,21 +81,46 @@ void Car::Update()
 	m_moveSpeed += camRight * PadX * MOVE_SPEED;
 	m_moveSpeed += camForward * PadY * MOVE_SPEED;
 #else
+	if (std::isnan(m_moveSpeed.x)
+		|| std::isnan(m_moveSpeed.z))
+	{
+		ENGINE_ASSERT(false, "NaNが入った。");
+	}
 	//ステート実行。
 	m_currentState->Execute();
 	//方向を求める。
 	Vector3 vMove = m_moveSpeed;
 	vMove.y = 0.0f;
+	if (std::isnan(vMove.x)
+		|| std::isnan(vMove.z))
+	{
+		ENGINE_ASSERT(false, "NaNが入った。");
+	}
 	//回転を軽くかける。
 	Quaternion dirRot;
 	dirRot.SetRotationDegY(Math::PI * CURVE_DEG * PadX * DeltaTime);
 	dirRot.Apply(vMove);
+	if (std::isnan(vMove.x)
+		|| std::isnan(vMove.z))
+	{
+		ENGINE_ASSERT(false, "NaNが入った。");
+	}
 	vMove.Normalize();
+	if (std::isnan(vMove.x)
+		|| std::isnan(vMove.z))
+	{
+		ENGINE_ASSERT(false, "NaNが入った。");
+	}
 	//移動方向を求める。
 	vMove = m_forward * HANDLE_WEIGHT + vMove * (1.0f - HANDLE_WEIGHT);
 	//移動速度を求める。
 	m_moveSpeed.x = vMove.x * m_speed;
 	m_moveSpeed.z = vMove.z * m_speed;
+	if (std::isnan(m_moveSpeed.x)
+		|| std::isnan(m_moveSpeed.z))
+	{
+		ENGINE_ASSERT(false, "NaNが入った。");
+	}
 
 	Vector3 moveScaler = m_moveSpeed;
 	moveScaler.y = 0.0f;
@@ -104,6 +129,7 @@ void Car::Update()
 		//車への回転を計算。
 		vMove.Normalize();
 		float angle = m_forward.Dot(vMove);
+		angle = min(1.0f, max(0.0f, angle));
 		float radian = acosf(angle);
 		float RtoV = m_right.Dot(vMove);
 		if (RtoV < 0.0f)
@@ -113,6 +139,11 @@ void Car::Update()
 		}
 
 		m_rotation.AddRotationY(radian);
+
+		if (std::isnan(m_rotation.x))
+		{
+			ENGINE_ASSERT(false, "NaNが入った。");
+		}
 	}
 
 	//回転から方向を計算。
@@ -120,6 +151,12 @@ void Car::Update()
 #endif
 
 	m_moveSpeed.y -= GRAVITY;
+
+	if(std::isnan(m_moveSpeed.x)
+		|| std::isnan(m_moveSpeed.z))
+	{
+		ENGINE_ASSERT(false,"NaNが入った。");
+	}
 
 	m_position = m_charaCon.Execute(m_moveSpeed, DeltaTime);
 

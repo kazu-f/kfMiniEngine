@@ -82,6 +82,9 @@
     <Filter Include="Car\State">
       <UniqueIdentifier>{df3bc0ae-0ac5-4329-a3a2-9301b6c22533}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Guardrail">
+      <UniqueIdentifier>{6b020dc1-ee05-4625-a0fb-3ae623c6706c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tkEngine.cpp">
@@ -293,6 +296,9 @@
     </ClCompile>
     <ClCompile Include="Car\State\CarStateBrake.cpp">
       <Filter>Car\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Guardrail\Guardrail.cpp">
+      <Filter>Guardrail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -547,6 +553,9 @@
     </ClInclude>
     <ClInclude Include="Car\State\CarStateBrake.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Guardrail\Guardrail.h">
+      <Filter>Guardrail</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
