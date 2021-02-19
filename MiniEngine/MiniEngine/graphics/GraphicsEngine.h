@@ -281,7 +281,7 @@ namespace Engine {
 		std::unique_ptr<CShadowMap> m_shadowMap;			//指向性シャドウマップ。
 		std::unique_ptr<CGBufferRender> m_gBuffer;			//GBuffer。
 		std::unique_ptr<CDefferdShading> m_defferd;			//ディファード。
-
+		int m_vsyncInterval = 1;							//VSyncの間隔
 		////エフェクト関係
 		//EffekseerRenderer::RendererRef m_renderer;
 	};

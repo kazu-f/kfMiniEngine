@@ -66,6 +66,11 @@ namespace Engine {
 	}
 	bool GraphicsEngine::Init(HWND hwnd, UINT frameBufferWidth, UINT frameBufferHeight)
 	{
+		auto hdc = GetDC(hwnd);
+		auto rate = GetDeviceCaps(hdc, VREFRESH);
+		if (rate >= 120) {
+			m_vsyncInterval = 2;
+		}
 		m_frameBufferWidth = frameBufferWidth;
 		m_frameBufferHeight = frameBufferHeight;
 
@@ -539,7 +544,7 @@ namespace Engine {
 		m_commandQueue->ExecuteCommandLists(_countof(ppCommandLists), ppCommandLists);
 
 		// Present the frame.
-		m_swapChain->Present(1, 0);
+		m_swapChain->Present(m_vsyncInterval, 0);
 
 		//•`‰æŠ®—¹‘Ò‚¿B
 		WaitDraw();
