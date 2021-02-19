@@ -3,7 +3,7 @@
 
 #define ON 1
 #define OFF 0
-#define ISBOX ON
+#define ISBOX OFF
 
 Spectator::Spectator()
 {
@@ -44,7 +44,7 @@ bool Spectator::Start()
 	//ÉÇÉfÉãèâä˙âªÅB
 	m_model = NewGO<prefab::ModelRender>(0);
 	ModelInitData modelInitData;
-#ifdef ISBOX
+#if ISBOX
 	modelInitData.m_tkmFilePath = "Assets/modelData/testbg/testBox.tkm";
 	modelInitData.m_fxFilePath = "Assets/shader/model.fx";
 	modelInitData.m_vsEntryPointFunc = "VSMainInstancing";
