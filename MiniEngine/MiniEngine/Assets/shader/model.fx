@@ -151,26 +151,6 @@ SPSIn VSMainInstancing(SVSIn vsIn, uint instanceID : SV_InstanceID)
 	return VSMainCore(vsIn, instancingDatas[instanceID]);
 }
 
-SPSIn VSMainSkinCore(SVSIn vsIn, float4x4 wMat)
-{
-	SPSIn psIn;
-
-	float4x4 m;
-	m = CalcSkinMatrix(vsIn.skinVert);
-	m = mul(wMat, m);
-
-	psIn.pos = mul(m, vsIn.pos);						//モデルの頂点をワールド座標系に変換。
-	psIn.worldPos = psIn.pos.xyz;
-	psIn.pos = mul(mView, psIn.pos);						//ワールド座標系からカメラ座標系に変換。
-	psIn.pos = mul(mProj, psIn.pos);						//カメラ座標系からスクリーン座標系に変換。
-	psIn.normal = normalize(mul(m, vsIn.normal));		//法線をワールド座標系に変換。
-	psIn.Tangent = normalize(mul(m, vsIn.Tangent));
-	psIn.biNormal = normalize(mul(m, vsIn.biNormal));
-	psIn.uv = vsIn.uv;
-
-	return psIn;
-}
-
 /*!--------------------------------------------------------------------------------------
  * @brief	スキンありモデル用の頂点シェーダー。
 -------------------------------------------------------------------------------------- */
@@ -199,7 +179,22 @@ SPSIn VSMainSkin(SVSIn vsIn)
 */
 SPSIn VSMainSkinInstancing(SVSIn vsIn, uint instanceID : SV_InstanceID)
 {
-	return VSMainSkinCore(vsIn, instancingDatas[instanceID]);
+	SPSIn psIn;
+
+	float4x4 m;
+	m = CalcSkinMatrix(vsIn.skinVert);
+	m = mul(instancingDatas[instanceID], m);
+
+	psIn.pos = mul(m, vsIn.pos);						//モデルの頂点をワールド座標系に変換。
+	psIn.worldPos = psIn.pos.xyz;
+	psIn.pos = mul(mView, psIn.pos);						//ワールド座標系からカメラ座標系に変換。
+	psIn.pos = mul(mProj, psIn.pos);						//カメラ座標系からスクリーン座標系に変換。
+	psIn.normal = normalize(mul(m, vsIn.normal));		//法線をワールド座標系に変換。
+	psIn.Tangent = normalize(mul(m, vsIn.Tangent));
+	psIn.biNormal = normalize(mul(m, vsIn.biNormal));
+	psIn.uv = vsIn.uv;
+
+	return psIn;
 }
 
 //物理ベースライティングのピクセルシェーダー。
