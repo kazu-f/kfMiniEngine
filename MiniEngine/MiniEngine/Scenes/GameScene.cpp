@@ -8,7 +8,16 @@
 
 #define ON 1
 #define OFF 0
-#define IS_SPECTATOR ON			//観客を出すかどうか。
+#define IS_SPECTATOR OFF			//観客を出すかどうか。
+namespace {
+#if 0
+	const char* COURSE_PATH = "Assets/level/CourseLevel.tkl";
+	const char* SPECTATOR_PATH = "Assets/level/spectatorLevel.tkl";
+#else
+	const char* COURSE_PATH = "Assets/level/CourseLevel2.tkl";
+	const char* SPECTATOR_PATH = "Assets/level/spectatorLevel2.tkl";
+#endif
+}
 
 
 GameScene::GameScene()
@@ -33,7 +42,7 @@ bool GameScene::Start()
 		m_initState = enInit_Course;
 		break;
 	case GameScene::enInit_Course:
-		m_courseLevel.Init("Assets/level/RaceLevel.tkl", [&](SLevelObjectData& objData) {
+		m_courseLevel.Init(COURSE_PATH, [&](SLevelObjectData& objData) {
 			if (wcscmp(objData.name, L"Sup") == 0) {
 				m_car = NewGO<Car>(0);
 				m_car->SetPosition(objData.position);
@@ -65,7 +74,7 @@ bool GameScene::Start()
 			m_spectator[i] = NewGO<Spectator>(0);
 		}
 
-		m_spectatorLevel.Init("Assets/level/spectatorLevel.tkl", [&](SLevelObjectData& objData) {
+		m_spectatorLevel.Init(SPECTATOR_PATH, [&](SLevelObjectData& objData) {
 			if (objData.EqualObjectName(L"nathanMale")) {
 				//オブジェクトの情報を追加。
 				m_spectator[enNathanMale]->AddObjectData(

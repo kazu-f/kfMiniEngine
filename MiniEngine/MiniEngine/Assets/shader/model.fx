@@ -246,7 +246,8 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 PSOut_GBuffer PSMain_RenderGBuffer (SPSIn psIn){
 	PSOut_GBuffer Out = (PSOut_GBuffer)0;
 
-	Out.albedo = g_texture.SampleLevel(g_sampler, psIn.uv, 0);		//アルベド。
+	Out.albedo = g_texture.Sample(g_sampler, psIn.uv);		//アルベド。
+	//Out.albedo = g_texture.SampleLevel(g_sampler, psIn.uv, 0);		//アルベド。
 	//法線マップ。
 	float3 normal = CalcNormal(psIn.normal, psIn.biNormal, psIn.Tangent, psIn.uv);
 	Out.normal.xyz = (normal / 2.0f) + 0.5f;
