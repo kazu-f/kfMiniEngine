@@ -43,6 +43,8 @@ namespace Engine {
 		{
 			return m_physicsWorld;
 		}
+	private:
+		void GameSleep();
 
 	private:
 		GraphicsEngine* m_graphicsEngine = nullptr;		//グラフィックエンジン。
