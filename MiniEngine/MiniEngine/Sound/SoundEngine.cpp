@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "SoundEngine.h"
+#include "WaveFile.h"
+#include "SoundSource.h"
 
 #define NUM_PRESETS 30				//プリセットの数。
 namespace Engine {
@@ -174,6 +176,38 @@ namespace Engine {
 		//COMの解放。
 		CoUninitialize();
 	}
+	IXAudio2SourceVoice* CSoundEngine::CreateXAudio2SourceVoice(CWaveFile* waveFile, bool is3DSound)
+	{
+		ENGINE_ASSERT(waveFile->GetFormat()->nChannels <= INPUTCHANNELS, "Channel over");
+		IXAudio2SourceVoice* pSourceVoice;
+		if (is3DSound == false)
+		{
+			//2Dサウンド。
+			if (FAILED(m_xAudio2->CreateSourceVoice(&pSourceVoice, waveFile->GetFormat())))
+			{
+				ENGINE_WARNING_LOG("Failed CreateSourceVoice");
+				return nullptr;
+			}
+		}
+		else {
+			//3Dサウンド。
+			XAUDIO2_SEND_DESCRIPTOR sendDescriptors[2];
+			sendDescriptors[0].Flags = XAUDIO2_SEND_USEFILTER; // LPF direct-path
+			sendDescriptors[0].pOutputVoice = m_masteringVoice;
+			sendDescriptors[1].Flags = XAUDIO2_SEND_USEFILTER; // LPF reverb-path -- omit for better performance at the cost of less realistic occlusion
+			sendDescriptors[1].pOutputVoice = m_submixVoice;
+
+			const XAUDIO2_VOICE_SENDS sendList = { 2,sendDescriptors };
+			if (FAILED(m_xAudio2->CreateSourceVoice(&pSourceVoice, waveFile->GetFormat(), 0, 2.0f, NULL, &sendList)))
+			{
+				ENGINE_WARNING_LOG("Failed CreateSourceVoice");
+				return nullptr;
+			}
+		}
+
+		return pSourceVoice;
+	}
+
 	void CSoundEngine::Update()
 	{
 	}

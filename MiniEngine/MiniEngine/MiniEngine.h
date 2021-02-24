@@ -54,6 +54,7 @@
 #include "graphics/GraphicsEngine.h"
 #include "graphics/DescriptorHeap.h"
 #include "graphics/RenderTarget.h"
+#include "Sound/SoundEngine.h"
 
 #include "gameObject/GameObjectManager.h"
 

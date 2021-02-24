@@ -7,6 +7,7 @@ namespace Engine {
 
 	class GraphicsEngine;
 	class CPhysicsWorld;
+	class CSoundEngine;
 
 	class TkEngine : Noncopyable {
 	public:
@@ -43,12 +44,17 @@ namespace Engine {
 		{
 			return m_physicsWorld;
 		}
+		CSoundEngine& GetSoundEngine()
+		{
+			return m_soundEngine;
+		}
 	private:
 		void GameSleep();
 
 	private:
 		GraphicsEngine* m_graphicsEngine = nullptr;		//グラフィックエンジン。
 		CPhysicsWorld m_physicsWorld;					//物理ワールド。
+		CSoundEngine m_soundEngine;						//サウンドエンジン。
 		GamePad m_pad[GamePad::CONNECT_PAD_MAX];		//ゲームパッド。
 		CGameTime			m_gameTime;					//ゲームタイム。
 	public:
@@ -69,5 +75,10 @@ namespace Engine {
 	static inline CPhysicsWorld& PhysicsWorld()
 	{
 		return g_engine->GetPhyshicsWorld();
+	}
+
+	static inline CSoundEngine& SoundEngine()
+	{
+		return g_engine->GetSoundEngine();
 	}
 }

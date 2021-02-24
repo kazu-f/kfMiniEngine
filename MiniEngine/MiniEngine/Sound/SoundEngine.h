@@ -4,7 +4,7 @@
 /// </summary>
 
 #pragma once
-
+#include "WaveFileBank.h"
 
 #define INPUTCHANNELS 2		//入力チャンネル数。
 #define OUTPUTCHANNELS 8	//最大出力チャンネル数。
@@ -38,11 +38,21 @@ namespace Engine {
 		/// <summary>
 		/// 3Dサウンドソースを追加。
 		/// </summary>
-		
+		void Add3DSoundSource(prefab::CSoundSource* sound)
+		{
+			m_3dSoundSource.push_back(sound);
+		}
 		/// <summary>
 		/// 3Dサウンドソースを解放。
 		/// </summary>
-
+		void Remove3DSoundSource(prefab::CSoundSource* sound)
+		{
+			auto it = std::find(m_3dSoundSource.begin(), m_3dSoundSource.end(), sound);
+			if (it != m_3dSoundSource.end())
+			{
+				m_3dSoundSource.erase(it);
+			}
+		}
 		/// <summary>
 		/// サウンドリスナーの座標を設定。
 		/// </summary>
@@ -74,7 +84,8 @@ namespace Engine {
 			m_listener.OrientTop.y = up.y;
 			m_listener.OrientTop.z = up.z;
 		}
-		//Todo XAudio2のソースボイス作成処理。
+		//XAudio2のソースボイスを作成。
+		IXAudio2SourceVoice* CreateXAudio2SourceVoice(CWaveFile* waveFile, bool is3DSound);
 
 		/// <summary>
 		/// マスターボイスを取得。
@@ -97,8 +108,11 @@ namespace Engine {
 		{
 			return m_nChannels;
 		}
-		//todo 波形データバンクを取得。
-
+		//波形データバンクを取得。
+		CWaveFileBank& GetWaveFileBank()
+		{
+			return m_waveFileBank;
+		}
 		/// <summary>
 		/// サウンドエンジンが利用可能かどうか判定。
 		/// </summary>
@@ -127,9 +141,9 @@ namespace Engine {
 		bool m_useRedirectToLFE = false;
 		bool m_isInited = false;								//初期化済み？
 		X3DAUDIO_LISTENER m_listener;							//サウンドリスナー。
+		std::list<prefab::CSoundSource*>	m_3dSoundSource;	//3Dサウンドのサウンドソース。
 		X3DAUDIO_CONE m_emitterCone;							//エミッターコーン？
-		//TODO サウンドソースのリストと波形データバンク。
-
+		CWaveFileBank m_waveFileBank;							//波形データのバンク。
 	};///class CSoungEngine;
 
 }///namespace Engine;
