@@ -306,7 +306,13 @@
     <ClCompile Include="Sound\SoundEngine.cpp">
       <Filter>Sound</Filter>
     </ClCompile>
-    <ClCompile Include="WaveFile.cpp">
+    <ClCompile Include="Sound\WaveFile.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound\SoundSource.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound\WaveFileBank.cpp">
       <Filter>Sound</Filter>
     </ClCompile>
   </ItemGroup>
@@ -569,7 +575,13 @@
     <ClInclude Include="Sound\SoundEngine.h">
       <Filter>Sound</Filter>
     </ClInclude>
-    <ClInclude Include="WaveFile.h">
+    <ClInclude Include="Sound\WaveFile.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound\SoundSource.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound\WaveFileBank.h">
       <Filter>Sound</Filter>
     </ClInclude>
   </ItemGroup>

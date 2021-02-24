@@ -207,6 +207,7 @@ namespace Engine {
 			unsigned int				m_streamingBufferSize = 0;	//ストリーミング用のバッファリングサイズ。
 			unsigned int				m_currentBufferingSize = 0;	//現在のバッファリングのサイズ。
 			unsigned int				m_readStartPos = 0;			//読み込みの開始位置。
+			unsigned int				m_ringBufferSize = 0;		//リングバッファのサイズ。
 			EnStreamingStatus			m_streamingState = enStreamingBuffering;		//ストリーミングステータス。
 			bool						m_is3DSound = false;		//3Dサウンドか？
 			Vector3						m_position = Vector3::Zero;	//音源の座標。3Dサウンドの時に必要。

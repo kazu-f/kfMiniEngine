@@ -53,6 +53,7 @@
     <ClCompile Include="prefab\ModelRender.cpp" />
     <ClCompile Include="physics\RigidBody.cpp" />
     <ClCompile Include="GameLight\SceneLight.cpp" />
+    <ClCompile Include="Sound\SoundSource.cpp" />
     <ClCompile Include="Sound\SoundEngine.cpp" />
     <ClCompile Include="Spectator\Spectator.cpp" />
     <ClCompile Include="physics\SphereCollider.cpp" />
@@ -95,7 +96,8 @@
     <ClCompile Include="tkFile\TkmFile.cpp" />
     <ClCompile Include="tkFile\TksFile.cpp" />
     <ClCompile Include="util\Stopwatch.cpp" />
-    <ClCompile Include="WaveFile.cpp" />
+    <ClCompile Include="Sound\WaveFile.cpp" />
+    <ClCompile Include="Sound\WaveFileBank.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Car\State\CarStateBrake.h" />
@@ -135,6 +137,7 @@
     <ClInclude Include="prefab\light\LightBase.h" />
     <ClInclude Include="prefab\ModelRender.h" />
     <ClInclude Include="GameLight\SceneLight.h" />
+    <ClInclude Include="Sound\SoundSource.h" />
     <ClInclude Include="Sound\SoundEngine.h" />
     <ClInclude Include="Spectator\Spectator.h" />
     <ClInclude Include="physics\SphereCollider.h" />
@@ -184,7 +187,8 @@
     <ClInclude Include="util\NameKey.h" />
     <ClInclude Include="util\Stopwatch.h" />
     <ClInclude Include="util\Util.h" />
-    <ClInclude Include="WaveFile.h" />
+    <ClInclude Include="Sound\WaveFile.h" />
+    <ClInclude Include="Sound\WaveFileBank.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
