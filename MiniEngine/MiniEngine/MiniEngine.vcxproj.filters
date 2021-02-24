@@ -85,6 +85,9 @@
     <Filter Include="Guardrail">
       <UniqueIdentifier>{6b020dc1-ee05-4625-a0fb-3ae623c6706c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{1da7d323-b80c-48de-91e3-e4c29134be9e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tkEngine.cpp">
@@ -299,6 +302,12 @@
     </ClCompile>
     <ClCompile Include="Guardrail\Guardrail.cpp">
       <Filter>Guardrail</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound\SoundEngine.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="WaveFile.cpp">
+      <Filter>Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -556,6 +565,12 @@
     </ClInclude>
     <ClInclude Include="Guardrail\Guardrail.h">
       <Filter>Guardrail</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound\SoundEngine.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="WaveFile.h">
+      <Filter>Sound</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

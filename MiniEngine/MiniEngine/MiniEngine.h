@@ -18,6 +18,9 @@
 #include <algorithm>
 #include <DirectXMath.h>
 #include <Xinput.h>
+#include <xaudio2.h>
+#include <x3daudio.h>
+#include <xaudio2fx.h>
 #include <array>
 #include <queue>
 #include <fstream>
