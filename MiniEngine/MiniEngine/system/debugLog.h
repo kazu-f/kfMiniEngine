@@ -17,6 +17,23 @@ namespace Engine {
 		va_end(va);
 	}
 	/// <summary>
+	/// 出力に警告を表示する。
+	/// </summary>
+	static inline void WarningLog(const char* format, ...)
+	{
+		static char newFormat[1024 * 10];
+		strcpy_s(newFormat, "ENGINE_WARNING : ");
+		strcat_s(newFormat, format);
+
+		static char log[1024 * 10];
+		va_list va;
+		va_start(va, format);
+		vsprintf_s(log, newFormat, va);
+		OutputDebugString(log);
+		OutputDebugString("\n");
+		va_end(va);
+	}
+	/// <summary>
 	/// 警告のメッセージボックス。
 	/// </summary>
 	static inline void WarningMessageBox(const char* file, long line, const char* format, ...)
@@ -59,10 +76,12 @@ namespace Engine {
 
 #if _DEBUG
 	#define ENGINE_LOG(format,...)				DebugLog(format,__VA_ARGS__);								//デバッグ用のログを出力する。
+#define ENGINE_WARNING_LOG(format,...)			WarningLog(format, __VA_ARGS__);							//警告ログを出力する。
 	#define ENGINE_MESSAGE_BOX(format,...)		WarningMessageBox(__FILE__,__LINE__,format,__VA_ARGS__);	//メッセージボックスを表示。
 	#define ENGINE_ASSERT(flag,format,...)		DebugAssert(flag,format,__FILE__,__LINE__,__VA_ARGS__);		//アサートする。
 #else
 	#define ENGINE_LOG(format,...)
+	#define ENGINE_WARNING_LOG(format,...)
 	#define ENGINE_MESSAGE_BOX(format,...)
 	#define ENGINE_ASSERT(flag,format,...)
 #endif // _DEBUG
