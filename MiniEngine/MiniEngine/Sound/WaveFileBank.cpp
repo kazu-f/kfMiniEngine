@@ -1,6 +1,6 @@
 #include "stdafx.h"
-#include "WaveFileBank.h"
 #include "WaveFile.h"
+#include "WaveFileBank.h"
 
 namespace Engine {
 	CWaveFileBank::CWaveFileBank()
@@ -15,7 +15,7 @@ namespace Engine {
 		for (auto waveFile : m_waveFileMap[groupID]) {
 			waveFile.second->Release();
 		}
-		m_waveFileMap[groupID].clear;
+		m_waveFileMap[groupID].clear();
 	}
 	void CWaveFileBank::UnregistWaveFile(int groupID, CWaveFilePtr waveFile)
 	{

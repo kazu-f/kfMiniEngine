@@ -17,8 +17,14 @@ public:
 	void OnDestroy() override final;
 
 private:
+	void OnBGM();
+	void PlaySE();
+
+private:
 	CLevel m_courseLevel;
 	Player* m_player = nullptr;
+	prefab::CSoundSource* m_bgm = nullptr;
+	prefab::CSoundSource* m_se = nullptr;
 	CGameCamera* m_camera = nullptr;
 	SceneLight* m_light = nullptr;
 };

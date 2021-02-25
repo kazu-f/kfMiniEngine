@@ -15,7 +15,7 @@ namespace Engine {
 			/// <remarks>オンメモリ再生向けの初期化。</remarks>
 			/// <param name="filePath">ファイルパス。(*.wave)形式</param>
 			/// <param name="is3DSound">3Dサウンドか？</param>
-			void Init(wchar_t* filePath, bool is3DSound = false);
+			void Init(const wchar_t* filePath, bool is3DSound = false);
 			/// <summary>
 			/// 初期化。
 			/// </summary>
@@ -36,7 +36,7 @@ namespace Engine {
 			/// <param name="is3DSound"></param>
 			/// <param name="ringBufferSize"></param>
 			/// <param name="bufferingSize"></param>
-			void InitStreaming(wchar_t* filePath,
+			void InitStreaming(const wchar_t* filePath,
 				bool is3DSound = false,
 				unsigned int ringBufferSize = 3 * 1024 * 1024,
 				unsigned int bufferingSize = 1024 * 512);
@@ -141,7 +141,7 @@ namespace Engine {
 			/// <summary>
 			/// ソースボイスを取得。
 			/// </summary>
-			IXAudio2SourceVoice* GetAudio2SourceVoice()
+			IXAudio2SourceVoice* GetXAudio2SourceVoice()
 			{
 				return m_sourceVoice;
 			}

@@ -9,9 +9,9 @@
 #define INPUTCHANNELS 2		//入力チャンネル数。
 #define OUTPUTCHANNELS 8	//最大出力チャンネル数。
 namespace Engine {
-
+	class CWaveFile;
 	namespace prefab {
-
+		class CSoundSource;
 	}
 	/// <summary>
 	/// サウンドエンジンクラス。

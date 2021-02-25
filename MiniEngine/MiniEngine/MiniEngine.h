@@ -25,6 +25,7 @@
 #include <queue>
 #include <fstream>
 #include <mbstring.h>
+#include <mmsystem.h>
 
 #include "d3dx12.h"
 
@@ -54,7 +55,6 @@
 #include "graphics/GraphicsEngine.h"
 #include "graphics/DescriptorHeap.h"
 #include "graphics/RenderTarget.h"
-#include "Sound/SoundEngine.h"
 
 #include "gameObject/GameObjectManager.h"
 
@@ -68,6 +68,7 @@
 #include "util/CGameTime.h"
 
 #include "physics/PhysicsWorld.h"
+#include "Sound/SoundEngine.h"
 #include "tkEngine.h"
 #include "physics/PhysicsStaticObject.h"
 #include "characterController/CharacterController.h"
@@ -78,6 +79,7 @@
 #include "graphics/animation/AnimationPlayController.h"
 #include "prefab/ModelRender.h"
 #include "level/Level.h"
+#include "Sound/SoundSource.h"
 #include "graphics/light/LightManager.h"
 #include "graphics/PreRender/ShadowMap.h"
 #include "graphics/PreRender/GBufferRender.h"

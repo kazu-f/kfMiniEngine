@@ -28,7 +28,7 @@ namespace Engine {
 			m_dspSettings.EmitterVelocityComponent = 0.0f;					//移動速度。
 			m_dspSettings.ListenerVelocityComponent = 0.0f;					//リスナー移動速度。
 		}
-		void CSoundSource::Init(wchar_t* filePath, bool is3DSound)
+		void CSoundSource::Init(const wchar_t* filePath, bool is3DSound)
 		{
 			if (SoundEngine().IsAvailable() == false)
 			{
@@ -98,7 +98,7 @@ namespace Engine {
 			m_isAvailable = true;
 		}
 
-		void CSoundSource::InitStreaming(wchar_t* filePath, bool is3DSound, unsigned int ringBufferSize, unsigned int bufferingSize)
+		void CSoundSource::InitStreaming(const wchar_t* filePath, bool is3DSound, unsigned int ringBufferSize, unsigned int bufferingSize)
 		{
 			if (SoundEngine().IsAvailable() == false) {
 				//サウンドエンジンが利用不可。
@@ -188,8 +188,9 @@ namespace Engine {
 					m_sourceVoice->Start(0);
 					PlayCommon(m_waveFile->GetReadBuffer(), m_waveFile->GetSize());
 				}
-				m_isLoop = isLoop;
+				m_isPlaying = true;
 			}
+			m_isLoop = isLoop;
 		}
 		void CSoundSource::UpdateStreaming()
 		{
