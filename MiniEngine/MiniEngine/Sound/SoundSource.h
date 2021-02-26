@@ -131,7 +131,7 @@ namespace Engine {
 			/// </summary>
 			/// <remarks>Ú×‚ÍIXAudio2SourceVoice‚ÌSetFrequencyRaito‚ğQÆB</remarks>
 			/// <param name="raito">ü”g””ä</param>
-			void SetFrequencyReito(float raito)
+			void SetFrequencyRetio(float raito)
 			{
 				if (m_sourceVoice != nullptr)
 				{

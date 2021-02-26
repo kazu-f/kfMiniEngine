@@ -40,6 +40,11 @@ public:		//GetŠÖ”‚Æ‚©
 		return m_forward;
 	}
 
+	float GetSpeed()const 
+	{
+		return m_speed;
+	}
+
 public:		//Ô‚ÌˆÚ“®‚È‚Ç‚Ìˆ—
 	/// <summary>
 	/// ‰Á‘¬“x‚ğ‘¬“x‚É‰ÁZ‚·‚éB
@@ -62,8 +67,8 @@ public:		//Ô‚ÌˆÚ“®‚È‚Ç‚Ìˆ—
 	/// </summary>
 	void CalcDirection();
 
-private:
-	const float MAX_SPEED = 6800.0f;
+protected:
+	static constexpr float MAX_SPEED = 6800.0f;
 protected:
 	ICarState* m_currentState = nullptr;
 	std::unique_ptr<CarStateIdle> m_stateIdle;

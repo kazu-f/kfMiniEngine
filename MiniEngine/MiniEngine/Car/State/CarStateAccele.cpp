@@ -10,7 +10,7 @@ namespace {
 CarStateAccele::CarStateAccele(Car* car):
 	ICarState::ICarState(car)
 {
-	m_acceleSound = NewGO<prefab::CSoundSource>(0);
+	m_acceleSound = NewGO<prefab::CSoundSource>(5);
 	m_acceleSound->Init(L"Assets/sound/Car/CarAcceleration.wav");
 }
 
@@ -22,6 +22,7 @@ void CarStateAccele::Enter()
 {
 	m_car->AddAcceleration(FIRST_SPEED);
 	m_acceleSound->Play(true);
+	CalcSoundFrequencyRetio();
 }
 
 void CarStateAccele::Leave()
@@ -37,8 +38,18 @@ void CarStateAccele::Execute()
 
 	m_car->AddAcceleration(ACCELE_SPEED);
 
+	CalcSoundFrequencyRetio();
+
 	if (!g_pad[0]->IsPress(enButtonA))
 	{
 		m_car->ChangeState(m_car->m_stateIdle.get());
 	}
+}
+
+void CarStateAccele::CalcSoundFrequencyRetio()
+{
+	float speed = m_car->GetSpeed();
+	m_soundFrequency = speed * (1.0f / Car::MAX_SPEED) + 0.3f;
+	m_soundFrequency = min(1.4f,max(0.6f, m_soundFrequency));
+	m_acceleSound->SetFrequencyRetio(m_soundFrequency);
 }

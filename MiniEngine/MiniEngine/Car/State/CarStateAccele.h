@@ -16,6 +16,9 @@ protected:
 	void Leave()override final;		//事後処理。
 	void Execute()override final;	//実行処理。
 private:
+	void CalcSoundFrequencyRetio();			//効果音の高さを設定。
+private:
 	prefab::CSoundSource* m_acceleSound = nullptr;
+	float m_soundFrequency = 0.0f;
 };
 
