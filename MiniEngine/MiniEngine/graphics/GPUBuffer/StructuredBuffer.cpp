@@ -22,10 +22,12 @@ namespace Engine {
 
 		int bufferNo = 0;
 		for (auto& buffer : m_buffersOnGPU) {
+			auto d3dxHeapProperties = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD);
+			auto d3dxResourceDesc = CD3DX12_RESOURCE_DESC::Buffer(m_sizeOfElement * m_numElement);
 			auto hr = device->CreateCommittedResource(
-				&CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD),
+				&d3dxHeapProperties,
 				D3D12_HEAP_FLAG_NONE,
-				&CD3DX12_RESOURCE_DESC::Buffer(m_sizeOfElement * m_numElement),
+				&d3dxResourceDesc,
 				D3D12_RESOURCE_STATE_GENERIC_READ,
 				nullptr,
 				IID_PPV_ARGS(&buffer)

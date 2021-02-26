@@ -194,12 +194,14 @@ namespace Engine {
 		void WaitUntilFinishDrawingToRenderTarget(RenderTarget& renderTarget);
 		void WaitUntilFinishDrawingToRenderTarget(ID3D12Resource* renderTarget)
 		{
-			m_commandList->ResourceBarrier(
-				1,
-				&CD3DX12_RESOURCE_BARRIER::Transition(
+			auto d3dxResourceBarrier = CD3DX12_RESOURCE_BARRIER::Transition(
 					renderTarget,
 					D3D12_RESOURCE_STATE_RENDER_TARGET,
-					D3D12_RESOURCE_STATE_PRESENT));
+					D3D12_RESOURCE_STATE_PRESENT);
+			m_commandList->ResourceBarrier(
+				1,
+				&d3dxResourceBarrier
+			);
 		}
 		/// <summary>
 		/// レンダリングターゲットとして使用可能になるまで待つ。
@@ -212,9 +214,10 @@ namespace Engine {
 		void WaitUntilToPossibleSetRenderTarget(RenderTarget& renderTarget);
 		void WaitUntilToPossibleSetRenderTarget(ID3D12Resource* renderTarget)
 		{
+			auto d3dxResourceBarrier = CD3DX12_RESOURCE_BARRIER::Transition(renderTarget, D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
 			m_commandList->ResourceBarrier(
 				1,
-				&CD3DX12_RESOURCE_BARRIER::Transition(renderTarget, D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET)
+				&d3dxResourceBarrier
 			);
 		}
 		/// <summary>
@@ -233,9 +236,10 @@ namespace Engine {
 		/// <param name="afterState"></param>
 		void TransitionResourceState(ID3D12Resource* resrouce, D3D12_RESOURCE_STATES beforeState, D3D12_RESOURCE_STATES afterState)
 		{
+			auto d3dxResourceBarrier = CD3DX12_RESOURCE_BARRIER::Transition(resrouce, beforeState, afterState);
 			m_commandList->ResourceBarrier(
 				1,
-				&CD3DX12_RESOURCE_BARRIER::Transition(resrouce, beforeState, afterState)
+				&d3dxResourceBarrier
 			);
 		}
 		/// <summary>

@@ -12,10 +12,12 @@ namespace Engine {
 	void VertexBuffer::Init(int size, int stride)
 	{
 		auto d3dDevice = g_graphicsEngine->GetD3DDevice();
+		auto d3dxHeapProperties = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT);
+		auto d3dxResourceDesc = CD3DX12_RESOURCE_DESC::Buffer(size);
 		d3dDevice->CreateCommittedResource(
-			&CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT),
+			&d3dxHeapProperties,
 			D3D12_HEAP_FLAG_NONE,
-			&CD3DX12_RESOURCE_DESC::Buffer(size),
+			&d3dxResourceDesc,
 			D3D12_RESOURCE_STATE_COPY_DEST,
 			nullptr,
 			IID_PPV_ARGS(&m_vertexBuffer));
