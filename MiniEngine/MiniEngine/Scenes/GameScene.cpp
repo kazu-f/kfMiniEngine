@@ -9,7 +9,7 @@
 
 #define ON 1
 #define OFF 0
-#define IS_SPECTATOR ON			//観客を出すかどうか。
+#define IS_SPECTATOR OFF			//観客を出すかどうか。
 namespace {
 #if 0
 	const char* COURSE_PATH = "Assets/level/CourseLevel.tkl";

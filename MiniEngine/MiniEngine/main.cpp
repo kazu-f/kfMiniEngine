@@ -25,7 +25,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	// ここから初期化を行うコードを記述する。
 	//////////////////////////////////////
 
-#if 1
+#if 0
 	NewGO<DebugScene>(0);
 #else
 	NewGO<GameScene>(0);

@@ -9,6 +9,8 @@ namespace {
 CarStateBrake::CarStateBrake(Car* car) :
 	ICarState::ICarState(car)
 {
+	m_breakeSound = NewGO<prefab::CSoundSource>(0);
+	m_breakeSound->Init(L"Assets/sound/Car/CarSkid.wav");
 }
 
 CarStateBrake::~CarStateBrake()
@@ -17,10 +19,12 @@ CarStateBrake::~CarStateBrake()
 
 void CarStateBrake::Enter()
 {
+	m_breakeSound->Play(true);
 }
 
 void CarStateBrake::Leave()
 {
+	m_breakeSound->Stop();
 }
 
 void CarStateBrake::Execute()

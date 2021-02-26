@@ -10,6 +10,8 @@ namespace {
 CarStateAccele::CarStateAccele(Car* car):
 	ICarState::ICarState(car)
 {
+	m_acceleSound = NewGO<prefab::CSoundSource>(0);
+	m_acceleSound->Init(L"Assets/sound/Car/CarAcceleration.wav");
 }
 
 CarStateAccele::~CarStateAccele()
@@ -19,10 +21,12 @@ CarStateAccele::~CarStateAccele()
 void CarStateAccele::Enter()
 {
 	m_car->AddAcceleration(FIRST_SPEED);
+	m_acceleSound->Play(true);
 }
 
 void CarStateAccele::Leave()
 {
+	m_acceleSound->Stop();
 }
 
 void CarStateAccele::Execute()
