@@ -133,7 +133,7 @@ namespace Engine {
 																//関連付けた複数のソースボイスの出力を
 																//まとめてエフェクトを掛ける機能を持つ。
 		DWORD m_channelMask = 0;								//オーディオチャンネルマスク。
-		DWORD m_nChannels = 0;									//チャンネル数。
+		DWORD m_nChannels = 0;									//チャンネル数。ステレオorモノラル???
 		Vector3 m_listenerPosition = Vector3::Zero;				//オーディオリスナーの座標。
 		float m_fListenerAngle = 0.0f;							//リスナーの向き？
 		bool m_UseListenerCone = false;
