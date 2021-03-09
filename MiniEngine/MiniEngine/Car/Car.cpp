@@ -57,30 +57,6 @@ void Car::Update()
 	const float PadY = g_pad[0]->GetLStickYF();
 	const float DeltaTime = GameTime().GetFrameDeltaTime();
 
-
-
-#if 0
-	//回転を軽くかける。
-	Quaternion carRot;
-	carRot.SetRotationDegY(Math::PI * CURVE_DEG * PadX * DeltaTime);
-	m_rotation.Multiply(carRot);
-
-	//車の方向を求める。
-	CalcDirection();
-
-	const float MOVE_SPEED = 4000.0f;
-	Vector3 camRight = g_camera3D->GetRight();
-	camRight.y = 0.0f;
-	camRight.Normalize();
-	Vector3 camForward = g_camera3D->GetForward();
-	camForward.y = 0.0f;
-	camForward.Normalize();
-
-	m_moveSpeed.x = 0.0f;
-	m_moveSpeed.z = 0.0f;
-	m_moveSpeed += camRight * PadX * MOVE_SPEED;
-	m_moveSpeed += camForward * PadY * MOVE_SPEED;
-#else
 	//ステート実行。
 	m_currentState->Execute();
 	//方向を求める。
@@ -112,13 +88,13 @@ void Car::Update()
 			//逆にする。
 			radian *= -1.0f;
 		}
-
-		m_rotation.AddRotationY(radian);
+		if (fabs(radian) > 0.01f) {
+			m_rotation.AddRotationY(radian);
+		}
 	}
 
 	//回転から方向を計算。
 	CalcDirection();
-#endif
 
 	m_moveSpeed.y -= GRAVITY;
 

@@ -49,7 +49,7 @@ void CarStateAccele::Execute()
 void CarStateAccele::CalcSoundFrequencyRetio()
 {
 	float speed = m_car->GetSpeed();
-	m_soundFrequency = speed * (1.0f / Car::MAX_SPEED) + 0.3f;
+	m_soundFrequency = speed * (1.0f / Car::MAX_SPEED);
 	m_soundFrequency = min(1.4f,max(0.6f, m_soundFrequency));
 	m_acceleSound->SetFrequencyRetio(m_soundFrequency);
 }
