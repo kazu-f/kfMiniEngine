@@ -1,6 +1,7 @@
 #pragma once
 
 #include "RigidBody.h"
+#include "PhysicsDebugDraw.h"
 
 namespace Engine {
 	class CCharacterController;
@@ -13,10 +14,14 @@ namespace Engine {
 		std::unique_ptr<btSequentialImpulseConstraintSolver> m_constraintSolver;	//コンストレイントソルバー。拘束条件の解決処理。？
 		std::unique_ptr<btDiscreteDynamicsWorld>			 m_dynamicWorld;		//物理ワールド。
 
+#ifdef _DEBUG
+		CPhysicsDebugDraw m_debugDraw;												//ワイヤーフレーム表示。
+#endif
 	public:
 		~CPhysicsWorld();
 		void Init();		//初期化。
 		void Update(const float time);		//物理ワールドの更新。
+		void DebugDrawWorld(RenderContext& rc);		//デバッグ描画。
 		void Release();		//解放処理。
 		/// <summary>
 		/// 重力の設定。
@@ -32,6 +37,17 @@ namespace Engine {
 		{
 			return m_dynamicWorld.get();
 		}
+		/// <summary>
+		/// デバッグモードを設定する。
+		/// </summary>
+		/// <param name="debugMode"></param>
+		void SetDebugMode(int debugMode)
+		{
+#ifdef _DEBUG
+			m_debugDraw.setDebugMode(debugMode);
+#endif
+		}
+
 		/// <summary>
 		/// 剛体を登録。
 		/// </summary>

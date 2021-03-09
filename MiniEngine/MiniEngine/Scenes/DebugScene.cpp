@@ -31,6 +31,8 @@ bool DebugScene::Start()
 		return false;
 		});
 
+	PhysicsWorld().SetDebugMode(btIDebugDraw::DBG_DrawWireframe);
+
 	return true;
 }
 

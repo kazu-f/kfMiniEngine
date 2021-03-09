@@ -496,7 +496,12 @@ namespace Engine {
 		//フォワードレンダリングパス。
 		goMgr->ForwardRender(m_renderContext);
 
-
+		//レンダリングターゲットを設定。
+		m_renderContext.SetRenderTarget(
+			m_currentFrameBufferRTVHandle,
+			m_gBuffer->GetRenderTarget(EnGBuffer::enGBufferAlbed).GetDSVCpuDescriptorHandle()
+		);
+		PhysicsWorld().DebugDrawWorld(m_renderContext);
 
 	}
 	void GraphicsEngine::BeginRender()

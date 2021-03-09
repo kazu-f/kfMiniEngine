@@ -259,6 +259,15 @@ namespace Engine {
 			m_commandList->Reset(commandAllocator, pipelineState);
 		}
 		/// <summary>
+		/// 描画。
+		/// </summary>
+		/// <param name="vertexCount">頂点数。</param>
+		/// <param name="startVertexLocation">頂点の開始位置。</param>
+		void Draw(UINT vertexCount, UINT startVertexLocation = 0)
+		{
+			m_commandList->DrawInstanced(vertexCount, 1, startVertexLocation, 0);
+		}
+		/// <summary>
 		/// インデックスつきプリミティブを描画。
 		/// </summary>
 		/// <param name="indexCount">インデックスの数。</param>

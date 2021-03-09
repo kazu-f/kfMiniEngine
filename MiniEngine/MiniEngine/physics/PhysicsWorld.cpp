@@ -52,10 +52,23 @@ namespace Engine {
 			);
 
 		m_dynamicWorld->setGravity(btVector3(0, -10, 0));
+
+#ifdef _DEBUG
+		m_debugDraw.Init();
+		m_dynamicWorld->setDebugDrawer(&m_debugDraw);
+#endif
 	}
 	void CPhysicsWorld::Update(const float time)
 	{
 		m_dynamicWorld->stepSimulation(time);
+	}
+	void CPhysicsWorld::DebugDrawWorld(RenderContext& rc)
+	{
+#ifdef _DEBUG
+		m_debugDraw.BeginDraw(rc);
+		m_dynamicWorld->debugDrawWorld();
+		m_debugDraw.EndDraw();
+#endif
 	}
 	void CPhysicsWorld::ContactTest(btCollisionObject* colObj, std::function<void(const btCollisionObject& contactCollisionObject)> cb)
 	{

@@ -315,6 +315,9 @@
     <ClCompile Include="Sound\WaveFileBank.cpp">
       <Filter>Sound</Filter>
     </ClCompile>
+    <ClCompile Include="physics\PhysicsDebugDraw.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MiniEngine.h">
@@ -583,6 +586,9 @@
     </ClInclude>
     <ClInclude Include="Sound\WaveFileBank.h">
       <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\PhysicsDebugDraw.h">
+      <Filter>physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
