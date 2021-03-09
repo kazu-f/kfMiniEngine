@@ -22,7 +22,7 @@ public:
 private:
 	//初期化ステップ。
 	enum EnInitStep {
-		enInit_Athor,
+		enInit_Other,
 		enInit_Course,
 		enInit_Spectator,
 	};
@@ -34,7 +34,7 @@ private:
 		enClaudiaWoman,
 		enSpectatorNum
 	};
-	EnInitStep m_initState = enInit_Athor;	//初期化ステップ。
+	EnInitStep m_initState = enInit_Other;	//初期化ステップ。
 
 	CLevel m_courseLevel;					//コースのレベル。
 	CLevel m_spectatorLevel;				//観客のレベル。

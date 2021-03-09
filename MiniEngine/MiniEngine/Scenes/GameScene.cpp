@@ -37,7 +37,7 @@ bool GameScene::Start()
 
 	switch (m_initState)
 	{
-	case GameScene::enInit_Athor:
+	case GameScene::enInit_Other:
 		m_camera = NewGO<FollowCarCamera>(5);		//ƒJƒƒ‰B
 
 		m_light = NewGO<SceneLight>(0);			//Æ–¾B
