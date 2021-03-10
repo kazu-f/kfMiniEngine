@@ -40,6 +40,7 @@ namespace Engine {
 		/// <summary>
 		/// デバッグモードを設定する。
 		/// </summary>
+		/// <remarks>指定する値はbtIDebugDrawを参照。</remarks>
 		/// <param name="debugMode"></param>
 		void SetDebugMode(int debugMode)
 		{
