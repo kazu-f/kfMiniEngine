@@ -13,10 +13,10 @@ namespace Engine
 	/// PhysicsWorld().ContactTest()で接触判定を取りたい相手を引数に渡し、
 	/// 関数オブジェクトを用いて自身と接触しているかを判定する。
 	/// </remarks>
-	class CPhysicsGhostobject:public CPhysicsObjectBase
+	class CPhysicsGhostObject:public CPhysicsObjectBase
 	{
 	public:
-		~CPhysicsGhostobject()
+		~CPhysicsGhostObject()
 		{
 			Release();
 		}

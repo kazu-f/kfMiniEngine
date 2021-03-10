@@ -71,6 +71,7 @@
 #include "Sound/SoundEngine.h"
 #include "tkEngine.h"
 #include "physics/PhysicsStaticObject.h"
+#include "physics/PhysicsGhostobject.h"
 #include "characterController/CharacterController.h"
 
 #include "graphics/Skeleton.h"

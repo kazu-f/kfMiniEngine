@@ -2,7 +2,7 @@
 #include "PhysicsGhostobject.h"
 
 namespace Engine {
-	void CPhysicsGhostobject::Release()
+	void CPhysicsGhostObject::Release()
 	{
 		//ƒRƒŠƒWƒ‡ƒ“‚Ì“o˜^‚ð‰ðœB
 		if (m_isRegistPhysicsWorld == true) {
@@ -10,7 +10,7 @@ namespace Engine {
 			m_isRegistPhysicsWorld = false;
 		}
 	}
-	void CPhysicsGhostobject::CreateCommon(const Vector3& pos, const Quaternion& rot)
+	void CPhysicsGhostObject::CreateCommon(const Vector3& pos, const Quaternion& rot)
 	{
 		m_ghostObject.setCollisionShape(m_collider->GetBody());
 		btTransform btTrans;
