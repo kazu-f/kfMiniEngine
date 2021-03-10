@@ -35,7 +35,7 @@ bool GameScene::Start()
 {
 	bool ret = false;
 
-	PhysicsWorld().SetDebugMode(1);
+	//PhysicsWorld().SetDebugMode(1);
 
 	switch (m_initState)
 	{

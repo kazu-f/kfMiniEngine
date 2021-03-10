@@ -3,6 +3,7 @@
 #include "Player/Player.h"
 #include "GameLight/SceneLight.h"
 #include "GameCamera/GameCamera.h"
+#include "Car/Car.h"
 
 DebugScene::DebugScene()
 {
@@ -17,6 +18,8 @@ bool DebugScene::Start()
 	m_light = NewGO<SceneLight>(0);
 
 	m_camera = NewGO<CGameCamera>(0);
+
+	//NewGO<Car>(0);
 
 	OnBGM();
 
