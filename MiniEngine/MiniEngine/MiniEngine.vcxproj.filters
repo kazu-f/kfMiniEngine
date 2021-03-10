@@ -88,6 +88,9 @@
     <Filter Include="Sound">
       <UniqueIdentifier>{1da7d323-b80c-48de-91e3-e4c29134be9e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CheckPoint">
+      <UniqueIdentifier>{4d2100b7-d4e8-4424-a675-8dfeae4444f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tkEngine.cpp">
@@ -317,6 +320,21 @@
     </ClCompile>
     <ClCompile Include="physics\PhysicsDebugDraw.cpp">
       <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckPoint\CheckPointBase.cpp">
+      <Filter>CheckPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckPoint\CheckedController.cpp">
+      <Filter>CheckPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckPoint\CheckPointManager.cpp">
+      <Filter>CheckPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckPoint\CheckPointNormal.cpp">
+      <Filter>CheckPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckPoint\CheckPointGoal.cpp">
+      <Filter>CheckPoint</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -589,6 +607,21 @@
     </ClInclude>
     <ClInclude Include="physics\PhysicsDebugDraw.h">
       <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckPoint\CheckPointBase.h">
+      <Filter>CheckPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckPoint\CheckedController.h">
+      <Filter>CheckPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckPoint\CheckPointManager.h">
+      <Filter>CheckPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckPoint\CheckPointNormal.h">
+      <Filter>CheckPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckPoint\CheckPointGoal.h">
+      <Filter>CheckPoint</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

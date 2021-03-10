@@ -24,6 +24,11 @@
     <ClCompile Include="Car\State\CarStateAccele.cpp" />
     <ClCompile Include="characterController\CharacterController.cpp" />
     <ClCompile Include="Car\State\ICarState.cpp" />
+    <ClCompile Include="CheckPoint\CheckPointGoal.cpp" />
+    <ClCompile Include="CheckPoint\CheckPointNormal.cpp" />
+    <ClCompile Include="CheckPoint\CheckPointManager.cpp" />
+    <ClCompile Include="CheckPoint\CheckedController.cpp" />
+    <ClCompile Include="CheckPoint\CheckPointBase.cpp" />
     <ClCompile Include="GameCamera\FollowCarCamera.cpp" />
     <ClCompile Include="Guardrail\Guardrail.cpp" />
     <ClCompile Include="physics\PhysicsDebugDraw.cpp" />
@@ -106,6 +111,11 @@
     <ClInclude Include="Car\State\CarStateAccele.h" />
     <ClInclude Include="characterController\CharacterController.h" />
     <ClInclude Include="Car\State\ICarState.h" />
+    <ClInclude Include="CheckPoint\CheckPointGoal.h" />
+    <ClInclude Include="CheckPoint\CheckPointNormal.h" />
+    <ClInclude Include="CheckPoint\CheckPointManager.h" />
+    <ClInclude Include="CheckPoint\CheckedController.h" />
+    <ClInclude Include="CheckPoint\CheckPointBase.h" />
     <ClInclude Include="GameCamera\FollowCarCamera.h" />
     <ClInclude Include="Guardrail\Guardrail.h" />
     <ClInclude Include="physics\PhysicsDebugDraw.h" />
