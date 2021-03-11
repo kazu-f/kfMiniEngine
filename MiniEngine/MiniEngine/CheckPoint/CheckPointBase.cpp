@@ -24,7 +24,7 @@ void CheckPointBase::Init()
 
 	//” ‚Ì’†S‚ÉÀ•W‚ð‡‚í‚¹‚éB
 	Vector3 pos = m_position;
-	pos.z += CHECKPOINT_BOXSIZE.z / 2.0f;
+	pos.y += CHECKPOINT_BOXSIZE.y / 2.0f;
 
 	m_ghostObj.CreateBox(
 		pos,
