@@ -91,6 +91,9 @@
     <Filter Include="CheckPoint">
       <UniqueIdentifier>{4d2100b7-d4e8-4424-a675-8dfeae4444f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ground">
+      <UniqueIdentifier>{f3f33b09-f5b1-4a89-99a7-6e88fd100ba6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tkEngine.cpp">
@@ -335,6 +338,9 @@
     </ClCompile>
     <ClCompile Include="CheckPoint\CheckPointGoal.cpp">
       <Filter>CheckPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground\BackGround.cpp">
+      <Filter>Ground</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -622,6 +628,9 @@
     </ClInclude>
     <ClInclude Include="CheckPoint\CheckPointGoal.h">
       <Filter>CheckPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground\BackGround.h">
+      <Filter>Ground</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

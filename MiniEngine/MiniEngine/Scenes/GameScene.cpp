@@ -7,6 +7,7 @@
 #include "GameLight/SceneLight.h"
 #include "Guardrail/Guardrail.h"
 #include "CheckPoint/CheckPointManager.h"
+#include "Ground/BackGround.h"
 
 #define ON 1
 #define OFF 0
@@ -69,6 +70,18 @@ bool GameScene::Start()
 			{
 				//ガードレールを読み込んでいく。
 				m_guardrail->LoadGuardrail(GUARDRAIL_TURNROAD, objData.position, objData.rotation);
+			}
+			if (objData.EqualObjectName(L"Road/Ground"))
+			{
+				//地面を作る。
+				m_ground = NewGO<BackGround>(0);
+				m_ground->InitData(
+					objData.position,
+					objData.rotation,
+					objData.scale
+				);
+
+				return true;
 			}
 
 

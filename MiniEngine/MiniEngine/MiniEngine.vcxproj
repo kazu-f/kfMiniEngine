@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Ground\BackGround.cpp" />
     <ClCompile Include="Car\State\CarStateBrake.cpp" />
     <ClCompile Include="Car\State\CarStateIdle.cpp" />
     <ClCompile Include="Car\State\CarStateAccele.cpp" />
@@ -106,6 +107,7 @@
     <ClCompile Include="Sound\WaveFileBank.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Ground\BackGround.h" />
     <ClInclude Include="Car\State\CarStateBrake.h" />
     <ClInclude Include="Car\State\CarStateIdle.h" />
     <ClInclude Include="Car\State\CarStateAccele.h" />
