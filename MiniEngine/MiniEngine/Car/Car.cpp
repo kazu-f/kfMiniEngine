@@ -5,6 +5,7 @@
 #include "State/CarStateAccele.h"
 #include "State/CarStateBrake.h"
 #include "GameCamera/GameCamera.h"
+#include "CheckPoint/CheckedController.h"
 
 namespace {
 	const float GRAVITY = 980.0f;			//重力加速度。
@@ -19,6 +20,7 @@ Car::Car()
 	m_stateIdle = std::make_unique<CarStateIdle>(this);
 	m_stateAccele = std::make_unique<CarStateAccele>(this);
 	m_stateBrake = std::make_unique<CarStateBrake>(this);
+	m_checkedCon = std::make_unique<CheckedController>();
 
 	//現在のステートを初期化。
 	ChangeState(m_stateIdle.get());
@@ -47,6 +49,14 @@ bool Car::Start()
 		50.0f,
 		m_position
 	);
+
+	//チェックポイントコントローラーの初期化。
+	m_checkedCon->Init(
+		&m_charaCon,
+		m_position,
+		m_rotation
+	);
+
 
 	return true;
 }
@@ -102,6 +112,8 @@ void Car::Update()
 
 	m_model->SetPosition(m_position);
 	m_model->SetRotation(m_rotation);
+
+	m_checkedCon->Update(m_position, m_rotation);
 
 	//if (g_pad[0]->IsTrigger(enButtonX)) {
 	//	DeleteGO(this);

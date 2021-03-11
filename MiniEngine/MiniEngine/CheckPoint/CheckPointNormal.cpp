@@ -23,7 +23,7 @@ void CheckPointNormal::CheckCharaconHit(CheckedController* checkedCon)
 			if (angleDot < 0.0f)
 			{
 				//Œã‚ë‚É‚¢‚éB
-				checkedCon->SetCheckPointNum(m_checkPointNum);
+				checkedCon->SetCheckPointNum(m_checkPointNo);
 			}
 			else {
 				//‘O•ûŒü‘¤‚É‚¢‚éB

@@ -6,10 +6,11 @@
 #include "Spectator/SpectatorNames.h"
 #include "GameLight/SceneLight.h"
 #include "Guardrail/Guardrail.h"
+#include "CheckPoint/CheckPointManager.h"
 
 #define ON 1
 #define OFF 0
-#define IS_SPECTATOR ON			//観客を出すかどうか。
+#define IS_SPECTATOR OFF			//観客を出すかどうか。
 namespace {
 #if 0
 	const char* COURSE_PATH = "Assets/level/CourseLevel.tkl";
@@ -20,6 +21,7 @@ namespace {
 #endif
 	const char* GUARDRAIL_ROAD = "Assets/level/RoadGuardrailLevel.tkl";
 	const char* GUARDRAIL_TURNROAD = "Assets/level/RoadTurnGuardrailLevel.tkl";
+	const char* CHECKPOINT_PATH = "Assets/level/CheckPointLevel.tkl";
 }
 
 
@@ -162,7 +164,60 @@ bool GameScene::Start()
 
 		m_spectator[enClaudiaWoman]->SetModelFilePath(FilePath::claudiaWoman);
 		m_spectator[enClaudiaWoman]->SetAnimFilePath(AnimPath::claudiaWomanAnim);
+
+		m_initState = enInit_CheckPoint;
+		break;
 #endif
+	case EnInitStep::enInit_CheckPoint:
+		//チェックポイントを読み込む。
+		m_checkPointManager = NewGO<CheckPointManager>(5);
+		//チェックポイントのレベル。
+		CLevel checkPointLevel;
+		checkPointLevel.Init(CHECKPOINT_PATH, [&](SLevelObjectData& objData) 
+			{
+				//チェックポイントを調べていく。
+				if (objData.ForwardMatchName(L"CheckPoint_"))
+				{
+					//名前からチェックポイント番号を調べる。
+					const wchar_t* objName = objData.name;
+					//数字の手前のアドレスを取得。
+					const wchar_t* index = wcsstr(objName, L"_");
+					if (index == nullptr) {
+						return true;
+					}
+					index++;		//チェックポイント番号まで位置を移動。
+					if (wcscmp(index, L"Start") == 0) {
+						//スタート地点のチェックポイントを作成。
+						m_checkPointManager->MakeCheckPoint(
+							objData.position,
+							objData.rotation,
+							0
+						);
+					}
+					else if (wcscmp(index, L"Goal") == 0) {
+						//ゴール用のチェックポイントを作成。
+						m_checkPointManager->MakeGoalPoint(
+							objData.position,
+							objData.rotation
+						);
+					}
+					else {
+						//チェックポイントを作成。
+						m_checkPointManager->MakeCheckPoint(
+							objData.position,
+							objData.rotation,
+							_wtoi(index)
+						);
+					}
+
+				}
+
+				//モデル表示は不要。
+				return true;
+			}
+		);
+		m_checkPointManager->RegistCheckedController(m_car->GetCheckedController());
+		m_checkPointManager->EnableInit();
 
 		ret = true;
 		break;

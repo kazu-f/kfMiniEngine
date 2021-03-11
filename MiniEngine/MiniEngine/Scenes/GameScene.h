@@ -8,6 +8,7 @@ class Car;
 class Spectator;
 class Guardrail;
 class SceneLight;
+class CheckPointManager;
 
 class GameScene:public IGameObject
 {
@@ -25,6 +26,7 @@ private:
 		enInit_Other,
 		enInit_Course,
 		enInit_Spectator,
+		enInit_CheckPoint,
 	};
 	//観客の列挙。
 	enum EnSpectator {
@@ -38,6 +40,7 @@ private:
 
 	CLevel m_courseLevel;					//コースのレベル。
 	CLevel m_spectatorLevel;				//観客のレベル。
+	CheckPointManager* m_checkPointManager = nullptr;	//チェックポイントの管理者。
 	FollowCarCamera* m_camera = nullptr;		//カメラ。
 	Car* m_car = nullptr;					//車。
 	Spectator* m_spectator[enSpectatorNum] = { nullptr };		//観客。

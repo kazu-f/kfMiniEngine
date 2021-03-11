@@ -41,7 +41,7 @@ public:
 	/// <param name="checkPointNum"></param>
 	void SetCheckPointNum(int checkPointNum)
 	{
-		m_currentCheckPointNum = checkPointNum;
+		m_currentCheckPointNo = checkPointNum;
 	}
 	/// <summary>
 	/// 逆走中かどうかのフラグを設定。
@@ -67,6 +67,13 @@ public:		//ゲット関係。
 		return m_forward;
 	}
 	/// <summary>
+	/// 現在のチェックポイント番号を取得する。
+	/// </summary>
+	int GetCheckPointNo()
+	{
+		return m_currentCheckPointNo;
+	}
+	/// <summary>
 	/// キャラコンを取得する。
 	/// </summary>
 	CCharacterController* GetCharaCon()
@@ -89,7 +96,7 @@ private:
 	Vector3 m_position = Vector3::Zero;					//座標。
 	Quaternion m_rotation = Quaternion::Identity;		//回転。
 	Vector3 m_forward = Vector3::AxisZ;					//前方向。
-	int m_currentCheckPointNum = 0;						//現在の次のチェックポイント番号。
+	int m_currentCheckPointNo = 0;						//現在の次のチェックポイント番号。
 	int m_currentLapsNum = 0;							//現在の周回数。
 	bool m_isReverseRun = false;						//逆走中か？
 };

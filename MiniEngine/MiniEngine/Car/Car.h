@@ -4,6 +4,7 @@ class ICarState;
 class CarStateIdle;
 class CarStateAccele;
 class CarStateBrake;
+class CheckedController;
 
 class Car : public IGameObject
 {
@@ -44,6 +45,11 @@ public:		//Get関数とか
 	{
 		return m_speed;
 	}
+	//チェックコントローラーを取得。
+	CheckedController* GetCheckedController()
+	{
+		return m_checkedCon.get();
+	}
 
 public:		//車の移動などの処理
 	/// <summary>
@@ -78,6 +84,7 @@ protected:
 	prefab::ModelRender* m_model = nullptr;
 	//移動関係。
 	CCharacterController m_charaCon;		//キャラコン。
+	std::unique_ptr<CheckedController> m_checkedCon;			//チェックポイントに監視される。
 	Vector3 m_position = Vector3::Zero;		//座標。
 	Vector3 m_moveSpeed = Vector3::Zero;	//移動速度。
 	float m_speed = 0.0f;					//速度。

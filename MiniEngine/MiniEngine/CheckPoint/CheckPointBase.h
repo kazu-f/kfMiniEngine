@@ -35,7 +35,7 @@ public:		//セット関係。
 	//チェックポイント番号を設定。
 	void SetCheckPointNum(int num)
 	{
-		m_checkPointNum = num;
+		m_checkPointNo = num;
 	}
 	/// <summary>
 	/// 前のチェックポイントを指定。
@@ -60,7 +60,7 @@ public:		//ゲット関係。
 	//チェックポイント番号を取得。
 	int GetCheckPointNum()
 	{
-		return m_checkPointNum;
+		return m_checkPointNo;
 	}
 
 protected:
@@ -70,7 +70,7 @@ protected:
 	Vector3 m_forward = Vector3::AxisZ;				//チェックポイントの前方向。
 	CheckPointBase* m_backPoint = nullptr;			//後ろのチェックポイント。
 	CheckPointBase* m_nextPoint = nullptr;			//次のチェックポイント。
-	int m_checkPointNum = -1;						//チェックポイント番号。
+	int m_checkPointNo = -1;						//チェックポイント番号。
 };
 
 
