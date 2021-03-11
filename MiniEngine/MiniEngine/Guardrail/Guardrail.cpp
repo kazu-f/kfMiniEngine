@@ -85,10 +85,15 @@ void Guardrail::LoadGuardrail(const char* path, const Vector3& parentPos, const 
 
 void Guardrail::CreateBoxCollider(const Vector3& pos, const Quaternion& rot)
 {
-	Vector3 pivot = pos;
-	pivot += BOX_SIZE * (1.0f / 2.0f);
+	Vector3 position = pos;
+	Vector3 pivot = Vector3::Zero;
+	pivot.y += BOX_SIZE.y * (1.0f / 2.0f);
+	pivot.z += BOX_SIZE.z * (1.0f / 2.0f);
+	rot.Apply(pivot);
+
+	position += pivot;
 	ColliderPtr col = std::make_unique<CPhysicsStaticObject>();
-	col->CreateBox(pivot, rot, BOX_SIZE);
+	col->CreateBox(position, rot, BOX_SIZE);
 
 	m_colliders.push_back(std::move(col));
 }
