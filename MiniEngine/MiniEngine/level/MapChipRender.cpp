@@ -45,7 +45,7 @@ namespace Engine {
 		if (m_renderObjDatas.size() > 1) {
 			//インスタンシング描画。
 			initData.m_vsEntryPointFunc = "VSMainInstancing";
-			m_modelRender->Init(initData, nullptr, 0, m_renderObjDatas.size());
+			m_modelRender->Init(initData, nullptr, 0, static_cast<int>(m_renderObjDatas.size()));
 		}
 		else {
 			//通常描画。
