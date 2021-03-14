@@ -23,6 +23,8 @@ bool DebugScene::Start()
 
 	OnBGM();
 
+	InitSprite();
+
 	m_courseLevel.Init("Assets/level/testLevel.tkl", [&](SLevelObjectData& objData) {
 		if (wcscmp(objData.name, L"unityChan") == 0) {
 
@@ -56,6 +58,19 @@ void DebugScene::PlaySE()
 	auto se = NewGO<prefab::CSoundSource>(0);
 	se->Init(L"Assets/sound/SE_Katana.wav");
 	se->Play(false);
+}
+
+void DebugScene::InitSprite()
+{
+	//スプライトを表示する。
+	m_sprite = NewGO<prefab::CSpriteRender>(0);
+	SpriteInitData spriteData;
+	spriteData.m_ddsFilePath[0] = "Assets/sprite/LAP.dds";
+	spriteData.m_height = 300.0f;
+	spriteData.m_width = 600.0f;
+	spriteData.m_fxFilePath = Sprite::SPRITE_SHADER_PATH;
+	m_sprite->Init(spriteData);
+	m_sprite->SetPivot({ 0.0f,0.0f });
 }
 
 void DebugScene::Update()

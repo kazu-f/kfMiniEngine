@@ -12,6 +12,7 @@ namespace Engine {
 		};
 	}
 	const Vector2	Sprite::DEFAULT_PIVOT = { 0.5f, 0.5f };
+	const char*		Sprite::SPRITE_SHADER_PATH = "Assets/shader/sprite.fx";
 	Sprite::~Sprite()
 	{
 	}
@@ -121,7 +122,7 @@ namespace Engine {
 		m_indexBuffer.Init(sizeof(indices), sizeof(indices[0]));
 		m_indexBuffer.Copy(indices);
 	}
-	void Sprite::InitPipelineState()
+	void Sprite::InitPipelineState(bool isDraw3D)
 	{
 		// 頂点レイアウトを定義する。
 		D3D12_INPUT_ELEMENT_DESC inputElementDescs[] =
@@ -139,7 +140,7 @@ namespace Engine {
 		psoDesc.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
 		psoDesc.RasterizerState.CullMode = D3D12_CULL_MODE_BACK;
 		psoDesc.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT);
-		psoDesc.DepthStencilState.DepthEnable = FALSE;
+		psoDesc.DepthStencilState.DepthEnable = isDraw3D ? TRUE : FALSE;
 		psoDesc.DepthStencilState.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ZERO;
 		psoDesc.DepthStencilState.DepthFunc = D3D12_COMPARISON_FUNC_LESS_EQUAL;
 		psoDesc.DepthStencilState.StencilEnable = FALSE;
@@ -148,6 +149,11 @@ namespace Engine {
 		psoDesc.NumRenderTargets = 1;
 		psoDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;
 		psoDesc.DSVFormat = DXGI_FORMAT_D32_FLOAT;
+		psoDesc.BlendState.IndependentBlendEnable = TRUE;							//αブレンディングを有効にする。
+		psoDesc.BlendState.RenderTarget[0].BlendEnable = TRUE;
+		psoDesc.BlendState.RenderTarget[0].SrcBlend = D3D12_BLEND_SRC_ALPHA;
+		psoDesc.BlendState.RenderTarget[0].DestBlend = D3D12_BLEND_INV_SRC_ALPHA;
+		psoDesc.BlendState.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
 		psoDesc.SampleDesc.Count = 1;
 		m_pipelineState.Init(psoDesc);
 	}
@@ -164,7 +170,7 @@ namespace Engine {
 			);
 		}
 	}
-	void Sprite::Init(const SpriteInitData& initData)
+	void Sprite::Init(const SpriteInitData& initData, bool isDraw3D)
 	{
 		m_size.x = static_cast<float>(initData.m_width);
 		m_size.y = static_cast<float>(initData.m_height);
@@ -186,7 +192,7 @@ namespace Engine {
 		//シェーダーを初期化。
 		InitShader(initData);
 		//パイプラインステートの初期化。
-		InitPipelineState();
+		InitPipelineState(isDraw3D);
 		//ディスクリプタヒープを初期化。
 		InitDescriptorHeap(initData);
 	}

@@ -39,12 +39,13 @@ namespace Engine {
 	class Sprite {
 	public:
 		static const Vector2	DEFAULT_PIVOT;					//!<ピボット。
+		static const char* SPRITE_SHADER_PATH;					//!<スプライトのシェーダーのファイルパス。
 		virtual ~Sprite();
 		/// <summary>
 		/// 初期化。
 		/// </summary>
 		/// <param name="initData">初期化データ</param>
-		void Init(const SpriteInitData& initData);
+		void Init(const SpriteInitData& initData, bool isDraw3D = false);
 		/// <summary>
 		/// 更新。
 		/// </summary>
@@ -96,7 +97,7 @@ namespace Engine {
 		/// <summary>
 		/// パイプラインステートを初期化する。
 		/// </summary>
-		void InitPipelineState();
+		void InitPipelineState(bool isDraw3D);
 		/// <summary>
 		/// 定数バッファを初期化。
 		/// </summary>

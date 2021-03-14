@@ -639,4 +639,9 @@
       <Filter>prefab</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\LAP.png">
+      <Filter>リソース ファイル</Filter>
+    </ImageContentTask>
+  </ItemGroup>
 </Project>

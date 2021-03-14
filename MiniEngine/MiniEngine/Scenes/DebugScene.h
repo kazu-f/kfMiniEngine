@@ -19,12 +19,14 @@ public:
 private:
 	void OnBGM();
 	void PlaySE();
+	void InitSprite();
 
 private:
 	CLevel m_courseLevel;
 	Player* m_player = nullptr;
 	prefab::CSoundSource* m_bgm = nullptr;
 	prefab::CSoundSource* m_se = nullptr;
+	prefab::CSpriteRender* m_sprite = nullptr;
 	CGameCamera* m_camera = nullptr;
 	SceneLight* m_light = nullptr;
 };
