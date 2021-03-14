@@ -32,6 +32,12 @@ LapUI::~LapUI()
 
 void LapUI::OnDestroy()
 {
+	DeleteGO(m_lapTextSprite);
+	DeleteGO(m_maxLapSprite);
+	DeleteGO(m_slashSprite);
+	for (int i = 0; i < enLap_Num; i++) {
+		DeleteGO(m_currentLapSprite[i]);
+	}
 }
 
 bool LapUI::Start()

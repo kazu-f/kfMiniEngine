@@ -1,6 +1,7 @@
 #pragma once
 class CheckedController;
 class LapUI;
+class ReverseRunUI;
 
 /// <summary>
 /// ƒŒ[ƒX‚ğŠÇ—‚·‚éB
@@ -22,5 +23,6 @@ public:
 private:
 	CheckedController* m_player = nullptr;
 	LapUI* m_LapUI = nullptr;
+	ReverseRunUI* m_reverseRunUI = nullptr;
 };
 

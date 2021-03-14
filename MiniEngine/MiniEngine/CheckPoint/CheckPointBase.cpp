@@ -2,7 +2,7 @@
 #include "CheckPointBase.h"
 
 namespace {
-	const float REVERSE_ANGLE = -0.7f;
+	const float REVERSE_ANGLE = -0.4f;
 	const Vector3 CHECKPOINT_BOXSIZE = {2700.0f,500.0f,500.0f};
 }
 
@@ -38,8 +38,10 @@ bool CheckPointBase::CheckReverseRun(CheckedController* car)
 	//車の前方向。
 	Vector3 carFront = car->GetForward();
 	carFront.Normalize();
-	//次のチェックポイントまでのベクトル。
-	Vector3 vDir = m_nextPoint->GetPosition() - m_position;
+	////次のチェックポイントまでのベクトル。
+	//Vector3 vDir = m_nextPoint->GetPosition() - m_position;
+	//手前のチェックポイントからのベクトル。
+	Vector3 vDir = m_position - m_backPoint->GetPosition();
 	vDir.Normalize();
 	//内積から逆走しているかを判定する。
 	float angle = vDir.Dot(carFront);

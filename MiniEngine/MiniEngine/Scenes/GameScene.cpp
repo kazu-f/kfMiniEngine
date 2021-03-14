@@ -186,7 +186,7 @@ bool GameScene::Start()
 		break;
 	case EnInitStep::enInit_RaceController:
 		//レースを管理する。
-		m_raceController = NewGO<RaceController>(0);
+		m_raceController = NewGO<RaceController>(3);
 		//プレイヤーを設定する。
 		m_raceController->SetPlayer(m_car->GetCheckedController());
 
@@ -194,7 +194,7 @@ bool GameScene::Start()
 		break;
 	case EnInitStep::enInit_CheckPoint:
 		//チェックポイントを読み込む。
-		m_checkPointManager = NewGO<CheckPointManager>(5);
+		m_checkPointManager = NewGO<CheckPointManager>(2);
 		//チェックポイントのレベル。
 		CLevel checkPointLevel;
 		checkPointLevel.Init(CHECKPOINT_PATH, [&](SLevelObjectData& objData) 

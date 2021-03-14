@@ -35,6 +35,7 @@
     <ClCompile Include="Race\RaceUI\LapUI.cpp" />
     <ClCompile Include="physics\PhysicsDebugDraw.cpp" />
     <ClCompile Include="Race\RaceController.cpp" />
+    <ClCompile Include="Race\RaceUI\ReverseRunUI.cpp" />
     <ClCompile Include="Scenes\DebugScene.cpp" />
     <ClCompile Include="physics\PhysicsGhostobject.cpp" />
     <ClCompile Include="physics\MeshCollider.cpp" />
@@ -126,6 +127,7 @@
     <ClInclude Include="Race\RaceUI\LapUI.h" />
     <ClInclude Include="physics\PhysicsDebugDraw.h" />
     <ClInclude Include="Race\RaceController.h" />
+    <ClInclude Include="Race\RaceUI\ReverseRunUI.h" />
     <ClInclude Include="Scenes\DebugScene.h" />
     <ClInclude Include="physics\PhysicsGhostobject.h" />
     <ClInclude Include="physics\MeshCollider.h" />
@@ -221,6 +223,9 @@
     <ImageContentTask Include="Assets\sprite\LapNum_2.png" />
     <ImageContentTask Include="Assets\sprite\LapNum_3.png" />
     <ImageContentTask Include="Assets\sprite\LapSlash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\RoadClosed.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

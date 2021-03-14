@@ -357,6 +357,9 @@
     <ClCompile Include="Race\RaceUI\LapUI.cpp">
       <Filter>Race\RaceUI</Filter>
     </ClCompile>
+    <ClCompile Include="Race\RaceUI\ReverseRunUI.cpp">
+      <Filter>Race\RaceUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MiniEngine.h">
@@ -656,6 +659,9 @@
     <ClInclude Include="Race\RaceUI\LapUI.h">
       <Filter>Race\RaceUI</Filter>
     </ClInclude>
+    <ClInclude Include="Race\RaceUI\ReverseRunUI.h">
+      <Filter>Race\RaceUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\LAP.png">
@@ -673,6 +679,9 @@
       <Filter>リソース ファイル</Filter>
     </Image>
     <Image Include="Assets\sprite\LapSlash.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Assets\sprite\RoadClosed.png">
       <Filter>リソース ファイル</Filter>
     </Image>
   </ItemGroup>
