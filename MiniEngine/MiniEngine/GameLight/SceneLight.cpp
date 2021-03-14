@@ -10,6 +10,15 @@ SceneLight::~SceneLight()
 {
 }
 
+void SceneLight::OnDestroy()
+{
+	//ライトの解放。
+	for (auto* lig : m_lightArray)
+	{
+		DeleteGO(lig);
+	}
+}
+
 bool SceneLight::Start()
 {
 	//ライトを用意する。
@@ -43,3 +52,4 @@ bool SceneLight::Start()
 
 	return true;
 }
+

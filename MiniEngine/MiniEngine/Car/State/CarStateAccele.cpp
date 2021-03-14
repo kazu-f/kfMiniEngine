@@ -16,6 +16,8 @@ CarStateAccele::CarStateAccele(Car* car):
 
 CarStateAccele::~CarStateAccele()
 {
+	//サウンドの削除。
+	DeleteGO(m_acceleSound);
 }
 
 void CarStateAccele::Enter()

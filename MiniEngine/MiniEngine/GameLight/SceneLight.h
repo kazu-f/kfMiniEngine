@@ -5,6 +5,7 @@ public:
 	SceneLight();
 	~SceneLight();
 	bool Start() override final;
+	void OnDestroy() override final;
 
 private:
 	std::vector<prefab::CDirectionLight*> m_lightArray;

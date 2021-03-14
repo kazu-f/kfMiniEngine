@@ -15,6 +15,8 @@ CarStateBrake::CarStateBrake(Car* car) :
 
 CarStateBrake::~CarStateBrake()
 {
+	//サウンドの削除。
+	DeleteGO(m_breakeSound);
 }
 
 void CarStateBrake::Enter()

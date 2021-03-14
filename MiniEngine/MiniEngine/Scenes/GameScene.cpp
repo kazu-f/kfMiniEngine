@@ -12,8 +12,10 @@
 #define ON 1
 #define OFF 0
 #define IS_SPECTATOR OFF			//観客を出すかどうか。
+#define DEBUG_DELETE OFF				//削除処理を呼び出せるようにするか。
+
 namespace {
-#if 0
+#if 0								//もう使うことはなさそう？
 	const char* COURSE_PATH = "Assets/level/CourseLevel.tkl";
 	const char* SPECTATOR_PATH = "Assets/level/spectatorLevel.tkl";
 #else
@@ -241,6 +243,17 @@ bool GameScene::Start()
 
 void GameScene::Release()
 {
+	DeleteGO(m_camera);		//カメラ。
+	DeleteGO(m_car);		//車。
+	DeleteGO(m_ground);		//背景モデル。
+	for (int i = 0; i < enSpectatorNum; i++)
+	{
+		//観客。
+		DeleteGO(m_spectator[i]);
+	}
+	DeleteGO(m_guardrail);	//ガードレール。
+	DeleteGO(m_light);		//ライト。
+	DeleteGO(m_checkPointManager);	//チェックポイント。
 }
 
 void GameScene::PreUpdate()
@@ -258,11 +271,18 @@ void GameScene::Update()
 		qRot.SetRotationDegY(-1.0f);
 	}
 
-	////環境光の変化をさせる。
-	//m_lightPow += g_pad[0]->GetLStickYF() * 0.02f;
-	//m_lightPow = min(1.0f, max(0.0f, m_lightPow));
-	//g_graphicsEngine->GetLightManager()->SetAmbientLight({ m_lightPow,m_lightPow,m_lightPow });
+#if DEBUG_DELETE
 
+	if (g_pad[0]->IsTrigger(enButtonStart))
+	{
+		DeleteGO(this);
+	}
 
+#endif // DEBUG_DELETE
+}
+
+void GameScene::OnDestroy()
+{
+	Release();
 }
 

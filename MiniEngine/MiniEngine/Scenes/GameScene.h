@@ -20,6 +20,7 @@ public:
 	void Release();		//解放処理が必要ならこれ。
 	void PreUpdate()override;
 	void Update();		//更新処理。
+	void OnDestroy()override final;	//削除時処理。
 
 private:
 	//初期化ステップ。

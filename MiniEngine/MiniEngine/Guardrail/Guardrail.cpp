@@ -44,6 +44,8 @@ bool Guardrail::Start()
 
 void Guardrail::OnDestroy()
 {
+	//ƒ‚ƒfƒ‹‚ğíœB
+	DeleteGO(m_model);
 }
 
 void Guardrail::Update()

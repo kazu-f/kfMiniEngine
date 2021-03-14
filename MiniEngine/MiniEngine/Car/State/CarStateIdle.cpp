@@ -16,6 +16,8 @@ CarStateIdle::CarStateIdle(Car* car):
 
 CarStateIdle::~CarStateIdle()
 {
+	//サウンドの削除。
+	DeleteGO(m_idleSound);
 }
 
 void CarStateIdle::Enter()
