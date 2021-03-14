@@ -6,6 +6,7 @@ namespace Engine {
 		enRenderStep_CreateDirectionalShadowMap,	//指向性シャドウマップ作成。
 		enRenderStep_PreRender,						//事前レンダリング。
 		enRenderStep_ForwardRender,					//フォワードレンダリング。
+		enRenderStep_PostRender,					//ポストレンダリング。
 	};
 
 	class ConstantBuffer;

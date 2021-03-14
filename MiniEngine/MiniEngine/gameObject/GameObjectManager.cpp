@@ -42,16 +42,6 @@ namespace Engine {
 		}
 	}
 
-	void CGameObjectManager::Draw()
-	{
-		for (GameObjectList objList : m_gameObjectListArray)
-		{
-			for (IGameObject* obj : objList) {
-				obj->DrawWrapper();
-			}
-		}
-	}
-
 	void CGameObjectManager::ForwardRender(RenderContext& rc)
 	{
 		for (auto objList : m_gameObjectListArray) {
@@ -61,14 +51,14 @@ namespace Engine {
 		}
 	}
 
-	//void CGameObjectManager::RenderHUD(RenderContext& rc)
-	//{
-	//	for (auto objList : m_gameObjectListArray) {
-	//		for (auto& obj : objList) {
-
-	//		}
-	//	}
-	//}
+	void CGameObjectManager::PostRender(RenderContext& rc)
+	{
+		for (auto objList : m_gameObjectListArray) {
+			for (auto& obj : objList) {
+				obj->PostRenderWrapper(rc);
+			}
+		}
+	}
 
 	void CGameObjectManager::PreRender(RenderContext& rc)
 	{

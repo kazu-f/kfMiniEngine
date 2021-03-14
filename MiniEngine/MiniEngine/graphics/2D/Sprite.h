@@ -62,8 +62,14 @@ namespace Engine {
 		/// <summary>
 		/// 描画。
 		/// </summary>
-		/// <param name="renderContext">レンダリングコンテキスト/param>
-		void Draw(RenderContext& renderContext);
+		/// <param name="renderContext">レンダリングコンテキスト</param>
+		void Draw(RenderContext& renderContext, const Matrix& viewMat, const Matrix& projMat);
+	public:		//Set関数。
+		void SetMulColor(const Vector4& col)
+		{
+			m_mulColor = col;
+		}
+
 	private:
 		/// <summary>
 		/// テクスチャを初期化。
@@ -102,6 +108,7 @@ namespace Engine {
 		Texture* m_textureExternal[MAX_TEXTURE] = { nullptr };	//外部から指定されたテクスチャ
 		Vector3 m_position;				//座標。
 		Vector2 m_size;						//サイズ。
+		Vector4 m_mulColor = Vector4::White;	//乗算カラー。
 		Quaternion m_rotation;			//回転。
 		Matrix m_world;					//ワールド行列。
 
