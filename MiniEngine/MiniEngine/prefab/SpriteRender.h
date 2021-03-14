@@ -11,12 +11,22 @@ namespace Engine {
 			/// 初期化。
 			/// </summary>
 			/// <param name="spriteData">初期化データ。</param>
+			/// <param name="isDraw3D">3D空間で描画するか？</param>
 			void Init(const SpriteInitData& spriteData, bool isDraw3D = false)
 			{
 				m_sprite.Init(spriteData,isDraw3D);	//初期化。
-				m_isInited = true;			//初期化済み。
 				m_isDraw3D = isDraw3D;		//3D空間で描画するか？
+				m_isInited = true;			//初期化済み。
 			}
+			/// <summary>
+			/// 簡易初期化。
+			/// </summary>
+			/// <param name="FilePath">スプライトのファイルパス。</param>
+			/// <param name="w">横。</param>
+			/// <param name="h">縦。</param>
+			/// <param name="isDraw3D">3D空間で描画するか？</param>
+			void Init(const char* FilePath, float w, float h, bool isDraw3D = false);
+
 		public:
 			bool Start()override final;
 			void Update()override final;
@@ -49,8 +59,8 @@ namespace Engine {
 			/// </summary>
 			/// <param name="pivot">基点。
 			/// <para>{ 0.5, 0.5 }が画像の中心が基点。</para>
-			/// <para>{ 0.0, 0.0 }で画像の左上。</para>
-			/// <para>{ 1.0, 1.0 }で画像の右下。</para>
+			/// <para>{ 0.0, 0.0 }で画像の右上。</para>
+			/// <para>{ 1.0, 1.0 }で画像の左下。</para>
 			/// </param>
 			void SetPivot(const Vector2& pivot)
 			{
