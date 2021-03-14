@@ -164,7 +164,7 @@ namespace Engine {
 		m_camera2D.SetUpdateProjMatrixFunc(Camera::enUpdateProjMatrixFunc_Ortho);
 		m_camera2D.SetWidth(static_cast<float>(m_frameBufferWidth));
 		m_camera2D.SetHeight(static_cast<float>(m_frameBufferHeight));
-		m_camera2D.SetPosition({ 0.0f, 0.0f, 1.0f });
+		m_camera2D.SetPosition({ 0.0f, 0.0f, -1.0f });
 		m_camera2D.SetTarget({ 0.0f, 0.0f, 0.0f });
 
 		m_camera3D.SetPosition({ 0.0f, 50.0f, 200.0f });
