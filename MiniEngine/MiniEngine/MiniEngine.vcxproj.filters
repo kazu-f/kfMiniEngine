@@ -94,6 +94,12 @@
     <Filter Include="Ground">
       <UniqueIdentifier>{f3f33b09-f5b1-4a89-99a7-6e88fd100ba6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Race">
+      <UniqueIdentifier>{5e7597b9-1d8d-4ae1-93de-c34800010783}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Race\RaceUI">
+      <UniqueIdentifier>{37a83391-f034-4385-a067-079c5a73c36f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tkEngine.cpp">
@@ -344,6 +350,12 @@
     </ClCompile>
     <ClCompile Include="prefab\SpriteRender.cpp">
       <Filter>prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="Race\RaceController.cpp">
+      <Filter>Race</Filter>
+    </ClCompile>
+    <ClCompile Include="Race\RaceUI\LapUI.cpp">
+      <Filter>Race\RaceUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -638,10 +650,30 @@
     <ClInclude Include="prefab\SpriteRender.h">
       <Filter>prefab</Filter>
     </ClInclude>
+    <ClInclude Include="Race\RaceController.h">
+      <Filter>Race</Filter>
+    </ClInclude>
+    <ClInclude Include="Race\RaceUI\LapUI.h">
+      <Filter>Race\RaceUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\LAP.png">
       <Filter>リソース ファイル</Filter>
     </ImageContentTask>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\sprite\LapNum_1.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Assets\sprite\LapNum_2.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Assets\sprite\LapNum_3.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Assets\sprite\LapSlash.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -74,6 +74,13 @@ public:		//ゲット関係。
 		return m_currentCheckPointNo;
 	}
 	/// <summary>
+	/// 現在の周回数を取得する。
+	/// </summary>
+	int GetCurrentLapNum()
+	{
+		return m_currentLapsNum;
+	}
+	/// <summary>
 	/// キャラコンを取得する。
 	/// </summary>
 	CCharacterController* GetCharaCon()

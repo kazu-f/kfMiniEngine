@@ -10,6 +10,7 @@ class Guardrail;
 class SceneLight;
 class CheckPointManager;
 class BackGround;
+class RaceController;
 
 class GameScene:public IGameObject
 {
@@ -28,6 +29,7 @@ private:
 		enInit_Other,
 		enInit_Course,
 		enInit_Spectator,
+		enInit_RaceController,
 		enInit_CheckPoint,
 	};
 	//観客の列挙。
@@ -43,6 +45,7 @@ private:
 	CLevel m_courseLevel;					//コースのレベル。
 	CLevel m_spectatorLevel;				//観客のレベル。
 	CheckPointManager* m_checkPointManager = nullptr;	//チェックポイントの管理者。
+	RaceController* m_raceController = nullptr;			//レースの管理。
 	FollowCarCamera* m_camera = nullptr;		//カメラ。
 	Car* m_car = nullptr;					//車。
 	BackGround* m_ground = nullptr;			//地面。

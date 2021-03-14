@@ -32,7 +32,9 @@
     <ClCompile Include="CheckPoint\CheckPointBase.cpp" />
     <ClCompile Include="GameCamera\FollowCarCamera.cpp" />
     <ClCompile Include="Guardrail\Guardrail.cpp" />
+    <ClCompile Include="Race\RaceUI\LapUI.cpp" />
     <ClCompile Include="physics\PhysicsDebugDraw.cpp" />
+    <ClCompile Include="Race\RaceController.cpp" />
     <ClCompile Include="Scenes\DebugScene.cpp" />
     <ClCompile Include="physics\PhysicsGhostobject.cpp" />
     <ClCompile Include="physics\MeshCollider.cpp" />
@@ -121,7 +123,9 @@
     <ClInclude Include="CheckPoint\CheckPointBase.h" />
     <ClInclude Include="GameCamera\FollowCarCamera.h" />
     <ClInclude Include="Guardrail\Guardrail.h" />
+    <ClInclude Include="Race\RaceUI\LapUI.h" />
     <ClInclude Include="physics\PhysicsDebugDraw.h" />
+    <ClInclude Include="Race\RaceController.h" />
     <ClInclude Include="Scenes\DebugScene.h" />
     <ClInclude Include="physics\PhysicsGhostobject.h" />
     <ClInclude Include="physics\MeshCollider.h" />
@@ -211,6 +215,12 @@
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(RelativeDir)/%(Filename).dds</ContentOutput>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(RelativeDir)/%(Filename).dds</ContentOutput>
     </ImageContentTask>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\LapNum_1.png" />
+    <ImageContentTask Include="Assets\sprite\LapNum_2.png" />
+    <ImageContentTask Include="Assets\sprite\LapNum_3.png" />
+    <ImageContentTask Include="Assets\sprite\LapSlash.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -313,6 +323,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>BulletCollision_Debug.lib;BulletDynamics_Debug.lib;LinearMath_Debug.lib;DXGI.lib;dxguid.lib;DirectXTK12.lib;d3d12.lib;d3dcompiler.lib;Effekseer.Debug.lib;EffekseerRendererDX12.Debug.lib;LLGI.Debug.lib;%(AdditionalDependencies);winmm.lib;xaudio2.lib</AdditionalDependencies>
     </Link>
+    <ImageContentTask>
+      <ContentOutput>%(RelativeDir)/%(Filename).dds</ContentOutput>
+    </ImageContentTask>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -350,6 +363,9 @@
       <AdditionalDependencies>BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;DXGI.lib;dxguid.lib;DirectXTK12.lib;d3d12.lib;d3dcompiler.lib;Effekseer.Release.lib;EffekseerRendererDX12.Release.lib;LLGI.Release.lib;%(AdditionalDependencies);winmm.lib;xaudio2.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(EFK_ROOT_DIR)/Release;$(EFK_ROOT_DIR)/EffekseerRenderer/Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <ImageContentTask>
+      <ContentOutput>%(RelativeDir)/%(Filename).dds</ContentOutput>
+    </ImageContentTask>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

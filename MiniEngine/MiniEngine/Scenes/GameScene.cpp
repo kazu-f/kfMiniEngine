@@ -8,6 +8,7 @@
 #include "Guardrail/Guardrail.h"
 #include "CheckPoint/CheckPointManager.h"
 #include "Ground/BackGround.h"
+#include "Race/RaceController.h"
 
 #define ON 1
 #define OFF 0
@@ -180,9 +181,17 @@ bool GameScene::Start()
 		m_spectator[enClaudiaWoman]->SetModelFilePath(FilePath::claudiaWoman);
 		m_spectator[enClaudiaWoman]->SetAnimFilePath(AnimPath::claudiaWomanAnim);
 
+#endif
+		m_initState = enInit_RaceController;
+		break;
+	case EnInitStep::enInit_RaceController:
+		//レースを管理する。
+		m_raceController = NewGO<RaceController>(0);
+		//プレイヤーを設定する。
+		m_raceController->SetPlayer(m_car->GetCheckedController());
+
 		m_initState = enInit_CheckPoint;
 		break;
-#endif
 	case EnInitStep::enInit_CheckPoint:
 		//チェックポイントを読み込む。
 		m_checkPointManager = NewGO<CheckPointManager>(5);
