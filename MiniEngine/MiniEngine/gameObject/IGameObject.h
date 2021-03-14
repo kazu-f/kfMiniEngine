@@ -79,10 +79,6 @@ namespace Engine {
 		virtual void PostUpdate() {}
 	public:		//描画関係の処理。
 		/// <summary>
-		/// 描画処理。
-		/// </summary>
-		virtual void Draw() {}
-		/// <summary>
 		/// シャドウマップへのレンダリングパスから呼ばれる描画処理。
 		/// </summary>
 		virtual void PreRender(RenderContext& rc)
@@ -100,6 +96,17 @@ namespace Engine {
 		{
 			(void)rc;
 		}
+		/// <summary>
+		/// ポストレンダリング。
+		/// </summary>
+		/// <remarks>
+		/// ポストエフェクトの後で実行される。ポストエフェクトの影響を受けたくない描画物をレンダリングする。
+		/// </remarks>
+		virtual void PostRender(RenderContext& rc)
+		{
+			(void)rc;
+		}
+
 		/// <summary>
 		/// 削除されるときに呼ばれる。
 		/// </summary>
@@ -246,15 +253,6 @@ namespace Engine {
 
 			OnDestroy();
 		}
-		/// <summary>
-		/// 描画関係
-		/// </summary>
-		void DrawWrapper()
-		{
-			if (m_isActive && m_isStart && !m_isDead && !m_isRegistDeadList) {
-				Draw();
-			}
-		}
 		void PreRenderWrapper(RenderContext& rc)
 		{
 			if (m_isActive && m_isStart && !m_isDead && !m_isRegistDeadList) {
@@ -265,6 +263,12 @@ namespace Engine {
 		{
 			if (m_isActive && m_isStart && !m_isDead && !m_isRegistDeadList) {
 				ForwardRender(rc);
+			}
+		}
+		void PostRenderWrapper(RenderContext& rc)
+		{
+			if (m_isActive && m_isStart && !m_isDead && !m_isRegistDeadList) {
+				PostRender(rc);
 			}
 		}
 

@@ -203,10 +203,9 @@ namespace Engine {
 		/// <summary>
 		/// 描画関係の更新処理はグラフィックエンジンから呼び出す。
 		/// </summary>
-		void Draw();
 		void ForwardRender(RenderContext& rc);
-		//void RenderHUD(RenderContext& rc);
 		void PreRender(RenderContext& rc);
+		void PostRender(RenderContext& rc);
 
 	private:
 		typedef std::list<IGameObject*> GameObjectList;			//!<ゲームオブジェクト*のリスト。

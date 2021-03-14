@@ -64,6 +64,7 @@
     <ClCompile Include="Sound\SoundEngine.cpp" />
     <ClCompile Include="Spectator\Spectator.cpp" />
     <ClCompile Include="physics\SphereCollider.cpp" />
+    <ClCompile Include="prefab\SpriteRender.cpp" />
     <ClCompile Include="util\CGameTime.cpp" />
     <ClCompile Include="graphics\animation\AnimationPlayController.cpp" />
     <ClCompile Include="graphics\animation\AnimationClip.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="Spectator\Spectator.h" />
     <ClInclude Include="physics\SphereCollider.h" />
     <ClInclude Include="Spectator\SpectatorNames.h" />
+    <ClInclude Include="prefab\SpriteRender.h" />
     <ClInclude Include="system\debugLog.h" />
     <ClInclude Include="util\CGameTime.h" />
     <ClInclude Include="graphics\animation\AnimationPlayController.h" />

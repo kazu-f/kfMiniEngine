@@ -342,6 +342,9 @@
     <ClCompile Include="Ground\BackGround.cpp">
       <Filter>Ground</Filter>
     </ClCompile>
+    <ClCompile Include="prefab\SpriteRender.cpp">
+      <Filter>prefab</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MiniEngine.h">
@@ -631,6 +634,9 @@
     </ClInclude>
     <ClInclude Include="Ground\BackGround.h">
       <Filter>Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="prefab\SpriteRender.h">
+      <Filter>prefab</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

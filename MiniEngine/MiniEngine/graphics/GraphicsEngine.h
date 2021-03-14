@@ -70,10 +70,18 @@ namespace Engine {
 		/// </summary>
 		void PreRender(CGameObjectManager* goMgr);
 		/// <summary>
-		/// 描画時に呼ばれる処理。
+		/// ディファード。
 		/// </summary>
 		/// <param name="goMgr"></param>
-		void OnRender(CGameObjectManager* goMgr);
+		void DefferdShading(CGameObjectManager* goMgr);
+		/// <summary>
+		/// フォワードレンダリング。
+		/// </summary>
+		void ForwardRender(CGameObjectManager* goMgr);
+		/// <summary>
+		/// ポストレンダリング。
+		/// </summary>
+		void PostRender(CGameObjectManager* goMgr);
 		/// <summary>
 		/// レンダリング開始。
 		/// </summary>

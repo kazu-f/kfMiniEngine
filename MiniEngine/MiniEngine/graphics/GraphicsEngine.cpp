@@ -467,9 +467,11 @@ namespace Engine {
 
 		PreRender(goMgr);
 		
-		//ライト情報の更新。
-		m_lightManager->Render(m_renderContext);
-		OnRender(goMgr);
+		DefferdShading(goMgr);
+
+		ForwardRender(goMgr);
+
+		PostRender(goMgr);
 
 		EndRender();
 	}
@@ -486,23 +488,32 @@ namespace Engine {
 		goMgr->PreRender(m_renderContext);
 		m_gBuffer->EndRender(m_renderContext);
 	}
-	void GraphicsEngine::OnRender(CGameObjectManager* goMgr)
+	void GraphicsEngine::DefferdShading(CGameObjectManager* goMgr)
+	{
+		//ライト情報の更新。
+		m_lightManager->Render(m_renderContext);
+		//ディファードレンダリングを行う。
+		m_defferd->Render(m_renderContext);
+	}
+	void GraphicsEngine::ForwardRender(CGameObjectManager* goMgr)
 	{
 		//レンダリングステップをフォワードレンダリングにする。
 		m_renderContext.SetRenderStep(EnRenderStep::enRenderStep_ForwardRender);
-
-		m_defferd->Render(m_renderContext);
-
-		//フォワードレンダリングパス。
-		goMgr->ForwardRender(m_renderContext);
-
 		//レンダリングターゲットを設定。
 		m_renderContext.SetRenderTarget(
 			m_currentFrameBufferRTVHandle,
 			m_gBuffer->GetRenderTarget(EnGBuffer::enGBufferAlbed).GetDSVCpuDescriptorHandle()
 		);
-		PhysicsWorld().DebugDrawWorld(m_renderContext);
+		//フォワードレンダリングパス。
+		goMgr->ForwardRender(m_renderContext);
 
+		PhysicsWorld().DebugDrawWorld(m_renderContext);
+	}
+	void GraphicsEngine::PostRender(CGameObjectManager* goMgr)
+	{
+		//レンダリングステップをポストレンダリングにする。
+		m_renderContext.SetRenderStep(EnRenderStep::enRenderStep_PostRender);
+		goMgr->PostRender(m_renderContext);
 	}
 	void GraphicsEngine::BeginRender()
 	{
