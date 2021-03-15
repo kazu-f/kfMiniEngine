@@ -220,8 +220,11 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 		float3 diffuse = baseColor * disneyDiffuse / PI;
 		//クックトランスモデルの鏡面反射
 		float3 specCol = CookTrranceSpecular(-directionalLight[ligNo].direction, toEye, normal, metaric) * directionalLight[ligNo].color.xyz;
+		float specTerm = length(albedoColor.xyz);
+		specCol *= lerp(float3(specTerm, specTerm, specTerm), albedoColor.xyz, metaric);
 		//拡散反射光と鏡面反射光を線形補完。
-		lig += lerp(diffuse, specCol, metaric);
+		//lig += lerp(diffuse, specCol, metaric);
+		lig += diffuse * (1.0f - specTerm) + specCol;
 	}
 	//環境光。
 	lig += ambientLight;

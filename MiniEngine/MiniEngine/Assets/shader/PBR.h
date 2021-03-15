@@ -10,6 +10,14 @@ static const float PI = 3.14159265358979323846;
 */
 float Beckmann(float m, float t)
 {
+
+	//float t2 = t * t;
+	//float t4 = t * t * t * t;
+	//float m2 = m * m;
+	//float D = 1.0f / (4.0f * m2 * t4);
+	//D *= exp((-1.0f / m2) * (1.0f - t2) / t2);
+	//return D;
+
 	float M = m * m;
 	float T = t * t;
 	return exp((T - 1) / (M * T)) / (M * M * T);
@@ -28,9 +36,9 @@ float specFresnel(float f0, float u)
 *	Vが視点
 *	Nが法線
 */
-float CookTrranceSpecular(float3 L, float3 V, float3 N, float metaric)
+float3 CookTrranceSpecular(float3 L, float3 V, float3 N, float metaric)
 {
-	float microfacet = 0.3f;		//マイクロファセット
+	float microfacet = 0.76f;		//マイクロファセット
 									//表面の凸凹具合を表す的な？
 									//面の粗さとかを調整するパラメータらしい？
 	float f0 = metaric;				//謎の数字。
@@ -39,10 +47,10 @@ float CookTrranceSpecular(float3 L, float3 V, float3 N, float metaric)
 	float3 H = normalize(L + V);		//ライト+視点のハーフベクトル。
 
 	//色々内積取ってる。
-	float NdotH = max(0.0f,dot(N, H));		//法線とハーフベクトル
-	float VdotH = max(0.0f, dot(V, H));		//視点とハーフベクトル
-	float NdotL = max(0.0f, dot(N, L));		//法線とライト
-	float NdotV = max(0.0f, dot(N, V));		//法線と視点
+	float NdotH = saturate(dot(N, H));		//法線とハーフベクトル
+	float VdotH = saturate(dot(V, H));		//視点とハーフベクトル
+	float NdotL = saturate(dot(N, L));		//法線とライト
+	float NdotV = saturate(dot(N, V));		//法線と視点
 
 	float D = Beckmann(microfacet, NdotH);	//微小面分布関数。
 	float F = specFresnel(f0, VdotH);		//フレネル項の近似式。

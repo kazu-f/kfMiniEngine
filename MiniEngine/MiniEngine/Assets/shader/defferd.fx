@@ -48,6 +48,7 @@ PSDefferdInput VSMain(VSDefferdInput In)
 
 float4 PSMain(PSDefferdInput psIn) : SV_Target0
 {
+	float4 albedoColor = g_albedoMap.Sample(g_sampler, psIn.uv);		//アルベド。
 	float3 normal = g_normalMap.Sample(g_sampler, psIn.uv).xyz;	//法線。
 	normal = normal * 2.0f - 1.0f;
 	float3 worldPos = g_worldPosMap.Sample(g_sampler, psIn.uv).xyz;	//ワールド座標。
@@ -66,8 +67,11 @@ float4 PSMain(PSDefferdInput psIn) : SV_Target0
 		float3 diffuse = baseColor  * disneyDiffuse / PI;
 		//クックトランスモデルの鏡面反射
 		float3 specCol = CookTrranceSpecular(-directionalLight[ligNo].direction, toEye, normal, metaric) * directionalLight[ligNo].color.xyz;
+		float specTerm = length(albedoColor.xyz);
+		specCol *= lerp(float3(specTerm, specTerm, specTerm), albedoColor.xyz, metaric);
 		//拡散反射光と鏡面反射光を線形補完。
-		lig += lerp(diffuse, specCol, metaric);
+		//lig += lerp(diffuse, specCol, metaric);
+		lig += diffuse * (1.0f - specTerm) + specCol;
 	}
 	//環境光。
 	lig += ambientLight;
@@ -75,7 +79,6 @@ float4 PSMain(PSDefferdInput psIn) : SV_Target0
 	lig *= lerp(1.0f, 0.5f, shadow);
 
 	//最終的な色を決定する。
-	float4 albedoColor = g_albedoMap.Sample(g_sampler, psIn.uv);		//アルベド。
 	
 	float4 finalColor = 1.0f;
 	finalColor.xyz = albedoColor.xyz * lig;
