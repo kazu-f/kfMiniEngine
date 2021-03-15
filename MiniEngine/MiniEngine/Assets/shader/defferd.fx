@@ -61,20 +61,22 @@ float4 PSMain(PSDefferdInput psIn) : SV_Target0
 	for (int ligNo = 0; ligNo < numDirectionLight; ligNo++)
 	{
 		//ディファード拡散反射の色。
-		float3 baseColor = max(dot(normal, -directionalLight[ligNo].direction), 0.0f) * directionalLight[ligNo].color.xyz;
+		float3 baseColor = saturate(dot(normal, -directionalLight[ligNo].direction)) * directionalLight[ligNo].color.xyz;
 		//DisneyModel拡散反射
 		float disneyDiffuse = NormalizedDisneyDiffuse(normal, -directionalLight[ligNo].direction, toEye, roughness);
 		float3 diffuse = baseColor  * disneyDiffuse / PI;
 		//クックトランスモデルの鏡面反射
 		float3 specCol = CookTrranceSpecular(-directionalLight[ligNo].direction, toEye, normal, metaric) * directionalLight[ligNo].color.xyz;
-		float specTerm = length(albedoColor.xyz);
-		specCol *= lerp(float3(specTerm, specTerm, specTerm), albedoColor.xyz, metaric);
 		//拡散反射光と鏡面反射光を線形補完。
-		//lig += lerp(diffuse, specCol, metaric);
-		lig += diffuse * (1.0f - specTerm) + specCol;
+		lig += lerp(diffuse, specCol, metaric);
+
+		//float specTerm = length(albedoColor.xyz * metaric);
+		//specCol *= lerp(float3(specTerm, specTerm, specTerm), albedoColor.xyz, metaric);
+		//lig += diffuse * (1.0f - specTerm) + specCol;
 	}
 	//環境光。
-	lig += ambientLight;
+	lig += ambientLight / PI * (1.0f - metaric);
+	lig += CookTrranceSpecular(normal, toEye, normal, metaric) * ambientLight * metaric;
 
 	lig *= lerp(1.0f, 0.5f, shadow);
 

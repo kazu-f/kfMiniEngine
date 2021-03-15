@@ -208,7 +208,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	float4 albedoColor = g_texture.Sample(g_sampler, psIn.uv);	//テクスチャカラー。		
 	if (hasSpecularMap) {
 		//スペキュラマップがある。
-		metaric = g_specularMap.Sample(g_sampler, psIn.uv).a;
+		metaric = g_specularMap.Sample(g_sampler, psIn.uv).r;
 	}
 	float roughness = 1.0f;			//拡散反射の面の粗さ。
 	for (int ligNo = 0; ligNo < numDirectionLight; ligNo++)
@@ -220,14 +220,15 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 		float3 diffuse = baseColor * disneyDiffuse / PI;
 		//クックトランスモデルの鏡面反射
 		float3 specCol = CookTrranceSpecular(-directionalLight[ligNo].direction, toEye, normal, metaric) * directionalLight[ligNo].color.xyz;
-		float specTerm = length(albedoColor.xyz);
-		specCol *= lerp(float3(specTerm, specTerm, specTerm), albedoColor.xyz, metaric);
 		//拡散反射光と鏡面反射光を線形補完。
-		//lig += lerp(diffuse, specCol, metaric);
-		lig += diffuse * (1.0f - specTerm) + specCol;
+		lig += lerp(diffuse, specCol, metaric);
+
+		//float specTerm = length(albedoColor.xyz * metaric);
+		//specCol *= lerp(float3(specTerm, specTerm, specTerm), albedoColor.xyz, metaric);
+		//lig += diffuse * (1.0f - specTerm) + specCol;
 	}
 	//環境光。
-	lig += ambientLight;
+	lig += ambientLight / PI * (1.0f - metaric);
 	//シャドウ。
 	float4 posInView = mul(mView, float4(psIn.worldPos,1.0f));
 	float shadow = CalcShadow(psIn.worldPos, posInView.z);

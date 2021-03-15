@@ -2,6 +2,10 @@
 #include "SceneLight.h"
 #include "prefab/light/DirectionLight.h"
 
+namespace {
+	const Vector3 AMBIENT_LIGHT = { 2.0f,2.0f,2.0f };
+}
+
 SceneLight::SceneLight()
 {
 }
@@ -24,8 +28,9 @@ bool SceneLight::Start()
 	//ライトを用意する。
 	prefab::CDirectionLight* light = NewGO<prefab::CDirectionLight>(0);
 
-	Vector4 color = Vector4::Gray * 3.0f;
-	m_lightDir = { 0.0f,-1.0f,-1.0f };
+	//Vector4 color = Vector4::Gray * 3.0f;
+	Vector4 color = Vector4::White * 5.0f;
+	m_lightDir = { 0.0f,-0.0f,-1.0f };
 	//color = { 1.0f,1.0f,0.0f,1.0f };
 	light->SetColor(color);
 	light->SetDirection(m_lightDir);
@@ -49,6 +54,9 @@ bool SceneLight::Start()
 	//light3->SetDirection(m_lightDir);
 
 	//m_lightArray.push_back(light3);
+
+	//環境光の設定。
+	g_graphicsEngine->GetLightManager()->SetAmbientLight(AMBIENT_LIGHT);
 
 	return true;
 }

@@ -3,6 +3,7 @@
 static const float PI = 3.14159265358979323846;
 
 //ベックマン分布?	
+//光の分散具合を求める？
 /*
 	m			(面の粗さ)
 	t = N・H	(法線・ハーフベクトル)
@@ -11,16 +12,16 @@ static const float PI = 3.14159265358979323846;
 float Beckmann(float m, float t)
 {
 
-	//float t2 = t * t;
-	//float t4 = t * t * t * t;
-	//float m2 = m * m;
-	//float D = 1.0f / (4.0f * m2 * t4);
-	//D *= exp((-1.0f / m2) * (1.0f - t2) / t2);
-	//return D;
+	float t2 = t * t;
+	float t4 = t * t * t * t;
+	float m2 = m * m;
+	float D = 1.0f / (4.0f * m2 * t4);
+	D *= exp((-1.0f / m2) * (1.0f - t2) / t2);
+	return D;
 
-	float M = m * m;
-	float T = t * t;
-	return exp((T - 1) / (M * T)) / (M * M * T);
+	//float M = m * m;
+	//float T = t * t;
+	//return exp((T - 1) / (M * T)) / (M * M * T);
 }
 
 //フレネル項?の近似式らしい？
@@ -38,7 +39,7 @@ float specFresnel(float f0, float u)
 */
 float3 CookTrranceSpecular(float3 L, float3 V, float3 N, float metaric)
 {
-	float microfacet = 0.76f;		//マイクロファセット
+	float microfacet = 0.3f;		//マイクロファセット
 									//表面の凸凹具合を表す的な？
 									//面の粗さとかを調整するパラメータらしい？
 	float f0 = metaric;				//謎の数字。
@@ -47,10 +48,10 @@ float3 CookTrranceSpecular(float3 L, float3 V, float3 N, float metaric)
 	float3 H = normalize(L + V);		//ライト+視点のハーフベクトル。
 
 	//色々内積取ってる。
-	float NdotH = saturate(dot(N, H));		//法線とハーフベクトル
-	float VdotH = saturate(dot(V, H));		//視点とハーフベクトル
-	float NdotL = saturate(dot(N, L));		//法線とライト
-	float NdotV = saturate(dot(N, V));		//法線と視点
+	float NdotH = max(0.01f,dot(N, H));		//法線とハーフベクトル
+	float VdotH = max(0.01f, dot(V, H));		//視点とハーフベクトル
+	float NdotL = max(0.01f, dot(N, L));		//法線とライト
+	float NdotV = max(0.01f, dot(N, V));		//法線と視点
 
 	float D = Beckmann(microfacet, NdotH);	//微小面分布関数。
 	float F = specFresnel(f0, VdotH);		//フレネル項の近似式。
@@ -90,25 +91,32 @@ float SchlickFresnel(float u, float f0, float f90)
 */
 float NormalizedDisneyDiffuse(float3 N, float3 L, float3 V, float roughness)
 {
-	float3 H = normalize(L + V);		//ハーフベクトル。
+	//法線とライト方向の内積。
+	float dotNL = saturate(dot(N, L));
+	//法線と視点方向の内積。
+	float dotNV = saturate(dot(N, V));
 
-	float energyBias = lerp(0.0f, 0.5f, roughness);				//なんか正規化のための数値？0.0～0.5の線形補完
-	float energyFactor = lerp(1.0f, 1.0f / 1.51f, roughness);	//同じく？なんかメンドイ線形補完してる感じする。
-	//内積する。(下限0.0～上限1.0)
-	float LdotH = saturate(dot(L, H));		//ライトとハーフベクトル
-	float NdotL = saturate(dot(N, L));		//法線とライト
-	float NdotV = saturate(dot(N, V));		//法線と視点
+	return max(0.2f, (dotNL * dotNV) / PI);
 
-	//謎数値　フレネル反射率?(0.0～1.0)
-	float Fd90 = energyBias + 2.0f * LdotH * LdotH * roughness;
+	//float3 H = normalize(L + V);		//ハーフベクトル。
 
-	//これだったら普通にフレネル式使うんでいいんでは？
-	float FL = SchlickFresnel(1.0f, Fd90, NdotL);	//フレネル係数(法線・ライト)
-	float FV = SchlickFresnel(1.0f, Fd90, NdotV);	//フレネル係数(法線・視点)
+	//float energyBias = lerp(0.0f, 0.5f, roughness);				//なんか正規化のための数値？0.0～0.5の線形補完
+	//float energyFactor = lerp(1.0f, 1.0f / 1.51f, roughness);	//同じく？なんかメンドイ線形補完してる感じする。
+	////内積する。(下限0.0～上限1.0)
+	//float LdotH = saturate(dot(L, H));		//ライトとハーフベクトル
+	//float NdotL = saturate(dot(N, L));		//法線とライト
+	//float NdotV = saturate(dot(N, V));		//法線と視点
 
-	/*
-	*	よくわからん係数 * ライトの強さ？
-	*	* フレネル係数(N・L) * フレネル係数(N・V) / PI
-	*/
-	return (energyFactor * FL * FV) / PI;
+	////謎数値　フレネル反射率?(0.0～1.0)
+	//float Fd90 = energyBias + 2.0f * LdotH * LdotH * roughness;
+
+	////これだったら普通にフレネル式使うんでいいんでは？
+	//float FL = SchlickFresnel(1.0f, Fd90, NdotL);	//フレネル係数(法線・ライト)
+	//float FV = SchlickFresnel(1.0f, Fd90, NdotV);	//フレネル係数(法線・視点)
+
+	///*
+	//*	よくわからん係数 * ライトの強さ？
+	//*	* フレネル係数(N・L) * フレネル係数(N・V) / PI
+	//*/
+	//return (energyFactor * FL * FV) / PI;
 }

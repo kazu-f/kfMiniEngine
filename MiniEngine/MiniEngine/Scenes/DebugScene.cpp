@@ -23,7 +23,7 @@ bool DebugScene::Start()
 
 	OnBGM();
 
-	InitSprite();
+	//InitSprite();
 
 	m_courseLevel.Init("Assets/level/testLevel.tkl", [&](SLevelObjectData& objData) {
 		if (wcscmp(objData.name, L"unityChan") == 0) {
