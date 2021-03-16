@@ -200,8 +200,6 @@ namespace Engine {
 		}
 #if 1
 
-		//auto ligMgr = g_graphicsEngine->GetLightManager();
-
 		//メッシュごとにドロー
 		//プリミティブのトポロジーはトライアングルリストのみ。
 		rc.SetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
