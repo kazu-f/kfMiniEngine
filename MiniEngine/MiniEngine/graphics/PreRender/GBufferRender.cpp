@@ -22,6 +22,7 @@ namespace Engine {
 			DXGI_FORMAT_R8G8B8A8_UNORM,
 			DXGI_FORMAT_D32_FLOAT
 		);
+		albedo.SetRTVClearColor({ 0.0f,0.0f,0.0f,0.0f });
 		//法線バッファの初期化。
 		auto& normal = GetRenderTarget(EnGBuffer::enGBufferNormal);
 		normal.Create(

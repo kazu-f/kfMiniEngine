@@ -84,6 +84,7 @@ float4 PSMain(PSDefferdInput psIn) : SV_Target0
 	
 	float4 finalColor = 1.0f;
 	finalColor.xyz = albedoColor.xyz * lig;
+	finalColor.a = albedoColor.a;
 	return finalColor;
 }
 
