@@ -3,7 +3,6 @@
 #include "GameCamera/FollowCarCamera.h"
 #include "Car/Car.h"
 #include "Spectator/Spectator.h"
-#include "Spectator/SpectatorNames.h"
 #include "GameLight/SceneLight.h"
 #include "Guardrail/Guardrail.h"
 #include "CheckPoint/CheckPointManager.h"
@@ -46,203 +45,34 @@ bool GameScene::Start()
 	switch (m_initState)
 	{
 	case GameScene::enInit_Other:
-		m_camera = NewGO<FollowCarCamera>(5);		//カメラ。
-
-		m_light = NewGO<SceneLight>(0);			//照明。
-
+		//カメラやライトなどの初期化。
+		InitOther();
 		m_initState = enInit_Course;
 		break;
 	case GameScene::enInit_Course:
-		m_guardrail = NewGO<Guardrail>(0);		//ガードレール。
+		//コースを読み込む。
+		InitCourse();
 
-		m_courseLevel.Init(COURSE_PATH, [&](SLevelObjectData& objData) {
-			if (wcscmp(objData.name, L"Sup") == 0) {
-				m_car = NewGO<Car>(0);
-				m_car->SetPosition(objData.position);
-				m_car->SetRotation(objData.rotation);
-
-				return true;
-			}
-
-			if (objData.EqualObjectName(L"Road/SM_Road"))
-			{
-				//ガードレールを読み込んでいく。
-				m_guardrail->LoadGuardrail(GUARDRAIL_ROAD, objData.position, objData.rotation);
-			}
-			if (objData.EqualObjectName(L"Road/SM_TurnRoad"))
-			{
-				//ガードレールを読み込んでいく。
-				m_guardrail->LoadGuardrail(GUARDRAIL_TURNROAD, objData.position, objData.rotation);
-			}
-			if (objData.EqualObjectName(L"Road/Ground"))
-			{
-				//地面を作る。
-				m_ground = NewGO<BackGround>(0);
-				m_ground->InitData(
-					objData.position,
-					objData.rotation,
-					objData.scale
-				);
-
-				return true;
-			}
-
-
-			return false;
-			});
-		if (m_car != nullptr)
-		{
-			m_camera->SetTargetCar(m_car);
-		}
-		else
-		{
-			ENGINE_LOG(
-				"レベルで車が見つからなかった。"
-				":tklファイルのデータを確認。"
-			)
-		}
 		m_initState = enInit_Spectator;
-
 		break;
 	case GameScene::enInit_Spectator:
 #if IS_SPECTATOR
-		//観客をロード。
-		for (int i = 0; i < enSpectatorNum; i++) {
-			m_spectator[i] = NewGO<Spectator>(0);
-		}
-
-		m_spectatorLevel.Init(SPECTATOR_PATH, [&](SLevelObjectData& objData) {
-			if (objData.EqualObjectName(L"nathanMale")) {
-				//オブジェクトの情報を追加。
-				m_spectator[enNathanMale]->AddObjectData(
-					objData.position,
-					objData.rotation,
-					objData.scale
-				);
-				m_spectator[enNathanMale]->SetShadowCasterFlag(objData.isShadowCaster);
-				m_spectator[enNathanMale]->SetShadowReceiverFlag(objData.isShadowReceiver);
-
-				return true;
-			}
-			if (objData.EqualObjectName(L"ShirtMale")) {
-				//オブジェクトの情報を追加。
-				m_spectator[enShirtMale]->AddObjectData(
-					objData.position,
-					objData.rotation,
-					objData.scale
-				);
-				m_spectator[enShirtMale]->SetShadowCasterFlag(objData.isShadowCaster);
-				m_spectator[enShirtMale]->SetShadowReceiverFlag(objData.isShadowReceiver);
-
-				return true;
-			}
-			if (objData.EqualObjectName(L"sophiaWoman")) {
-				//オブジェクトの情報を追加。
-				m_spectator[enSophiaWoman]->AddObjectData(
-					objData.position,
-					objData.rotation,
-					objData.scale
-				);
-				m_spectator[enSophiaWoman]->SetShadowCasterFlag(objData.isShadowCaster);
-				m_spectator[enSophiaWoman]->SetShadowReceiverFlag(objData.isShadowReceiver);
-
-				return true;
-			}
-			if (objData.EqualObjectName(L"whiteWoman")) {
-				//オブジェクトの情報を追加。
-				m_spectator[enClaudiaWoman]->AddObjectData(
-					objData.position,
-					objData.rotation,
-					objData.scale
-				);
-				m_spectator[enClaudiaWoman]->SetShadowCasterFlag(objData.isShadowCaster);
-				m_spectator[enClaudiaWoman]->SetShadowReceiverFlag(objData.isShadowReceiver);
-
-				return true;
-			}
-			//使わなくなったもの。存在している可能性考慮して残しとくが、そのうち消す。
-			if (objData.EqualObjectName(L"womanSuit")) {
-				return true;
-			}
-
-			return false;
-			});
-
-		//モデルとアニメーションの指定。
-		m_spectator[enNathanMale]->SetModelFilePath(FilePath::nathanMale);
-		m_spectator[enNathanMale]->SetAnimFilePath(AnimPath::nathanMaleAnim);
-
-		m_spectator[enShirtMale]->SetModelFilePath(FilePath::shirtMale);
-		m_spectator[enShirtMale]->SetAnimFilePath(AnimPath::shirtMaleAnim);
-
-		m_spectator[enSophiaWoman]->SetModelFilePath(FilePath::sophiaWoman);
-		m_spectator[enSophiaWoman]->SetAnimFilePath(AnimPath::sophiaWomanAnim);
-
-		m_spectator[enClaudiaWoman]->SetModelFilePath(FilePath::claudiaWoman);
-		m_spectator[enClaudiaWoman]->SetAnimFilePath(AnimPath::claudiaWomanAnim);
-
+		//観客を配置する。
+		InitSpectator();
 #endif
 		m_initState = enInit_RaceController;
 		break;
 	case EnInitStep::enInit_RaceController:
-		//レースを管理する。
-		m_raceController = NewGO<RaceController>(3);
-		//プレイヤーを設定する。
-		m_raceController->SetPlayer(m_car->GetCheckedController());
+		//レース制御のクラスを初期化。
+		InitRaceController();
 
 		m_initState = enInit_CheckPoint;
 		break;
 	case EnInitStep::enInit_CheckPoint:
 		//チェックポイントを読み込む。
-		m_checkPointManager = NewGO<CheckPointManager>(2);
-		//チェックポイントのレベル。
-		CLevel checkPointLevel;
-		checkPointLevel.Init(CHECKPOINT_PATH, [&](SLevelObjectData& objData) 
-			{
-				//チェックポイントを調べていく。
-				if (objData.ForwardMatchName(L"CheckPoint_"))
-				{
-					//名前からチェックポイント番号を調べる。
-					const wchar_t* objName = objData.name;
-					//数字の手前のアドレスを取得。
-					const wchar_t* index = wcsstr(objName, L"_");
-					if (index == nullptr) {
-						return true;
-					}
-					index++;		//チェックポイント番号まで位置を移動。
-					if (wcscmp(index, L"Start") == 0) {
-						//スタート地点のチェックポイントを作成。
-						m_checkPointManager->MakeCheckPoint(
-							objData.position,
-							objData.rotation,
-							0
-						);
-					}
-					else if (wcscmp(index, L"Goal") == 0) {
-						//ゴール用のチェックポイントを作成。
-						m_checkPointManager->MakeGoalPoint(
-							objData.position,
-							objData.rotation
-						);
-					}
-					else {
-						//チェックポイントを作成。
-						m_checkPointManager->MakeCheckPoint(
-							objData.position,
-							objData.rotation,
-							_wtoi(index)
-						);
-					}
+		InitCheckPoint();
 
-				}
-
-				//モデル表示は不要。
-				return true;
-			}
-		);
-		m_checkPointManager->RegistCheckedController(m_car->GetCheckedController());
-		m_checkPointManager->EnableInit();
-
+		m_initState = enInit_End;
 		ret = true;
 		break;
 	}
@@ -293,5 +123,189 @@ void GameScene::Update()
 void GameScene::OnDestroy()
 {
 	Release();
+}
+
+void GameScene::InitOther()
+{
+	m_camera = NewGO<FollowCarCamera>(5);		//カメラ。
+
+	m_light = NewGO<SceneLight>(0);			//照明。
+}
+
+void GameScene::InitCourse()
+{
+	m_guardrail = NewGO<Guardrail>(0);		//ガードレール。
+
+	m_courseLevel.Init(COURSE_PATH, [&](SLevelObjectData& objData) {
+		if (wcscmp(objData.name, L"Sup") == 0) {
+			m_car = NewGO<Car>(0);
+			m_car->SetPosition(objData.position);
+			m_car->SetRotation(objData.rotation);
+
+			return true;
+		}
+
+		if (objData.EqualObjectName(L"Road/SM_Road"))
+		{
+			//ガードレールを読み込んでいく。
+			m_guardrail->LoadGuardrail(GUARDRAIL_ROAD, objData.position, objData.rotation);
+		}
+		if (objData.EqualObjectName(L"Road/SM_TurnRoad"))
+		{
+			//ガードレールを読み込んでいく。
+			m_guardrail->LoadGuardrail(GUARDRAIL_TURNROAD, objData.position, objData.rotation);
+		}
+		if (objData.EqualObjectName(L"Road/Ground"))
+		{
+			//地面を作る。
+			m_ground = NewGO<BackGround>(0);
+			m_ground->InitData(
+				objData.position,
+				objData.rotation,
+				objData.scale
+			);
+
+			return true;
+		}
+
+
+		return false;
+		});
+	if (m_car != nullptr)
+	{
+		m_camera->SetTargetCar(m_car);
+	}
+	else
+	{
+		ENGINE_LOG(
+			"レベルで車が見つからなかった。"
+			":tklファイルのデータを確認。"
+		)
+	}
+}
+
+void GameScene::InitSpectator()
+{
+#if IS_SPECTATOR
+	//観客をロード。
+	for (int i = 0; i < enSpectatorNum; i++) {
+		m_spectator[i] = NewGO<Spectator>(0);
+	}
+
+	m_spectatorLevel.Init(SPECTATOR_PATH, [&](SLevelObjectData& objData) {
+		if (objData.EqualObjectName(L"nathanMale")) {
+			//オブジェクトの情報を追加。
+			AddSpectatorData(objData, enNathanMale);
+
+			return true;
+		}
+		if (objData.EqualObjectName(L"ShirtMale")) {
+			//オブジェクトの情報を追加。
+			AddSpectatorData(objData, enShirtMale);
+
+			return true;
+		}
+		if (objData.EqualObjectName(L"sophiaWoman")) {
+			//オブジェクトの情報を追加。
+			AddSpectatorData(objData, enSophiaWoman);
+
+			return true;
+		}
+		if (objData.EqualObjectName(L"whiteWoman")) {
+			//オブジェクトの情報を追加。
+			AddSpectatorData(objData, enClaudiaWoman);
+
+			return true;
+		}
+		//使わなくなったもの。存在している可能性考慮して残しとくが、そのうち消す。
+		if (objData.EqualObjectName(L"womanSuit")) {
+			return true;
+		}
+
+		return false;
+		});
+
+	//モデルとアニメーションの指定。
+	for (int i = 0; i < EnSpectator::enSpectatorNum; i++) {
+		m_spectator[i]->SetModelFilePath(FilePath::SPECTATOR_MODEL_PATH[i]);
+		m_spectator[i]->SetAnimFilePath(AnimPath::SPECTATOR_ANIM_PATH[i]);
+	}
+
+#endif
+}
+
+//レースの制御を行うクラスを初期化。
+void GameScene::InitRaceController()
+{
+	//レースの制御クラス。
+	m_raceController = NewGO<RaceController>(3);
+	//プレイヤーを設定する。
+	m_raceController->SetPlayer(m_car->GetCheckedController());
+}
+
+void GameScene::InitCheckPoint()
+{
+	//チェックポイントを読み込む。
+	m_checkPointManager = NewGO<CheckPointManager>(2);
+	//チェックポイントのレベル。
+	CLevel checkPointLevel;
+	checkPointLevel.Init(CHECKPOINT_PATH, [&](SLevelObjectData& objData)
+		{
+			//チェックポイントを調べていく。
+			if (objData.ForwardMatchName(L"CheckPoint_"))
+			{
+				//名前からチェックポイント番号を調べる。
+				const wchar_t* objName = objData.name;
+				//数字の手前のアドレスを取得。
+				const wchar_t* index = wcsstr(objName, L"_");
+				if (index == nullptr) {
+					return true;
+				}
+				index++;		//チェックポイント番号まで位置を移動。
+				if (wcscmp(index, L"Start") == 0) {
+					//スタート地点のチェックポイントを作成。
+					m_checkPointManager->MakeCheckPoint(
+						objData.position,
+						objData.rotation,
+						0
+					);
+				}
+				else if (wcscmp(index, L"Goal") == 0) {
+					//ゴール用のチェックポイントを作成。
+					m_checkPointManager->MakeGoalPoint(
+						objData.position,
+						objData.rotation
+					);
+				}
+				else {
+					//チェックポイントを作成。
+					m_checkPointManager->MakeCheckPoint(
+						objData.position,
+						objData.rotation,
+						_wtoi(index)
+					);
+				}
+
+			}
+
+			//モデル表示は不要。
+			return true;
+		}
+	);
+	m_checkPointManager->RegistCheckedController(m_car->GetCheckedController());
+	m_checkPointManager->EnableInit();
+}
+
+void GameScene::AddSpectatorData(SLevelObjectData& objData, int type)
+{
+	//オブジェクトの情報を追加。
+	m_spectator[type]->AddObjectData(
+		objData.position,
+		objData.rotation,
+		objData.scale
+	);
+	m_spectator[type]->SetShadowCasterFlag(objData.isShadowCaster);
+	m_spectator[type]->SetShadowReceiverFlag(objData.isShadowReceiver);
+
 }
 
