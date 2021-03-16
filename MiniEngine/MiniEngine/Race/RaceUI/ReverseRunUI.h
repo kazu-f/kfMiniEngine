@@ -25,9 +25,9 @@ private:
 	void ReverseRun();
 
 private:
-	prefab::CSpriteRender* m_sprite = nullptr;
+	prefab::CSpriteRender* m_sprite = nullptr;	//スプライト。
 
-	float m_currentTime = 0.0f;
-	bool m_isReverseRun = false;
+	float m_currentTime = 0.0f;					//現在の経過時間。
+	bool m_isReverseRun = false;				//逆走中か？
 };
 

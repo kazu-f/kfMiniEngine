@@ -1,9 +1,12 @@
 #pragma once
 
 
-
+/// <summary>
+/// 観客のクラス。
+/// </summary>
 class Spectator : public IGameObject
 {
+	//観客の配置データ。
 	struct LowObjctData
 	{
 		Vector3 position;

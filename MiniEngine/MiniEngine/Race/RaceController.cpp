@@ -14,6 +14,7 @@ RaceController::~RaceController()
 
 void RaceController::OnDestroy()
 {
+	//後処理削除。
 	DeleteGO(m_LapUI);
 	DeleteGO(m_reverseRunUI);
 }
@@ -38,6 +39,7 @@ void RaceController::Update()
 	//逆走中のフラグを設定する。
 	m_reverseRunUI->SetIsReverseRunFlag(m_player->IsReverseRun());
 
+	//ゴール時の処理。
 	if (m_LapUI->IsGoal()) {
 
 	}

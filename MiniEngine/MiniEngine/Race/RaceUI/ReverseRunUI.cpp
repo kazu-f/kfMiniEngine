@@ -2,6 +2,7 @@
 #include "ReverseRunUI.h"
 
 namespace {
+	const char* SPRITE_FILEPATH = "Assets/sprite/RoadClosed.dds";	//スプライトのファイルパス。
 	const Vector3 UI_POS = { 0.0f,200.0f,0.0f };				//スプライトの位置。
 	const Vector2 UI_SIZE = { 100.0f,100.0f };				//スプライトのサイズ。
 
@@ -24,8 +25,9 @@ void ReverseRunUI::OnDestroy()
 
 bool ReverseRunUI::Start()
 {
+	//スプライトの初期化。
 	m_sprite = NewGO<prefab::CSpriteRender>(SPRITE_PRIO);
-	m_sprite->Init("Assets/sprite/RoadClosed.dds", UI_SIZE.x, UI_SIZE.y);
+	m_sprite->Init(SPRITE_FILEPATH, UI_SIZE.x, UI_SIZE.y);
 	m_sprite->SetPosition(UI_POS);
 
 	return true;
@@ -52,6 +54,7 @@ void ReverseRunUI::ReverseRun()
 	float flagTime = m_currentTime / INTARVAL_TIME;
 	//整数部を求める。
 	int count = static_cast<int>(floorf(flagTime));
+	//整数部の偶数奇数でアクティブフラグを切り替える。
 	int activeFlag = count % 2;
 	m_sprite->SetActiveFlag(activeFlag == 1);
 }

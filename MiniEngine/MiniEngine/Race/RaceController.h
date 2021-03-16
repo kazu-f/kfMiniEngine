@@ -21,8 +21,8 @@ public:
 	}
 
 private:
-	CheckedController* m_player = nullptr;
-	LapUI* m_LapUI = nullptr;
-	ReverseRunUI* m_reverseRunUI = nullptr;
+	CheckedController* m_player = nullptr;		//プレイヤー。
+	LapUI* m_LapUI = nullptr;					//周回数の表示等を行うクラス。
+	ReverseRunUI* m_reverseRunUI = nullptr;		//逆走中の表示を行うクラス。
 };
 

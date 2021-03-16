@@ -3,7 +3,7 @@
 
 #define ON 1
 #define OFF 0
-#define ISBOX OFF
+#define ISBOX OFF			//デバッグ用に観客を箱に置き換えるか。
 
 Spectator::Spectator()
 {
@@ -45,9 +45,9 @@ bool Spectator::Start()
 	m_model = NewGO<prefab::ModelRender>(0);
 	ModelInitData modelInitData;
 #if ISBOX
-	modelInitData.m_tkmFilePath = "Assets/modelData/testbg/testBox.tkm";
-	modelInitData.m_fxFilePath = "Assets/shader/model.fx";
-	modelInitData.m_vsEntryPointFunc = "VSMainInstancing";
+	modelInitData.m_tkmFilePath = "Assets/modelData/testbg/testBox.tkm";	//デバッグ表示用の箱のモデル。
+	modelInitData.m_fxFilePath = "Assets/shader/model.fx";					//モデルシェーダー。
+	modelInitData.m_vsEntryPointFunc = "VSMainInstancing";					//インスタンシング描画。
 
 	//初期化。
 	m_model->Init(
@@ -58,8 +58,8 @@ bool Spectator::Start()
 	);
 #else
 	modelInitData.m_tkmFilePath = m_modelFilePath;
-	modelInitData.m_fxFilePath = "Assets/shader/model.fx";
-	modelInitData.m_vsEntryPointFunc = "VSMainSkinInstancing";
+	modelInitData.m_fxFilePath = "Assets/shader/model.fx";			//モデルシェーダー。
+	modelInitData.m_vsEntryPointFunc = "VSMainSkinInstancing";		//インスタンシング描画。
 	modelInitData.m_modelUpAxis = enModelUpAxis_Z;
 	//アニメーション情報。
 	AnimClipInitData animInitData[1];

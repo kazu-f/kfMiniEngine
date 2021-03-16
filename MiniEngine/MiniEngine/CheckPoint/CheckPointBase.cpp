@@ -38,8 +38,6 @@ bool CheckPointBase::CheckReverseRun(CheckedController* car)
 	//車の前方向。
 	Vector3 carFront = car->GetForward();
 	carFront.Normalize();
-	////次のチェックポイントまでのベクトル。
-	//Vector3 vDir = m_nextPoint->GetPosition() - m_position;
 	//手前のチェックポイントからのベクトル。
 	Vector3 vDir = m_position - m_backPoint->GetPosition();
 	vDir.Normalize();

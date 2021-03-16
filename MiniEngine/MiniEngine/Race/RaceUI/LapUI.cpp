@@ -11,6 +11,9 @@ namespace {
 		"Assets/sprite/LapNum_2.dds",
 		"Assets/sprite/LapNum_3.dds"
 	};
+	const char* LAPTEXT_FILEPATH = "Assets/sprite/LAP.dds";				//テキストが書かれたスプライト(LAP)
+	const char* LAPSLASH_FILEPATH = "Assets/sprite/LapSlash.dds";		//スラッシュ(/)のスプライト。
+
 	const Vector3 CURRENT_LAPPOS = { 480.0f,-320.0f,0.0f };		//現在の周回数の位置。
 	const Vector3 MAX_LAPPOS = { 580.0f,-320.0f,0.0f };			//最大周回数の位置。
 	const Vector3 SLASH_POS = { 530.0f,-320.0f,0.0f };			//スラッシュの位置。
@@ -32,6 +35,7 @@ LapUI::~LapUI()
 
 void LapUI::OnDestroy()
 {
+	//後処理削除。
 	DeleteGO(m_lapTextSprite);
 	DeleteGO(m_maxLapSprite);
 	DeleteGO(m_slashSprite);
@@ -44,11 +48,11 @@ bool LapUI::Start()
 {
 	//テキスト。
 	m_lapTextSprite = NewGO<prefab::CSpriteRender>(SPRITE_PRIO);
-	m_lapTextSprite->Init("Assets/sprite/LAP.dds", TEXTSIZE.x, TEXTSIZE.y);
+	m_lapTextSprite->Init(LAPTEXT_FILEPATH, TEXTSIZE.x, TEXTSIZE.y);
 	m_lapTextSprite->SetPosition(TEXTPOS);
 	//スラッシュ。
 	m_slashSprite = NewGO<prefab::CSpriteRender>(SPRITE_PRIO);
-	m_slashSprite->Init("Assets/sprite/LapSlash.dds", LAPNUM_SIZE.x, LAPNUM_SIZE.y);
+	m_slashSprite->Init(LAPSLASH_FILEPATH, LAPNUM_SIZE.x, LAPNUM_SIZE.y);
 	m_slashSprite->SetPosition(SLASH_POS);
 	//最大周回数。
 	m_maxLapSprite = NewGO<prefab::CSpriteRender>(SPRITE_PRIO);
@@ -74,9 +78,11 @@ void LapUI::Update()
 		return;
 	}
 	if (m_nextLapNum == enLap_Num) {
+		//ゴールした。
 		m_isGoal = true;
 	}
 	else {
+		//周回数を切り替える。。
 		CountUpLap();
 	}
 
@@ -99,6 +105,7 @@ void LapUI::CountUpLap()
 		float flagTime = m_currentTime / INTARVAL_TIME;
 		//整数部を求める。
 		int count = static_cast<int>(floorf(flagTime));
+		//整数部の偶数奇数でアクティブフラグを切り替え。
 		int activeFlag = count % 2;
 		m_currentLapSprite[m_nextLapNum]->SetActiveFlag(activeFlag == 1);
 	}
