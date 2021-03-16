@@ -2,9 +2,6 @@
 #include "GraphicsEngine.h"
 
 namespace Engine {
-	Camera* g_camera2D = nullptr;				//2Dカメラ。
-	Camera* g_camera3D = nullptr;				//3Dカメラ。
-
 	CGraphicsEngine::~CGraphicsEngine()
 	{
 		WaitDraw();
@@ -168,9 +165,6 @@ namespace Engine {
 
 		m_camera3D.SetPosition({ 0.0f, 50.0f, 200.0f });
 		m_camera3D.SetTarget({ 0.0f, 50.0f, 0.0f });
-
-		g_camera2D = &m_camera2D;
-		g_camera3D = &m_camera3D;
 
 
 		//ライトマネージャーの作成。

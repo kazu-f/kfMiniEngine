@@ -65,7 +65,7 @@ namespace Engine {
 
 		m_lightParam.numDirectionLight = numDirLig;		//ディレクションライトの数。
 		m_lightParam.numPointLight = numPointLig;		//ポイントライトの数。
-		m_lightParam.eyePos = g_camera3D->GetPosition();//視点の座標。
+		m_lightParam.eyePos = MainCamera().GetPosition();//視点の座標。
 		m_lightParam.screenParam.x = 0.0f;				//near
 		m_lightParam.screenParam.y = 0.0f;				//far
 		m_lightParam.screenParam.z = static_cast<float>(GraphicsEngine()->GetFrameBufferWidth());	//screenWidth

@@ -100,6 +100,20 @@ namespace Engine {
 	{
 		return GameEngine().GetGraphicsEngine();
 	}
+	/// <summary>
+	/// メインカメラを取得。
+	/// </summary>
+	static inline Camera& MainCamera()
+	{
+		return GraphicsEngine()->GetMainCamera();
+	}
+	/// <summary>
+	/// 2Dカメラを取得。
+	/// </summary>
+	static inline Camera& MainCamera2D()
+	{
+		return GraphicsEngine()->Get2DCamera();
+	}
 
 	/// <summary>
 	/// 物理ワールドを取得。

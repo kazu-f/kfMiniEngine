@@ -108,7 +108,7 @@ namespace Engine {
 			return;
 		}
 		//シーンのレンダリングに使用しているカメラを使ってライトの回転を求める。
-		Vector3 cameraDir = g_camera3D->GetForward();
+		Vector3 cameraDir = MainCamera().GetForward();
 		if (fabs(cameraDir.x) < FLT_EPSILON && fabsf(cameraDir.z) < FLT_EPSILON) {
 			//ほぼ真上を向いている。
 			return;
@@ -146,17 +146,17 @@ namespace Engine {
 		lightViewRot.m[2][3] = 0.0f;
 
 		//ライトビューの高さを計算。するようにする。
-		float lightHeight = g_camera3D->GetTarget().y + m_lightHeight;
+		float lightHeight = MainCamera().GetTarget().y + m_lightHeight;
 
 		float nearPlaneZ = 0.0f;	//近平面。
 		float farPlaneZ;			//遠平面。
 		Vector3 cameraUp;			//カメラの上方向
-		cameraUp.Cross(g_camera3D->GetForward(), g_camera3D->GetRight());
+		cameraUp.Cross(MainCamera().GetForward(), MainCamera().GetRight());
 		//カスケードシャドウのための処理。
 		for (int i = 0; i < NUM_SHADOW_MAP; i++) {
 			farPlaneZ = nearPlaneZ + m_shadowAreas[i];		//近平面+シャドウの範囲。
 			Matrix mLightView = Matrix::Identity;			//ライトビュー。
-			float halfViewAngle = g_camera3D->GetViewAngle() * 0.5f;		//画角の半分。
+			float halfViewAngle = MainCamera().GetViewAngle() * 0.5f;		//画角の半分。
 			//視推台の8頂点をライト空間に変換してAABBを求めて、正射影の幅、高さを求める。
 			float w, h;						//高さ,幅
 			float far_z = -1.0f;			//視推台の奥行。
@@ -166,23 +166,23 @@ namespace Engine {
 				Vector3 toUpperNear, toUpperFar;			//視推台の近平面、遠平面の上方向ベクトル。
 				toUpperNear = cameraUp * t * nearPlaneZ;
 				toUpperFar = cameraUp * t * farPlaneZ;
-				t *= g_camera3D->GetAspect();		//アスペクト比をかけている？
+				t *= MainCamera().GetAspect();		//アスペクト比をかけている？
 				//近平面の中央座標を計算。
-				Vector3 nearPlaneCenterPos = g_camera3D->GetPosition() + cameraDir * nearPlaneZ;
+				Vector3 nearPlaneCenterPos = MainCamera().GetPosition() + cameraDir * nearPlaneZ;
 				//近平面の中央座標 + (カメラの右単位ベクトル * 縦横の比率(tan) * 近平面までの距離。) + 近平面の上方向のベクトル。
-				v[0] = nearPlaneCenterPos + g_camera3D->GetRight() * t * nearPlaneZ + toUpperNear;		//近平面の右上。
+				v[0] = nearPlaneCenterPos + MainCamera().GetRight() * t * nearPlaneZ + toUpperNear;		//近平面の右上。
 				v[1] = v[0] - toUpperNear * 2.0f;														//近平面の右下。
 
-				v[2] = nearPlaneCenterPos + g_camera3D->GetRight() * -t * nearPlaneZ + toUpperNear;		//近平面の左上。
+				v[2] = nearPlaneCenterPos + MainCamera().GetRight() * -t * nearPlaneZ + toUpperNear;		//近平面の左上。
 				v[3] = v[2] - toUpperNear * 2.0f;														//近平面の左下。
 
 				//遠平面の中央座標を計算。
-				Vector3 farPlaneCenterPos = g_camera3D->GetPosition() + cameraDir * farPlaneZ;
+				Vector3 farPlaneCenterPos = MainCamera().GetPosition() + cameraDir * farPlaneZ;
 
-				v[4] = farPlaneCenterPos + g_camera3D->GetRight() * t * farPlaneZ + toUpperFar;			//遠平面の右上。
+				v[4] = farPlaneCenterPos + MainCamera().GetRight() * t * farPlaneZ + toUpperFar;			//遠平面の右上。
 				v[5] = v[4] - toUpperFar * 2.0f;														//遠平面の右下。
 
-				v[6] = farPlaneCenterPos + g_camera3D->GetRight() * -t * farPlaneZ + toUpperFar;		//遠平面の左上。
+				v[6] = farPlaneCenterPos + MainCamera().GetRight() * -t * farPlaneZ + toUpperFar;		//遠平面の左上。
 				v[7] = v[6] - toUpperFar * 2.0f;														//遠平面の左下。
 
 				//ライト行列を作成。

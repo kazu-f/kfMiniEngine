@@ -32,7 +32,7 @@ namespace Engine {
 		{
 			//3D‹óŠÔ‚Å•`‰æ‚·‚éB
 			if (m_isDraw3D) {
-				m_sprite.Draw(rc, g_camera3D->GetViewMatrix(), g_camera3D->GetProjectionMatrix());
+				m_sprite.Draw(rc, MainCamera().GetViewMatrix(), MainCamera().GetProjectionMatrix());
 			}
 		}
 
@@ -41,7 +41,7 @@ namespace Engine {
 			//2D•`‰æ‚ð‚·‚éB
 			if (!m_isDraw3D)
 			{
-				m_sprite.Draw(rc, g_camera2D->GetViewMatrix(), g_camera2D->GetProjectionMatrix());
+				m_sprite.Draw(rc, MainCamera2D().GetViewMatrix(), MainCamera2D().GetProjectionMatrix());
 			}
 		}
 

@@ -181,6 +181,22 @@ namespace Engine {
 		{
 			return m_shadowMap;
 		}
+		/// <summary>
+		/// 3Dカメラの取得。
+		/// </summary>
+		Camera& GetMainCamera()
+		{
+			return m_camera3D;
+		}
+
+		/// <summary>
+		/// 2Dカメラの取得。
+		/// </summary>
+		Camera& Get2DCamera()
+		{
+			return m_camera2D;
+		}
+
 	private:
 		/// <summary>
 		/// D3Dデバイスの作成。
@@ -293,6 +309,4 @@ namespace Engine {
 		////エフェクト関係
 		//EffekseerRenderer::RendererRef m_renderer;
 	};
-	extern Camera* g_camera2D;					//2Dカメラ。
-	extern Camera* g_camera3D;					//3Dカメラ。
 }

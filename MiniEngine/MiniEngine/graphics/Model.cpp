@@ -64,8 +64,8 @@ namespace Engine {
 		m_meshParts.Draw(
 			rc,
 			m_world,
-			g_camera3D->GetViewMatrix(),
-			g_camera3D->GetProjectionMatrix()
+			MainCamera().GetViewMatrix(),
+			MainCamera().GetProjectionMatrix()
 		);
 	}
 	void Model::Draw(RenderContext& rc, Matrix mLVP)

@@ -33,14 +33,14 @@ bool FollowCarCamera::Start()
 	}
 
 	//遠平面の設定。
-	g_camera3D->SetFar(CAMERA_FAR);
+	MainCamera().SetFar(CAMERA_FAR);
 
 	m_target = m_car->GetPosition();	//ターゲットとなる車の座標を取得。
 	m_target.y += TARGET_HIGHT;			//少し高くする。
 	m_position = m_target + CAMERA_DISTANCE;
 
-	g_camera3D->SetPosition(m_position);
-	g_camera3D->SetTarget(m_target);
+	MainCamera().SetPosition(m_position);
+	MainCamera().SetTarget(m_target);
 
 
 	return true;
@@ -95,8 +95,8 @@ void FollowCarCamera::Update()
 	m_target = targetPos;
 
 	//カメラの座標を更新。
-	g_camera3D->SetTarget(m_target);
-	g_camera3D->SetPosition(m_position);
+	MainCamera().SetTarget(m_target);
+	MainCamera().SetPosition(m_position);
 }
 
 void FollowCarCamera::OnDestroy()

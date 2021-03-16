@@ -96,10 +96,10 @@ void Player::Update()
 		DeleteGO(this);
 	}
 
-	Vector3 camRight = g_camera3D->GetRight();
+	Vector3 camRight = MainCamera().GetRight();
 	camRight.y = 0.0f;
 	camRight.Normalize();
-	Vector3 camForward = g_camera3D->GetForward();
+	Vector3 camForward = MainCamera().GetForward();
 	camForward.y = 0.0f;
 	camForward.Normalize();
 

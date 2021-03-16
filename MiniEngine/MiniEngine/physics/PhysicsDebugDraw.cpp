@@ -36,8 +36,8 @@ namespace Engine {
 	{
 		//定数バッファの更新。
 		SConstantBuffer cb;
-		cb.mView = g_camera3D->GetViewMatrix();
-		cb.mProj = g_camera3D->GetProjectionMatrix();
+		cb.mView = MainCamera().GetViewMatrix();
+		cb.mProj = MainCamera().GetProjectionMatrix();
 		m_cb.CopyToVRAM(&cb);
 
 		//頂点のデータ更新。

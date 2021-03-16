@@ -24,6 +24,6 @@ namespace Engine {
 	void CDefferdShading::Render(RenderContext& rc)
 	{
 		m_defferd.Update(Vector3::Zero, Quaternion::Identity, Vector3::One);
-		m_defferd.Draw(rc, g_camera2D->GetViewMatrix(), g_camera2D->GetProjectionMatrix());
+		m_defferd.Draw(rc, MainCamera2D().GetViewMatrix(), MainCamera2D().GetProjectionMatrix());
 	}
 }
