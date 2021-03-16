@@ -1,6 +1,6 @@
 #pragma once
 namespace Engine {
-	class GraphicsEngine;
+	class CGraphicsEngine;
 	extern HWND			g_hWnd;				//ウィンドウハンドル。
 
 	//ゲームの初期化。

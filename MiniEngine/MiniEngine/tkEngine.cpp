@@ -23,8 +23,7 @@ namespace Engine {
 	void TkEngine::Init(HWND hwnd, UINT frameBufferWidth, UINT frameBufferHeight)
 	{
 		//グラフィックエンジンの初期化。
-		m_graphicsEngine = new GraphicsEngine();
-		g_graphicsEngine = m_graphicsEngine;
+		m_graphicsEngine = new CGraphicsEngine();
 		m_graphicsEngine->Init(hwnd, frameBufferWidth, frameBufferHeight);
 		//物理エンジンの初期化。
 		m_physicsWorld.Init();

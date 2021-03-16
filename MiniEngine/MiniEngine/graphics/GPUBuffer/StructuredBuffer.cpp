@@ -18,7 +18,7 @@ namespace Engine {
 	{
 		m_sizeOfElement = sizeOfElement;
 		m_numElement = numElement;
-		auto device = g_graphicsEngine->GetD3DDevice();
+		auto device = GraphicsEngine()->GetD3DDevice();
 
 		int bufferNo = 0;
 		for (auto& buffer : m_buffersOnGPU) {
@@ -50,12 +50,12 @@ namespace Engine {
 	}
 	void StructuredBuffer::Update(void* data)
 	{
-		auto backBufferIndex = g_graphicsEngine->GetBackBufferIndex();
+		auto backBufferIndex = GraphicsEngine()->GetBackBufferIndex();
 		memcpy(m_buffersOnCPU[backBufferIndex], data, m_numElement * m_sizeOfElement);
 	}
 	ID3D12Resource* StructuredBuffer::GetD3DResoruce()
 	{
-		auto backBufferIndex = g_graphicsEngine->GetBackBufferIndex();
+		auto backBufferIndex = GraphicsEngine()->GetBackBufferIndex();
 		return m_buffersOnGPU[backBufferIndex];
 	}
 	void StructuredBuffer::RegistShaderResourceView(D3D12_CPU_DESCRIPTOR_HANDLE descriptorHandle, int bufferNo)
@@ -63,7 +63,7 @@ namespace Engine {
 		if (!m_isInited) {
 			return;
 		}
-		auto device = g_graphicsEngine->GetD3DDevice();
+		auto device = GraphicsEngine()->GetD3DDevice();
 
 		D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc;
 		ZeroMemory(&srvDesc, sizeof(srvDesc));

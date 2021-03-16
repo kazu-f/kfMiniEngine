@@ -11,7 +11,7 @@ namespace Engine {
 	}
 	void VertexBuffer::Init(int size, int stride)
 	{
-		auto d3dDevice = g_graphicsEngine->GetD3DDevice();
+		auto d3dDevice = GraphicsEngine()->GetD3DDevice();
 		auto d3dxHeapProperties = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT);
 		auto d3dxResourceDesc = CD3DX12_RESOURCE_DESC::Buffer(size);
 		d3dDevice->CreateCommittedResource(
@@ -30,8 +30,8 @@ namespace Engine {
 	}
 	void VertexBuffer::Copy(void* srcVertices)
 	{
-		auto& rc = g_graphicsEngine->GetRenderContext();
-		auto device = g_graphicsEngine->GetD3DDevice();
+		auto& rc = GraphicsEngine()->GetRenderContext();
+		auto device = GraphicsEngine()->GetD3DDevice();
 
 		DirectX::ResourceUploadBatch re(device);
 		re.Begin();
@@ -45,7 +45,7 @@ namespace Engine {
 			&subResourceData,
 			1);
 
-		re.End(g_graphicsEngine->GetCommandQueue());
+		re.End(GraphicsEngine()->GetCommandQueue());
 
 	}
 }

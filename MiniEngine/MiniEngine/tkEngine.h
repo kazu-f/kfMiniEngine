@@ -5,7 +5,7 @@
 
 namespace Engine {
 
-	class GraphicsEngine;
+	class CGraphicsEngine;
 	class CPhysicsWorld;
 	class CSoundEngine;
 
@@ -39,21 +39,29 @@ namespace Engine {
 		/// ゲームエンジンの初期化。
 		/// </summary>
 		void Init(HWND hwnd, UINT frameBufferWidth, UINT frameBufferHeight);
-	public:		//Get関数系統
+		//インスタンスを取得する。
 		static TkEngine& Instance()
 		{
 			static TkEngine instance;
 			return instance;
 		}
-
+	public:		//Get関数系統
+		//ゲームタイム。
 		const CGameTime& GetGameTime()
 		{
 			return m_gameTime;
 		}
+		//グラフィックエンジン。
+		CGraphicsEngine* GetGraphicsEngine()
+		{
+			return m_graphicsEngine;
+		}
+		//物理ワールド。
 		CPhysicsWorld& GetPhyshicsWorld()
 		{
 			return m_physicsWorld;
 		}
+		//サウンドエンジン。
 		CSoundEngine& GetSoundEngine()
 		{
 			return m_soundEngine;
@@ -62,7 +70,7 @@ namespace Engine {
 		void GameSleep();
 
 	private:
-		GraphicsEngine* m_graphicsEngine = nullptr;		//グラフィックエンジン。
+		CGraphicsEngine* m_graphicsEngine = nullptr;		//グラフィックエンジン。
 		CPhysicsWorld m_physicsWorld;					//物理ワールド。
 		CSoundEngine m_soundEngine;						//サウンドエンジン。
 		GamePad m_pad[GamePad::CONNECT_PAD_MAX];		//ゲームパッド。
@@ -74,7 +82,7 @@ namespace Engine {
 	/// <summary>
 	/// エンジンを取得。
 	/// </summary>
-	static inline TkEngine& GetEngine()
+	static inline TkEngine& GameEngine()
 	{
 		return TkEngine::Instance();
 	}
@@ -83,18 +91,28 @@ namespace Engine {
 	/// </summary>
 	static inline const CGameTime& GameTime()
 	{
-		return GetEngine().GetGameTime();
+		return GameEngine().GetGameTime();
 	}
+	/// <summary>
+	/// グラフィックエンジンを取得。
+	/// </summary>
+	static inline CGraphicsEngine* GraphicsEngine()
+	{
+		return GameEngine().GetGraphicsEngine();
+	}
+
 	/// <summary>
 	/// 物理ワールドを取得。
 	/// </summary>
 	static inline CPhysicsWorld& PhysicsWorld()
 	{
-		return GetEngine().GetPhyshicsWorld();
+		return GameEngine().GetPhyshicsWorld();
 	}
-
+	/// <summary>
+	/// サウンドエンジンを取得。
+	/// </summary>
 	static inline CSoundEngine& SoundEngine()
 	{
-		return GetEngine().GetSoundEngine();
+		return GameEngine().GetSoundEngine();
 	}
 }

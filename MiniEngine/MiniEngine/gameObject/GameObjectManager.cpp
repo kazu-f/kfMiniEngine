@@ -103,8 +103,8 @@ namespace Engine {
 		}
 		//•`‰æŒn‚Ìˆ—B
 		{
-			g_graphicsEngine->PreRenderUpdate();
-			g_graphicsEngine->Render(this);
+			GraphicsEngine()->PreRenderUpdate();
+			GraphicsEngine()->Render(this);
 		}
 
 		ExecuteDeleteGameObjects();		//íœˆ—B

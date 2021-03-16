@@ -17,7 +17,7 @@ namespace Engine {
 		{
 		case WM_DESTROY:
 			//エンジンの破棄。
-			GetEngine().Release();
+			GameEngine().Release();
 			PostQuitMessage(0);
 			break;
 		default:
@@ -80,7 +80,7 @@ namespace Engine {
 		//ウィンドウを初期化。
 		InitWindow(hInstance, hPrevInstance, lpCmdLine, nCmdShow, appName);
 		//TKエンジンの初期化。
-		GetEngine().Init(g_hWnd, FRAME_BUFFER_W, FRAME_BUFFER_H);
+		GameEngine().Init(g_hWnd, FRAME_BUFFER_W, FRAME_BUFFER_H);
 	}
 	//ウィンドウメッセージをディスパッチ。falseが返ってきたら、ゲーム終了。
 	bool DispatchWindowMessage()

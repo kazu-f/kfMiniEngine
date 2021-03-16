@@ -4,7 +4,7 @@
 #include "Texture.h"
 
 namespace Engine {
-	class GraphicsEngine;
+	class CGraphicsEngine;
 
 	/// <summary>
 	/// レンダリングターゲット。
@@ -100,7 +100,7 @@ namespace Engine {
 		/// <param name="ge">グラフィックエンジン</param>
 		/// <param name="d3dDevice">D3Dデバイス</param>
 		/// <returns></returns>
-		bool CreateDescriptorHeap(GraphicsEngine& ge, ID3D12Device*& d3dDevice);
+		bool CreateDescriptorHeap(CGraphicsEngine& ge, ID3D12Device*& d3dDevice);
 		/// <summary>
 		/// レンダリングターゲットとなるテクスチャを作成。
 		/// </summary>
@@ -113,7 +113,7 @@ namespace Engine {
 		/// <param name="format">テクスチャのフォーマット</param>
 		/// <returns>trueが返ってきたら成功。</returns>
 		bool CreateRenderTargetTexture(
-			GraphicsEngine& ge,
+			CGraphicsEngine& ge,
 			ID3D12Device*& d3dDevice,
 			int w,
 			int h,
@@ -132,7 +132,7 @@ namespace Engine {
 		/// <param name="format">テクスチャのフォーマット</param>
 		/// <returns>trueが返ってきたら成功</returns>
 		bool CreateDepthStencilTexture(
-			GraphicsEngine& ge,
+			CGraphicsEngine& ge,
 			ID3D12Device*& d3dDevice,
 			int w,
 			int h,

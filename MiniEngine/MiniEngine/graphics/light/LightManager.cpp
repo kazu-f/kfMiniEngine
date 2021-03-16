@@ -68,8 +68,8 @@ namespace Engine {
 		m_lightParam.eyePos = g_camera3D->GetPosition();//éãì_ÇÃç¿ïWÅB
 		m_lightParam.screenParam.x = 0.0f;				//near
 		m_lightParam.screenParam.y = 0.0f;				//far
-		m_lightParam.screenParam.z = static_cast<float>(g_graphicsEngine->GetFrameBufferWidth());	//screenWidth
-		m_lightParam.screenParam.w = static_cast<float>(g_graphicsEngine->GetFrameBufferHeight());	//screenHeight
+		m_lightParam.screenParam.z = static_cast<float>(GraphicsEngine()->GetFrameBufferWidth());	//screenWidth
+		m_lightParam.screenParam.w = static_cast<float>(GraphicsEngine()->GetFrameBufferHeight());	//screenHeight
 	}
 
 	void CLightManager::Render(RenderContext& rc)

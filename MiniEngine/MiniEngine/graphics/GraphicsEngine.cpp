@@ -2,11 +2,10 @@
 #include "GraphicsEngine.h"
 
 namespace Engine {
-	GraphicsEngine* g_graphicsEngine = nullptr;	//グラフィックスエンジン
 	Camera* g_camera2D = nullptr;				//2Dカメラ。
 	Camera* g_camera3D = nullptr;				//3Dカメラ。
 
-	GraphicsEngine::~GraphicsEngine()
+	CGraphicsEngine::~CGraphicsEngine()
 	{
 		WaitDraw();
 		//後始末。
@@ -49,7 +48,7 @@ namespace Engine {
 
 		CloseHandle(m_fenceEvent);
 	}
-	void GraphicsEngine::WaitDraw()
+	void CGraphicsEngine::WaitDraw()
 	{
 		//描画終了待ち
 		// Signal and increment the fence value.
@@ -64,7 +63,7 @@ namespace Engine {
 			WaitForSingleObject(m_fenceEvent, INFINITE);
 		}
 	}
-	bool GraphicsEngine::Init(HWND hwnd, UINT frameBufferWidth, UINT frameBufferHeight)
+	bool CGraphicsEngine::Init(HWND hwnd, UINT frameBufferWidth, UINT frameBufferHeight)
 	{
 		auto hdc = GetDC(hwnd);
 		auto rate = GetDeviceCaps(hdc, VREFRESH);
@@ -209,7 +208,7 @@ namespace Engine {
 		return true;
 	}
 
-	IDXGIFactory4* GraphicsEngine::CreateDXGIFactory()
+	IDXGIFactory4* CGraphicsEngine::CreateDXGIFactory()
 	{
 		UINT dxgiFactoryFlags = 0;
 #ifdef _DEBUG
@@ -229,7 +228,7 @@ namespace Engine {
 		return factory;
 	}
 
-	bool GraphicsEngine::CreateD3DDevice(IDXGIFactory4* dxgiFactory)
+	bool CGraphicsEngine::CreateD3DDevice(IDXGIFactory4* dxgiFactory)
 	{
 		D3D_FEATURE_LEVEL fuatureLevel[] = {
 			D3D_FEATURE_LEVEL_12_1,	//Direct3D 12.1の機能を使う。
@@ -290,7 +289,7 @@ namespace Engine {
 		}
 		return m_d3dDevice != nullptr;
 	}
-	bool GraphicsEngine::CreateCommandQueue()
+	bool CGraphicsEngine::CreateCommandQueue()
 	{
 		D3D12_COMMAND_QUEUE_DESC queueDesc = {};
 		queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;
@@ -303,7 +302,7 @@ namespace Engine {
 		}
 		return true;
 	}
-	bool GraphicsEngine::CreateSwapChain(
+	bool CGraphicsEngine::CreateSwapChain(
 		HWND hwnd,
 		UINT frameBufferWidth,
 		UINT frameBufferHeight,
@@ -335,7 +334,7 @@ namespace Engine {
 		m_currentBackBufferIndex = m_swapChain->GetCurrentBackBufferIndex();
 		return true;
 	}
-	bool GraphicsEngine::CreateDescriptorHeapForFrameBuffer()
+	bool CGraphicsEngine::CreateDescriptorHeapForFrameBuffer()
 	{
 		//RTV用のディスクリプタヒープを作成する。
 		D3D12_DESCRIPTOR_HEAP_DESC desc = {};
@@ -362,7 +361,7 @@ namespace Engine {
 		m_dsvDescriptorSize = m_d3dDevice->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
 		return true;
 	}
-	bool GraphicsEngine::CreateRTVForFameBuffer()
+	bool CGraphicsEngine::CreateRTVForFameBuffer()
 	{
 		D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle = m_rtvHeap->GetCPUDescriptorHandleForHeapStart();
 
@@ -376,7 +375,7 @@ namespace Engine {
 		}
 		return true;
 	}
-	bool GraphicsEngine::CreateDSVForFrameBuffer(UINT frameBufferWidth, UINT frameBufferHeight)
+	bool CGraphicsEngine::CreateDSVForFrameBuffer(UINT frameBufferWidth, UINT frameBufferHeight)
 	{
 		D3D12_CLEAR_VALUE dsvClearValue;
 		dsvClearValue.Format = DXGI_FORMAT_D32_FLOAT;
@@ -418,7 +417,7 @@ namespace Engine {
 
 		return true;
 	}
-	bool GraphicsEngine::CreateCommandList()
+	bool CGraphicsEngine::CreateCommandList()
 	{
 		//コマンドリストの作成。
 		m_d3dDevice->CreateCommandList(
@@ -432,7 +431,7 @@ namespace Engine {
 
 		return true;
 	}
-	bool GraphicsEngine::CreateSynchronizationWithGPUObject()
+	bool CGraphicsEngine::CreateSynchronizationWithGPUObject()
 	{
 		m_d3dDevice->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&m_fence));
 		if (!m_fence) {
@@ -447,21 +446,21 @@ namespace Engine {
 		}
 		return true;
 	}
-	void GraphicsEngine::Update()
+	void CGraphicsEngine::Update()
 	{
 		//カメラを更新する。
 		m_camera2D.Update();
 		m_camera3D.Update();
 
 	}
-	void GraphicsEngine::PreRenderUpdate()
+	void CGraphicsEngine::PreRenderUpdate()
 	{
 		//ライトの更新処理。
 		m_lightManager->LightUpdate();
 		//シャドウマップの更新処理。
 		m_shadowMap->Update();
 	}
-	void GraphicsEngine::Render(CGameObjectManager* goMgr)
+	void CGraphicsEngine::Render(CGameObjectManager* goMgr)
 	{
 		BeginRender();
 
@@ -475,7 +474,7 @@ namespace Engine {
 
 		EndRender();
 	}
-	void GraphicsEngine::PreRender(CGameObjectManager* goMgr)
+	void CGraphicsEngine::PreRender(CGameObjectManager* goMgr)
 	{
 		//指向性シャドウ回りの処理。
 		m_shadowMap->RenderToShadowMap(m_renderContext);
@@ -488,14 +487,14 @@ namespace Engine {
 		goMgr->PreRender(m_renderContext);
 		m_gBuffer->EndRender(m_renderContext);
 	}
-	void GraphicsEngine::DefferdShading(CGameObjectManager* goMgr)
+	void CGraphicsEngine::DefferdShading(CGameObjectManager* goMgr)
 	{
 		//ライト情報の更新。
 		m_lightManager->Render(m_renderContext);
 		//ディファードレンダリングを行う。
 		m_defferd->Render(m_renderContext);
 	}
-	void GraphicsEngine::ForwardRender(CGameObjectManager* goMgr)
+	void CGraphicsEngine::ForwardRender(CGameObjectManager* goMgr)
 	{
 		//レンダリングステップをフォワードレンダリングにする。
 		m_renderContext.SetRenderStep(EnRenderStep::enRenderStep_ForwardRender);
@@ -509,13 +508,13 @@ namespace Engine {
 
 		PhysicsWorld().DebugDrawWorld(m_renderContext);
 	}
-	void GraphicsEngine::PostRender(CGameObjectManager* goMgr)
+	void CGraphicsEngine::PostRender(CGameObjectManager* goMgr)
 	{
 		//レンダリングステップをポストレンダリングにする。
 		m_renderContext.SetRenderStep(EnRenderStep::enRenderStep_PostRender);
 		goMgr->PostRender(m_renderContext);
 	}
-	void GraphicsEngine::BeginRender()
+	void CGraphicsEngine::BeginRender()
 	{
 		m_frameIndex = m_swapChain->GetCurrentBackBufferIndex();
 
@@ -544,11 +543,11 @@ namespace Engine {
 		m_renderContext.ClearDepthStencilView(m_currentFrameBufferDSVHandle, 1.0f);
 
 	}
-	void GraphicsEngine::ChangeRenderTargetToFrameBuffer(RenderContext& rc)
+	void CGraphicsEngine::ChangeRenderTargetToFrameBuffer(RenderContext& rc)
 	{
 		rc.SetRenderTarget(m_currentFrameBufferRTVHandle, m_currentFrameBufferDSVHandle);
 	}
-	void GraphicsEngine::EndRender()
+	void CGraphicsEngine::EndRender()
 	{
 		// レンダリングターゲットへの描き込み完了待ち
 		m_renderContext.WaitUntilFinishDrawingToRenderTarget(m_renderTargets[m_frameIndex]);
@@ -567,7 +566,7 @@ namespace Engine {
 		WaitDraw();
 	}
 
-	void GraphicsEngine::ExecuteCommand()
+	void CGraphicsEngine::ExecuteCommand()
 	{
 		// レンダリングターゲットへの描き込み完了待ち
 		m_renderContext.WaitUntilFinishDrawingToRenderTarget(m_renderTargets[m_frameIndex]);

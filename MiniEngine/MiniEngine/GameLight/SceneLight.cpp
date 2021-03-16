@@ -57,10 +57,10 @@ bool SceneLight::Start()
 	m_lightArray.push_back(light3);
 
 	//ŠÂ‹«Œõ‚ÌÝ’èB
-	g_graphicsEngine->GetLightManager()->SetAmbientLight(AMBIENT_LIGHT);
+	GraphicsEngine()->GetLightManager()->SetAmbientLight(AMBIENT_LIGHT);
 
 	//‰e‚Ì—Ž‚¿‚éŒü‚«‚ðÝ’èB
-	g_graphicsEngine->GetShadowMap()->SetLightDirection(SHADOW_DIRECTION);
+	GraphicsEngine()->GetShadowMap()->SetLightDirection(SHADOW_DIRECTION);
 
 	return true;
 }

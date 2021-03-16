@@ -86,8 +86,8 @@ namespace Engine {
 				caster->Draw(rc,m_LVPMatrix[i]);
 			}
 			rc.WaitUntilFinishDrawingToRenderTarget(m_shadowMaps[i]);
-			g_graphicsEngine->ExecuteCommand();
-			g_graphicsEngine->BeginRenderShadowMap();
+			GraphicsEngine()->ExecuteCommand();
+			GraphicsEngine()->BeginRenderShadowMap();
 		}
 
 		//シャドウキャスター登録をクリア。

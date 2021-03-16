@@ -24,12 +24,12 @@ namespace Engine {
 	/// <summary>
 	/// DirectX12に依存するグラフィックスエンジン
 	/// </summary>
-	class GraphicsEngine {
+	class CGraphicsEngine {
 	public:
 		/// <summary>
 		/// デストラクタ。
 		/// </summary>
-		~GraphicsEngine();
+		~CGraphicsEngine();
 		/// <summary>
 		/// 初期化
 		/// </summary>
@@ -293,7 +293,6 @@ namespace Engine {
 		////エフェクト関係
 		//EffekseerRenderer::RendererRef m_renderer;
 	};
-	extern GraphicsEngine* g_graphicsEngine;	//グラフィックスエンジン
 	extern Camera* g_camera2D;					//2Dカメラ。
 	extern Camera* g_camera3D;					//3Dカメラ。
 }

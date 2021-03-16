@@ -84,7 +84,7 @@ namespace Engine {
 		void ModelRender::OnDestroy()
 		{
 			//シャドウキャスター登録を解除する。
-			auto& shadowMap = g_graphicsEngine->GetShadowMap();
+			auto& shadowMap = GraphicsEngine()->GetShadowMap();
 			shadowMap->RemoveShadowCaster(&m_model);
 		}
 		void ModelRender::Update()
@@ -92,7 +92,7 @@ namespace Engine {
 			if (m_isShadowCaster)
 			{
 				//シャドウキャスターに登録する。
-				auto& shadowMap = g_graphicsEngine->GetShadowMap();
+				auto& shadowMap = GraphicsEngine()->GetShadowMap();
 				shadowMap->RegistShadowCaster(&m_model);
 			}
 

@@ -18,7 +18,7 @@ namespace Engine {
 		m_size = size;
 
 		//D3Dデバイスを取得。
-		auto device = g_graphicsEngine->GetD3DDevice();
+		auto device = GraphicsEngine()->GetD3DDevice();
 
 
 		//定数バッファは256バイトアライメントが要求されるので、256の倍数に切り上げる。
@@ -53,7 +53,7 @@ namespace Engine {
 	void ConstantBuffer::RegistConstantBufferView(D3D12_CPU_DESCRIPTOR_HANDLE descriptorHandle, int bufferNo)
 	{
 		//D3Dデバイスを取得。
-		auto device = g_graphicsEngine->GetD3DDevice();
+		auto device = GraphicsEngine()->GetD3DDevice();
 		D3D12_CONSTANT_BUFFER_VIEW_DESC desc = {};
 		desc.BufferLocation = m_constantBuffer[bufferNo]->GetGPUVirtualAddress();
 		desc.SizeInBytes = m_allocSize;
@@ -61,12 +61,12 @@ namespace Engine {
 	}
 	void ConstantBuffer::RegistConstantBufferView(D3D12_CPU_DESCRIPTOR_HANDLE descriptorHandle)
 	{
-		auto backBufferIndex = g_graphicsEngine->GetBackBufferIndex();
+		auto backBufferIndex = GraphicsEngine()->GetBackBufferIndex();
 		RegistConstantBufferView(descriptorHandle, backBufferIndex);
 	}
 	void ConstantBuffer::CopyToVRAM(void* data)
 	{
-		auto backBufferIndex = g_graphicsEngine->GetBackBufferIndex();
+		auto backBufferIndex = GraphicsEngine()->GetBackBufferIndex();
 		memcpy(m_constBufferCPU[backBufferIndex], data, m_size);
 	}
 }

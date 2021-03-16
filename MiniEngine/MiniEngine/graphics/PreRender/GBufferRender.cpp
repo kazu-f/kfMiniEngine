@@ -10,8 +10,8 @@ namespace Engine {
 	}
 	void CGBufferRender::Init()
 	{
-		const int Width = static_cast<int>(g_graphicsEngine->GetFrameBufferWidth());
-		const int Height = static_cast<int>(g_graphicsEngine->GetFrameBufferHeight());
+		const int Width = static_cast<int>(GraphicsEngine()->GetFrameBufferWidth());
+		const int Height = static_cast<int>(GraphicsEngine()->GetFrameBufferHeight());
 		//アルベドバッファの初期化。
 		auto& albedo = GetRenderTarget(EnGBuffer::enGBufferAlbed);
 		albedo.Create(
@@ -92,6 +92,6 @@ namespace Engine {
 		}
 		//書き込みが終わるまで待つ。
 		rc.WaitUntilFinishDrawingToRenderTargets(arraySize, rts);
-		g_graphicsEngine->ChangeRenderTargetToFrameBuffer(rc);
+		GraphicsEngine()->ChangeRenderTargetToFrameBuffer(rc);
 	}
 }

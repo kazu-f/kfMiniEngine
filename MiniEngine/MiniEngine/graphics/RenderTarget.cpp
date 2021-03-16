@@ -13,23 +13,23 @@ namespace Engine {
 		float clearColor[4]
 	)
 	{
-		auto d3dDevice = g_graphicsEngine->GetD3DDevice();
+		auto d3dDevice = GraphicsEngine()->GetD3DDevice();
 		m_width = w;
 		m_height = h;
 		//レンダリングターゲットとなるテクスチャを作成する。
-		if (!CreateRenderTargetTexture(*g_graphicsEngine, d3dDevice, w, h, mipLevel, arraySize, colorFormat, clearColor)) {
+		if (!CreateRenderTargetTexture(*GraphicsEngine(), d3dDevice, w, h, mipLevel, arraySize, colorFormat, clearColor)) {
 			//	TK_ASSERT(false, "レンダリングターゲットとなるテクスチャの作成に失敗しました。");
 			MessageBoxA(nullptr, "レンダリングターゲットとなるテクスチャの作成に失敗しました。", "エラー", MB_OK);
 			return false;
 		}
 		//深度ステンシルバッファとなるテクスチャを作成する。
 		if (depthStencilFormat != DXGI_FORMAT_UNKNOWN) {
-			if (!CreateDepthStencilTexture(*g_graphicsEngine, d3dDevice, w, h, depthStencilFormat)) {
+			if (!CreateDepthStencilTexture(*GraphicsEngine(), d3dDevice, w, h, depthStencilFormat)) {
 				MessageBoxA(nullptr, "レンダリングターゲットとなるテクスチャの作成に失敗しました。", "エラー", MB_OK);
 				return false;
 			}
 		}
-		if (!CreateDescriptorHeap(*g_graphicsEngine, d3dDevice)) {
+		if (!CreateDescriptorHeap(*GraphicsEngine(), d3dDevice)) {
 			//ディスクリプタヒープの作成に失敗した。
 			MessageBoxA(nullptr, "レンダリングターゲットとなるテクスチャの作成に失敗しました。", "エラー", MB_OK);
 			return false;
@@ -41,12 +41,12 @@ namespace Engine {
 		}
 		return true;
 	}
-	bool RenderTarget::CreateDescriptorHeap(GraphicsEngine& ge, ID3D12Device*& d3dDevice)
+	bool RenderTarget::CreateDescriptorHeap(CGraphicsEngine& ge, ID3D12Device*& d3dDevice)
 	{
 
 		//RTV用のディスクリプタヒープを作成する。
 		D3D12_DESCRIPTOR_HEAP_DESC desc = {};
-		desc.NumDescriptors = GraphicsEngine::FRAME_BUFFER_COUNT;
+		desc.NumDescriptors = CGraphicsEngine::FRAME_BUFFER_COUNT;
 		desc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
 		desc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
 		d3dDevice->CreateDescriptorHeap(&desc, IID_PPV_ARGS(&m_rtvHeap));
@@ -72,7 +72,7 @@ namespace Engine {
 		return true;
 	}
 	bool RenderTarget::CreateRenderTargetTexture(
-		GraphicsEngine& ge,
+		CGraphicsEngine& ge,
 		ID3D12Device*& d3dDevice,
 		int w,
 		int h,
@@ -129,7 +129,7 @@ namespace Engine {
 		return true;
 	}
 	bool RenderTarget::CreateDepthStencilTexture(
-		GraphicsEngine& ge,
+		CGraphicsEngine& ge,
 		ID3D12Device*& d3dDevice,
 		int w,
 		int h,

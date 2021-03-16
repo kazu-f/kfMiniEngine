@@ -70,7 +70,7 @@ namespace Engine {
 				m_descriptorHeap.RegistShaderResource(texNo, m_textures[texNo]);
 			}
 		}
-		auto& ligMgr = g_graphicsEngine->GetLightManager();
+		auto& ligMgr = GraphicsEngine()->GetLightManager();
 
 		m_descriptorHeap.RegistShaderResource(9, ligMgr->GetDirectionLightStructuredBuffer());
 

@@ -18,7 +18,7 @@ namespace Engine {
 	{
 		m_sizeOfElement = sizeOfElement;
 		m_numElement = numElement;
-		auto device = g_graphicsEngine->GetD3DDevice();
+		auto device = GraphicsEngine()->GetD3DDevice();
 		D3D12_RESOURCE_DESC desc = CD3DX12_RESOURCE_DESC::Buffer(m_sizeOfElement * m_numElement);
 		desc.Flags = D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS;
 		int bufferNo = 0;
@@ -55,7 +55,7 @@ namespace Engine {
 
 	ID3D12Resource* RWStructuredBuffer::GetD3DResoruce()
 	{
-		auto backBufferIndex = g_graphicsEngine->GetBackBufferIndex();
+		auto backBufferIndex = GraphicsEngine()->GetBackBufferIndex();
 		return m_buffersOnGPU[backBufferIndex];
 	}
 	/// <summary>
@@ -64,7 +64,7 @@ namespace Engine {
 	/// <returns></returns>
 	void* RWStructuredBuffer::GetResourceOnCPU()
 	{
-		auto backBufferIndex = g_graphicsEngine->GetBackBufferIndex();
+		auto backBufferIndex = GraphicsEngine()->GetBackBufferIndex();
 		return m_buffersOnCPU[backBufferIndex];
 	}
 	void RWStructuredBuffer::RegistUnorderAccessView(D3D12_CPU_DESCRIPTOR_HANDLE descriptorHandle, int bufferNo)
@@ -72,7 +72,7 @@ namespace Engine {
 		if (!m_isInited) {
 			return;
 		}
-		auto device = g_graphicsEngine->GetD3DDevice();
+		auto device = GraphicsEngine()->GetD3DDevice();
 
 		D3D12_UNORDERED_ACCESS_VIEW_DESC desc{};
 		desc.ViewDimension = D3D12_UAV_DIMENSION_BUFFER;
@@ -91,7 +91,7 @@ namespace Engine {
 		if (!m_isInited) {
 			return;
 		}
-		auto device = g_graphicsEngine->GetD3DDevice();
+		auto device = GraphicsEngine()->GetD3DDevice();
 
 		D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc;
 		ZeroMemory(&srvDesc, sizeof(srvDesc));

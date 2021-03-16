@@ -19,7 +19,7 @@ namespace Engine {
 			//stride = 4‚ÌŽžsize‚ª‚È‚­‚È‚Á‚Ä‚½‚µ‚±‚ê‚Å‚¨‚‹H
 			m_sizeInBytes = size;
 		}
-		auto d3dDevice = g_graphicsEngine->GetD3DDevice();
+		auto d3dDevice = GraphicsEngine()->GetD3DDevice();
 		auto d3dxHeapProperties = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD);
 		auto d3dxResourceDesc = CD3DX12_RESOURCE_DESC::Buffer(m_sizeInBytes);
 		auto hr = d3dDevice->CreateCommittedResource(

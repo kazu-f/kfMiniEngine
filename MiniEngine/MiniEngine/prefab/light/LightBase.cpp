@@ -7,12 +7,12 @@ namespace Engine {
 	namespace prefab {
 		bool CLightBase::Start()
 		{
-			g_graphicsEngine->GetLightManager()->AddLight(this);
+			GraphicsEngine()->GetLightManager()->AddLight(this);
 			return StartSub();
 		}
 		void CLightBase::OnDestroy()
 		{
-			g_graphicsEngine->GetLightManager()->RemoveLight(this);
+			GraphicsEngine()->GetLightManager()->RemoveLight(this);
 			OnDestroySub();
 		}
 	}

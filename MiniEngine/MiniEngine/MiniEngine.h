@@ -58,8 +58,6 @@
 
 #include "gameObject/GameObjectManager.h"
 
-#include "graphics/RenderContext_inline.h"
-#include "graphics/DescriptorHeap_inline.h"
 
 #include "graphics/2D/Sprite.h"
 //#include "graphics/Model.h"
@@ -74,6 +72,8 @@
 #include "physics/PhysicsGhostobject.h"
 #include "characterController/CharacterController.h"
 
+#include "graphics/RenderContext_inline.h"
+#include "graphics/DescriptorHeap_inline.h"
 #include "graphics/Skeleton.h"
 #include "graphics/animation/Animation.h"
 #include "graphics/animation/AnimationClip.h"
