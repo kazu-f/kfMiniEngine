@@ -141,6 +141,7 @@ namespace Engine {
 			}
 			break;
 		case enRenderStep_PreRender:
+			//G-Bufferの描画。
 			if (maxInstance > 1) {
 				rc.SetPipelineState(m_ModelInstancingPipelineState);
 			}
@@ -150,6 +151,7 @@ namespace Engine {
 
 			break;
 		case enRenderStep_ForwardRender:
+			//半透明モデルの描画。
 			rc.SetPipelineState(m_transModelPipelineState);
 
 			break;
@@ -169,7 +171,7 @@ namespace Engine {
 		m_vsModelShadowMap.LoadVS(fxFilePath, "VSMainNonSkinShadowMap");
 		m_vsModelShadowInstancing.LoadVS(fxFilePath, "VSMainNonSkinInstancingShadowMap");
 		m_psModelShadowMap.LoadPS(fxFilePath, "PSMainShadowMap");
-		m_psTransModel.LoadPS(fxFilePath, "PSMain_RenderGBuffer");
+		m_psTransModel.LoadPS(fxFilePath, "PSMain");
 	}
 	/// <summary>
 	/// スキンありマテリアル用のシェーダーをロードする。
@@ -182,6 +184,6 @@ namespace Engine {
 		m_vsModelShadowMap.LoadVS(fxFilePath, "VSMainSkinShadowMap");
 		m_vsModelShadowInstancing.LoadVS(fxFilePath, "VSMainSkinInstancingShadowMap");
 		m_psModelShadowMap.LoadPS(fxFilePath, "PSMainShadowMap");
-		m_psTransModel.LoadPS(fxFilePath, "PSMain_RenderGBuffer");
+		m_psTransModel.LoadPS(fxFilePath, "PSMain");
 	}
 }
