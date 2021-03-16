@@ -4,7 +4,6 @@
 #include "physics/PhysicsWorld.h"
 
 namespace Engine {
-	TkEngine* g_engine = nullptr;
 
 	TkEngine::TkEngine()
 	{
@@ -12,8 +11,13 @@ namespace Engine {
 
 	TkEngine::~TkEngine()
 	{
+		Release();
+	}
+	void TkEngine::Release()
+	{
 		if (m_graphicsEngine) {
 			delete m_graphicsEngine;
+			m_graphicsEngine = nullptr;
 		}
 	}
 	void TkEngine::Init(HWND hwnd, UINT frameBufferWidth, UINT frameBufferHeight)

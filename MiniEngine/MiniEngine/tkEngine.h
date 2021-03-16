@@ -20,6 +20,10 @@ namespace Engine {
 		/// </summary>
 		~TkEngine();
 		/// <summary>
+		/// 解放処理。
+		/// </summary>
+		void Release();
+		/// <summary>
 		/// ゲームの処理。
 		/// </summary>
 		void GameUpdate();
@@ -36,6 +40,12 @@ namespace Engine {
 		/// </summary>
 		void Init(HWND hwnd, UINT frameBufferWidth, UINT frameBufferHeight);
 	public:		//Get関数系統
+		static TkEngine& Instance()
+		{
+			static TkEngine instance;
+			return instance;
+		}
+
 		const CGameTime& GetGameTime()
 		{
 			return m_gameTime;
@@ -61,24 +71,30 @@ namespace Engine {
 		Stopwatch			m_sw;						//タイマークラス。
 	};
 
-	extern TkEngine* g_engine;	//TKエンジン。
+	/// <summary>
+	/// エンジンを取得。
+	/// </summary>
+	static inline TkEngine& GetEngine()
+	{
+		return TkEngine::Instance();
+	}
 	/// <summary>
 	/// ゲームタイムを取得。
 	/// </summary>
 	static inline const CGameTime& GameTime()
 	{
-		return g_engine->GetGameTime();
+		return GetEngine().GetGameTime();
 	}
 	/// <summary>
 	/// 物理ワールドを取得。
 	/// </summary>
 	static inline CPhysicsWorld& PhysicsWorld()
 	{
-		return g_engine->GetPhyshicsWorld();
+		return GetEngine().GetPhyshicsWorld();
 	}
 
 	static inline CSoundEngine& SoundEngine()
 	{
-		return g_engine->GetSoundEngine();
+		return GetEngine().GetSoundEngine();
 	}
 }

@@ -34,7 +34,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 			エンジンの中で更新処理をまとめて、
 			この中で呼び出す。
 		*/
-		g_engine->GameUpdate();
+		GetEngine().GameUpdate();
 		
 		
 		//////////////////////////////////////
