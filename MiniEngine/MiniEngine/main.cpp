@@ -2,7 +2,13 @@
 #include "system/system.h"
 #include "Scenes/GameScene.h"
 #include "Scenes/DebugScene.h"
+#include "Scenes/LightingDemoScene.h"
 
+#define GAME_SCENE 0
+#define DEBUG_SCENE 1
+#define LIGHTDEMO_SCENE 2
+
+#define START_SCENE GAME_SCENE
 
 ///////////////////////////////////////////////////////////////////
 // ウィンドウプログラムのメイン関数。
@@ -16,9 +22,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	// ここから初期化を行うコードを記述する。
 	//////////////////////////////////////
 
-#if 0
+#if START_SCENE == DEBUG_SCENE
 	NewGO<DebugScene>(0);
-#else
+#elif START_SCENE == LIGHTDEMO_SCENE
+	NewGO<LightingDemoScene>(0);
+#elif START_SCENE == GAME_SCENE
 	NewGO<GameScene>(0);
 #endif
 	//////////////////////////////////////

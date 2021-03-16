@@ -80,6 +80,7 @@
 #include "graphics/animation/AnimationPlayController.h"
 #include "prefab/ModelRender.h"
 #include "prefab/SpriteRender.h"
+#include "prefab/light/DirectionLight.h"
 #include "level/Level.h"
 #include "Sound/SoundSource.h"
 #include "graphics/light/LightManager.h"

@@ -32,6 +32,7 @@
     <ClCompile Include="CheckPoint\CheckPointBase.cpp" />
     <ClCompile Include="GameCamera\FollowCarCamera.cpp" />
     <ClCompile Include="Guardrail\Guardrail.cpp" />
+    <ClCompile Include="Scenes\LightingDemoScene.cpp" />
     <ClCompile Include="Race\RaceUI\LapUI.cpp" />
     <ClCompile Include="physics\PhysicsDebugDraw.cpp" />
     <ClCompile Include="Race\RaceController.cpp" />
@@ -124,6 +125,7 @@
     <ClInclude Include="CheckPoint\CheckPointBase.h" />
     <ClInclude Include="GameCamera\FollowCarCamera.h" />
     <ClInclude Include="Guardrail\Guardrail.h" />
+    <ClInclude Include="Scenes\LightingDemoScene.h" />
     <ClInclude Include="Race\RaceUI\LapUI.h" />
     <ClInclude Include="physics\PhysicsDebugDraw.h" />
     <ClInclude Include="Race\RaceController.h" />

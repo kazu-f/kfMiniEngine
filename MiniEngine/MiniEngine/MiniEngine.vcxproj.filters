@@ -100,6 +100,15 @@
     <Filter Include="Race\RaceUI">
       <UniqueIdentifier>{37a83391-f034-4385-a067-079c5a73c36f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{b02697e7-f137-45ff-b3e2-b3a09d338724}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameCamera">
+      <UniqueIdentifier>{8f7dcdee-6cb6-4a31-a5e6-b03bb11cf784}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLight">
+      <UniqueIdentifier>{d3d62b83-0eb5-460b-92b3-595803ba4eca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tkEngine.cpp">
@@ -282,15 +291,6 @@
     <ClCompile Include="physics\PhysicsGhostobject.cpp">
       <Filter>physics</Filter>
     </ClCompile>
-    <ClCompile Include="Scenes\DebugScene.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Scenes\GameScene.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="GameLight\SceneLight.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Player\Player.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -302,12 +302,6 @@
     </ClCompile>
     <ClCompile Include="Car\State\CarStateIdle.cpp">
       <Filter>Car\State</Filter>
-    </ClCompile>
-    <ClCompile Include="GameCamera\GameCamera.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="GameCamera\FollowCarCamera.cpp">
-      <Filter>camera</Filter>
     </ClCompile>
     <ClCompile Include="Car\State\CarStateBrake.cpp">
       <Filter>Car\State</Filter>
@@ -359,6 +353,24 @@
     </ClCompile>
     <ClCompile Include="Race\RaceUI\ReverseRunUI.cpp">
       <Filter>Race\RaceUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\LightingDemoScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\DebugScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\GameScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCamera\FollowCarCamera.cpp">
+      <Filter>GameCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCamera\GameCamera.cpp">
+      <Filter>GameCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLight\SceneLight.cpp">
+      <Filter>GameLight</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -581,19 +593,7 @@
     <ClInclude Include="physics\PhysicsGhostobject.h">
       <Filter>physics</Filter>
     </ClInclude>
-    <ClInclude Include="Scenes\DebugScene.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Scenes\GameScene.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="GameLight\SceneLight.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Player\Player.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Spectator\SpectatorNames.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Car\State\CarStateAccele.h">
@@ -604,12 +604,6 @@
     </ClInclude>
     <ClInclude Include="Car\State\CarStateIdle.h">
       <Filter>Car\State</Filter>
-    </ClInclude>
-    <ClInclude Include="GameCamera\GameCamera.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="GameCamera\FollowCarCamera.h">
-      <Filter>camera</Filter>
     </ClInclude>
     <ClInclude Include="Car\State\CarStateBrake.h">
       <Filter>ヘッダー ファイル</Filter>
@@ -662,27 +656,46 @@
     <ClInclude Include="Race\RaceUI\ReverseRunUI.h">
       <Filter>Race\RaceUI</Filter>
     </ClInclude>
+    <ClInclude Include="Scenes\LightingDemoScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\DebugScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\GameScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCamera\FollowCarCamera.h">
+      <Filter>GameCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCamera\GameCamera.h">
+      <Filter>GameCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLight\SceneLight.h">
+      <Filter>GameLight</Filter>
+    </ClInclude>
+    <ClInclude Include="Spectator\SpectatorNames.h">
+      <Filter>Spectator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\LAP.png">
       <Filter>リソース ファイル</Filter>
     </ImageContentTask>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Assets\sprite\LapNum_1.png">
+    <ImageContentTask Include="Assets\sprite\LapNum_1.png">
       <Filter>リソース ファイル</Filter>
-    </Image>
-    <Image Include="Assets\sprite\LapNum_2.png">
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\LapNum_2.png">
       <Filter>リソース ファイル</Filter>
-    </Image>
-    <Image Include="Assets\sprite\LapNum_3.png">
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\LapNum_3.png">
       <Filter>リソース ファイル</Filter>
-    </Image>
-    <Image Include="Assets\sprite\LapSlash.png">
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\LapSlash.png">
       <Filter>リソース ファイル</Filter>
-    </Image>
-    <Image Include="Assets\sprite\RoadClosed.png">
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\RoadClosed.png">
       <Filter>リソース ファイル</Filter>
-    </Image>
+    </ImageContentTask>
   </ItemGroup>
 </Project>

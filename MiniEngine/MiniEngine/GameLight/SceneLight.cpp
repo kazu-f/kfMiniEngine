@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "SceneLight.h"
-#include "prefab/light/DirectionLight.h"
 
 namespace {
 	const Vector3 AMBIENT_LIGHT = { 2.0f,2.0f,2.0f };
