@@ -3,6 +3,8 @@
 
 namespace {
 	const Vector3 CAMERA_DISTANCE = { 0.0f,200.0f,500.0f };
+	const float CAMERAMOV_SPEED = 100.0f;
+	const float CAMERAROT_SPEED = 20.0f;
 }
 
 bool CGameCamera::Start()
@@ -30,9 +32,8 @@ void CGameCamera::Update()
 	const auto& targetPos = g_camera3D->GetTarget();
 	Vector3 vCamera = g_camera3D->GetPosition() - targetPos;
 	const float deltaTime = static_cast<float>(GameTime().GetFrameDeltaTime());
-	const float cameraSpeed = 100.0f;
 		
-	m_targetToPosLen -= g_pad[0]->GetRStickYF() * deltaTime * cameraSpeed;
+	m_targetToPosLen -= g_pad[0]->GetRStickYF() * deltaTime * CAMERAMOV_SPEED;
 	m_targetToPosLen = min(500.0f, max(50.0f, m_targetToPosLen));
 
 	auto vDir = vCamera;
@@ -42,8 +43,7 @@ void CGameCamera::Update()
 
 	Quaternion qRot;
 	//ƒJƒƒ‰‚ð‰ñ‚·B
-	const float cameraRotSpeed = 20.0f;
-	qRot.SetRotationDegY(g_pad[0]->GetRStickXF() * GameTime().GetFrameDeltaTime() * cameraRotSpeed);
+	qRot.SetRotationDegY(g_pad[0]->GetRStickXF() * GameTime().GetFrameDeltaTime() * CAMERAROT_SPEED);
 	auto camPos = g_camera3D->GetPosition() - g_camera3D->GetTarget();
 	qRot.Apply(camPos);
 
