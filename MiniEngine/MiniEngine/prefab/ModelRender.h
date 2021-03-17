@@ -144,7 +144,20 @@ namespace Engine {
 			{
 				m_model.SetShadowReceiverFlag(flag);
 			}
-
+			/// <summary>
+			/// フォワードレンダリングを行うか？
+			/// </summary>
+			/// <param name="flag">trueでフォワードレンダリングが行われる。</param>
+			void SetForwardRenderFlag(bool flag)
+			{
+				m_isForwardRender = flag;
+			}
+			/// <summary>
+			/// インスタンシング描画のデータを更新する。
+			/// </summary>
+			/// <param name="pos">座標。</param>
+			/// <param name="rot">回転。</param>
+			/// <param name="scale">スケール。</param>
 			void UpdateInstancingData(const Vector3& pos, const Quaternion& rot, const Vector3& scale)
 			{
 				m_model.UpdateInstancingData(pos, rot, scale);
@@ -201,6 +214,7 @@ namespace Engine {
 			std::vector <AnimClipInitData> m_animClipInitDatas;	//アニメーションクリップの初期化データ。
 			std::vector <CAnimationClipPtr> m_animClips;	//アニメーションクリップの配列。
 			bool m_isShadowCaster = false;					//シャドウキャスタ―フラグ。
+			bool m_isForwardRender = false;					//フォワードレンダリングを行うか？
 		};
 	}
 }

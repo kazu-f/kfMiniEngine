@@ -119,10 +119,17 @@ namespace Engine {
 		}
 		void ModelRender::PreRender(RenderContext& rc)
 		{
-			m_model.Draw(rc);
+			//ディファードレンダリングを行う。
+			if (!m_isForwardRender) {
+				m_model.Draw(rc);
+			}
 		}
 		void ModelRender::ForwardRender(RenderContext& renderContext)
 		{
+			//フォワードレンダリングを行う。
+			if (m_isForwardRender) {
+				m_model.Draw(renderContext);
+			}
 		}
 	}
 }
