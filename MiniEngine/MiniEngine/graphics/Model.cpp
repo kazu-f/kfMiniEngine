@@ -2,6 +2,8 @@
 #include "Model.h"
 
 namespace Engine {
+	const char* Model::MODEL_SHADER_PAHT = "Assets/shader/model.fx";
+
 	void Model::Init(const ModelInitData& initData, int maxInstance)
 	{
 		//内部のシェーダーをロードする処理が求めているのが

@@ -29,6 +29,7 @@ namespace Engine {
 	class Model {
 
 	public:
+		static const char* MODEL_SHADER_PAHT;
 
 		/// <summary>
 		/// tkmファイルから初期化。
