@@ -21,15 +21,18 @@ namespace {
 	};
 
 	const int LIGHT_NUM = 2;						//ライトの本数。
+	const float LIGHT_POW = 2.0f;					//ライトの強さ。
 	//ライトデータ。
 	const LightData LIGHTDATAS[LIGHT_NUM] = {
-		{ {1.0f,0.0f,0.0f},Vector4::White * 5.0f },
-		{ {1.0f,0.0f,0.0f},Vector4::White * 5.0f },
+		{ {1.0f,0.0f,0.0f},Vector4::White * LIGHT_POW },
+		{ {1.0f,0.0f,0.0f},Vector4::White * LIGHT_POW },
 	};
 
 	//カメラ
 	const float CAMERA_ROTSPEED = 90.0f;
 
+	const char* DEMO_SHADER = "Assets/shader/modelDemo.fx";
+	const char* MODEL_SHADER = Model::MODEL_SHADER_PAHT;
 
 }
 
@@ -46,10 +49,11 @@ bool LightingDemoScene::Start()
 	m_model = NewGO<prefab::ModelRender>(0);
 
 	ModelInitData modelData;
-	modelData.m_fxFilePath = "Assets/shader/model.fx";
+	modelData.m_fxFilePath = DEMO_SHADER;
 	modelData.m_tkmFilePath = MODEL_FILEPATH[enDemo_Unity];
 	
 	m_model->Init(modelData);
+	m_model->SetForwardRenderFlag(true);
 
 	for (int i = 0; i < LIGHT_NUM; i++)
 	{
