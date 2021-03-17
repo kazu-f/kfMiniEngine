@@ -64,7 +64,7 @@ float4 PSMain(PSDefferdInput psIn) : SV_Target0
 		float3 baseColor = saturate(dot(normal, -directionalLight[ligNo].direction)) * directionalLight[ligNo].color.xyz;
 		//DisneyModel拡散反射
 		float disneyDiffuse = NormalizedDisneyDiffuse(normal, -directionalLight[ligNo].direction, toEye, roughness);
-		float3 diffuse = baseColor  * disneyDiffuse / PI;
+		float3 diffuse = baseColor  * disneyDiffuse;
 		//クックトランスモデルの鏡面反射
 		float3 specCol = CookTrranceSpecular(-directionalLight[ligNo].direction, toEye, normal, metaric) * directionalLight[ligNo].color.xyz;
 		//拡散反射光と鏡面反射光を線形補完。

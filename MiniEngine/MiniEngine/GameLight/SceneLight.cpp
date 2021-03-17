@@ -2,7 +2,8 @@
 #include "SceneLight.h"
 
 namespace {
-	const Vector3 AMBIENT_LIGHT = { 2.0f,2.0f,2.0f };
+	const float AMBIENT_LIGHT_POWER = 1.0f;
+	const Vector3 AMBIENT_LIGHT = { AMBIENT_LIGHT_POWER,AMBIENT_LIGHT_POWER,AMBIENT_LIGHT_POWER };
 	const Vector3 SHADOW_DIRECTION = { 0.0f,-1.0f,0.0f };
 }
 
@@ -29,7 +30,7 @@ bool SceneLight::Start()
 	prefab::CDirectionLight* light = NewGO<prefab::CDirectionLight>(0);
 
 	//Vector4 color = Vector4::Gray * 3.0f;
-	Vector4 color = Vector4::White * 5.0f;
+	Vector4 color = Vector4::White * 2.0f;
 	m_lightDir = { 0.0f,-1.0f,-1.0f };
 	//color = { 1.0f,1.0f,0.0f,1.0f };
 	light->SetColor(color);
