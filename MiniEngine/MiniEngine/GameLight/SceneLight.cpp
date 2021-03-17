@@ -5,6 +5,7 @@ namespace {
 	const float AMBIENT_LIGHT_POWER = 1.0f;
 	const Vector3 AMBIENT_LIGHT = { AMBIENT_LIGHT_POWER,AMBIENT_LIGHT_POWER,AMBIENT_LIGHT_POWER };
 	const Vector3 SHADOW_DIRECTION = { 0.0f,-1.0f,0.0f };
+	const Vector4 DIRLIGHT_POWER = Vector4::White * 3.0f;
 }
 
 SceneLight::SceneLight()
@@ -30,7 +31,7 @@ bool SceneLight::Start()
 	prefab::CDirectionLight* light = NewGO<prefab::CDirectionLight>(0);
 
 	//Vector4 color = Vector4::Gray * 3.0f;
-	Vector4 color = Vector4::White * 2.0f;
+	Vector4 color = DIRLIGHT_POWER;
 	m_lightDir = { 0.0f,-1.0f,-1.0f };
 	//color = { 1.0f,1.0f,0.0f,1.0f };
 	light->SetColor(color);
