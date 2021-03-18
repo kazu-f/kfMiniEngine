@@ -40,6 +40,22 @@ namespace {
 	const char* DEMO_SHADER = "Assets/shader/modelDemo.fx";
 	const char* MODEL_SHADER = Model::MODEL_SHADER_PAHT;
 
+	struct DemoConstantBuffer {
+		int isPBR = 0;		//PBR
+		int isNormal = 0;	//法線
+		int isSpec = 0;		//スペキュラ。
+	};
+	DemoConstantBuffer DEMO_CB = { 0,0,0 };
+	
+	enum EnDemoState {
+		enNormal,		//法線。
+		enSpec,			//スペキュラ。
+		enPBR,			//PBR。
+		enDemoNum
+	};
+
+	int DEMO_STATE = 0;
+
 }
 
 LightingDemoScene::LightingDemoScene()
@@ -57,6 +73,8 @@ bool LightingDemoScene::Start()
 	ModelInitData modelData;
 	modelData.m_fxFilePath = DEMO_SHADER;
 	modelData.m_tkmFilePath = MODEL_FILEPATH[enDemo_Unity];
+	modelData.m_expandConstantBuffer = &DEMO_CB;
+	modelData.m_expandConstantBufferSize = sizeof(DemoConstantBuffer);
 	
 	m_model->Init(modelData);
 	m_model->SetForwardRenderFlag(true);
@@ -78,6 +96,7 @@ bool LightingDemoScene::Start()
 void LightingDemoScene::Update()
 {
 	RotCamera();
+	ChangeDemo();
 }
 
 void LightingDemoScene::OnDestroy()
@@ -128,4 +147,31 @@ void LightingDemoScene::RotCamera()
 	qRotY.Apply(m_cameraPos);
 
 	MainCamera().SetPosition(CAMERA_TARGETPOS + m_cameraPos);
+}
+
+void LightingDemoScene::ChangeDemo()
+{
+	//LB1で切り替え。キーボードだと[B]キーに割り当てられている。
+	if (Pad(0).IsTrigger(enButtonLB1)) {
+		//ステートで切り替える。
+		switch (DEMO_STATE)
+		{
+		case enPBR:
+			//切り替え。
+			DEMO_CB.isPBR = DEMO_CB.isPBR ^ 1;
+			break;
+		case enNormal:
+			//切り替え。
+			DEMO_CB.isNormal = DEMO_CB.isNormal ^ 1;
+			break;
+		case enSpec:
+			//切り替え。
+			DEMO_CB.isSpec = DEMO_CB.isSpec ^ 1;
+			break;
+		default:
+			break;
+		}
+		DEMO_STATE++;
+		DEMO_STATE %= enDemoNum;
+	}
 }

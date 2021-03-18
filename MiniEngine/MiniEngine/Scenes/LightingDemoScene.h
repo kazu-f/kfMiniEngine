@@ -16,6 +16,8 @@ public:
 private:
 	//カメラを回す。
 	void RotCamera();
+	//描画デモを変更。
+	void ChangeDemo();
 
 private:
 	prefab::ModelRender* m_model = nullptr;				//モデル。

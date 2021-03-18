@@ -6,6 +6,12 @@
 #include "modelStruct.h"
 #include "PBR.h"
 
+cbuffer DemoCB : register(b4){
+	int isPBR		: packoffset(c0.x);		//PBRを使うか。
+	int isNormal	: packoffset(c0.y);		//法線マップを使うか。
+	int isSpec		: packoffset(c0.z);		//スペキュラマップを使うか。
+}
+
 //モデルテクスチャ。
 Texture2D<float4> g_texture : register(t0);
 Texture2D<float4> g_normalMap : register(t1);
@@ -217,33 +223,43 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	float3 lig = 0;		//ライト
 	float4 albedoColor = g_texture.Sample(g_sampler, psIn.uv);	//テクスチャカラー。		
 	//法線の計算。
-	float3 normal = CalcNormal(psIn.normal,psIn.biNormal,psIn.Tangent,psIn.uv);
-	//float3 normal = psIn.normal;
+	float3 normal = 0.0f;
+	if (isNormal) {
+		normal = CalcNormal(psIn.normal, psIn.biNormal, psIn.Tangent, psIn.uv);
+	}
+	else {
+		normal = psIn.normal;
+	}
 	float3 toEye = normalize(eyePos - psIn.worldPos);		//点から視点までの正規化ベクトル
 	float metaric = 0.0f;			//スペキュラ
-	if (hasSpecularMap) {
-		//スペキュラマップがある。
-		metaric = g_specularMap.Sample(g_sampler, psIn.uv).a;
+	if (isSpec) {
+		if (hasSpecularMap) {
+			//スペキュラマップがある。
+			metaric = g_specularMap.Sample(g_sampler, psIn.uv).a;
+		}
 	}
+
 	float roughness = 1.0f;			//拡散反射の面の粗さ。
 	for (int ligNo = 0; ligNo < numDirectionLight; ligNo++)
 	{
 		//ディファード拡散反射の色。
 		float3 baseColor = max(dot(normal, -directionalLight[ligNo].direction), 0.0f) * directionalLight[ligNo].color.xyz;
-		//DisneyModel拡散反射
-		float disneyDiffuse = NormalizedDisneyDiffuse(normal, -directionalLight[ligNo].direction, toEye, roughness);
-		float3 diffuse = baseColor * disneyDiffuse;
 
-		////通常の正規化ランバート拡散反射
-		//float3 diffuse = baseColor / PI;
-
-
-		////クックトランスモデルの鏡面反射
-		float3 specCol = CookTrranceSpecular(-directionalLight[ligNo].direction, toEye, normal, metaric) * directionalLight[ligNo].color.xyz;
-
-		//フォン鏡面反射
-		//float3 specCol = PhongSpec(directionalLight[ligNo].direction, normal, toEye, directionalLight[ligNo].color.xyz, 1.3f);
-
+		float3 diffuse = 0.0f;
+		float3 specCol = 0.0f;
+		if (isPBR) {
+			//DisneyModel拡散反射
+			float disneyDiffuse = NormalizedDisneyDiffuse(normal, -directionalLight[ligNo].direction, toEye, roughness);
+			diffuse = baseColor * disneyDiffuse;
+			////クックトランスモデルの鏡面反射
+			float3 specCol = CookTrranceSpecular(-directionalLight[ligNo].direction, toEye, normal, metaric) * directionalLight[ligNo].color.xyz;
+		}
+		else {
+			//通常の正規化ランバート拡散反射
+			diffuse = baseColor / PI;
+			//フォン鏡面反射
+			specCol = PhongSpec(directionalLight[ligNo].direction, normal, toEye, directionalLight[ligNo].color.xyz, 1.3f);
+		}
 
 		////拡散反射光と鏡面反射光を線形補完。
 		lig += lerp(diffuse, specCol, metaric);
