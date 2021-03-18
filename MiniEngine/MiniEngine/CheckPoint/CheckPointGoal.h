@@ -7,6 +7,10 @@
 /// </summary>
 class CheckPointGoal : public CheckPointBase
 {
+	struct ContactData {
+		CheckedController* controller = nullptr;
+		bool isForward = false;
+	};
 public:
 	CheckPointGoal();
 	~CheckPointGoal();
@@ -16,6 +20,6 @@ public:
 	/// <param name="checkedCon">チェックされるもの。</param>
 	void CheckCharaconHit(CheckedController* checkedCon) override final;
 private:
-	std::vector<CheckedController*> m_contactedList;			//接触しているものの配列。
+	std::vector<ContactData> m_contactedList;			//接触しているものの配列。
 };
 
