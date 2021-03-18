@@ -103,16 +103,16 @@ void GameScene::PreUpdate()
 void GameScene::Update()
 {
 	Quaternion qRot;
-	if (g_pad[0]->IsPress(enButtonRight)) {
+	if (Pad(0).IsPress(enButtonRight)) {
 		qRot.SetRotationDegY(1.0f);
 	}
-	else if (g_pad[0]->IsPress(enButtonLeft)) {
+	else if (Pad(0).IsPress(enButtonLeft)) {
 		qRot.SetRotationDegY(-1.0f);
 	}
 
 #if DEBUG_DELETE
 
-	if (g_pad[0]->IsTrigger(enButtonStart))
+	if (Pad(0).IsTrigger(enButtonStart))
 	{
 		DeleteGO(this);
 	}

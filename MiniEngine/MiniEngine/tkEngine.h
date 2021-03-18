@@ -66,6 +66,16 @@ namespace Engine {
 		{
 			return m_soundEngine;
 		}
+		//パッドの取得。
+		GamePad& GetPad(int padNo)
+		{
+			ENGINE_ASSERT(
+				padNo < GamePad::CONNECT_PAD_MAX
+				|| padNo >= 0
+				, "パッド番号が範囲外になっています。"
+			);
+			return m_pad[padNo];
+		}
 	private:
 		void GameSleep();
 
@@ -92,6 +102,13 @@ namespace Engine {
 	static inline const CGameTime& GameTime()
 	{
 		return GameEngine().GetGameTime();
+	}
+	/// <summary>
+	/// パッドを取得。
+	/// </summary>
+	static inline const GamePad& Pad(int padNo)
+	{
+		return GameEngine().GetPad(padNo);
 	}
 	/// <summary>
 	/// グラフィックエンジンを取得。

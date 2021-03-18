@@ -86,13 +86,13 @@ bool Player::Start()
 
 void Player::Update()
 {
-	if (g_pad[0]->IsPress(enButtonA)) {
+	if (Pad(0).IsPress(enButtonA)) {
 		m_model->PlayAnimation(en_animIdle, 0.3f);
 	}
-	if (g_pad[0]->IsPress(enButtonB)) {
+	if (Pad(0).IsPress(enButtonB)) {
 		m_model->PlayAnimation(en_animRun, 0.3f);
 	}
-	if (g_pad[0]->IsTrigger(enButtonX)) {
+	if (Pad(0).IsTrigger(enButtonX)) {
 		DeleteGO(this);
 	}
 
@@ -105,8 +105,8 @@ void Player::Update()
 
 	Vector3 moveVec = Vector3::Zero;
 	float speed = 100.0f;
-	moveVec += camRight * g_pad[0]->GetLStickXF() * speed;
-	moveVec += camForward * g_pad[0]->GetLStickYF() * speed;
+	moveVec += camRight * Pad(0).GetLStickXF() * speed;
+	moveVec += camForward * Pad(0).GetLStickYF() * speed;
 	moveVec.y = -980.0;
 
 	m_position = m_chara.Execute(moveVec);

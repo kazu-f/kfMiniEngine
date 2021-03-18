@@ -30,7 +30,7 @@ void CGameCamera::Update()
 	Vector3 vCamera = MainCamera().GetPosition() - targetPos;
 	const float deltaTime = static_cast<float>(GameTime().GetFrameDeltaTime());
 		
-	m_targetToPosLen -= g_pad[0]->GetRStickYF() * deltaTime * CAMERAMOV_SPEED;
+	m_targetToPosLen -= Pad(0).GetRStickYF() * deltaTime * CAMERAMOV_SPEED;
 	m_targetToPosLen = min(500.0f, max(50.0f, m_targetToPosLen));
 
 	auto vDir = vCamera;
@@ -40,7 +40,7 @@ void CGameCamera::Update()
 
 	Quaternion qRot;
 	//ƒJƒƒ‰‚ð‰ñ‚·B
-	qRot.SetRotationDegY(g_pad[0]->GetRStickXF() * GameTime().GetFrameDeltaTime() * CAMERAROT_SPEED);
+	qRot.SetRotationDegY(Pad(0).GetRStickXF() * GameTime().GetFrameDeltaTime() * CAMERAROT_SPEED);
 	auto camPos = MainCamera().GetPosition() - MainCamera().GetTarget();
 	qRot.Apply(camPos);
 

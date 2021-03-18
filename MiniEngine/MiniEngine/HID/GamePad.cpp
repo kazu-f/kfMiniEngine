@@ -7,7 +7,6 @@
 
 #define INPUT_DEADZONE  ( 0.24f * FLOAT(0x7FFF) )  // Default to 24% of the +/- 32767 range.   This is a reasonable default value but can be altered if needed.
 namespace Engine {
-	std::array<GamePad*, GamePad::CONNECT_PAD_MAX> g_pad;
 
 	namespace {
 		/*!

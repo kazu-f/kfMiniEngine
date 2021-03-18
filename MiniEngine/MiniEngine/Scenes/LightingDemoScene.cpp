@@ -81,8 +81,8 @@ void LightingDemoScene::OnDestroy()
 
 void LightingDemoScene::RotCamera()
 {
-	const float PadX = g_pad[0]->GetRStickXF();
-	const float PadY = g_pad[0]->GetRStickYF();
+	const float PadX = Pad(0).GetRStickXF();
+	const float PadY = Pad(0).GetRStickYF();
 	const float delTime = GameTime().GetFrameDeltaTime();
 
 

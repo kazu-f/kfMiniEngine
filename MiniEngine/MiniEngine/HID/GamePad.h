@@ -155,5 +155,4 @@ namespace Engine {
 		static EnXInputPadState m_padStates[MAX_PAD];
 	};
 
-	extern std::array<GamePad*, GamePad::CONNECT_PAD_MAX> g_pad;
 }

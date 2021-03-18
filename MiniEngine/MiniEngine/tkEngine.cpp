@@ -29,10 +29,6 @@ namespace Engine {
 		m_physicsWorld.Init();
 		//サウンドエンジンの初期化。
 		m_soundEngine.Init();
-		//ゲームパッドの初期化。
-		for (int i = 0; i < GamePad::CONNECT_PAD_MAX; i++) {
-			g_pad[i] = &m_pad[i];
-		}
 		//ゲームオブジェクトマネージャーの初期化。
 		GameObjectManager().Init(20);
 	}

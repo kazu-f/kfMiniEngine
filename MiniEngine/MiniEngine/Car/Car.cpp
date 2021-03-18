@@ -63,8 +63,8 @@ bool Car::Start()
 
 void Car::Update()
 {
-	const float PadX = g_pad[0]->GetLStickXF();
-	const float PadY = g_pad[0]->GetLStickYF();
+	const float PadX = Pad(0).GetLStickXF();
+	const float PadY = Pad(0).GetLStickYF();
 	const float DeltaTime = GameTime().GetFrameDeltaTime();
 
 	//ステート実行。

@@ -75,16 +75,16 @@ void DebugScene::InitSprite()
 
 void DebugScene::Update()
 {
-	if (g_pad[0]->IsTrigger(enButtonX)) {
+	if (Pad(0).IsTrigger(enButtonX)) {
 		if (m_bgm != nullptr) {
 			DeleteGO(m_bgm);
 			m_bgm = nullptr;
 		}
 	}
-	if (g_pad[0]->IsTrigger(enButtonY)) {
+	if (Pad(0).IsTrigger(enButtonY)) {
 		OnBGM();
 	}
-	if (g_pad[0]->IsTrigger(enButtonA)) {
+	if (Pad(0).IsTrigger(enButtonA)) {
 		PlaySE();
 	}
 }

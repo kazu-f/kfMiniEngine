@@ -34,7 +34,7 @@ void CarStateBrake::Execute()
 	//ブレーキで減速する。
 	m_car->AddDicceleration(BRAKE_POWER);
 
-	if (!g_pad[0]->IsPress(enButtonB))
+	if (!Pad(0).IsPress(enButtonB))
 	{
 		m_car->ChangeState(m_car->m_stateIdle.get());
 	}
