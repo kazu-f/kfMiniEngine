@@ -6,7 +6,7 @@ namespace {
 	const Vector3 UI_POS = { 0.0f,200.0f,0.0f };				//スプライトの位置。
 	const Vector2 UI_SIZE = { 100.0f,100.0f };				//スプライトのサイズ。
 
-	int SPRITE_PRIO = 5;									//スプライトの実行優先度。
+	const int SPRITE_PRIO = 5;									//スプライトの実行優先度。
 
 	const float INTARVAL_TIME = 0.4f;						//点滅間隔時間。
 }

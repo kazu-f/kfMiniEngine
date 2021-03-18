@@ -3,6 +3,7 @@
 #include "CheckPoint/CheckedController.h"
 #include "RaceUI/LapUI.h"
 #include "RaceUI/ReverseRunUI.h"
+#include "RaceUI/GoalUI.h"
 
 RaceController::RaceController()
 {
@@ -23,8 +24,12 @@ bool RaceController::Start()
 {
 	//周回数のUI
 	m_LapUI = NewGO<LapUI>(4);
+
 	//逆走中表記のUI。
 	m_reverseRunUI = NewGO<ReverseRunUI>(4);
+
+	//ゴール表記のUI。
+	m_goalUI = NewGO<GoalUI>(4);
 
 	return true;
 }
@@ -41,6 +46,7 @@ void RaceController::Update()
 
 	//ゴール時の処理。
 	if (m_LapUI->IsGoal()) {
-
+		//ゴール表記を有効にする。
+		m_goalUI->ActiveGoal();
 	}
 }

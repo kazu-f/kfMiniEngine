@@ -19,7 +19,7 @@ namespace {
 	const Vector3 SLASH_POS = { 530.0f,-320.0f,0.0f };			//スラッシュの位置。
 	const Vector2 LAPNUM_SIZE = { 100.0f,100.0f };			//周回数のサイズ。
 
-	int SPRITE_PRIO = 5;									//スプライトの実行優先度。
+	const int SPRITE_PRIO = 5;									//スプライトの実行優先度。
 
 	const float INTARVAL_TIME = 0.4f;						//点滅間隔時間。
 	const float MAX_TIME = 2.0f;							//点滅時間。

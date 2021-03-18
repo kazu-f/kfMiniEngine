@@ -109,6 +109,12 @@
     <Filter Include="GameLight">
       <UniqueIdentifier>{d3d62b83-0eb5-460b-92b3-595803ba4eca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{d2e6077d-ee5f-4c73-9e9c-237218a5b190}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\sprite">
+      <UniqueIdentifier>{2c566b10-bb91-4ca9-baab-bc0f00afd12c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tkEngine.cpp">
@@ -371,6 +377,9 @@
     </ClCompile>
     <ClCompile Include="GameLight\SceneLight.cpp">
       <Filter>GameLight</Filter>
+    </ClCompile>
+    <ClCompile Include="Race\RaceUI\GoalUI.cpp">
+      <Filter>Race\RaceUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -677,25 +686,31 @@
     <ClInclude Include="Spectator\SpectatorNames.h">
       <Filter>Spectator</Filter>
     </ClInclude>
+    <ClInclude Include="Race\RaceUI\GoalUI.h">
+      <Filter>Race\RaceUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\LAP.png">
-      <Filter>リソース ファイル</Filter>
+      <Filter>Assets\sprite</Filter>
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\LapNum_1.png">
-      <Filter>リソース ファイル</Filter>
+      <Filter>Assets\sprite</Filter>
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\LapNum_2.png">
-      <Filter>リソース ファイル</Filter>
+      <Filter>Assets\sprite</Filter>
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\LapNum_3.png">
-      <Filter>リソース ファイル</Filter>
+      <Filter>Assets\sprite</Filter>
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\LapSlash.png">
-      <Filter>リソース ファイル</Filter>
+      <Filter>Assets\sprite</Filter>
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\RoadClosed.png">
-      <Filter>リソース ファイル</Filter>
+      <Filter>Assets\sprite</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\RaceGoalUI.png">
+      <Filter>Assets\sprite</Filter>
     </ImageContentTask>
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
 class CheckedController;
 class LapUI;
 class ReverseRunUI;
+class GoalUI;
 
 /// <summary>
 /// レースを管理する。
@@ -24,5 +25,6 @@ private:
 	CheckedController* m_player = nullptr;		//プレイヤー。
 	LapUI* m_LapUI = nullptr;					//周回数の表示等を行うクラス。
 	ReverseRunUI* m_reverseRunUI = nullptr;		//逆走中の表示を行うクラス。
+	GoalUI* m_goalUI = nullptr;					//ゴール表示を行うクラス。
 };
 
