@@ -13,6 +13,7 @@ namespace {
 	const float CURVE_DEG = 20.0f;			//カーブの角度。
 }
 
+const float Car::MOVE_COEFFICIENT = 60.0f;
 
 Car::Car()
 {
