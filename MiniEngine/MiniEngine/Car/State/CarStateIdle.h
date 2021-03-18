@@ -5,6 +5,12 @@ class CarStateIdle : public ICarState
 public:
 	CarStateIdle(Car* car);			//コンストラクタ。
 	~CarStateIdle();				//デストラクタ。
+	//ドリフト可能か？
+	bool IsDrift()override final
+	{
+		return false;
+	}
+
 protected:
 	void Enter()override final;		//事前処理。
 	void Leave()override final;		//事後処理。

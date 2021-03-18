@@ -11,6 +11,9 @@ namespace {
 	const float GRAVITY = 980.0f;			//重力加速度。
 	const float HANDLE_WEIGHT = 0.3f;		//ハンドルの効き。
 	const float CURVE_DEG = 20.0f;			//カーブの角度。
+	const float DRIFT_POWER = 1.4f;			//ドリフトの強さ。
+
+	const float DEADROT_SPEED = 0.1f;		//速度が一定以下なら回転しない。
 }
 
 const float Car::MOVE_COEFFICIENT = 60.0f;
@@ -75,7 +78,12 @@ void Car::Update()
 	vMove.y = 0.0f;
 	//回転を軽くかける。
 	Quaternion dirRot;
-	dirRot.SetRotationDegY(Math::PI * CURVE_DEG * PadX * DeltaTime);
+	float rotSpeed = CURVE_DEG;
+	if (m_currentState->IsDrift()) {
+		//ブレーキ中はカーブしやすい。
+		rotSpeed *= DRIFT_POWER;
+	}
+	dirRot.SetRotationDegY(Math::PI * rotSpeed * PadX * DeltaTime);
 	dirRot.Apply(vMove);
 	vMove.Normalize();
 	//移動方向を求める。
@@ -86,7 +94,8 @@ void Car::Update()
 
 	Vector3 moveScaler = m_moveSpeed;
 	moveScaler.y = 0.0f;
-	if (moveScaler.Length() > 1.0f)
+	//動きがある。
+	if (moveScaler.Length() > DEADROT_SPEED)
 	{
 		//車への回転を計算。
 		vMove.Normalize();

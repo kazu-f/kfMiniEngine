@@ -13,6 +13,8 @@ public:
 	ICarState(Car* car);			//コンストラクタ。
 	virtual ~ICarState();			//デストラクタ。
 
+	virtual bool IsDrift() = 0;		//ドリフトが可能か？
+
 	friend class Car;
 protected:
 	virtual void Enter() = 0;		//事前処理。
