@@ -14,15 +14,16 @@ namespace Engine {
 		const int Height = static_cast<int>(GraphicsEngine()->GetFrameBufferHeight());
 		//アルベドバッファの初期化。
 		auto& albedo = GetRenderTarget(EnGBuffer::enGBufferAlbed);
+		float clearCol[] = { 0.0f,0.0f,0.0f,0.0f };
 		albedo.Create(
 			Width,
 			Height,
 			1,
 			1,
 			DXGI_FORMAT_R8G8B8A8_UNORM,
-			DXGI_FORMAT_D32_FLOAT
+			DXGI_FORMAT_D32_FLOAT,
+			clearCol
 		);
-		albedo.SetRTVClearColor({ 0.0f,0.0f,0.0f,0.0f });
 		//法線バッファの初期化。
 		auto& normal = GetRenderTarget(EnGBuffer::enGBufferNormal);
 		normal.Create(
