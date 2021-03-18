@@ -37,7 +37,7 @@ namespace Engine {
 		//ディスクリプタを作成する。
 		CreateDescriptor(d3dDevice);
 		if (clearColor) {
-			memcpy(m_rtvClearColor, clearColor, sizeof(clearColor));
+			memcpy(m_rtvClearColor, clearColor, sizeof(float) * 4);
 		}
 		return true;
 	}
