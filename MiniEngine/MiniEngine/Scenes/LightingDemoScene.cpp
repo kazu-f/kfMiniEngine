@@ -96,6 +96,19 @@ void LightingDemoScene::RotCamera()
 	
 	const float delTime = GameTime().GetFrameDeltaTime();
 
+#if CAMERA_ROTMODE
+	if (Pad(0).IsTrigger(enButtonA))
+	{
+		m_isRotCam = true;
+	}
+#else
+	if (PadX > 0.01f ||
+		PadY > 0.01f)
+	{
+		m_isRotCam = true;
+	}
+#endif
+	if (!m_isRotCam)return;
 
 	//ƒJƒƒ‰‚ÌˆÊ’u‚ğŒˆ‚ß‚éB
 

@@ -234,11 +234,8 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 		float disneyDiffuse = NormalizedDisneyDiffuse(normal, -directionalLight[ligNo].direction, toEye, roughness);
 		float3 diffuse = baseColor * disneyDiffuse;
 
-		////通常の正規化拡散反射
+		////通常の正規化ランバート拡散反射
 		//float3 diffuse = baseColor / PI;
-
-		////ただのランバート拡散反射。
-		//float3 diffuse = baseColor;
 
 
 		////クックトランスモデルの鏡面反射

@@ -22,5 +22,6 @@ private:
 	std::vector<prefab::CDirectionLight*> m_lights;		//ライト。
 	const Vector3 CAMERA_TARGETPOS = { 0.0f,50.0f,0.0f };
 	Vector3 m_cameraPos = { 0.0f,0.0f,150.0f };		//カメラの座標。
+	bool m_isRotCam = false;						//カメラの回転は有効か？
 };
 
