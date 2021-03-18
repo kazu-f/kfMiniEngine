@@ -21,8 +21,8 @@ namespace Engine {
 			SpriteInitData spriteData;
 			spriteData.m_fxFilePath = Sprite::SPRITE_SHADER_PATH;
 			spriteData.m_ddsFilePath[0] = FilePath;
-			spriteData.m_width = w;
-			spriteData.m_height = h;
+			spriteData.m_width = static_cast<UINT>(w);
+			spriteData.m_height = static_cast<UINT>(h);
 			m_sprite.Init(spriteData,isDraw3D);
 			m_isDraw3D = isDraw3D;
 			m_isInited = true;				//èâä˙âªçœÇ›ÅB

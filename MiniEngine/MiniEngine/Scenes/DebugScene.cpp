@@ -5,6 +5,18 @@
 #include "GameCamera/GameCamera.h"
 #include "Car/Car.h"
 
+namespace {
+
+	const wchar_t* BGM_FILEPATH = L"Assets/sound/wanage.wav";
+
+	const wchar_t* SE_FILEPATH = L"Assets/sound/SE_Katana.wav";
+
+	const char* SPRITE_FILEPATH = "Assets/sprite/LAP.dds";
+	const Vector2 SPRITE_SIZE = { 600.0f, 300.0f };
+	const Vector2 SPRITE_PIVOT = { 0.0f,0.0f };
+	const bool SPRITE_IS3D = false;
+}
+
 DebugScene::DebugScene()
 {
 }
@@ -43,34 +55,11 @@ bool DebugScene::Start()
 
 void DebugScene::OnDestroy()
 {
-}
+	DeleteGO(m_bgm);
+	DeleteGO(m_sprite);
+	DeleteGO(m_light);
+	DeleteGO(m_player);
 
-void DebugScene::OnBGM()
-{
-	if (m_bgm != nullptr) return;
-	m_bgm = NewGO<prefab::CSoundSource>(0);
-	m_bgm->InitStreaming(L"Assets/sound/wanage.wav");
-	m_bgm->Play(true);
-}
-
-void DebugScene::PlaySE()
-{
-	auto se = NewGO<prefab::CSoundSource>(0);
-	se->Init(L"Assets/sound/SE_Katana.wav");
-	se->Play(false);
-}
-
-void DebugScene::InitSprite()
-{
-	//スプライトを表示する。
-	m_sprite = NewGO<prefab::CSpriteRender>(0);
-	SpriteInitData spriteData;
-	spriteData.m_ddsFilePath[0] = "Assets/sprite/LAP.dds";
-	spriteData.m_height = 300.0f;
-	spriteData.m_width = 600.0f;
-	spriteData.m_fxFilePath = Sprite::SPRITE_SHADER_PATH;
-	m_sprite->Init(spriteData);
-	m_sprite->SetPivot({ 0.0f,0.0f });
 }
 
 void DebugScene::Update()
@@ -88,4 +77,33 @@ void DebugScene::Update()
 		PlaySE();
 	}
 }
+
+void DebugScene::OnBGM()
+{
+	if (m_bgm != nullptr) return;
+	m_bgm = NewGO<prefab::CSoundSource>(0);
+	m_bgm->InitStreaming(BGM_FILEPATH);
+	m_bgm->Play(true);
+}
+
+void DebugScene::PlaySE()
+{
+	auto se = NewGO<prefab::CSoundSource>(0);
+	se->Init(SE_FILEPATH);
+	se->Play(false);
+}
+
+void DebugScene::InitSprite()
+{
+	//スプライトを表示する。
+	m_sprite = NewGO<prefab::CSpriteRender>(0);
+	SpriteInitData spriteData;
+	spriteData.m_ddsFilePath[0] = SPRITE_FILEPATH;
+	spriteData.m_height = static_cast<UINT>(SPRITE_SIZE.y);
+	spriteData.m_width = static_cast<UINT>(SPRITE_SIZE.x);
+	spriteData.m_fxFilePath = Sprite::SPRITE_SHADER_PATH;
+	m_sprite->Init(spriteData, SPRITE_IS3D);
+	m_sprite->SetPivot(SPRITE_PIVOT);
+}
+
 
