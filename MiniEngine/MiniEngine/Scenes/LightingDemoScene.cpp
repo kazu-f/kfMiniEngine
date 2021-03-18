@@ -1,6 +1,11 @@
 #include "stdafx.h"
 #include "LightingDemoScene.h"
 
+#define ROTMODE 0
+#define AUTOMODE 1
+
+#define CAMERA_ROTMODE AUTOMODE
+
 namespace {
 	//モデルのファイルパス。
 	const char* MODEL_FILEPATH[] = {
@@ -30,6 +35,7 @@ namespace {
 
 	//カメラ
 	const float CAMERA_ROTSPEED = 90.0f;
+	const float AUTO_ROTSPEED = 0.8f;
 
 	const char* DEMO_SHADER = "Assets/shader/modelDemo.fx";
 	const char* MODEL_SHADER = Model::MODEL_SHADER_PAHT;
@@ -81,8 +87,13 @@ void LightingDemoScene::OnDestroy()
 
 void LightingDemoScene::RotCamera()
 {
+#if CAMERA_ROTMODE
+	const float PadX = AUTO_ROTSPEED;
+#else
 	const float PadX = Pad(0).GetRStickXF();
+#endif
 	const float PadY = Pad(0).GetRStickYF();
+	
 	const float delTime = GameTime().GetFrameDeltaTime();
 
 
@@ -91,19 +102,13 @@ void LightingDemoScene::RotCamera()
 	//X回転。
 	Quaternion qRotX;
 	qRotX.SetRotationDegY(PadX * CAMERA_ROTSPEED * delTime);
+
 	qRotX.Apply(m_cameraPos);
 	
 	//Y回転。
 	Vector3 cameraToTarget = CAMERA_TARGETPOS - m_cameraPos;
 	cameraToTarget.Normalize();
-	Vector3 axisRotY;
-	//ほぼY軸。
-	if (fabsf(cameraToTarget.Dot(Vector3::AxisY)) > 0.9998 ) {
-		axisRotY.Cross(cameraToTarget,Vector3::AxisZ);
-	}
-	else {
-		axisRotY.Cross(cameraToTarget, Vector3::AxisY);
-	}
+	Vector3 axisRotY = MainCamera().GetRight();
 	Quaternion qRotY;
 	qRotY.SetRotationDeg(axisRotY, PadY * CAMERA_ROTSPEED * delTime);
 
