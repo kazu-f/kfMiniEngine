@@ -22,9 +22,6 @@
     <Filter Include="graphics\2D">
       <UniqueIdentifier>{5ac53df7-8da8-444c-8bba-963903ba4da3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="graphics\animation">
-      <UniqueIdentifier>{6e2fba13-df3d-457f-ab17-019c8a3d04e7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="HID">
       <UniqueIdentifier>{aac9c03f-fc49-435a-bd72-c9c95e2f702c}</UniqueIdentifier>
     </Filter>
@@ -39,21 +36,6 @@
     </Filter>
     <Filter Include="system">
       <UniqueIdentifier>{6945b4fa-4dfc-4373-9c44-f57942115169}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="graphics\light">
-      <UniqueIdentifier>{23807ab7-7b7c-49b4-add7-9d6ec13da296}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="prefab">
-      <UniqueIdentifier>{685e0cba-9ba1-4524-b24c-e57cdd6b2b8c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="prefab\light">
-      <UniqueIdentifier>{0ff9d23b-fa30-4a08-b2db-b38cba3951f6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="graphics\PreRender">
-      <UniqueIdentifier>{522912f5-7cbe-4b9d-ae7d-25971c5cf7be}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="graphics\defferd">
-      <UniqueIdentifier>{dbfd0d83-2bdf-457d-bede-bb8545c3b500}</UniqueIdentifier>
     </Filter>
     <Filter Include="Assets">
       <UniqueIdentifier>{d2e6077d-ee5f-4c73-9e9c-237218a5b190}</UniqueIdentifier>
@@ -123,6 +105,24 @@
     </Filter>
     <Filter Include="MyProgram\util">
       <UniqueIdentifier>{02169e3e-fc38-423e-9de0-0f4db8902453}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\graphics\animation">
+      <UniqueIdentifier>{6e2fba13-df3d-457f-ab17-019c8a3d04e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\graphics\defferd">
+      <UniqueIdentifier>{dbfd0d83-2bdf-457d-bede-bb8545c3b500}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\graphics\light">
+      <UniqueIdentifier>{23807ab7-7b7c-49b4-add7-9d6ec13da296}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\graphics\PreRender">
+      <UniqueIdentifier>{522912f5-7cbe-4b9d-ae7d-25971c5cf7be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\prefab">
+      <UniqueIdentifier>{685e0cba-9ba1-4524-b24c-e57cdd6b2b8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\prefab\light">
+      <UniqueIdentifier>{0ff9d23b-fa30-4a08-b2db-b38cba3951f6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -210,41 +210,8 @@
     <ClCompile Include="system\system.cpp">
       <Filter>system</Filter>
     </ClCompile>
-    <ClCompile Include="graphics\animation\Animation.cpp">
-      <Filter>graphics\animation</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics\animation\AnimationClip.cpp">
-      <Filter>graphics\animation</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics\animation\AnimationPlayController.cpp">
-      <Filter>graphics\animation</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics\light\LightManager.cpp">
-      <Filter>graphics\light</Filter>
-    </ClCompile>
-    <ClCompile Include="prefab\light\LightBase.cpp">
-      <Filter>prefab\light</Filter>
-    </ClCompile>
-    <ClCompile Include="prefab\light\DirectionLight.cpp">
-      <Filter>prefab\light</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics\PreRender\ShadowMap.cpp">
-      <Filter>graphics\PreRender</Filter>
-    </ClCompile>
     <ClCompile Include="graphics\GraphicsEngine.cpp">
       <Filter>graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics\PreRender\GBufferRender.cpp">
-      <Filter>graphics\PreRender</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics\deferrd\DefferdShading.cpp">
-      <Filter>graphics\defferd</Filter>
-    </ClCompile>
-    <ClCompile Include="prefab\ModelRender.cpp">
-      <Filter>prefab</Filter>
-    </ClCompile>
-    <ClCompile Include="prefab\SpriteRender.cpp">
-      <Filter>prefab</Filter>
     </ClCompile>
     <ClCompile Include="MyProgram\Sound\SoundSource.cpp">
       <Filter>MyProgram\Sound</Filter>
@@ -390,6 +357,39 @@
     <ClCompile Include="MyProgram\util\CGameTime.cpp">
       <Filter>MyProgram\util</Filter>
     </ClCompile>
+    <ClCompile Include="MyProgram\graphics\animation\AnimationPlayController.cpp">
+      <Filter>MyProgram\graphics\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\graphics\animation\AnimationClip.cpp">
+      <Filter>MyProgram\graphics\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\graphics\animation\Animation.cpp">
+      <Filter>MyProgram\graphics\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\graphics\deferrd\DefferdShading.cpp">
+      <Filter>MyProgram\graphics\defferd</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\graphics\light\LightManager.cpp">
+      <Filter>MyProgram\graphics\light</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\graphics\PreRender\ShadowMap.cpp">
+      <Filter>MyProgram\graphics\PreRender</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\graphics\PreRender\GBufferRender.cpp">
+      <Filter>MyProgram\graphics\PreRender</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\prefab\light\LightBase.cpp">
+      <Filter>MyProgram\prefab\light</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\prefab\light\DirectionLight.cpp">
+      <Filter>MyProgram\prefab\light</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\prefab\ModelRender.cpp">
+      <Filter>MyProgram\prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\prefab\SpriteRender.cpp">
+      <Filter>MyProgram\prefab</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tkEngine.h">
@@ -491,50 +491,11 @@
     <ClInclude Include="system\system.h">
       <Filter>system</Filter>
     </ClInclude>
-    <ClInclude Include="graphics\animation\Animation.h">
-      <Filter>graphics\animation</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\animation\AnimationClip.h">
-      <Filter>graphics\animation</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\animation\AnimationPlayController.h">
-      <Filter>graphics\animation</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\light\LightManager.h">
-      <Filter>graphics\light</Filter>
-    </ClInclude>
-    <ClInclude Include="prefab\light\LightBase.h">
-      <Filter>prefab\light</Filter>
-    </ClInclude>
-    <ClInclude Include="prefab\light\DirectionLight.h">
-      <Filter>prefab\light</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\light\LightData.h">
-      <Filter>graphics\light</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\PreRender\ShadowMap.h">
-      <Filter>graphics\PreRender</Filter>
-    </ClInclude>
     <ClInclude Include="graphics\GraphicsEngine.h">
       <Filter>graphics</Filter>
     </ClInclude>
-    <ClInclude Include="graphics\GraphicsConfig.h">
-      <Filter>graphics\PreRender</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\PreRender\GBufferRender.h">
-      <Filter>graphics\PreRender</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\deferrd\DefferdShading.h">
-      <Filter>graphics\defferd</Filter>
-    </ClInclude>
-    <ClInclude Include="prefab\ModelRender.h">
-      <Filter>prefab</Filter>
-    </ClInclude>
     <ClInclude Include="system\debugLog.h">
       <Filter>system</Filter>
-    </ClInclude>
-    <ClInclude Include="prefab\SpriteRender.h">
-      <Filter>prefab</Filter>
     </ClInclude>
     <ClInclude Include="MiniEngine.h">
       <Filter>ヘッダー ファイル</Filter>
@@ -697,6 +658,45 @@
     </ClInclude>
     <ClInclude Include="MyProgram\util\Util.h">
       <Filter>MyProgram\util</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\graphics\animation\AnimationPlayController.h">
+      <Filter>MyProgram\graphics\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\graphics\animation\AnimationClip.h">
+      <Filter>MyProgram\graphics\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\graphics\animation\Animation.h">
+      <Filter>MyProgram\graphics\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\graphics\deferrd\DefferdShading.h">
+      <Filter>MyProgram\graphics\defferd</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\graphics\light\LightManager.h">
+      <Filter>MyProgram\graphics\light</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\graphics\light\LightData.h">
+      <Filter>MyProgram\graphics\light</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\graphics\PreRender\GBufferRender.h">
+      <Filter>MyProgram\graphics\PreRender</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\graphics\PreRender\ShadowMap.h">
+      <Filter>MyProgram\graphics\PreRender</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\graphics\GraphicsConfig.h">
+      <Filter>MyProgram\graphics\PreRender</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\prefab\light\DirectionLight.h">
+      <Filter>MyProgram\prefab\light</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\prefab\light\LightBase.h">
+      <Filter>MyProgram\prefab\light</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\prefab\ModelRender.h">
+      <Filter>MyProgram\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\prefab\SpriteRender.h">
+      <Filter>MyProgram\prefab</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
