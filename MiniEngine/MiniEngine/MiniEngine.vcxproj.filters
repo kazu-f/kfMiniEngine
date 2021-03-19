@@ -37,20 +37,11 @@
     <Filter Include="camera">
       <UniqueIdentifier>{c017f83b-12d2-4348-8f0a-cbf5e3b6fa17}</UniqueIdentifier>
     </Filter>
-    <Filter Include="util">
-      <UniqueIdentifier>{02169e3e-fc38-423e-9de0-0f4db8902453}</UniqueIdentifier>
-    </Filter>
     <Filter Include="system">
       <UniqueIdentifier>{6945b4fa-4dfc-4373-9c44-f57942115169}</UniqueIdentifier>
     </Filter>
-    <Filter Include="policy">
-      <UniqueIdentifier>{bd14b65e-b1d6-4908-96c7-38d73c7ac577}</UniqueIdentifier>
-    </Filter>
     <Filter Include="graphics\light">
       <UniqueIdentifier>{23807ab7-7b7c-49b4-add7-9d6ec13da296}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="gameObject">
-      <UniqueIdentifier>{40d94d8c-12b9-4d9c-9275-0090efcbe19a}</UniqueIdentifier>
     </Filter>
     <Filter Include="prefab">
       <UniqueIdentifier>{685e0cba-9ba1-4524-b24c-e57cdd6b2b8c}</UniqueIdentifier>
@@ -64,56 +55,74 @@
     <Filter Include="graphics\defferd">
       <UniqueIdentifier>{dbfd0d83-2bdf-457d-bede-bb8545c3b500}</UniqueIdentifier>
     </Filter>
-    <Filter Include="level">
-      <UniqueIdentifier>{d862d0d3-883b-4e18-987f-160fa98ca636}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Car">
-      <UniqueIdentifier>{a388ed18-2f72-437d-87e9-27c5f0c98aa4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Spectator">
-      <UniqueIdentifier>{a87fff65-f7a8-4225-b224-ddcf76966c1b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="physics">
-      <UniqueIdentifier>{d00e304a-89ea-4faa-a921-87549da2760e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="characterController">
-      <UniqueIdentifier>{69d57548-594e-4c96-88cb-6030e2f9a5a7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Car\State">
-      <UniqueIdentifier>{df3bc0ae-0ac5-4329-a3a2-9301b6c22533}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Guardrail">
-      <UniqueIdentifier>{6b020dc1-ee05-4625-a0fb-3ae623c6706c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sound">
-      <UniqueIdentifier>{1da7d323-b80c-48de-91e3-e4c29134be9e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="CheckPoint">
-      <UniqueIdentifier>{4d2100b7-d4e8-4424-a675-8dfeae4444f6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Ground">
-      <UniqueIdentifier>{f3f33b09-f5b1-4a89-99a7-6e88fd100ba6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Race">
-      <UniqueIdentifier>{5e7597b9-1d8d-4ae1-93de-c34800010783}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Race\RaceUI">
-      <UniqueIdentifier>{37a83391-f034-4385-a067-079c5a73c36f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes">
-      <UniqueIdentifier>{b02697e7-f137-45ff-b3e2-b3a09d338724}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameCamera">
-      <UniqueIdentifier>{8f7dcdee-6cb6-4a31-a5e6-b03bb11cf784}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameLight">
-      <UniqueIdentifier>{d3d62b83-0eb5-460b-92b3-595803ba4eca}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Assets">
       <UniqueIdentifier>{d2e6077d-ee5f-4c73-9e9c-237218a5b190}</UniqueIdentifier>
     </Filter>
     <Filter Include="Assets\sprite">
       <UniqueIdentifier>{2c566b10-bb91-4ca9-baab-bc0f00afd12c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram">
+      <UniqueIdentifier>{83bc6eef-9504-4acd-8c23-0555b25d7676}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\level">
+      <UniqueIdentifier>{d862d0d3-883b-4e18-987f-160fa98ca636}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\physics">
+      <UniqueIdentifier>{d00e304a-89ea-4faa-a921-87549da2760e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\policy">
+      <UniqueIdentifier>{bd14b65e-b1d6-4908-96c7-38d73c7ac577}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\Race">
+      <UniqueIdentifier>{5e7597b9-1d8d-4ae1-93de-c34800010783}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\Race\RaceUI">
+      <UniqueIdentifier>{37a83391-f034-4385-a067-079c5a73c36f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\Scenes">
+      <UniqueIdentifier>{b02697e7-f137-45ff-b3e2-b3a09d338724}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\Sound">
+      <UniqueIdentifier>{1da7d323-b80c-48de-91e3-e4c29134be9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\Spectator">
+      <UniqueIdentifier>{a87fff65-f7a8-4225-b224-ddcf76966c1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\Guardrail">
+      <UniqueIdentifier>{6b020dc1-ee05-4625-a0fb-3ae623c6706c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\Ground">
+      <UniqueIdentifier>{f3f33b09-f5b1-4a89-99a7-6e88fd100ba6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\CheckPoint">
+      <UniqueIdentifier>{4d2100b7-d4e8-4424-a675-8dfeae4444f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\gameObject">
+      <UniqueIdentifier>{40d94d8c-12b9-4d9c-9275-0090efcbe19a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\GameCamera">
+      <UniqueIdentifier>{8f7dcdee-6cb6-4a31-a5e6-b03bb11cf784}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\GameLight">
+      <UniqueIdentifier>{d3d62b83-0eb5-460b-92b3-595803ba4eca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\characterController">
+      <UniqueIdentifier>{69d57548-594e-4c96-88cb-6030e2f9a5a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\Car">
+      <UniqueIdentifier>{a388ed18-2f72-437d-87e9-27c5f0c98aa4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\Car\State">
+      <UniqueIdentifier>{df3bc0ae-0ac5-4329-a3a2-9301b6c22533}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\Player">
+      <UniqueIdentifier>{0dcfeea1-dca9-490e-a6bb-c859f49851fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\graphics">
+      <UniqueIdentifier>{aee606f6-7fe0-47e6-b1f6-bcf53ef72a33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\util">
+      <UniqueIdentifier>{02169e3e-fc38-423e-9de0-0f4db8902453}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -210,20 +219,8 @@
     <ClCompile Include="graphics\animation\AnimationPlayController.cpp">
       <Filter>graphics\animation</Filter>
     </ClCompile>
-    <ClCompile Include="util\Stopwatch.cpp">
-      <Filter>util</Filter>
-    </ClCompile>
-    <ClCompile Include="util\CGameTime.cpp">
-      <Filter>util</Filter>
-    </ClCompile>
     <ClCompile Include="graphics\light\LightManager.cpp">
       <Filter>graphics\light</Filter>
-    </ClCompile>
-    <ClCompile Include="gameObject\GameObjectManager.cpp">
-      <Filter>gameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="gameObject\IGameObject.cpp">
-      <Filter>gameObject</Filter>
     </ClCompile>
     <ClCompile Include="prefab\light\LightBase.cpp">
       <Filter>prefab\light</Filter>
@@ -246,146 +243,155 @@
     <ClCompile Include="prefab\ModelRender.cpp">
       <Filter>prefab</Filter>
     </ClCompile>
-    <ClCompile Include="level\Level.cpp">
-      <Filter>level</Filter>
-    </ClCompile>
-    <ClCompile Include="level\MapChip.cpp">
-      <Filter>level</Filter>
-    </ClCompile>
-    <ClCompile Include="level\MapChipRender.cpp">
-      <Filter>level</Filter>
-    </ClCompile>
-    <ClCompile Include="level\TklFile.cpp">
-      <Filter>level</Filter>
-    </ClCompile>
-    <ClCompile Include="Car\Car.cpp">
-      <Filter>Car</Filter>
-    </ClCompile>
-    <ClCompile Include="Spectator\Spectator.cpp">
-      <Filter>Spectator</Filter>
-    </ClCompile>
-    <ClCompile Include="physics\RigidBody.cpp">
-      <Filter>physics</Filter>
-    </ClCompile>
-    <ClCompile Include="physics\PhysicsWorld.cpp">
-      <Filter>physics</Filter>
-    </ClCompile>
-    <ClCompile Include="physics\ICollider.cpp">
-      <Filter>physics</Filter>
-    </ClCompile>
-    <ClCompile Include="physics\PhysicsObjectBase.cpp">
-      <Filter>physics</Filter>
-    </ClCompile>
-    <ClCompile Include="physics\PhysicsStaticObject.cpp">
-      <Filter>physics</Filter>
-    </ClCompile>
-    <ClCompile Include="physics\BoxCollider.cpp">
-      <Filter>physics</Filter>
-    </ClCompile>
-    <ClCompile Include="physics\CapsuleCollider.cpp">
-      <Filter>physics</Filter>
-    </ClCompile>
-    <ClCompile Include="characterController\CharacterController.cpp">
-      <Filter>characterController</Filter>
-    </ClCompile>
-    <ClCompile Include="physics\SphereCollider.cpp">
-      <Filter>physics</Filter>
-    </ClCompile>
-    <ClCompile Include="physics\MeshCollider.cpp">
-      <Filter>physics</Filter>
-    </ClCompile>
-    <ClCompile Include="physics\PhysicsGhostobject.cpp">
-      <Filter>physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Player\Player.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Car\State\CarStateAccele.cpp">
-      <Filter>Car\State</Filter>
-    </ClCompile>
-    <ClCompile Include="Car\State\ICarState.cpp">
-      <Filter>Car\State</Filter>
-    </ClCompile>
-    <ClCompile Include="Car\State\CarStateIdle.cpp">
-      <Filter>Car\State</Filter>
-    </ClCompile>
-    <ClCompile Include="Car\State\CarStateBrake.cpp">
-      <Filter>Car\State</Filter>
-    </ClCompile>
-    <ClCompile Include="Guardrail\Guardrail.cpp">
-      <Filter>Guardrail</Filter>
-    </ClCompile>
-    <ClCompile Include="Sound\SoundEngine.cpp">
-      <Filter>Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="Sound\WaveFile.cpp">
-      <Filter>Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="Sound\SoundSource.cpp">
-      <Filter>Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="Sound\WaveFileBank.cpp">
-      <Filter>Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="physics\PhysicsDebugDraw.cpp">
-      <Filter>physics</Filter>
-    </ClCompile>
-    <ClCompile Include="CheckPoint\CheckPointBase.cpp">
-      <Filter>CheckPoint</Filter>
-    </ClCompile>
-    <ClCompile Include="CheckPoint\CheckedController.cpp">
-      <Filter>CheckPoint</Filter>
-    </ClCompile>
-    <ClCompile Include="CheckPoint\CheckPointManager.cpp">
-      <Filter>CheckPoint</Filter>
-    </ClCompile>
-    <ClCompile Include="CheckPoint\CheckPointNormal.cpp">
-      <Filter>CheckPoint</Filter>
-    </ClCompile>
-    <ClCompile Include="CheckPoint\CheckPointGoal.cpp">
-      <Filter>CheckPoint</Filter>
-    </ClCompile>
-    <ClCompile Include="Ground\BackGround.cpp">
-      <Filter>Ground</Filter>
-    </ClCompile>
     <ClCompile Include="prefab\SpriteRender.cpp">
       <Filter>prefab</Filter>
     </ClCompile>
-    <ClCompile Include="Race\RaceController.cpp">
-      <Filter>Race</Filter>
+    <ClCompile Include="MyProgram\Sound\SoundSource.cpp">
+      <Filter>MyProgram\Sound</Filter>
     </ClCompile>
-    <ClCompile Include="Race\RaceUI\LapUI.cpp">
-      <Filter>Race\RaceUI</Filter>
+    <ClCompile Include="MyProgram\Sound\SoundEngine.cpp">
+      <Filter>MyProgram\Sound</Filter>
     </ClCompile>
-    <ClCompile Include="Race\RaceUI\ReverseRunUI.cpp">
-      <Filter>Race\RaceUI</Filter>
+    <ClCompile Include="MyProgram\Sound\WaveFile.cpp">
+      <Filter>MyProgram\Sound</Filter>
     </ClCompile>
-    <ClCompile Include="Scenes\LightingDemoScene.cpp">
-      <Filter>Scenes</Filter>
+    <ClCompile Include="MyProgram\Sound\WaveFileBank.cpp">
+      <Filter>MyProgram\Sound</Filter>
     </ClCompile>
-    <ClCompile Include="Scenes\DebugScene.cpp">
-      <Filter>Scenes</Filter>
+    <ClCompile Include="MyProgram\Scenes\DebugScene.cpp">
+      <Filter>MyProgram\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Scenes\GameScene.cpp">
-      <Filter>Scenes</Filter>
+    <ClCompile Include="MyProgram\Scenes\GameScene.cpp">
+      <Filter>MyProgram\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="GameCamera\FollowCarCamera.cpp">
-      <Filter>GameCamera</Filter>
+    <ClCompile Include="MyProgram\Scenes\LightingDemoScene.cpp">
+      <Filter>MyProgram\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="GameCamera\GameCamera.cpp">
-      <Filter>GameCamera</Filter>
+    <ClCompile Include="MyProgram\Spectator\Spectator.cpp">
+      <Filter>MyProgram\Spectator</Filter>
     </ClCompile>
-    <ClCompile Include="GameLight\SceneLight.cpp">
-      <Filter>GameLight</Filter>
+    <ClCompile Include="MyProgram\Race\RaceUI\ReverseRunUI.cpp">
+      <Filter>MyProgram\Race\RaceUI</Filter>
     </ClCompile>
-    <ClCompile Include="Race\RaceUI\GoalUI.cpp">
-      <Filter>Race\RaceUI</Filter>
+    <ClCompile Include="MyProgram\Race\RaceUI\LapUI.cpp">
+      <Filter>MyProgram\Race\RaceUI</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\Race\RaceUI\GoalUI.cpp">
+      <Filter>MyProgram\Race\RaceUI</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\Race\RaceController.cpp">
+      <Filter>MyProgram\Race</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\physics\CapsuleCollider.cpp">
+      <Filter>MyProgram\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\physics\BoxCollider.cpp">
+      <Filter>MyProgram\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\physics\PhysicsGhostobject.cpp">
+      <Filter>MyProgram\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\physics\PhysicsObjectBase.cpp">
+      <Filter>MyProgram\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\physics\PhysicsStaticObject.cpp">
+      <Filter>MyProgram\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\physics\PhysicsWorld.cpp">
+      <Filter>MyProgram\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\physics\SphereCollider.cpp">
+      <Filter>MyProgram\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\physics\RigidBody.cpp">
+      <Filter>MyProgram\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\physics\PhysicsDebugDraw.cpp">
+      <Filter>MyProgram\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\level\TklFile.cpp">
+      <Filter>MyProgram\level</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\level\Level.cpp">
+      <Filter>MyProgram\level</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\level\MapChip.cpp">
+      <Filter>MyProgram\level</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\level\MapChipRender.cpp">
+      <Filter>MyProgram\level</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\physics\ICollider.cpp">
+      <Filter>MyProgram\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\physics\MeshCollider.cpp">
+      <Filter>MyProgram\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\Guardrail\Guardrail.cpp">
+      <Filter>MyProgram\Guardrail</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\Ground\BackGround.cpp">
+      <Filter>MyProgram\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\CheckPoint\CheckPointBase.cpp">
+      <Filter>MyProgram\CheckPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\CheckPoint\CheckPointGoal.cpp">
+      <Filter>MyProgram\CheckPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\CheckPoint\CheckPointManager.cpp">
+      <Filter>MyProgram\CheckPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\CheckPoint\CheckPointNormal.cpp">
+      <Filter>MyProgram\CheckPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\CheckPoint\CheckedController.cpp">
+      <Filter>MyProgram\CheckPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\gameObject\IGameObject.cpp">
+      <Filter>MyProgram\gameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\gameObject\GameObjectManager.cpp">
+      <Filter>MyProgram\gameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\GameLight\SceneLight.cpp">
+      <Filter>MyProgram\GameLight</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\GameCamera\FollowCarCamera.cpp">
+      <Filter>MyProgram\GameCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\GameCamera\GameCamera.cpp">
+      <Filter>MyProgram\GameCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\characterController\CharacterController.cpp">
+      <Filter>MyProgram\characterController</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\Car\Car.cpp">
+      <Filter>MyProgram\Car</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\Car\State\ICarState.cpp">
+      <Filter>MyProgram\Car\State</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\Car\State\CarStateAccele.cpp">
+      <Filter>MyProgram\Car\State</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\Car\State\CarStateIdle.cpp">
+      <Filter>MyProgram\Car\State</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\Car\State\CarStateBrake.cpp">
+      <Filter>MyProgram\Car\State</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\Player\Player.cpp">
+      <Filter>MyProgram\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\util\Stopwatch.cpp">
+      <Filter>MyProgram\util</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\util\CGameTime.cpp">
+      <Filter>MyProgram\util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MiniEngine.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="tkEngine.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -479,9 +485,6 @@
     <ClInclude Include="camera\Camera.h">
       <Filter>camera</Filter>
     </ClInclude>
-    <ClInclude Include="util\Stopwatch.h">
-      <Filter>util</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -497,23 +500,8 @@
     <ClInclude Include="graphics\animation\AnimationPlayController.h">
       <Filter>graphics\animation</Filter>
     </ClInclude>
-    <ClInclude Include="policy\Noncopyable.h">
-      <Filter>policy</Filter>
-    </ClInclude>
-    <ClInclude Include="util\CGameTime.h">
-      <Filter>util</Filter>
-    </ClInclude>
     <ClInclude Include="graphics\light\LightManager.h">
       <Filter>graphics\light</Filter>
-    </ClInclude>
-    <ClInclude Include="gameObject\GameObjectManager.h">
-      <Filter>gameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="gameObject\IGameObject.h">
-      <Filter>gameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="util\Util.h">
-      <Filter>util</Filter>
     </ClInclude>
     <ClInclude Include="prefab\light\LightBase.h">
       <Filter>prefab\light</Filter>
@@ -542,152 +530,173 @@
     <ClInclude Include="prefab\ModelRender.h">
       <Filter>prefab</Filter>
     </ClInclude>
-    <ClInclude Include="level\Level.h">
-      <Filter>level</Filter>
-    </ClInclude>
-    <ClInclude Include="level\MapChip.h">
-      <Filter>level</Filter>
-    </ClInclude>
-    <ClInclude Include="level\MapChipRender.h">
-      <Filter>level</Filter>
-    </ClInclude>
-    <ClInclude Include="level\TklFile.h">
-      <Filter>level</Filter>
-    </ClInclude>
-    <ClInclude Include="util\NameKey.h">
-      <Filter>util</Filter>
-    </ClInclude>
     <ClInclude Include="system\debugLog.h">
       <Filter>system</Filter>
-    </ClInclude>
-    <ClInclude Include="Car\Car.h">
-      <Filter>Car</Filter>
-    </ClInclude>
-    <ClInclude Include="Spectator\Spectator.h">
-      <Filter>Spectator</Filter>
-    </ClInclude>
-    <ClInclude Include="physics\ICollider.h">
-      <Filter>physics</Filter>
-    </ClInclude>
-    <ClInclude Include="physics\PhysicsWorld.h">
-      <Filter>physics</Filter>
-    </ClInclude>
-    <ClInclude Include="physics\RigidBody.h">
-      <Filter>physics</Filter>
-    </ClInclude>
-    <ClInclude Include="physics\PhysicsObjectBase.h">
-      <Filter>physics</Filter>
-    </ClInclude>
-    <ClInclude Include="physics\PhysicsStaticObject.h">
-      <Filter>physics</Filter>
-    </ClInclude>
-    <ClInclude Include="physics\BoxCollider.h">
-      <Filter>physics</Filter>
-    </ClInclude>
-    <ClInclude Include="physics\CapsuleCollider.h">
-      <Filter>physics</Filter>
-    </ClInclude>
-    <ClInclude Include="characterController\CharacterController.h">
-      <Filter>characterController</Filter>
-    </ClInclude>
-    <ClInclude Include="physics\CollisionAttr.h">
-      <Filter>physics</Filter>
-    </ClInclude>
-    <ClInclude Include="physics\SphereCollider.h">
-      <Filter>physics</Filter>
-    </ClInclude>
-    <ClInclude Include="physics\MeshCollider.h">
-      <Filter>physics</Filter>
-    </ClInclude>
-    <ClInclude Include="physics\PhysicsGhostobject.h">
-      <Filter>physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Player\Player.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Car\State\CarStateAccele.h">
-      <Filter>Car\State</Filter>
-    </ClInclude>
-    <ClInclude Include="Car\State\ICarState.h">
-      <Filter>Car\State</Filter>
-    </ClInclude>
-    <ClInclude Include="Car\State\CarStateIdle.h">
-      <Filter>Car\State</Filter>
-    </ClInclude>
-    <ClInclude Include="Car\State\CarStateBrake.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Guardrail\Guardrail.h">
-      <Filter>Guardrail</Filter>
-    </ClInclude>
-    <ClInclude Include="Sound\SoundEngine.h">
-      <Filter>Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="Sound\WaveFile.h">
-      <Filter>Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="Sound\SoundSource.h">
-      <Filter>Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="Sound\WaveFileBank.h">
-      <Filter>Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="physics\PhysicsDebugDraw.h">
-      <Filter>physics</Filter>
-    </ClInclude>
-    <ClInclude Include="CheckPoint\CheckPointBase.h">
-      <Filter>CheckPoint</Filter>
-    </ClInclude>
-    <ClInclude Include="CheckPoint\CheckedController.h">
-      <Filter>CheckPoint</Filter>
-    </ClInclude>
-    <ClInclude Include="CheckPoint\CheckPointManager.h">
-      <Filter>CheckPoint</Filter>
-    </ClInclude>
-    <ClInclude Include="CheckPoint\CheckPointNormal.h">
-      <Filter>CheckPoint</Filter>
-    </ClInclude>
-    <ClInclude Include="CheckPoint\CheckPointGoal.h">
-      <Filter>CheckPoint</Filter>
-    </ClInclude>
-    <ClInclude Include="Ground\BackGround.h">
-      <Filter>Ground</Filter>
     </ClInclude>
     <ClInclude Include="prefab\SpriteRender.h">
       <Filter>prefab</Filter>
     </ClInclude>
-    <ClInclude Include="Race\RaceController.h">
-      <Filter>Race</Filter>
+    <ClInclude Include="MiniEngine.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Race\RaceUI\LapUI.h">
-      <Filter>Race\RaceUI</Filter>
+    <ClInclude Include="MyProgram\Sound\WaveFile.h">
+      <Filter>MyProgram\Sound</Filter>
     </ClInclude>
-    <ClInclude Include="Race\RaceUI\ReverseRunUI.h">
-      <Filter>Race\RaceUI</Filter>
+    <ClInclude Include="MyProgram\Sound\WaveFileBank.h">
+      <Filter>MyProgram\Sound</Filter>
     </ClInclude>
-    <ClInclude Include="Scenes\LightingDemoScene.h">
-      <Filter>Scenes</Filter>
+    <ClInclude Include="MyProgram\Sound\SoundEngine.h">
+      <Filter>MyProgram\Sound</Filter>
     </ClInclude>
-    <ClInclude Include="Scenes\DebugScene.h">
-      <Filter>Scenes</Filter>
+    <ClInclude Include="MyProgram\Sound\SoundSource.h">
+      <Filter>MyProgram\Sound</Filter>
     </ClInclude>
-    <ClInclude Include="Scenes\GameScene.h">
-      <Filter>Scenes</Filter>
+    <ClInclude Include="MyProgram\Scenes\DebugScene.h">
+      <Filter>MyProgram\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="GameCamera\FollowCarCamera.h">
-      <Filter>GameCamera</Filter>
+    <ClInclude Include="MyProgram\Scenes\GameScene.h">
+      <Filter>MyProgram\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="GameCamera\GameCamera.h">
-      <Filter>GameCamera</Filter>
+    <ClInclude Include="MyProgram\Scenes\LightingDemoScene.h">
+      <Filter>MyProgram\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="GameLight\SceneLight.h">
-      <Filter>GameLight</Filter>
+    <ClInclude Include="MyProgram\Spectator\SpectatorNames.h">
+      <Filter>MyProgram\Spectator</Filter>
     </ClInclude>
-    <ClInclude Include="Spectator\SpectatorNames.h">
-      <Filter>Spectator</Filter>
+    <ClInclude Include="MyProgram\Spectator\Spectator.h">
+      <Filter>MyProgram\Spectator</Filter>
     </ClInclude>
-    <ClInclude Include="Race\RaceUI\GoalUI.h">
-      <Filter>Race\RaceUI</Filter>
+    <ClInclude Include="MyProgram\Race\RaceUI\GoalUI.h">
+      <Filter>MyProgram\Race\RaceUI</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\Race\RaceUI\LapUI.h">
+      <Filter>MyProgram\Race\RaceUI</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\Race\RaceUI\ReverseRunUI.h">
+      <Filter>MyProgram\Race\RaceUI</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\Race\RaceController.h">
+      <Filter>MyProgram\Race</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\policy\Noncopyable.h">
+      <Filter>MyProgram\policy</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\physics\BoxCollider.h">
+      <Filter>MyProgram\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\physics\CapsuleCollider.h">
+      <Filter>MyProgram\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\physics\CollisionAttr.h">
+      <Filter>MyProgram\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\physics\ICollider.h">
+      <Filter>MyProgram\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\physics\PhysicsGhostobject.h">
+      <Filter>MyProgram\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\physics\PhysicsObjectBase.h">
+      <Filter>MyProgram\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\physics\PhysicsStaticObject.h">
+      <Filter>MyProgram\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\physics\PhysicsWorld.h">
+      <Filter>MyProgram\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\physics\RigidBody.h">
+      <Filter>MyProgram\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\physics\SphereCollider.h">
+      <Filter>MyProgram\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\physics\PhysicsDebugDraw.h">
+      <Filter>MyProgram\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\level\TklFile.h">
+      <Filter>MyProgram\level</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\level\Level.h">
+      <Filter>MyProgram\level</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\level\MapChip.h">
+      <Filter>MyProgram\level</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\level\MapChipRender.h">
+      <Filter>MyProgram\level</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\physics\MeshCollider.h">
+      <Filter>MyProgram\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\Guardrail\Guardrail.h">
+      <Filter>MyProgram\Guardrail</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\Ground\BackGround.h">
+      <Filter>MyProgram\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\CheckPoint\CheckedController.h">
+      <Filter>MyProgram\CheckPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\CheckPoint\CheckPointBase.h">
+      <Filter>MyProgram\CheckPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\CheckPoint\CheckPointGoal.h">
+      <Filter>MyProgram\CheckPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\CheckPoint\CheckPointManager.h">
+      <Filter>MyProgram\CheckPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\CheckPoint\CheckPointNormal.h">
+      <Filter>MyProgram\CheckPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\gameObject\IGameObject.h">
+      <Filter>MyProgram\gameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\gameObject\GameObjectManager.h">
+      <Filter>MyProgram\gameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\GameLight\SceneLight.h">
+      <Filter>MyProgram\GameLight</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\GameCamera\FollowCarCamera.h">
+      <Filter>MyProgram\GameCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\GameCamera\GameCamera.h">
+      <Filter>MyProgram\GameCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\characterController\CharacterController.h">
+      <Filter>MyProgram\characterController</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\Car\Car.h">
+      <Filter>MyProgram\Car</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\Car\State\ICarState.h">
+      <Filter>MyProgram\Car\State</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\Car\State\CarStateIdle.h">
+      <Filter>MyProgram\Car\State</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\Car\State\CarStateBrake.h">
+      <Filter>MyProgram\Car\State</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\Car\State\CarStateAccele.h">
+      <Filter>MyProgram\Car\State</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\Player\Player.h">
+      <Filter>MyProgram\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\util\Stopwatch.h">
+      <Filter>MyProgram\util</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\util\NameKey.h">
+      <Filter>MyProgram\util</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\util\CGameTime.h">
+      <Filter>MyProgram\util</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\util\Util.h">
+      <Filter>MyProgram\util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

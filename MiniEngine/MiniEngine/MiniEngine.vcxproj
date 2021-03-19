@@ -19,61 +19,64 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Race\RaceUI\GoalUI.cpp" />
-    <ClCompile Include="Ground\BackGround.cpp" />
-    <ClCompile Include="Car\State\CarStateBrake.cpp" />
-    <ClCompile Include="Car\State\CarStateIdle.cpp" />
-    <ClCompile Include="Car\State\CarStateAccele.cpp" />
-    <ClCompile Include="characterController\CharacterController.cpp" />
-    <ClCompile Include="Car\State\ICarState.cpp" />
-    <ClCompile Include="CheckPoint\CheckPointGoal.cpp" />
-    <ClCompile Include="CheckPoint\CheckPointNormal.cpp" />
-    <ClCompile Include="CheckPoint\CheckPointManager.cpp" />
-    <ClCompile Include="CheckPoint\CheckedController.cpp" />
-    <ClCompile Include="CheckPoint\CheckPointBase.cpp" />
-    <ClCompile Include="GameCamera\FollowCarCamera.cpp" />
-    <ClCompile Include="Guardrail\Guardrail.cpp" />
-    <ClCompile Include="Scenes\LightingDemoScene.cpp" />
-    <ClCompile Include="Race\RaceUI\LapUI.cpp" />
-    <ClCompile Include="physics\PhysicsDebugDraw.cpp" />
-    <ClCompile Include="Race\RaceController.cpp" />
-    <ClCompile Include="Race\RaceUI\ReverseRunUI.cpp" />
-    <ClCompile Include="Scenes\DebugScene.cpp" />
-    <ClCompile Include="physics\PhysicsGhostobject.cpp" />
-    <ClCompile Include="physics\MeshCollider.cpp" />
-    <ClCompile Include="physics\CapsuleCollider.cpp" />
-    <ClCompile Include="Car\Car.cpp" />
-    <ClCompile Include="GameCamera\GameCamera.cpp" />
-    <ClCompile Include="gameObject\GameObjectManager.cpp" />
-    <ClCompile Include="gameObject\IGameObject.cpp" />
+    <ClCompile Include="MyProgram\Car\Car.cpp" />
+    <ClCompile Include="MyProgram\Car\State\CarStateAccele.cpp" />
+    <ClCompile Include="MyProgram\Car\State\CarStateBrake.cpp" />
+    <ClCompile Include="MyProgram\Car\State\CarStateIdle.cpp" />
+    <ClCompile Include="MyProgram\Car\State\ICarState.cpp" />
+    <ClCompile Include="MyProgram\characterController\CharacterController.cpp" />
+    <ClCompile Include="MyProgram\CheckPoint\CheckedController.cpp" />
+    <ClCompile Include="MyProgram\CheckPoint\CheckPointBase.cpp" />
+    <ClCompile Include="MyProgram\CheckPoint\CheckPointGoal.cpp" />
+    <ClCompile Include="MyProgram\CheckPoint\CheckPointManager.cpp" />
+    <ClCompile Include="MyProgram\CheckPoint\CheckPointNormal.cpp" />
+    <ClCompile Include="MyProgram\GameCamera\FollowCarCamera.cpp" />
+    <ClCompile Include="MyProgram\GameCamera\GameCamera.cpp" />
+    <ClCompile Include="MyProgram\GameLight\SceneLight.cpp" />
+    <ClCompile Include="MyProgram\gameObject\GameObjectManager.cpp" />
+    <ClCompile Include="MyProgram\gameObject\IGameObject.cpp" />
+    <ClCompile Include="MyProgram\Ground\BackGround.cpp" />
+    <ClCompile Include="MyProgram\Guardrail\Guardrail.cpp" />
+    <ClCompile Include="MyProgram\level\Level.cpp" />
+    <ClCompile Include="MyProgram\level\MapChip.cpp" />
+    <ClCompile Include="MyProgram\level\MapChipRender.cpp" />
+    <ClCompile Include="MyProgram\level\TklFile.cpp" />
+    <ClCompile Include="MyProgram\physics\BoxCollider.cpp" />
+    <ClCompile Include="MyProgram\physics\CapsuleCollider.cpp" />
+    <ClCompile Include="MyProgram\physics\ICollider.cpp" />
+    <ClCompile Include="MyProgram\physics\MeshCollider.cpp" />
+    <ClCompile Include="MyProgram\physics\PhysicsDebugDraw.cpp" />
+    <ClCompile Include="MyProgram\physics\PhysicsGhostobject.cpp" />
+    <ClCompile Include="MyProgram\physics\PhysicsObjectBase.cpp" />
+    <ClCompile Include="MyProgram\physics\PhysicsStaticObject.cpp" />
+    <ClCompile Include="MyProgram\physics\PhysicsWorld.cpp" />
+    <ClCompile Include="MyProgram\physics\RigidBody.cpp" />
+    <ClCompile Include="MyProgram\physics\SphereCollider.cpp" />
+    <ClCompile Include="MyProgram\Player\Player.cpp" />
+    <ClCompile Include="MyProgram\Race\RaceController.cpp" />
+    <ClCompile Include="MyProgram\Race\RaceUI\GoalUI.cpp" />
+    <ClCompile Include="MyProgram\Race\RaceUI\LapUI.cpp" />
+    <ClCompile Include="MyProgram\Race\RaceUI\ReverseRunUI.cpp" />
+    <ClCompile Include="MyProgram\Scenes\DebugScene.cpp" />
+    <ClCompile Include="MyProgram\Scenes\GameScene.cpp" />
+    <ClCompile Include="MyProgram\Scenes\LightingDemoScene.cpp" />
+    <ClCompile Include="MyProgram\Sound\SoundEngine.cpp" />
+    <ClCompile Include="MyProgram\Sound\SoundSource.cpp" />
+    <ClCompile Include="MyProgram\Sound\WaveFile.cpp" />
+    <ClCompile Include="MyProgram\Sound\WaveFileBank.cpp" />
+    <ClCompile Include="MyProgram\Spectator\Spectator.cpp" />
     <ClCompile Include="graphics\deferrd\DefferdShading.cpp" />
     <ClCompile Include="graphics\PreRender\GBufferRender.cpp" />
     <ClCompile Include="graphics\light\LightManager.cpp" />
     <ClCompile Include="graphics\PreRender\ShadowMap.cpp" />
-    <ClCompile Include="physics\BoxCollider.cpp" />
-    <ClCompile Include="physics\ICollider.cpp" />
-    <ClCompile Include="level\Level.cpp" />
-    <ClCompile Include="level\MapChip.cpp" />
-    <ClCompile Include="level\MapChipRender.cpp" />
-    <ClCompile Include="level\TklFile.cpp" />
-    <ClCompile Include="physics\PhysicsObjectBase.cpp" />
-    <ClCompile Include="physics\PhysicsStaticObject.cpp" />
-    <ClCompile Include="physics\PhysicsWorld.cpp" />
-    <ClCompile Include="Player\Player.cpp" />
+    <ClCompile Include="MyProgram\util\CGameTime.cpp" />
+    <ClCompile Include="MyProgram\util\Stopwatch.cpp" />
     <ClCompile Include="prefab\light\DirectionLight.cpp" />
     <ClCompile Include="prefab\light\LightBase.cpp" />
     <ClCompile Include="prefab\ModelRender.cpp" />
-    <ClCompile Include="physics\RigidBody.cpp" />
-    <ClCompile Include="GameLight\SceneLight.cpp" />
-    <ClCompile Include="Sound\SoundSource.cpp" />
-    <ClCompile Include="Sound\SoundEngine.cpp" />
-    <ClCompile Include="Spectator\Spectator.cpp" />
-    <ClCompile Include="physics\SphereCollider.cpp" />
     <ClCompile Include="prefab\SpriteRender.cpp" />
-    <ClCompile Include="util\CGameTime.cpp" />
     <ClCompile Include="graphics\animation\AnimationPlayController.cpp" />
     <ClCompile Include="graphics\animation\AnimationClip.cpp" />
-    <ClCompile Include="Scenes\GameScene.cpp" />
     <ClCompile Include="graphics\animation\Animation.cpp" />
     <ClCompile Include="camera\Camera.cpp" />
     <ClCompile Include="graphics\2D\Sprite.cpp" />
@@ -108,71 +111,75 @@
     <ClCompile Include="tkFile\TkaFile.cpp" />
     <ClCompile Include="tkFile\TkmFile.cpp" />
     <ClCompile Include="tkFile\TksFile.cpp" />
-    <ClCompile Include="util\Stopwatch.cpp" />
-    <ClCompile Include="Sound\WaveFile.cpp" />
-    <ClCompile Include="Sound\WaveFileBank.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Race\RaceUI\GoalUI.h" />
-    <ClInclude Include="Ground\BackGround.h" />
-    <ClInclude Include="Car\State\CarStateBrake.h" />
-    <ClInclude Include="Car\State\CarStateIdle.h" />
-    <ClInclude Include="Car\State\CarStateAccele.h" />
-    <ClInclude Include="characterController\CharacterController.h" />
-    <ClInclude Include="Car\State\ICarState.h" />
-    <ClInclude Include="CheckPoint\CheckPointGoal.h" />
-    <ClInclude Include="CheckPoint\CheckPointNormal.h" />
-    <ClInclude Include="CheckPoint\CheckPointManager.h" />
-    <ClInclude Include="CheckPoint\CheckedController.h" />
-    <ClInclude Include="CheckPoint\CheckPointBase.h" />
-    <ClInclude Include="GameCamera\FollowCarCamera.h" />
-    <ClInclude Include="Guardrail\Guardrail.h" />
-    <ClInclude Include="Scenes\LightingDemoScene.h" />
-    <ClInclude Include="Race\RaceUI\LapUI.h" />
-    <ClInclude Include="physics\PhysicsDebugDraw.h" />
-    <ClInclude Include="Race\RaceController.h" />
-    <ClInclude Include="Race\RaceUI\ReverseRunUI.h" />
-    <ClInclude Include="Scenes\DebugScene.h" />
-    <ClInclude Include="physics\PhysicsGhostobject.h" />
-    <ClInclude Include="physics\MeshCollider.h" />
-    <ClInclude Include="physics\CollisionAttr.h" />
-    <ClInclude Include="physics\CapsuleCollider.h" />
-    <ClInclude Include="Car\Car.h" />
-    <ClInclude Include="GameCamera\GameCamera.h" />
-    <ClInclude Include="gameObject\GameObjectManager.h" />
-    <ClInclude Include="gameObject\IGameObject.h" />
+    <ClInclude Include="MiniEngine.h" />
+    <ClInclude Include="MyProgram\Car\Car.h" />
+    <ClInclude Include="MyProgram\Car\State\CarStateAccele.h" />
+    <ClInclude Include="MyProgram\Car\State\CarStateBrake.h" />
+    <ClInclude Include="MyProgram\Car\State\CarStateIdle.h" />
+    <ClInclude Include="MyProgram\Car\State\ICarState.h" />
+    <ClInclude Include="MyProgram\characterController\CharacterController.h" />
+    <ClInclude Include="MyProgram\CheckPoint\CheckedController.h" />
+    <ClInclude Include="MyProgram\CheckPoint\CheckPointBase.h" />
+    <ClInclude Include="MyProgram\CheckPoint\CheckPointGoal.h" />
+    <ClInclude Include="MyProgram\CheckPoint\CheckPointManager.h" />
+    <ClInclude Include="MyProgram\CheckPoint\CheckPointNormal.h" />
+    <ClInclude Include="MyProgram\GameCamera\FollowCarCamera.h" />
+    <ClInclude Include="MyProgram\GameCamera\GameCamera.h" />
+    <ClInclude Include="MyProgram\GameLight\SceneLight.h" />
+    <ClInclude Include="MyProgram\gameObject\GameObjectManager.h" />
+    <ClInclude Include="MyProgram\gameObject\IGameObject.h" />
+    <ClInclude Include="MyProgram\Ground\BackGround.h" />
+    <ClInclude Include="MyProgram\Guardrail\Guardrail.h" />
+    <ClInclude Include="MyProgram\level\Level.h" />
+    <ClInclude Include="MyProgram\level\MapChip.h" />
+    <ClInclude Include="MyProgram\level\MapChipRender.h" />
+    <ClInclude Include="MyProgram\level\TklFile.h" />
+    <ClInclude Include="MyProgram\physics\BoxCollider.h" />
+    <ClInclude Include="MyProgram\physics\CapsuleCollider.h" />
+    <ClInclude Include="MyProgram\physics\CollisionAttr.h" />
+    <ClInclude Include="MyProgram\physics\ICollider.h" />
+    <ClInclude Include="MyProgram\physics\MeshCollider.h" />
+    <ClInclude Include="MyProgram\physics\PhysicsDebugDraw.h" />
+    <ClInclude Include="MyProgram\physics\PhysicsGhostobject.h" />
+    <ClInclude Include="MyProgram\physics\PhysicsObjectBase.h" />
+    <ClInclude Include="MyProgram\physics\PhysicsStaticObject.h" />
+    <ClInclude Include="MyProgram\physics\PhysicsWorld.h" />
+    <ClInclude Include="MyProgram\physics\RigidBody.h" />
+    <ClInclude Include="MyProgram\physics\SphereCollider.h" />
+    <ClInclude Include="MyProgram\Player\Player.h" />
+    <ClInclude Include="MyProgram\policy\Noncopyable.h" />
+    <ClInclude Include="MyProgram\Race\RaceController.h" />
+    <ClInclude Include="MyProgram\Race\RaceUI\GoalUI.h" />
+    <ClInclude Include="MyProgram\Race\RaceUI\LapUI.h" />
+    <ClInclude Include="MyProgram\Race\RaceUI\ReverseRunUI.h" />
+    <ClInclude Include="MyProgram\Scenes\DebugScene.h" />
+    <ClInclude Include="MyProgram\Scenes\GameScene.h" />
+    <ClInclude Include="MyProgram\Scenes\LightingDemoScene.h" />
+    <ClInclude Include="MyProgram\Sound\SoundEngine.h" />
+    <ClInclude Include="MyProgram\Sound\SoundSource.h" />
+    <ClInclude Include="MyProgram\Sound\WaveFile.h" />
+    <ClInclude Include="MyProgram\Sound\WaveFileBank.h" />
+    <ClInclude Include="MyProgram\Spectator\Spectator.h" />
+    <ClInclude Include="MyProgram\Spectator\SpectatorNames.h" />
     <ClInclude Include="graphics\deferrd\DefferdShading.h" />
     <ClInclude Include="graphics\PreRender\GBufferRender.h" />
     <ClInclude Include="graphics\GraphicsConfig.h" />
     <ClInclude Include="graphics\light\LightData.h" />
     <ClInclude Include="graphics\light\LightManager.h" />
     <ClInclude Include="graphics\PreRender\ShadowMap.h" />
-    <ClInclude Include="level\Level.h" />
-    <ClInclude Include="level\MapChip.h" />
-    <ClInclude Include="level\MapChipRender.h" />
-    <ClInclude Include="level\TklFile.h" />
-    <ClInclude Include="physics\BoxCollider.h" />
-    <ClInclude Include="physics\ICollider.h" />
-    <ClInclude Include="physics\PhysicsObjectBase.h" />
-    <ClInclude Include="physics\PhysicsStaticObject.h" />
-    <ClInclude Include="physics\PhysicsWorld.h" />
-    <ClInclude Include="physics\RigidBody.h" />
-    <ClInclude Include="Player\Player.h" />
+    <ClInclude Include="MyProgram\util\CGameTime.h" />
+    <ClInclude Include="MyProgram\util\NameKey.h" />
+    <ClInclude Include="MyProgram\util\Stopwatch.h" />
+    <ClInclude Include="MyProgram\util\Util.h" />
     <ClInclude Include="prefab\light\DirectionLight.h" />
     <ClInclude Include="prefab\light\LightBase.h" />
     <ClInclude Include="prefab\ModelRender.h" />
-    <ClInclude Include="GameLight\SceneLight.h" />
-    <ClInclude Include="Sound\SoundSource.h" />
-    <ClInclude Include="Sound\SoundEngine.h" />
-    <ClInclude Include="Spectator\Spectator.h" />
-    <ClInclude Include="physics\SphereCollider.h" />
-    <ClInclude Include="Spectator\SpectatorNames.h" />
     <ClInclude Include="prefab\SpriteRender.h" />
     <ClInclude Include="system\debugLog.h" />
-    <ClInclude Include="util\CGameTime.h" />
     <ClInclude Include="graphics\animation\AnimationPlayController.h" />
     <ClInclude Include="graphics\animation\AnimationClip.h" />
-    <ClInclude Include="Scenes\GameScene.h" />
     <ClInclude Include="graphics\animation\Animation.h" />
     <ClInclude Include="camera\Camera.h" />
     <ClInclude Include="d3dx12.h" />
@@ -202,19 +209,12 @@
     <ClInclude Include="math\Math.h" />
     <ClInclude Include="math\Matrix.h" />
     <ClInclude Include="math\Vector.h" />
-    <ClInclude Include="MiniEngine.h" />
-    <ClInclude Include="policy\Noncopyable.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="system\system.h" />
     <ClInclude Include="tkEngine.h" />
     <ClInclude Include="tkFile\TkaFile.h" />
     <ClInclude Include="tkFile\TkmFile.h" />
     <ClInclude Include="tkFile\TksFile.h" />
-    <ClInclude Include="util\NameKey.h" />
-    <ClInclude Include="util\Stopwatch.h" />
-    <ClInclude Include="util\Util.h" />
-    <ClInclude Include="Sound\WaveFile.h" />
-    <ClInclude Include="Sound\WaveFileBank.h" />
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\LAP.png">
@@ -326,8 +326,7 @@
       <PreprocessorDefinitions>_WINDOWS;_CRT_SECURE_NO_WARNINGS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>
-      </AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>;$(ProjectDir)/MyProgram</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -365,7 +364,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(EFK_ROOT_DIR)/Effekseer;$(EFK_ROOT_DIR)/EffekseerRendererDX12</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(EFK_ROOT_DIR)/Effekseer;$(EFK_ROOT_DIR)/EffekseerRendererDX12;$(ProjectDir)/MyProgram</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
