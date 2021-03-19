@@ -252,7 +252,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 			float disneyDiffuse = NormalizedDisneyDiffuse(normal, -directionalLight[ligNo].direction, toEye, roughness);
 			diffuse = baseColor * disneyDiffuse;
 			////クックトランスモデルの鏡面反射
-			float3 specCol = CookTrranceSpecular(-directionalLight[ligNo].direction, toEye, normal, metaric) * directionalLight[ligNo].color.xyz;
+			specCol = CookTrranceSpecular(-directionalLight[ligNo].direction, toEye, normal, metaric) * directionalLight[ligNo].color.xyz;
 		}
 		else {
 			//通常の正規化ランバート拡散反射

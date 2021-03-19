@@ -29,8 +29,8 @@ namespace {
 	const float LIGHT_POW = 2.0f;					//ライトの強さ。
 	//ライトデータ。
 	const LightData LIGHTDATAS[LIGHT_NUM] = {
-		{ {1.0f,0.0f,0.0f},Vector4::White * LIGHT_POW },
-		{ {1.0f,0.0f,0.0f},Vector4::White * LIGHT_POW },
+		{ {1.0f,0.0f,0.0f},{LIGHT_POW,LIGHT_POW,LIGHT_POW,1.0f } },
+		{ {1.0f,0.0f,0.0f},{LIGHT_POW,LIGHT_POW,LIGHT_POW,1.0f } },
 	};
 
 	//カメラ
