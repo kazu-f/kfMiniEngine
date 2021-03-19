@@ -18,6 +18,7 @@ void RaceController::OnDestroy()
 	//Œãˆ—íœB
 	DeleteGO(m_LapUI);
 	DeleteGO(m_reverseRunUI);
+	DeleteGO(m_goalUI);
 }
 
 bool RaceController::Start()

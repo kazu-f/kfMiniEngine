@@ -8,7 +8,7 @@
 #define DEBUG_SCENE 1
 #define LIGHTDEMO_SCENE 2
 
-#define START_SCENE LIGHTDEMO_SCENE
+#define START_SCENE GAME_SCENE
 
 ///////////////////////////////////////////////////////////////////
 // ウィンドウプログラムのメイン関数。
