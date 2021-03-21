@@ -14,7 +14,7 @@ public:
 	/// <param name="chara">キャラコン。</param>
 	/// <param name="pos">座標。</param>
 	/// <param name="rot">回転。</param>
-	void Init(CCharacterController* chara, Vector3& pos, Quaternion& rot);
+	void Init(CRigidBody* rb, Vector3& pos, Quaternion& rot);
 	/// <summary>
 	/// 更新。
 	/// </summary>
@@ -83,9 +83,9 @@ public:		//ゲット関係。
 	/// <summary>
 	/// キャラコンを取得する。
 	/// </summary>
-	CCharacterController* GetCharaCon()
+	CRigidBody* GetBody()
 	{
-		return m_characon;
+		return m_rigidBody;
 	}
 	bool IsReverseRun()const
 	{
@@ -99,7 +99,7 @@ private:
 	void CalcForward();
 
 private:
-	CCharacterController* m_characon = nullptr;			//キャラコン。
+	CRigidBody* m_rigidBody = nullptr;					//判定を行う剛体。
 	Vector3 m_position = Vector3::Zero;					//座標。
 	Quaternion m_rotation = Quaternion::Identity;		//回転。
 	Vector3 m_forward = Vector3::AxisZ;					//前方向。

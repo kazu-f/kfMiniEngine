@@ -13,7 +13,7 @@ public:
 	//初期化処理。
 	void Init();
 	//キャラコンとの判定。
-	virtual void CheckCharaconHit(CheckedController* checkedCon) = 0;
+	virtual void CheckHit(CheckedController* checkedCon) = 0;
 	/// <summary>
 	/// 逆走判定。
 	/// </summary>

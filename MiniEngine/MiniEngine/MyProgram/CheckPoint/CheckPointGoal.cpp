@@ -9,7 +9,7 @@ CheckPointGoal::~CheckPointGoal()
 {
 }
 
-void CheckPointGoal::CheckCharaconHit(CheckedController* checkedCon)
+void CheckPointGoal::CheckHit(CheckedController* checkedCon)
 {
 	//接触しているか？
 	bool isHit = false;
@@ -27,7 +27,7 @@ void CheckPointGoal::CheckCharaconHit(CheckedController* checkedCon)
 		}
 	);
 	//ゴーストとの判定を行う。
-	PhysicsWorld().ContactTest(*(checkedCon->GetCharaCon()), [&](const btCollisionObject& contactCollisionObject) {
+	PhysicsWorld().ContactTest(*(checkedCon->GetBody()), [&](const btCollisionObject& contactCollisionObject) {
 		//ゴーストと接触している。
 		if (m_ghostObj.IsSelf(contactCollisionObject)) {
 			isHit = true;		//接触している。

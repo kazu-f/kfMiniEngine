@@ -9,10 +9,10 @@ CheckPointNormal::~CheckPointNormal()
 {
 }
 
-void CheckPointNormal::CheckCharaconHit(CheckedController* checkedCon)
+void CheckPointNormal::CheckHit(CheckedController* checkedCon)
 {
 	//ゴーストとの判定を取る。
-	PhysicsWorld().ContactTest(*(checkedCon->GetCharaCon()), [&](const btCollisionObject& contactCollisionObject) {
+	PhysicsWorld().ContactTest(*(checkedCon->GetBody()), [&](const btCollisionObject& contactCollisionObject) {
 		//ゴーストと接触している。
 		if (m_ghostObj.IsSelf(contactCollisionObject)) {
 			//ゴーストからコントローラーへのベクトル。

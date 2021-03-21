@@ -14,6 +14,6 @@ public:
 	/// 判定を行う。
 	/// </summary>
 	/// <param name="checkedCon">チェックされるもの。</param>
-	void CheckCharaconHit(CheckedController* checkedCon) override final;
+	void CheckHit(CheckedController* checkedCon) override final;
 };
 

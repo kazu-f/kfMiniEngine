@@ -9,9 +9,9 @@ CheckedController::~CheckedController()
 {
 }
 
-void CheckedController::Init(CCharacterController* chara, Vector3& pos, Quaternion& rot)
+void CheckedController::Init(CRigidBody* rb, Vector3& pos, Quaternion& rot)
 {
-	m_characon = chara;
+	m_rigidBody = rb;
 	m_position = pos;
 	m_rotation = rot;
 }

@@ -66,9 +66,9 @@ void CheckPointManager::Update()
 		//逆走中か？
 		controller->SetIsReverseRun(m_checkPointList[indexNo]->CheckReverseRun(controller));
 		//チェックポイントの更新があるか？
-		m_checkPointList[(indexNo + checkPointSize - 1) % checkPointSize]->CheckCharaconHit(controller);
-		m_checkPointList[indexNo]->CheckCharaconHit(controller);
-		m_checkPointList[(indexNo + 1) % checkPointSize]->CheckCharaconHit(controller);
+		m_checkPointList[(indexNo + checkPointSize - 1) % checkPointSize]->CheckHit(controller);
+		m_checkPointList[indexNo]->CheckHit(controller);
+		m_checkPointList[(indexNo + 1) % checkPointSize]->CheckHit(controller);
 	}
 }
 

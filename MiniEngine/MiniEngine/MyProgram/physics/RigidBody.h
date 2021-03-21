@@ -20,7 +20,7 @@ namespace Engine {
 		}
 		Vector3 pos;			//座標
 		Quaternion rot;			//回転
-		Vector3 localInteria;	//慣性テンソル。
+		Vector3 localInteria;	//慣性テンソル。回転のしやすさ(0.0f ～ 1.0f)。
 		ICollider* collider;	//コライダー。
 		float mass;				//質量。
 	};///struct RigidBodyInfo

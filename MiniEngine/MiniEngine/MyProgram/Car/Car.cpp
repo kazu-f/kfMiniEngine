@@ -14,6 +14,13 @@ namespace {
 	const float DRIFT_POWER = 1.4f;			//ドリフトの強さ。
 
 	const float DEADROT_SPEED = 0.1f;		//速度が一定以下なら回転しない。
+
+	const Vector3 CAR_SIZE = { 50.0f,50.0f,100.0f };			//車のサイズ。
+	const Vector3 CAR_LOCALINTERIA = { 0.5f,0.5f,0.5f };		//車の回転のしやすさ。
+	const Vector3 CAR_ANGULARFACTOR = { 0.0f,1.0f,0.0f };		//回転軸を設定。
+	const float CAR_MASS = 10.0f;								//車の質量。
+	const float CAR_FRICTION = 10.0f;							//車の摩擦力。
+
 }
 
 const float Car::MOVE_COEFFICIENT = 60.0f;
@@ -47,6 +54,23 @@ bool Car::Start()
 	m_model->SetRotation(m_rotation);
 	m_model->SetShadowCasterFlag(true);
 
+#if 0
+	//車のコリジョンを作成。
+	m_carCollider.Create(CAR_SIZE);
+	//剛体を作成する。
+	RigidBodyInfo rbInfo;
+	rbInfo.collider = &m_carCollider;
+	rbInfo.pos = m_position;
+	rbInfo.rot = m_rotation;
+	rbInfo.localInteria = CAR_LOCALINTERIA;
+	rbInfo.mass = CAR_MASS;
+	m_rigidBody.Create(rbInfo);
+	//摩擦力の設定。
+	m_rigidBody.SetFriction(CAR_FRICTION);
+	//回転軸を設定。
+	m_rigidBody.SetAngularFactor(CAR_ANGULARFACTOR);
+#else
+
 	//キャラコンの初期化。
 	m_charaCon.Init(
 		50.0f,
@@ -56,11 +80,11 @@ bool Car::Start()
 
 	//チェックポイントコントローラーの初期化。
 	m_checkedCon->Init(
-		&m_charaCon,
+		m_charaCon.GetBody(),
 		m_position,
 		m_rotation
 	);
-
+#endif
 
 	return true;
 }

@@ -1,4 +1,5 @@
 #pragma once
+#include "physics/BoxCollider.h"
 
 class ICarState;
 class CarStateIdle;
@@ -86,6 +87,8 @@ protected:
 	prefab::ModelRender* m_model = nullptr;
 	//移動関係。
 	CCharacterController m_charaCon;		//キャラコン。
+	CRigidBody m_rigidBody;					//剛体。
+	CBoxCollider m_carCollider;		//車のコライダー。
 	std::unique_ptr<CheckedController> m_checkedCon;			//チェックポイントに監視される。
 	Vector3 m_position = Vector3::Zero;		//座標。
 	Vector3 m_moveSpeed = Vector3::Zero;	//移動速度。
