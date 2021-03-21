@@ -718,6 +718,16 @@ namespace Engine {
 			SetRotationDeg(g_vec3AxisX, angle);
 		}
 		/// <summary>
+		/// Bulletの回転から変換。
+		/// </summary>
+		void Set(const btQuaternion& rot)
+		{
+			x = rot.x();
+			y = rot.y();
+			z = rot.z();
+			w = rot.w();
+		}
+		/// <summary>
 		/// Y軸周りの回転クォータニオンを作成。
 		/// </summary>
 		/// <param name="axis"></param>
