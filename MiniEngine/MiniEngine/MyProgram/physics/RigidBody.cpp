@@ -8,7 +8,9 @@ namespace Engine {
 	}
 	void CRigidBody::Release()
 	{
-
+		if (m_rigidBody) {
+			PhysicsWorld().RemoveRigidBody(*this);
+		}
 	}
 	void CRigidBody::Create(RigidBodyInfo& rbInfo)
 	{
@@ -23,5 +25,8 @@ namespace Engine {
 		btRigidBody::btRigidBodyConstructionInfo btRbInfo(rbInfo.mass, m_myMotionState.get(), rbInfo.collider->GetBody(), btLocalInteria);
 		//剛体を作成。
 		m_rigidBody = std::make_unique<btRigidBody>(btRbInfo);
+
+		//物理ワールドに登録。
+		PhysicsWorld().AddRigidBody(*this);
 	}
 }

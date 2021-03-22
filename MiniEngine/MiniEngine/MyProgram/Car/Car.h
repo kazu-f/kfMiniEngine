@@ -54,7 +54,7 @@ public:		//Get関数とか
 		return m_checkedCon.get();
 	}
 
-public:		//車の移動などの処理
+protected:		//車の移動などの処理
 	/// <summary>
 	/// 加速度を速度に加算する。
 	/// </summary>
@@ -75,6 +75,15 @@ public:		//車の移動などの処理
 	/// 車の向きを計算する。
 	/// </summary>
 	void CalcDirection();
+
+	/// <summary>
+	/// キャラコンを使った移動。
+	/// </summary>
+	void CharaConMove();
+	/// <summary>
+	/// 剛体の移動。
+	/// </summary>
+	void RigidBodyMove();
 
 protected:
 	static constexpr float MAX_SPEED = 6800.0f;

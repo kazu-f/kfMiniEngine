@@ -4,6 +4,7 @@
 /// </summary>
 
 class Player;
+class PlayerBall;
 class SceneLight;
 class CGameCamera;
 
@@ -24,6 +25,7 @@ private:
 private:
 	CLevel m_courseLevel;
 	Player* m_player = nullptr;
+	PlayerBall* m_ball = nullptr;
 	prefab::CSoundSource* m_bgm = nullptr;
 	prefab::CSoundSource* m_se = nullptr;
 	prefab::CSpriteRender* m_sprite = nullptr;

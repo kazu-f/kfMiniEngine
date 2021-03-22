@@ -390,6 +390,9 @@
     <ClCompile Include="MyProgram\prefab\SpriteRender.cpp">
       <Filter>MyProgram\prefab</Filter>
     </ClCompile>
+    <ClCompile Include="MyProgram\Player\PlayerBall.cpp">
+      <Filter>MyProgram\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tkEngine.h">
@@ -697,6 +700,9 @@
     </ClInclude>
     <ClInclude Include="MyProgram\prefab\SpriteRender.h">
       <Filter>MyProgram\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\Player\PlayerBall.h">
+      <Filter>MyProgram\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

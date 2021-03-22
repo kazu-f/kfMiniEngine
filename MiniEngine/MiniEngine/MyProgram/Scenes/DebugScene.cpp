@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "DebugScene.h"
 #include "Player/Player.h"
+#include "Player/PlayerBall.h"
 #include "GameLight/SceneLight.h"
 #include "GameCamera/GameCamera.h"
 #include "Car/Car.h"
@@ -40,10 +41,14 @@ bool DebugScene::Start()
 	m_courseLevel.Init("Assets/level/testLevel.tkl", [&](SLevelObjectData& objData) {
 		if (wcscmp(objData.name, L"unityChan") == 0) {
 
-			m_player = NewGO<Player>(0);
+			//m_player = NewGO<Player>(0);
+			m_ball = NewGO<PlayerBall>(0);
 
 			return true;
 		}
+		//if (objData.EqualObjectName(L"testbg/testBox")) {
+		//	return true;
+		//}
 
 		return false;
 		});

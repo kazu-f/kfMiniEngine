@@ -60,7 +60,7 @@ namespace Engine {
 		/// </summary>
 		/// <param name="pos"></param>
 		/// <param name="rot"></param>
-		void GetPositonAndRotation(Vector3& pos, Quaternion& rot)
+		void GetPositionAndRotation(Vector3& pos, Quaternion& rot)
 		{
 			btTransform trans;
 			m_myMotionState->getWorldTransform(trans);
@@ -134,6 +134,7 @@ namespace Engine {
 			btVector3 v;
 			v.setValue(angVel.x, angVel.y, angVel.z);
 			m_rigidBody->setAngularVelocity(v);
+			m_rigidBody->activate();
 		}
 		/// <summary>
 		/// ‰ñ“]‰Â”\²‚ğİ’èB
@@ -155,6 +156,13 @@ namespace Engine {
 			v.setValue(angFactor.x, angFactor.y, angFactor.z);
 			m_rigidBody->setAngularFactor(v);
 		}
+
+		void SetGravity(const float g)
+		{
+			btVector3 v;
+			v.setValue(0.0f, -g, 0.0f);
+			m_rigidBody->setGravity(v);
+		}
 		/// <summary>
 		/// —Í‚ğ‰Á‚¦‚éB
 		/// </summary>
@@ -167,6 +175,7 @@ namespace Engine {
 			force.CopyTo(btForce);
 			relPos.CopyTo(btRelPos);
 			m_rigidBody->applyForce(btForce, btRelPos);
+			m_rigidBody->activate();
 		}
 
 	private:

@@ -14,7 +14,7 @@ namespace Engine {
 		//ボックスコライダーを作成。
 		auto boxCollider = std::make_unique<CBoxCollider>();
 		boxCollider->Create(size);
-		m_collider = std::move(boxCollider);
+		m_sphere = std::move(boxCollider);
 		//物理オブジェクトの作成、登録。
 		CreateCommon(pos, rot);
 	}
@@ -24,7 +24,7 @@ namespace Engine {
 		//カプセルコライダーを作成。
 		auto capsuleCollider = std::make_unique<CCapsuleCollider>();
 		capsuleCollider->Create(radius, height);
-		m_collider = std::move(capsuleCollider);
+		m_sphere = std::move(capsuleCollider);
 		//物理オブジェクトの作成、登録。
 		CreateCommon(pos, rot);
 	}
@@ -34,7 +34,7 @@ namespace Engine {
 		//球体コライダーの作成。
 		auto sphereCollider = std::make_unique<CSphereCollider>();
 		sphereCollider->Create(radius);
-		m_collider = std::move(sphereCollider);
+		m_sphere = std::move(sphereCollider);
 		//物理オブジェクトの作成、登録。
 		CreateCommon(pos, rot);
 	}
@@ -44,7 +44,7 @@ namespace Engine {
 		//メッシュコライダーの作成。
 		auto meshCollider = std::make_unique<CMeshCollider>();
 		meshCollider->CreateFromTkmFile(tkmFile, nullptr);
-		m_collider = std::move(meshCollider);
+		m_sphere = std::move(meshCollider);
 		//物理オブジェクト作成、登録。
 		CreateCommon(pos, rot);
 	}
@@ -57,7 +57,7 @@ namespace Engine {
 		//メッシュコライダーの作成。
 		auto meshCollider = std::make_unique<CMeshCollider>();
 		meshCollider->CreateFromModel(model, &mScale);
-		m_collider = std::move(meshCollider);
+		m_sphere = std::move(meshCollider);
 		//物理オブジェクトの作成、登録。
 		CreateCommon(pos, rot);
 	}

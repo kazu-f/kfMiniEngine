@@ -12,7 +12,7 @@ namespace Engine {
 	}
 	void CPhysicsGhostObject::CreateCommon(const Vector3& pos, const Quaternion& rot)
 	{
-		m_ghostObject.setCollisionShape(m_collider->GetBody());
+		m_ghostObject.setCollisionShape(m_sphere->GetBody());
 		btTransform btTrans;
 		btTrans.setOrigin({ pos.x,pos.y,pos.z });
 		btTrans.setRotation({ rot.x,rot.y,rot.z,rot.w });

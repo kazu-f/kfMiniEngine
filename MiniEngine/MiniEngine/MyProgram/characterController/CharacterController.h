@@ -17,7 +17,6 @@ namespace Engine {
 		}
 		~CCharacterController()
 		{
-			RemoveRigidBody();
 		}
 		/// <summary>
 		/// キャラクターコントローラーの初期化。
@@ -58,17 +57,13 @@ namespace Engine {
 		{
 			return &m_rigidBody;
 		}
-		/// <summary>
-		/// 剛体を物理エンジンから削除。
-		/// </summary>
-		void RemoveRigidBody();
 
 	private:
 		bool				m_isInited = false;				//初期化済み？
 		Vector3				m_position = Vector3::Zero;		//座標。
 		bool				m_isJump = false;				//ジャンプ中か？
 		bool				m_isOnGround = true;			//地面上にいるか？
-		CCapsuleCollider	m_collider;						//コライダー。
+		CCapsuleCollider	m_sphere;						//コライダー。
 		float				m_radius = 0.0f;				//カプセルコライダーの半径。
 		float				m_height = 0.0f;				//カプセルコライダーの高さ。
 		CRigidBody			m_rigidBody;					//剛体。

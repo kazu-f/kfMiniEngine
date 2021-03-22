@@ -115,11 +115,11 @@ namespace Engine {
 		//コリジョン作成。
 		m_radius = radius;
 		m_height = height;
-		m_collider.Create(radius, height);
+		m_sphere.Create(radius, height);
 
 		//剛体を初期化。
 		RigidBodyInfo rbInfo;
-		rbInfo.collider = &m_collider;
+		rbInfo.collider = &m_sphere;
 		rbInfo.mass = 0.0f;
 		m_rigidBody.Create(rbInfo);
 		//平行移動を取得。
@@ -128,7 +128,6 @@ namespace Engine {
 		trans.setOrigin(btVector3(position.x, position.y, position.z));
 		m_rigidBody.GetBody()->setUserIndex(enCollisionAttr_Character);
 		m_rigidBody.GetBody()->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
-		PhysicsWorld().AddRigidBody(m_rigidBody);
 		//初期化済み。
 		m_isInited = true;
 	}
@@ -184,7 +183,7 @@ namespace Engine {
 				callback.startPos = posTmp;
 				//衝突検出。
 				PhysicsWorld().ConvexSweepTest(
-					static_cast<const btConvexShape*>(m_collider.GetBody()),
+					static_cast<const btConvexShape*>(m_sphere.GetBody()),
 					start, end, callback
 				);
 
@@ -287,7 +286,7 @@ namespace Engine {
 			if (fabsf(endPos.y - callback.startPos.y) > FLT_EPSILON) {
 				//衝突判定。
 				PhysicsWorld().ConvexSweepTest(
-					(const btConvexShape*)m_collider.GetBody(),
+					(const btConvexShape*)m_sphere.GetBody(),
 					start, end, callback
 				);
 				if (callback.isHit) {
@@ -319,11 +318,6 @@ namespace Engine {
 
 		//移動先の座標を返す。
 		return m_position;
-	}
-	void CCharacterController::RemoveRigidBody()
-	{
-		//死亡したことを通知。
-		PhysicsWorld().RemoveRigidBody(m_rigidBody);
 	}
 }
 

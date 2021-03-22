@@ -84,7 +84,7 @@ namespace Engine {
 		void CreateMesh(const Vector3& pos, const Quaternion& rot, const Vector3& scale, prefab::ModelRender* model);
 
 	protected:
-		std::unique_ptr<ICollider> m_collider;		//コライダー。
+		std::unique_ptr<ICollider> m_sphere;		//コライダー。
 	};///class CPhysicsObjectBase
 
 }///namespace Engine
