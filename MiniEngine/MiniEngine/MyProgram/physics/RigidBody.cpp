@@ -12,7 +12,7 @@ namespace Engine {
 			PhysicsWorld().RemoveRigidBody(*this);
 		}
 	}
-	void CRigidBody::Create(RigidBodyInfo& rbInfo)
+	void CRigidBody::Create(RigidBodyInfo& rbInfo, bool isRegistPhysicsWorld)
 	{
 		btTransform transform;
 		transform.setIdentity();
@@ -26,7 +26,9 @@ namespace Engine {
 		//剛体を作成。
 		m_rigidBody = std::make_unique<btRigidBody>(btRbInfo);
 
-		//物理ワールドに登録。
-		PhysicsWorld().AddRigidBody(*this);
+		if (isRegistPhysicsWorld) {
+			//物理ワールドに登録。
+			PhysicsWorld().AddRigidBody(*this);
+		}
 	}
 }

@@ -33,7 +33,12 @@ namespace Engine {
 	public:
 		~CRigidBody();
 		void Release();		//解放。
-		void Create(RigidBodyInfo& rbInfo);		//剛体を作成。
+		/// <summary>
+		/// 剛体を作成する。
+		/// </summary>
+		/// <param name="rbInfo">剛体情報。</param>
+		/// <param name="isRegistPhysicsWorld">物理ワールドに登録するか？</param>
+		void Create(RigidBodyInfo& rbInfo,bool isRegistPhysicsWorld = true);
 		//剛体を取得。
 		btRigidBody* GetBody()
 		{
