@@ -25,6 +25,9 @@ namespace {
 	const char* GUARDRAIL_ROAD = "Assets/level/RoadGuardrailLevel.tkl";
 	const char* GUARDRAIL_TURNROAD = "Assets/level/RoadTurnGuardrailLevel.tkl";
 	const char* CHECKPOINT_PATH = "Assets/level/CheckPointLevel.tkl";
+
+	const int PHYSICS_DEBUGMODE = 0;
+
 }
 
 
@@ -40,7 +43,7 @@ bool GameScene::Start()
 {
 	bool ret = false;
 
-	PhysicsWorld().SetDebugMode(1);
+	PhysicsWorld().SetDebugMode(PHYSICS_DEBUGMODE);
 
 	switch (m_initState)
 	{
