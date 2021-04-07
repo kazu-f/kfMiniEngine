@@ -11,6 +11,8 @@
 #include "DirectXTK/Inc/ResourceUploadBatch.h"
 
 #include "RenderContext.h"
+#include "RenderTarget.h"
+#include "2D/Sprite.h"
 
 #include "camera/Camera.h"
 
@@ -129,6 +131,13 @@ namespace Engine {
 		UINT GetCbrSrvDescriptorSize() const
 		{
 			return m_cbrSrvDescriptorSize;
+		}
+		/// <summary>
+		/// メインレンダリングターゲットを取得。
+		/// </summary>
+		RenderTarget& GetMainRenderTarget()
+		{
+			return m_mainRenderTarget;
 		}
 		/// <summary>
 		/// レンダリングコンテキストを取得。
@@ -281,6 +290,8 @@ namespace Engine {
 		ID3D12CommandAllocator* m_commandAllocator = nullptr;	//コマンドアロケータ。
 		ID3D12GraphicsCommandList* m_commandList = nullptr;		//コマンドリスト。
 		ID3D12PipelineState* m_pipelineState = nullptr;			//パイプラインステート。
+		RenderTarget m_mainRenderTarget;						//メインレンダリングターゲット。
+		Sprite m_copyFullScreenSprite;							//フルスクリーンコピー用のスプライト。
 		int m_currentBackBufferIndex = 0;						//現在のバックバッファの番号。
 		UINT m_rtvDescriptorSize = 0;							//フレームバッファのディスクリプタのサイズ。
 		UINT m_dsvDescriptorSize = 0;							//深度ステンシルバッファのディスクリプタのサイズ。

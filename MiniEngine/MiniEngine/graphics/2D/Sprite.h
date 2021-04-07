@@ -3,6 +3,7 @@
 #include "graphics/GPUBuffer/Indexbuffer.h"
 #include "graphics/GPUBuffer/VertexBuffer.h"
 #include "graphics/GPUBuffer/ConstantBuffer.h"
+#include "graphics/DescriptorHeap.h"
 
 namespace Engine {
 	class Texture;

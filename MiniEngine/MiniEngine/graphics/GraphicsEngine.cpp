@@ -135,6 +135,20 @@ namespace Engine {
 		//レンダリングコンテキストの作成。
 		m_renderContext.Init(m_commandList);
 
+		//メインレンダリングターゲットの初期化。
+		float clearCol[] = { 0.5f,0.5f,0.5f,1.0f };
+		if(m_mainRenderTarget.Create(
+			static_cast<int>(frameBufferWidth),
+			static_cast<int>(frameBufferHeight),
+			1,
+			1,
+			DXGI_FORMAT_R32G32B32A32_FLOAT,
+			DXGI_FORMAT_D32_FLOAT,
+			clearCol) == false ) {
+			ENGINE_ASSERT(false, "メインレンダリングターゲットの作成に失敗。");
+			return false;
+		}
+
 		//ビューポートを初期化。
 		m_viewport.TopLeftX = 0;
 		m_viewport.TopLeftY = 0;
@@ -183,10 +197,18 @@ namespace Engine {
 		m_defferd = std::make_unique<CDefferdShading>();
 		m_defferd->Init(m_gBuffer.get());
 
-		DXGI_FORMAT effectFormat[] =
-		{
-			DXGI_FORMAT_R8G8B8A8_UNORM
-		};
+		//フルスクリーンコピー用のスプライトの初期化。
+		SpriteInitData spriteData;
+		spriteData.m_fxFilePath = Sprite::SPRITE_SHADER_PATH;
+		spriteData.m_textures[0] = &m_mainRenderTarget.GetRenderTargetTexture();
+		spriteData.m_width = static_cast<float>(frameBufferWidth);
+		spriteData.m_height = static_cast<float>(frameBufferHeight);
+		m_copyFullScreenSprite.Init(spriteData);
+
+		//DXGI_FORMAT effectFormat[] =
+		//{
+		//	DXGI_FORMAT_R8G8B8A8_UNORM
+		//};
 
 		//m_renderer = EffekseerRendererDX12::Create(
 		//	GetD3DDevice(),
@@ -562,8 +584,8 @@ namespace Engine {
 
 	void CGraphicsEngine::ExecuteCommand()
 	{
-		// レンダリングターゲットへの描き込み完了待ち
-		m_renderContext.WaitUntilFinishDrawingToRenderTarget(m_renderTargets[m_frameIndex]);
+		//// レンダリングターゲットへの描き込み完了待ち
+		//m_renderContext.WaitUntilFinishDrawingToRenderTarget(m_renderTargets[m_frameIndex]);
 
 		//レンダリングコンテキストを閉じる。
 		m_renderContext.Close();
