@@ -94,6 +94,6 @@ namespace Engine {
 		}
 		//‘‚«ž‚Ý‚ªI‚í‚é‚Ü‚Å‘Ò‚ÂB
 		rc.WaitUntilFinishDrawingToRenderTargets(arraySize, rts);
-		GraphicsEngine()->ChangeRenderTargetToFrameBuffer(rc);
+		GraphicsEngine()->ChangeToMainRenderTarget(rc);
 	}
 }

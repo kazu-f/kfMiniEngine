@@ -167,7 +167,7 @@ namespace Engine {
 		/// レンダリングターゲットをフレームバッファに変更する。
 		/// </summary>
 		/// <param name="rc"></param>
-		void ChangeRenderTargetToFrameBuffer(RenderContext& rc);
+		void ChangeToMainRenderTarget(RenderContext& rc);
 		/// <summary>
 		/// 現在のフレームバッファのレンダリングターゲットビューを取得。
 		/// </summary>
@@ -312,6 +312,7 @@ namespace Engine {
 		UINT m_frameBufferHeight = 0;		//フレームバッファの高さ。
 		Camera m_camera2D;					//2Dカメラ。
 		Camera m_camera3D;					//3Dカメラ。
+		Camera m_cameraPostEffect;			//ポストエフェクト用カメラ。
 		std::unique_ptr<CLightManager> m_lightManager;		//ライトマネージャー。
 		std::unique_ptr<CShadowMap> m_shadowMap;			//指向性シャドウマップ。
 		std::unique_ptr<CGBufferRender> m_gBuffer;			//GBuffer。

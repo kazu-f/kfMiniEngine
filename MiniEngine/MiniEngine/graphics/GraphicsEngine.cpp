@@ -495,7 +495,7 @@ namespace Engine {
 		//指向性シャドウ回りの処理。
 		m_shadowMap->RenderToShadowMap(m_renderContext);
 		m_shadowMap->WaitEndRenderToShadowMap(m_renderContext);
-		ChangeRenderTargetToFrameBuffer(m_renderContext);
+		ChangeToMainRenderTarget(m_renderContext);
 
 		m_renderContext.SetRenderStep(enRenderStep_PreRender);
 		//Gbufferに書き込みを行う。
@@ -516,7 +516,7 @@ namespace Engine {
 		m_renderContext.SetRenderStep(EnRenderStep::enRenderStep_ForwardRender);
 		//レンダリングターゲットを設定。
 		m_renderContext.SetRenderTarget(
-			m_currentFrameBufferRTVHandle,
+			m_mainRenderTarget.GetRTVCpuDescriptorHandle(),
 			m_gBuffer->GetRenderTarget(EnGBuffer::enGBufferAlbed).GetDSVCpuDescriptorHandle()
 		);
 		//フォワードレンダリングパス。
@@ -543,30 +543,60 @@ namespace Engine {
 		m_renderContext.SetViewport(m_viewport);
 		//シザリング矩形を設定。
 		m_renderContext.SetScissorRect(m_scissorRect);
-
-		m_currentFrameBufferRTVHandle = m_rtvHeap->GetCPUDescriptorHandleForHeapStart();
-		m_currentFrameBufferRTVHandle.ptr += m_frameIndex * m_rtvDescriptorSize;
-		//深度ステンシルバッファのディスクリプタヒープの開始アドレスを取得。
-		m_currentFrameBufferDSVHandle = m_dsvHeap->GetCPUDescriptorHandleForHeapStart();
-		//バックバッファがレンダリングターゲットとして設定可能になるまで待つ。
-		m_renderContext.WaitUntilToPossibleSetRenderTarget(m_renderTargets[m_frameIndex]);
-
+		//レンダリングターゲットをメインにする。
+		//レンダリングターゲットとして利用可能まで待つ。
+		m_renderContext.WaitUntilToPossibleSetRenderTarget(m_mainRenderTarget.GetRenderTargetTexture().Get());
 		//レンダリングターゲットを設定。
-		m_renderContext.SetRenderTarget(m_currentFrameBufferRTVHandle, m_currentFrameBufferDSVHandle);
+		m_renderContext.SetRenderTarget(m_mainRenderTarget.GetRTVCpuDescriptorHandle(), m_mainRenderTarget.GetDSVCpuDescriptorHandle());
+		const float clearColor[] = { 0.5f,0.5f,0.5f,1.0f };
+		m_renderContext.ClearRenderTargetView(m_mainRenderTarget.GetRTVCpuDescriptorHandle(), clearColor);
+		m_renderContext.ClearDepthStencilView(m_mainRenderTarget.GetDSVCpuDescriptorHandle(), 1.0f);
 
-		const float clearColor[] = { 0.5f, 0.5f, 0.5f, 1.0f };
-		m_renderContext.ClearRenderTargetView(m_currentFrameBufferRTVHandle, clearColor);
-		m_renderContext.ClearDepthStencilView(m_currentFrameBufferDSVHandle, 1.0f);
+		//m_currentFrameBufferRTVHandle = m_rtvHeap->GetCPUDescriptorHandleForHeapStart();
+		//m_currentFrameBufferRTVHandle.ptr += m_frameIndex * m_rtvDescriptorSize;
+		////深度ステンシルバッファのディスクリプタヒープの開始アドレスを取得。
+		//m_currentFrameBufferDSVHandle = m_dsvHeap->GetCPUDescriptorHandleForHeapStart();
+		////バックバッファがレンダリングターゲットとして設定可能になるまで待つ。
+		//m_renderContext.WaitUntilToPossibleSetRenderTarget(m_renderTargets[m_frameIndex]);
+
+		////レンダリングターゲットを設定。
+		//m_renderContext.SetRenderTarget(m_currentFrameBufferRTVHandle, m_currentFrameBufferDSVHandle);
+
+		//const float clearColor[] = { 0.5f, 0.5f, 0.5f, 1.0f };
+		//m_renderContext.ClearRenderTargetView(m_currentFrameBufferRTVHandle, clearColor);
+		//m_renderContext.ClearDepthStencilView(m_currentFrameBufferDSVHandle, 1.0f);
 
 	}
-	void CGraphicsEngine::ChangeRenderTargetToFrameBuffer(RenderContext& rc)
+	void CGraphicsEngine::ChangeToMainRenderTarget(RenderContext& rc)
 	{
-		rc.SetRenderTarget(m_currentFrameBufferRTVHandle, m_currentFrameBufferDSVHandle);
+		rc.SetRenderTarget(m_mainRenderTarget.GetRTVCpuDescriptorHandle(), m_mainRenderTarget.GetDSVCpuDescriptorHandle());
 	}
 	void CGraphicsEngine::EndRender()
 	{
-		// レンダリングターゲットへの描き込み完了待ち
-		m_renderContext.WaitUntilFinishDrawingToRenderTarget(m_renderTargets[m_frameIndex]);
+		//バックバッファにテクスチャをコピー
+		{
+			// レンダリングターゲットへの描き込み完了待ち
+			//m_renderContext.WaitUntilFinishDrawingToRenderTarget(m_renderTargets[m_frameIndex]);
+			m_renderContext.WaitUntilFinishDrawingToRenderTarget(m_mainRenderTarget.GetRenderTargetTexture().Get());
+
+			m_currentFrameBufferRTVHandle = m_rtvHeap->GetCPUDescriptorHandleForHeapStart();
+			m_currentFrameBufferRTVHandle.ptr += m_frameIndex * m_rtvDescriptorSize;
+			//深度ステンシルバッファのディスクリプタヒープの開始アドレスを取得。
+			m_currentFrameBufferDSVHandle = m_dsvHeap->GetCPUDescriptorHandleForHeapStart();
+			//バックバッファがレンダリングターゲットとして設定可能になるまで待つ。
+			m_renderContext.WaitUntilToPossibleSetRenderTarget(m_renderTargets[m_frameIndex]);
+
+			//レンダリングターゲットを設定。
+			m_renderContext.SetRenderTarget(m_currentFrameBufferRTVHandle, m_currentFrameBufferDSVHandle);
+
+			const float clearColor[] = { 0.5f, 0.5f, 0.5f, 1.0f };
+			m_renderContext.ClearRenderTargetView(m_currentFrameBufferRTVHandle, clearColor);
+			m_renderContext.ClearDepthStencilView(m_currentFrameBufferDSVHandle, 1.0f);
+
+			m_copyFullScreenSprite.Draw(m_renderContext, m_camera2D.GetViewMatrix(), m_camera2D.GetProjectionMatrix());
+			//レンダリングターゲットへの書き込み完了待ち。
+			m_renderContext.WaitUntilToPossibleSetRenderTarget(m_renderTargets[m_frameIndex]);
+		}
 
 		//レンダリングコンテキストを閉じる。
 		m_renderContext.Close();
