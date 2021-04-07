@@ -20,6 +20,16 @@ namespace Engine {
 			GameEngine().Release();
 			PostQuitMessage(0);
 			break;
+		case WM_KEYDOWN:
+			switch (wParam)
+			{
+			case VK_ESCAPE:
+				DestroyWindow(g_hWnd);
+				break;
+			default:
+				break;
+			}
+
 		default:
 			return DefWindowProc(hWnd, msg, wParam, lParam);
 		}
