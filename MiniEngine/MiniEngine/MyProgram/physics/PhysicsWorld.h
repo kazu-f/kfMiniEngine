@@ -61,6 +61,23 @@ namespace Engine {
 			}
 		}
 		/// <summary>
+		/// 剛体を登録。(マスク付き。)
+		/// </summary>
+		/// <remarks>
+		/// マスクを使うことで当たり判定を行う相手を制限できるらしい。
+		/// </remarks>
+		/// <param name="rb">剛体。</param>
+		/// <param name="grop">グループ？</param>
+		/// <param name="mask">マスク。</param>
+		void AddRigidBody(CRigidBody& rb, short group, short mask)
+		{
+			//登録されていないなら登録。
+			if (rb.IsAddPhysicsWorld() == false) {
+				m_dynamicWorld->addRigidBody(rb.GetBody(),group,mask);
+				rb.SetMarkAddPhysicsWorld();
+			}
+		}
+		/// <summary>
 		/// 剛体を破棄。
 		/// </summary>
 		void RemoveRigidBody(CRigidBody& rb)
@@ -78,6 +95,17 @@ namespace Engine {
 		void AddCollisionObject(btCollisionObject& colliObj)
 		{
 			m_dynamicWorld->addCollisionObject(&colliObj);
+		}
+		/// <summary>
+		/// コリジョンオブジェクトをワールドに登録。(マスク付き。)
+		/// </summary>
+		/// <remarks>当たり判定を行う相手を制御できる？</remarks>
+		/// <param name="colliObj">コリジョンオブジェクト。</param>
+		/// <param name="grounp">グループ？</param>
+		/// <param name="mask">マスク？</param>
+		void AddCollisionObject(btCollisionObject& colliObj,short grounp,short mask)
+		{
+			m_dynamicWorld->addCollisionObject(&colliObj, grounp, mask);
 		}
 		/// <summary>
 		/// コリジョンオブジェクトをワールドから削除。
