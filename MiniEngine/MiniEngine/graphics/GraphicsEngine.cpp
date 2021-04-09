@@ -203,6 +203,7 @@ namespace Engine {
 		spriteData.m_textures[0] = &m_mainRenderTarget.GetRenderTargetTexture();
 		spriteData.m_width = static_cast<float>(frameBufferWidth);
 		spriteData.m_height = static_cast<float>(frameBufferHeight);
+		spriteData.m_isAlpha = false;			//αブレンディングは無効。
 		m_copyFullScreenSprite.Init(spriteData);
 
 		//DXGI_FORMAT effectFormat[] =

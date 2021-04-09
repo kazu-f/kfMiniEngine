@@ -30,6 +30,7 @@ namespace Engine {
 		const char* m_fxFilePath = nullptr;						//.fxファイルのファイルパス。
 		UINT m_width = 0;										//スプライトの幅。
 		UINT m_height = 0;										//スプライトの高さ。
+		bool m_isAlpha = true;									//αブレンディング有効？
 		void* m_expandConstantBuffer = nullptr;					//ユーザー拡張の定数バッファ
 		int m_expandConstantBufferSize = 0;						//ユーザー拡張の定数バッファのサイズ。
 		IShaderResource* m_expandShaderResoruceView = nullptr;	//ユーザー拡張のシェーダーリソース。
@@ -98,7 +99,7 @@ namespace Engine {
 		/// <summary>
 		/// パイプラインステートを初期化する。
 		/// </summary>
-		void InitPipelineState(bool isDraw3D);
+		void InitPipelineState(bool isDraw3D, bool isAlpha);
 		/// <summary>
 		/// 定数バッファを初期化。
 		/// </summary>
