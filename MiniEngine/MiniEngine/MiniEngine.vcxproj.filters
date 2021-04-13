@@ -124,6 +124,9 @@
     <Filter Include="MyProgram\prefab\light">
       <UniqueIdentifier>{0ff9d23b-fa30-4a08-b2db-b38cba3951f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MyProgram\graphics\PostEffect">
+      <UniqueIdentifier>{dedbf358-27ad-473f-86ab-2bdd1a827eff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tkEngine.cpp">
@@ -392,6 +395,12 @@
     </ClCompile>
     <ClCompile Include="MyProgram\Player\PlayerBall.cpp">
       <Filter>MyProgram\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\graphics\PostEffect\PostEffect.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\graphics\PostEffect\Bloom.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -686,9 +695,6 @@
     <ClInclude Include="MyProgram\graphics\PreRender\ShadowMap.h">
       <Filter>MyProgram\graphics\PreRender</Filter>
     </ClInclude>
-    <ClInclude Include="MyProgram\graphics\GraphicsConfig.h">
-      <Filter>MyProgram\graphics\PreRender</Filter>
-    </ClInclude>
     <ClInclude Include="MyProgram\prefab\light\DirectionLight.h">
       <Filter>MyProgram\prefab\light</Filter>
     </ClInclude>
@@ -703,6 +709,15 @@
     </ClInclude>
     <ClInclude Include="MyProgram\Player\PlayerBall.h">
       <Filter>MyProgram\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\graphics\GraphicsConfig.h">
+      <Filter>MyProgram\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\graphics\PostEffect\PostEffect.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\graphics\PostEffect\Bloom.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

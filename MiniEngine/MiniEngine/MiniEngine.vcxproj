@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MyProgram\graphics\PostEffect\Bloom.cpp" />
     <ClCompile Include="MyProgram\Car\Car.cpp" />
     <ClCompile Include="MyProgram\Car\State\CarStateAccele.cpp" />
     <ClCompile Include="MyProgram\Car\State\CarStateBrake.cpp" />
@@ -102,6 +103,7 @@
     <ClCompile Include="math\Matrix.cpp" />
     <ClCompile Include="math\Vector.cpp" />
     <ClCompile Include="MyProgram\Player\PlayerBall.cpp" />
+    <ClCompile Include="MyProgram\graphics\PostEffect\PostEffect.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -114,6 +116,7 @@
     <ClCompile Include="tkFile\TksFile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MyProgram\graphics\PostEffect\Bloom.h" />
     <ClInclude Include="MiniEngine.h" />
     <ClInclude Include="MyProgram\Car\Car.h" />
     <ClInclude Include="MyProgram\Car\State\CarStateAccele.h" />
@@ -182,6 +185,7 @@
     <ClInclude Include="MyProgram\util\Stopwatch.h" />
     <ClInclude Include="MyProgram\util\Util.h" />
     <ClInclude Include="MyProgram\Player\PlayerBall.h" />
+    <ClInclude Include="MyProgram\graphics\PostEffect\PostEffect.h" />
     <ClInclude Include="system\debugLog.h" />
     <ClInclude Include="camera\Camera.h" />
     <ClInclude Include="d3dx12.h" />
