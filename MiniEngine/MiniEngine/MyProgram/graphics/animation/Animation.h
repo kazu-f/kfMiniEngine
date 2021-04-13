@@ -11,7 +11,7 @@ namespace Engine {
 	class Skeleton;
 	using AnimationEventListener = std::function<void(const wchar_t* clipname, const wchar_t* eventName)>;
 
-	class CAnimation
+	class CAnimation : Noncopyable
 	{
 	public:
 		CAnimation();

@@ -18,7 +18,7 @@ namespace Engine {
 	/// インスタンス化されたLightBaseのインスタンスはすべて登録される。
 	/// このクラスはGraphicsEngineクラスのみが保持する。
 	/// </remarks>
-	class CLightManager
+	class CLightManager : Noncopyable
 	{
 	public:
 		/// <summary>

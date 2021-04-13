@@ -8,7 +8,7 @@ namespace Engine {
 
 	class CGBufferRender;
 
-	class CDefferdShading
+	class CDefferdShading : Noncopyable
 	{
 	public:
 		CDefferdShading() {};

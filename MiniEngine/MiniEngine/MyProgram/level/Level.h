@@ -43,7 +43,7 @@ namespace Engine {
 	/// <summary>
 	/// ƒŒƒxƒ‹B
 	/// </summary>
-	class CLevel
+	class CLevel : Noncopyable
 	{
 	private:
 		using CMapChipPtr = std::unique_ptr<CMapChip>;

@@ -12,7 +12,7 @@ namespace Engine {
 	/// <para>waveファイルの同期読み込み、非同期読み込みをサポートする。</para>
 	/// <para>CWave::Readは同期読み込み、CWaveFile::ReadAsyncは非同期読み込みが行われる。</para>
 	/// </remarks>
-	class CWaveFile
+	class CWaveFile : Noncopyable
 	{
 	public:
 		CWaveFile();

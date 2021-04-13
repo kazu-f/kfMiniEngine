@@ -6,7 +6,7 @@
 namespace Engine {
 	class CCharacterController;
 
-	class CPhysicsWorld
+	class CPhysicsWorld : Noncopyable
 	{
 		std::unique_ptr<btDefaultCollisionConfiguration>	 m_collisionConfig;		//コリジョンの設定？
 		std::unique_ptr<btCollisionDispatcher>				 m_collisionDispatcher;	//衝突解決処理。

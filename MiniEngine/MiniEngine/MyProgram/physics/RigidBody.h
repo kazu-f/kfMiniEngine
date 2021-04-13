@@ -28,7 +28,7 @@ namespace Engine {
 	/// <summary>
 	/// 剛体クラス。
 	/// </summary>
-	class CRigidBody
+	class CRigidBody : Noncopyable
 	{					//物理ワールドに追加されているか？
 	public:
 		~CRigidBody();

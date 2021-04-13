@@ -6,7 +6,7 @@ namespace Engine {
 	/// <summary>
 	/// ゲームタイム。
 	/// </summary>
-	class CGameTime
+	class CGameTime : Noncopyable
 	{
 	public:
 		/// <summary>

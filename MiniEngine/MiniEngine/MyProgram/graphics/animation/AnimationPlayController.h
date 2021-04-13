@@ -16,7 +16,7 @@ namespace Engine {
 	/// 一つのアニメーションクリップに対してアニメーションを進めて、ローカルポーズを計算する。
 	/// </remarks>
 
-	class CAnimationPlayController
+	class CAnimationPlayController : Noncopyable
 	{
 	public:
 		//コンストラクタ。

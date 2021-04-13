@@ -18,7 +18,7 @@ printf("経過時間 = %lf(単位：ミリ)\n", sw.GetElapsedMillisecond());
 *
 */
 namespace Engine {
-	class Stopwatch {
+	class Stopwatch : Noncopyable {
 	public:
 		/*!
 			*@brief	コンストラクタ。

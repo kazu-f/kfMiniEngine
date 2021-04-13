@@ -16,7 +16,7 @@ namespace Engine {
 	/// <summary>
 	/// サウンドエンジンクラス。
 	/// </summary>
-	class CSoundEngine
+	class CSoundEngine : Noncopyable
 	{
 	public:
 		CSoundEngine();		//コンストラクタ。

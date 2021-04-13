@@ -11,7 +11,7 @@ namespace Engine {
 		enGBufferNum,			//GBuffer‚Ì”B
 	};
 
-	class CGBufferRender
+	class CGBufferRender : Noncopyable
 	{
 	public:
 		CGBufferRender();
