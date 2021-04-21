@@ -17,10 +17,10 @@ namespace Engine {
 	/// </summary>
 	struct PrimitiveInitData {
 		EnPrimitiveTopology topology;			//トポロジー。
-		int numVertex = 0;						//頂点数。
+		int vertexSize = 0;						//頂点データのサイズ。
 		int vertexStride = 0;					//頂点のサイズ。
 		void* pSrcVertexBuffer = nullptr;		//頂点データ。
-		int numIndex = 0;						//インデックスバッファの数。
+		int indexSize = 0;						//インデックスバッファデータのサイズ。
 		int indexStride = 0;					//インデックスバッファのサイズ。
 		void* pSrcIndexBuffer = nullptr;		//インデックスデータ。
 
@@ -63,9 +63,9 @@ namespace Engine {
 		/// <summary>
 		/// プリミティブトポロジーを取得。
 		/// </summary>
-		EnPrimitiveTopology GetPrimitiveTopology()
+		D3D12_PRIMITIVE_TOPOLOGY GetPrimitiveTopology()
 		{
-			return m_topology;
+			return static_cast<D3D12_PRIMITIVE_TOPOLOGY>(m_topology);
 		}
 
 	private:

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "graphics/Primitive.h"
 #include "Bloom.h"
 
 namespace Engine {
@@ -16,7 +17,7 @@ namespace Engine {
 		/// <summary>
 		/// デストラクタ。
 		/// </summary>
-		CPostEffect();
+		~CPostEffect();
 		/// <summary>
 		/// 開放。
 		/// </summary>
@@ -31,16 +32,17 @@ namespace Engine {
 		/// </summary>
 		/// <param name="rc">レンダリングコンテキスト。</param>
 		void Render(RenderContext& rc);
-		/// <summary>
-		/// フルスクリーン描画。
-		/// </summary>
-		/// <param name="rc">レンダリングコンテキスト。</param>
-		void DrawFullScreenQuad(RenderContext& rc);
-		/// <summary>
-		/// 最終書き込みのレンダリングターゲットを切り替える。
-		/// </summary>
 
+	private:
+		/// <summary>
+		/// プリミティブを初期化。
+		/// </summary>
+		void InitPrimitive();
 
+	private:
+		CBloom m_bloom;				//ブルーム。
+		CPrimitive m_quadPrimitive;	//四角形プリミティブ。
+		int m_primitiveVertexNum = 0;	//プリミティブの頂点の数。
 	};
 
 }
