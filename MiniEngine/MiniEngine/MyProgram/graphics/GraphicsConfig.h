@@ -23,4 +23,9 @@ namespace Engine {
 		//float	offsetTexelWorld = 0.05f;			//!<ブラーの時にフェッチするオフセット座標。ワールド空間の量。値が大きいほど大きくボケる。
 	};
 
+	struct SPostEffectConfig
+	{
+		bool isBloom = true;					//ブルームを有効にするか？
+	};
+
 }
