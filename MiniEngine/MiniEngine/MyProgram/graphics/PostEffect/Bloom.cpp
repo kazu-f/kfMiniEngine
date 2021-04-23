@@ -198,13 +198,14 @@ namespace Engine {
 		}
 
 		m_combineMainRenderTargetDescriptorHeap.RegistShaderResource(0, m_combineRT.GetRenderTargetTexture());
-		m_combineBlurDescriptorHeap.Commit();
+		m_combineMainRenderTargetDescriptorHeap.Commit();
 	}
 	void CBloom::UpdateWeight(float dispersion)
 	{
 		float total = 0;
 		for (int i = 0; i < NUM_WEIGHTS; i++) {
 			m_blurParam.weights[i] = expf(-0.5f * static_cast<float>(i * i) / dispersion);
+			total += m_blurParam.weights[i];
 		}
 		//規格化
 		for (int i = 0; i < NUM_WEIGHTS; i++) {
@@ -214,18 +215,126 @@ namespace Engine {
 	}
 	void CBloom::SamplingLuminance(RenderContext& rc)
 	{
+		//メインレンダリングターゲットをテクスチャとして利用出来るようになるまで待機。
+		rc.WaitUntilToPossibleSetRenderTarget(m_luminanceRT);
+		//パイプラインステートを設定。
+		rc.SetPipelineState(m_samplingLuminancePipelineState);
+		//レンダリングターゲットを輝度抽出用に切り替える。
+		rc.SetRenderTargetAndViewport(&m_luminanceRT);
+		//クリアカラーを設定。
+		const float clearColor[] = { 0.0f,0.0f,0.0f,1.0f };
+		rc.ClearRenderTargetView(m_luminanceRT.GetRTVCpuDescriptorHandle(), clearColor);
+		//シェーダーリソースビューと定数バッファをセットする。
+		rc.SetDescriptorHeap(m_sampleLuminanceDiscriptorHeap);
+		//輝度抽出テクスチャを描画する。
+		rc.DrawIndexed(4);
+		//描画完了待ち。
+		rc.WaitUntilFinishDrawingToRenderTarget(m_luminanceRT);
 	}
 	void CBloom::BlurLuminanceTexture(RenderContext& rc)
 	{
+		//テクスチャ。
+		RenderTarget* prevRt = &m_luminanceRT;
+		//レンダリングターゲットのインデックス。
+		int rtIndex = 0;
+		//ブラーを掛けていく。
+		for (int i = 0; i < NUM_DOWN_SAMPRING_RT / 2; i++){
+			//Xブラー。
+			{
+				m_blurParam.offset.x = 16.0f / prevRt->GetWidth();
+				m_blurParam.offset.y = 0.0f;
+				//定数バッファの値を更新。
+				m_blurParamCB[rtIndex].CopyToVRAM(&m_blurParam);
+
+				//メインレンダリングターゲットとして利用可能待ち。
+				rc.WaitUntilToPossibleSetRenderTarget(m_downSamplingRT[rtIndex]);
+				//Xブラー用のパイプラインステートを設定。
+				rc.SetPipelineState(m_xblurLuminancePipelineState);
+				//レンダリングターゲットを設定。
+				rc.SetRenderTargetAndViewport(&m_downSamplingRT[rtIndex]);
+				//シェーダーリソースビューと定数バッファのセット。
+				rc.SetDescriptorHeap(m_downSampleDescriptorHeap[rtIndex]);
+				//ドローコール。
+				rc.DrawIndexed(4);
+				//描画完了待ち。
+				rc.WaitUntilFinishDrawingToRenderTarget(m_downSamplingRT[rtIndex]);
+			}
+			//Yブラー用にテクスチャ変更。
+			prevRt = &m_downSamplingRT[rtIndex];
+			rtIndex++;
+
+			//Yブラー。
+			{
+				m_blurParam.offset.x = 0.0f;
+				m_blurParam.offset.y = 16.0f/ prevRt->GetWidth();
+				//定数バッファの値を更新。
+				m_blurParamCB[rtIndex].CopyToVRAM(&m_blurParam);
+
+				//メインレンダリングターゲットとして利用可能待ち。
+				rc.WaitUntilToPossibleSetRenderTarget(m_downSamplingRT[rtIndex]);
+				//Yブラー用のパイプラインステートを設定。
+				rc.SetPipelineState(m_yblurLuminancePipelineState);
+				//レンダリングターゲットを設定。
+				rc.SetRenderTargetAndViewport(&m_downSamplingRT[rtIndex]);
+				//シェーダーリソースビューと定数バッファのセット。
+				rc.SetDescriptorHeap(m_downSampleDescriptorHeap[rtIndex]);
+				//ドローコール。
+				rc.DrawIndexed(4);
+				//描画完了待ち。
+				rc.WaitUntilFinishDrawingToRenderTarget(m_downSamplingRT[rtIndex]);
+			}
+			//ダウンサンプリングした後のテクスチャに変更。
+			prevRt = &m_downSamplingRT[rtIndex];
+			rtIndex++;
+		}
+
 	}
 	void CBloom::CombineBlurImage(RenderContext& rc)
 	{
+		//メインレンダリングターゲットとして利用可能待ち。
+		rc.WaitUntilFinishDrawingToRenderTarget(m_combineRT);
+		//ボケ合成用のパイプラインステートをセット。
+		rc.SetPipelineState(m_combineBlurImagePipelineState);
+		//レンダリングターゲットを設定。
+		rc.SetRenderTargetAndViewport(&m_combineRT);
+
+		//ディスクリプタヒープをセット。
+		rc.SetDescriptorHeap(m_combineBlurDescriptorHeap);
+		//ドローコール。
+		rc.DrawIndexed(4);
+		//描画完了待ち。
+		rc.WaitUntilFinishDrawingToRenderTarget(m_combineRT);
 	}
 	void CBloom::CombineMainRenderTarget(RenderContext& rc)
 	{
+		//メインレンダリングターゲットを取得。
+		auto& mainRT = GraphicsEngine()->GetMainRenderTarget();
+		//レンダリングターゲット利用可能待ち。
+		rc.WaitUntilToPossibleSetRenderTarget(mainRT);
+		//メインレンダリングターゲットに合成するためのパイプラインステートをセット。
+		rc.SetPipelineState(m_combineMainRenderTargetPipelineState);
+		//レンダリングターゲットを設定。
+		rc.SetRenderTargetAndViewport(&mainRT);
+
+		//ディスクリプタヒープの設定。
+		rc.SetDescriptorHeap(m_combineMainRenderTargetDescriptorHeap);
+		//ドローコール。
+		rc.DrawIndexed(4);
 	}
 	void CBloom::Render(RenderContext& rc)
 	{
+		//重みを更新。
+		UpdateWeight(25.0f);
+		//ルートシグネチャを設定。
+		rc.SetRootSignature(m_rootSignature);
+		//輝度を抽出。
+		SamplingLuminance(rc);
+		//輝度をぼかす。
+		BlurLuminanceTexture(rc);
+		//ぼかした画像を合成。
+		CombineBlurImage(rc);
+		//メインレンダリングターゲットに合成。
+		CombineMainRenderTarget(rc);
 	}
 }
 

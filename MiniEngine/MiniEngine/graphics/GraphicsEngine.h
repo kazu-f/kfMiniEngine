@@ -22,6 +22,7 @@ namespace Engine {
 	class CShadowMap;
 	class CGBufferRender;
 	class CDefferdShading;
+	class CPostEffect;
 
 	/// <summary>
 	/// DirectX12に依存するグラフィックスエンジン
@@ -317,6 +318,8 @@ namespace Engine {
 		std::unique_ptr<CShadowMap> m_shadowMap;			//指向性シャドウマップ。
 		std::unique_ptr<CGBufferRender> m_gBuffer;			//GBuffer。
 		std::unique_ptr<CDefferdShading> m_defferd;			//ディファード。
+		std::unique_ptr<CPostEffect> m_postEffect;			//ポストエフェクト。
+
 		int m_vsyncInterval = 1;							//VSyncの間隔
 		////エフェクト関係
 		//EffekseerRenderer::RendererRef m_renderer;

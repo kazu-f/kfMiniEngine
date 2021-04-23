@@ -19,15 +19,22 @@ namespace Engine {
 	}
 	void CPostEffect::Create(const SPostEffectConfig& config)
 	{
-
+		//ブルームを初期化。
+		m_bloom.Init(config);
 		//四角形プリミティブを初期化。
 		InitPrimitive();
 	}
 	void CPostEffect::Render(RenderContext& rc)
 	{
+		//頂点バッファを設定。
 		rc.SetVertexBuffer(m_quadPrimitive.GetVertexBuffer());
+		//インデックスバッファを設定。
 		rc.SetIndexBuffer(m_quadPrimitive.GetIndexBuffer());
+		//プリミティブトポロジーを設定。
 		rc.SetPrimitiveTopology(m_quadPrimitive.GetPrimitiveTopology());
+
+		//ブルーム。
+		m_bloom.Render(rc);
 	}
 	void CPostEffect::InitPrimitive()
 	{

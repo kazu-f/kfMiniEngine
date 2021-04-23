@@ -1,3 +1,4 @@
+#include "RenderContext.h"
 #pragma once
 
 namespace Engine {
@@ -51,6 +52,31 @@ namespace Engine {
 	{
 		for (int i = 0; i < numRt; i++) {
 			WaitUntilFinishDrawingToRenderTarget(*renderTargets[i]);
+		}
+	}
+	inline void RenderContext::SetRenderTargetAndViewport(RenderTarget* renderTarget)
+	{
+		D3D12_VIEWPORT viewport;
+		viewport.TopLeftX = 0;
+		viewport.TopLeftY = 0;
+		viewport.Width = static_cast<float>(renderTarget->GetWidth());
+		viewport.Height = static_cast<float>(renderTarget->GetHeight());
+		viewport.MinDepth = D3D12_MIN_DEPTH;
+		viewport.MaxDepth = D3D12_MAX_DEPTH;
+		SetViewport(viewport);
+		SetRenderTarget(renderTarget);
+	}
+	inline void RenderContext::SetRenderTarget(RenderTarget* renderTarget)
+	{
+		auto rtvHandle = renderTarget->GetRTVCpuDescriptorHandle();
+		if (renderTarget->IsExsitDepthStencilBuffer())
+		{
+			auto dsvHandle = renderTarget->GetDSVCpuDescriptorHandle();
+			m_commandList->OMSetRenderTargets(1, &rtvHandle, FALSE, &dsvHandle);
+		}
+		else {
+			//デプスステンシルバッファはない。
+			m_commandList->OMSetRenderTargets(1, &rtvHandle, FALSE, nullptr);
 		}
 	}
 	inline void RenderContext::SetRenderTargets(UINT numRT, RenderTarget* renderTargets[])

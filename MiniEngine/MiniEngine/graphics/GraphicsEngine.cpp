@@ -196,6 +196,12 @@ namespace Engine {
 		//ディファード用クラス作成。
 		m_defferd = std::make_unique<CDefferdShading>();
 		m_defferd->Init(m_gBuffer.get());
+		//ポストエフェクト。
+		SPostEffectConfig postEffectConfig;
+		postEffectConfig.isBloom = true;
+
+		m_postEffect = std::make_unique<CPostEffect>();
+		m_postEffect->Create(postEffectConfig);
 
 		//フルスクリーンコピー用のスプライトの初期化。
 		SpriteInitData spriteData;
@@ -529,6 +535,10 @@ namespace Engine {
 	{
 		//レンダリングステップをポストレンダリングにする。
 		m_renderContext.SetRenderStep(EnRenderStep::enRenderStep_PostRender);
+
+		//ポストエフェクトを掛ける。
+		m_postEffect->Render(m_renderContext);
+
 		goMgr->PostRender(m_renderContext);
 	}
 	void CGraphicsEngine::BeginRender()

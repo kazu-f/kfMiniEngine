@@ -143,13 +143,21 @@ namespace Engine {
 		/// <summary>
 		/// レンダリングターゲットとビューポートを同時に設定する。
 		/// </summary>
+		void SetRenderTargetAndViewport(RenderTarget* renderTarget);
+		/// <summary>
+		/// レンダリングターゲットとデプスステンシルバッファを設定する。
+		/// </summary>
 		/// <param name="renderTarget"></param>
 		void SetRenderTarget(D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle, D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle)
 		{
 			m_commandList->OMSetRenderTargets(1, &rtvHandle, FALSE, &dsvHandle);
 		}
 		/// <summary>
-		/// レンダリングターゲットとビューポートを同時に設定する。
+		/// レンダリングターゲットを設定。
+		/// </summary>
+		void SetRenderTarget(RenderTarget* renderTarget);
+		/// <summary>
+		/// マルチレンダリングターゲットを設定する。
 		/// </summary>
 		/// <param name="numRT"></param>
 		/// <param name="renderTarget"></param>

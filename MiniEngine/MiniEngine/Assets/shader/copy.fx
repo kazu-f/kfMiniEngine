@@ -17,7 +17,7 @@ sampler Sampler : register(s0);
 
 PSInput VSMain(VSInput In)
 {
-	PSinput psIn;
+	PSInput psIn;
 	psIn.pos = In.pos;
 	psIn.uv = In.uv;
 	return psIn;
