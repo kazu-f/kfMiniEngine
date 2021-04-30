@@ -10,7 +10,7 @@ namespace Engine {
 	class CSoundEngine;
 
 	class TkEngine : Noncopyable {
-	public:
+	private:
 		/// <summary>
 		/// コンストラクタ。
 		/// </summary>
@@ -19,6 +19,7 @@ namespace Engine {
 		/// デストラクタ。
 		/// </summary>
 		~TkEngine();
+	public:
 		/// <summary>
 		/// 解放処理。
 		/// </summary>
