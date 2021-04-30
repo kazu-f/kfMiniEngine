@@ -17,12 +17,12 @@ namespace Engine {
 		/// </summary>
 		/// <param name="rc">レンダリングコンテキスト。</param>
 		void Render(RenderContext& rc);
-
-	private:	//初期化等。
 		/// <summary>
 		/// 重みを更新。
 		/// </summary>
 		void UpdateWeight(float dispersion);
+
+	private:	//初期化等。
 		/// <summary>
 		/// レンダリングターゲットを初期化。
 		/// </summary>
@@ -98,6 +98,7 @@ namespace Engine {
 		DescriptorHeap m_combineBlurDescriptorHeap;				//ボケ合成に使用するディスクリプタヒープ。
 		DescriptorHeap m_downSampleDescriptorHeap[NUM_DOWN_SAMPRING_RT];	//ダウンサンプリング用のディスクリプタヒープ。
 		DescriptorHeap m_combineMainRenderTargetDescriptorHeap;	//メインレンダリングターゲットへの合成に使用するディスクリプタヒープ。
+		bool m_isEnable = false;
 	};
 
 }

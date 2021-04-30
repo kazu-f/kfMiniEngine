@@ -53,6 +53,7 @@ namespace Engine {
 		//ディスクリプタヒープを作成。
 		CreateDescriptorHeap();
 
+		m_isEnable = true;
 	}
 	void CBloom::InitRenderTargets()
 	{
@@ -323,6 +324,11 @@ namespace Engine {
 	}
 	void CBloom::Render(RenderContext& rc)
 	{
+		if (!m_isEnable) {
+			//初期化されていない。
+			return;
+		}
+
 		//重みを更新。
 		UpdateWeight(25.0f);
 		//ルートシグネチャを設定。
