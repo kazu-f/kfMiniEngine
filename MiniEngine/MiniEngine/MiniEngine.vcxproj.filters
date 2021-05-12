@@ -127,6 +127,9 @@
     <Filter Include="MyProgram\graphics\PostEffect">
       <UniqueIdentifier>{dedbf358-27ad-473f-86ab-2bdd1a827eff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MyProgram\prefab\nature">
+      <UniqueIdentifier>{7536199a-e996-4a1b-acea-fd760d602e90}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tkEngine.cpp">
@@ -396,14 +399,17 @@
     <ClCompile Include="MyProgram\Player\PlayerBall.cpp">
       <Filter>MyProgram\Player</Filter>
     </ClCompile>
-    <ClCompile Include="MyProgram\graphics\PostEffect\PostEffect.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="MyProgram\prefab\nature\Sky.cpp">
+      <Filter>MyProgram\prefab\nature</Filter>
     </ClCompile>
     <ClCompile Include="MyProgram\graphics\PostEffect\Bloom.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>MyProgram\graphics\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\graphics\PostEffect\PostEffect.cpp">
+      <Filter>MyProgram\graphics\PostEffect</Filter>
     </ClCompile>
     <ClCompile Include="MyProgram\graphics\Primitive.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>MyProgram\graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -716,14 +722,17 @@
     <ClInclude Include="MyProgram\graphics\GraphicsConfig.h">
       <Filter>MyProgram\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="MyProgram\graphics\PostEffect\PostEffect.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="MyProgram\prefab\nature\Sky.h">
+      <Filter>MyProgram\prefab\nature</Filter>
     </ClInclude>
     <ClInclude Include="MyProgram\graphics\PostEffect\Bloom.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>MyProgram\graphics\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\graphics\PostEffect\PostEffect.h">
+      <Filter>MyProgram\graphics\PostEffect</Filter>
     </ClInclude>
     <ClInclude Include="MyProgram\graphics\Primitive.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>MyProgram\graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
