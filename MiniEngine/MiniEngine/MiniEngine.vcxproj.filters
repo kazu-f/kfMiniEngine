@@ -414,6 +414,9 @@
     <ClCompile Include="MyProgram\graphics\PipelineStatesDefault.cpp">
       <Filter>MyProgram\graphics</Filter>
     </ClCompile>
+    <ClCompile Include="MyProgram\graphics\UserMaterial.cpp">
+      <Filter>MyProgram\graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tkEngine.h">
@@ -738,6 +741,9 @@
       <Filter>MyProgram\graphics</Filter>
     </ClInclude>
     <ClInclude Include="MyProgram\graphics\PipelineStatesDefault.h">
+      <Filter>MyProgram\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\graphics\UserMaterial.h">
       <Filter>MyProgram\graphics</Filter>
     </ClInclude>
   </ItemGroup>

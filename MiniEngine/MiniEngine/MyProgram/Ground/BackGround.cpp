@@ -14,7 +14,6 @@ bool BackGround::Start()
 	//モデルの初期化を行う。。
 	m_model = NewGO<prefab::ModelRender>(0);
 	ModelInitData initData;
-	initData.m_fxFilePath = "Assets/shader/model.fx";
 	initData.m_tkmFilePath = "Assets/modelData/Road/Ground.tkm";
 	m_model->Init(initData);
 	m_model->SetPosition(m_position);

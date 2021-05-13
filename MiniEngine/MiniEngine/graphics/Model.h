@@ -15,9 +15,7 @@ namespace Engine {
 	/// </summary>
 	struct ModelInitData {
 		const char* m_tkmFilePath = nullptr;		//tkmファイルパス。
-		const char* m_vsEntryPointFunc = "VSMain";	//頂点シェーダーのエントリーポイント。
-		const char* m_psEntryPointFunc = "PSMain";	//ピクセルシェーダーのエントリーポイント。
-		const char* m_fxFilePath = nullptr;			//.fxファイルのファイルパス。
+		SShaderInitData m_shaderData;				//読み込むシェーダーのデータ。頂点シェーダーとピクセルシェーダーの両方を指定する必要がある。
 		void* m_expandConstantBuffer = nullptr;		//ユーザー拡張の定数バッファ。
 		int m_expandConstantBufferSize = 0;			//ユーザー拡張の定数バッファのサイズ。
 		IShaderResource* m_expandShaderResoruceView = nullptr;	//ユーザー拡張のシェーダーリソース。1111
@@ -29,7 +27,7 @@ namespace Engine {
 	class Model {
 
 	public:
-		static const char* MODEL_SHADER_PAHT;
+		static const wchar_t* MODEL_SHADER_PAHT;
 
 		/// <summary>
 		/// tkmファイルから初期化。

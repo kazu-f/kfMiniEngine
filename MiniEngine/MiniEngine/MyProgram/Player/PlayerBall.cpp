@@ -28,7 +28,6 @@ bool PlayerBall::Start()
 	//モデル情報を設定する。
 	ModelInitData modelData;
 	modelData.m_tkmFilePath = BALL_MODEL;
-	modelData.m_fxFilePath = Model::MODEL_SHADER_PAHT;
 	m_model->Init(modelData);
 
 	//コライダーの作成。

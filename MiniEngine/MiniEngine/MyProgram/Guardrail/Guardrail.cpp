@@ -25,8 +25,6 @@ bool Guardrail::Start()
 	m_model = NewGO<prefab::ModelRender>(0);
 	ModelInitData modelInitData;
 	modelInitData.m_tkmFilePath = m_modelFilePath;
-	modelInitData.m_fxFilePath = "Assets/shader/model.fx";
-	modelInitData.m_vsEntryPointFunc = "VSMainInstancing";
 
 	//‰Šú‰»B
 	m_model->Init(

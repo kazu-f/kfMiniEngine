@@ -1,6 +1,17 @@
 #pragma once
 
 namespace Engine {
+	/// <summary>
+	/// シェーダーの情報。
+	/// <para>主にモデルの初期化などに使う。</para>
+	/// <para>頂点シェーダーとピクセルシェーダーの両方を指定する必要がある。</para>
+	/// </summary>
+	struct SShaderInitData {
+		const wchar_t* vsFxFilePath = nullptr;
+		const char* vsEntryPointFunc = nullptr;
+		const wchar_t* psFxFilePath = nullptr;
+		const char* psEntryPointFunc = nullptr;
+	};
 
 	class Shader {
 	public:

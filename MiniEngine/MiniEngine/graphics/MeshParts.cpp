@@ -2,6 +2,8 @@
 #include "MeshParts.h"
 #include "Skeleton.h"
 #include "Material.h"
+#include "graphics\UserMaterial.h"
+
 namespace Engine {
 	MeshParts::~MeshParts()
 	{
@@ -20,9 +22,7 @@ namespace Engine {
 	}
 	void MeshParts::InitFromTkmFile(
 		const TkmFile& tkmFile,
-		const wchar_t* fxFilePath,
-		const char* vsEntryPointFunc,
-		const char* psEntryPointFunc,
+		const SShaderInitData& shaderData,
 		void* expandData,
 		int expandDataSize,
 		IShaderResource* expandShaderResourceView,
@@ -38,7 +38,7 @@ namespace Engine {
 		int meshNo = 0;
 		tkmFile.QueryMeshParts([&](const TkmFile::SMesh& mesh) {
 			//tkmファイルのメッシュ情報からメッシュを作成する。
-			CreateMeshFromTkmMesh(mesh, meshNo, fxFilePath, vsEntryPointFunc, psEntryPointFunc);
+			CreateMeshFromTkmMesh(mesh, meshNo, shaderData);
 
 
 			meshNo++;
@@ -107,9 +107,7 @@ namespace Engine {
 	void MeshParts::CreateMeshFromTkmMesh(
 		const TkmFile::SMesh& tkmMesh,
 		int meshNo,
-		const wchar_t* fxFilePath,
-		const char* vsEntryPointFunc,
-		const char* psEntryPointFunc)
+		const SShaderInitData& shaderData)
 	{
 		//頂点バッファを作成。
 		int numVertex = (int)tkmMesh.vertexBuffer.size();
@@ -163,13 +161,23 @@ namespace Engine {
 		int matNo = 0;
 		for (auto& tkmMat : tkmMesh.materials) {
 			IMaterial* mat = nullptr;
-			if (mesh->skinFlags[matNo]) {
-				mat = new SkinMaterial;
+			//ファイルパスが指定されていない。
+			if (shaderData.vsFxFilePath == nullptr
+				&& shaderData.psFxFilePath == nullptr) {
+				//あらかじめ用意したシェーダーを使う。
+				if (mesh->skinFlags[matNo]) {
+					mat = new SkinMaterial;
+				}
+				else {
+					mat = new NonSkinMaterial;
+				}
 			}
 			else {
-				mat = new NonSkinMaterial;
+				//新しくシェーダーを作る。
+				mat = new UserMaterial;
 			}
-			mat->InitFromTkmMaterila(tkmMat, fxFilePath, vsEntryPointFunc, psEntryPointFunc);
+
+			mat->InitFromTkmMaterila(tkmMat, shaderData);
 			mesh->m_materials.push_back(mat);
 			matNo++;
 		}

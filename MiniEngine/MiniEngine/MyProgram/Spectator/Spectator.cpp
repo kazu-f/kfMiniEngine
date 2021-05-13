@@ -58,8 +58,6 @@ bool Spectator::Start()
 	);
 #else
 	modelInitData.m_tkmFilePath = m_modelFilePath;
-	modelInitData.m_fxFilePath = "Assets/shader/model.fx";			//モデルシェーダー。
-	modelInitData.m_vsEntryPointFunc = "VSMainSkinInstancing";		//インスタンシング描画。
 	modelInitData.m_modelUpAxis = enModelUpAxis_Z;
 	//アニメーション情報。
 	AnimClipInitData animInitData[1];

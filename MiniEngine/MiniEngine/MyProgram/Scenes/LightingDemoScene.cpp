@@ -37,8 +37,8 @@ namespace {
 	const float CAMERA_ROTSPEED = 90.0f;
 	const float AUTO_ROTSPEED = 0.8f;
 
-	const char* DEMO_SHADER = "Assets/shader/modelDemo.fx";
-	const char* MODEL_SHADER = Model::MODEL_SHADER_PAHT;
+	const wchar_t* DEMO_SHADER = L"Assets/shader/modelDemo.fx";
+	const wchar_t* MODEL_SHADER = Model::MODEL_SHADER_PAHT;
 
 	struct DemoConstantBuffer {
 		int isPBR = 0;		//PBR
@@ -71,7 +71,10 @@ bool LightingDemoScene::Start()
 	m_model = NewGO<prefab::ModelRender>(0);
 
 	ModelInitData modelData;
-	modelData.m_fxFilePath = DEMO_SHADER;
+	modelData.m_shaderData.vsFxFilePath = DEMO_SHADER;
+	modelData.m_shaderData.vsEntryPointFunc = "VSMain";
+	modelData.m_shaderData.psFxFilePath = DEMO_SHADER;
+	modelData.m_shaderData.psEntryPointFunc = "PSMain";
 	modelData.m_tkmFilePath = MODEL_FILEPATH[enDemo_Unity];
 	modelData.m_expandConstantBuffer = &DEMO_CB;
 	modelData.m_expandConstantBufferSize = sizeof(DemoConstantBuffer);

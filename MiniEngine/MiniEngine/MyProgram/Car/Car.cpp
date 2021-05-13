@@ -50,7 +50,6 @@ bool Car::Start()
 	//3Dモデルを作成。
 	ModelInitData initData;
 	initData.m_tkmFilePath = "Assets/modelData/Car/Car.tkm";
-	initData.m_fxFilePath = "Assets/shader/model.fx";
 	m_model = NewGO<prefab::ModelRender>(0);
 	m_model->Init(initData);
 	//モデルの設定。

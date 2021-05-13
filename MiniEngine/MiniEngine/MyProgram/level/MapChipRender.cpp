@@ -39,12 +39,10 @@ namespace Engine {
 		_mbscat_s((unsigned char*)nString, newSize + strConcatSize, (unsigned char*)strConcat);
 
 		ModelInitData initData;
-		initData.m_fxFilePath = "Assets/shader/model.fx";
 		initData.m_tkmFilePath = nString;
 
 		if (m_renderObjDatas.size() > 1) {
 			//インスタンシング描画。
-			initData.m_vsEntryPointFunc = "VSMainInstancing";
 			m_modelRender->Init(initData, nullptr, 0, static_cast<int>(m_renderObjDatas.size()));
 		}
 		else {

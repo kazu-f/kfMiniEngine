@@ -14,8 +14,6 @@ bool Player::Start()
 	//3Dモデルを作成。
 	ModelInitData initData;
 	initData.m_tkmFilePath = "Assets/modelData/unityChan2.tkm";
-	initData.m_fxFilePath = "Assets/shader/model.fx";
-	initData.m_vsEntryPointFunc = "VSMainSkin";
 	//アニメーションの初期化データ。
 	AnimClipInitData animInitData[en_animNum];
 	animInitData[en_animIdle].tkaFilePath = "Assets/animData/idle.tka";

@@ -2,15 +2,10 @@
 #include "Model.h"
 
 namespace Engine {
-	const char* Model::MODEL_SHADER_PAHT = "Assets/shader/model.fx";
+	const wchar_t* Model::MODEL_SHADER_PAHT = L"Assets/shader/model.fx";
 
 	void Model::Init(const ModelInitData& initData, int maxInstance)
 	{
-		//内部のシェーダーをロードする処理が求めているのが
-		//wchar_t型の文字列なので、ここで変換しておく。
-		wchar_t wfxFilePath[256];
-		ENGINE_ASSERT(initData.m_fxFilePath != nullptr,"fxファイルパスが指定されていません。")
-
 		//インスタンシング描画を行う？
 		if (maxInstance > 1) {
 			m_maxInstance = maxInstance;
@@ -18,14 +13,10 @@ namespace Engine {
 			m_instancingDataSB.Init(sizeof(Matrix), maxInstance, m_instancingData.get());
 		}
 
-		mbstowcs(wfxFilePath, initData.m_fxFilePath, 256);
-
 		m_tkmFile.Load(initData.m_tkmFilePath);
 		m_meshParts.InitFromTkmFile(
 			m_tkmFile,
-			wfxFilePath,
-			initData.m_vsEntryPointFunc,
-			initData.m_psEntryPointFunc,
+			initData.m_shaderData,
 			initData.m_expandConstantBuffer,
 			initData.m_expandConstantBufferSize,
 			initData.m_expandShaderResoruceView,

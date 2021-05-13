@@ -12,7 +12,6 @@ namespace Engine {
 	class IMaterial;
 	class IShaderResource;
 
-
 	/// <summary>
 	/// メッシュ
 	/// </summary>
@@ -43,9 +42,7 @@ namespace Engine {
 		/// <param name="maxInstance">インスタンスの最大数</param>
 		void InitFromTkmFile(
 			const TkmFile& tkmFile,
-			const wchar_t* fxFilePath,
-			const char* vsEntryPointFunc,
-			const char* psEntryPointFunc,
+			const SShaderInitData& shaderData,
 			void* expandData,
 			int expandDataSize,
 			IShaderResource* expandShaderResourceView,
@@ -85,9 +82,7 @@ namespace Engine {
 		void CreateMeshFromTkmMesh(
 			const TkmFile::SMesh& mesh,
 			int meshNo,
-			const wchar_t* fxFilePath,
-			const char* vsEntryPointFunc,
-			const char* psEntryPointFunc);
+			const SShaderInitData& shaderData);
 
 		/// <summary>
 		/// ディスクリプタヒープを作成。

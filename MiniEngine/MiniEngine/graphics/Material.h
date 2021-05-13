@@ -2,6 +2,7 @@
 
 #include "tkFile/TkmFile.h"
 
+
 namespace Engine {
 	/// <summary>
 	/// マテリアル。
@@ -12,17 +13,15 @@ namespace Engine {
 		/// tkmファイルのマテリアル情報から初期化する。
 		/// </summary>
 		/// <param name="tkmMat">tkmマテリアル</param>
-		void InitFromTkmMaterila(
+		virtual void InitFromTkmMaterila(
 			const TkmFile::SMaterial& tkmMat,
-			const wchar_t* fxFilePath,
-			const char* vsEntryPointFunc,
-			const char* psEntryPointFunc);
+			const SShaderInitData& shaderData);
 		/// <summary>
 		/// レンダリングを開始するときに呼び出す関数。
 		/// </summary>
 		/// <param name="rc">レンダリングコンテキスト</param>
 		/// <param name="maxInstance">インスタンスの数</param>
-		virtual void BeginRender(RenderContext& rc, int maxInstance = 1);
+		virtual void BeginRender(RenderContext& rc, int maxInstance = 1) = 0;
 
 		/// <summary>
 		/// アルベドマップを取得。
@@ -58,17 +57,6 @@ namespace Engine {
 		}
 	protected:
 		/// <summary>
-		/// パイプラインステートの初期化。
-		/// </summary>
-		void InitPipelineState();
-		/// <summary>
-		/// シェーダーの初期化。
-		/// </summary>
-		/// <param name="fxFilePath">fxファイルのファイルパス</param>
-		/// <param name="vsEntryPointFunc">頂点シェーダーのエントリーポイントの関数名</param>
-		/// <param name="psEntryPointFunc">ピクセルシェーダーのエントリーポイントの関数名</param>
-		virtual void InitShaders(const wchar_t* fxFilePath) = 0;
-		/// <summary>
 		/// テクスチャを初期化。
 		/// </summary>
 		/// <param name="tkmMat"></param>
@@ -86,32 +74,12 @@ namespace Engine {
 		Texture	m_normalMap;							//法線マップ。
 		Texture	m_specularMap;							//スペキュラマップ。
 		ConstantBuffer m_constantBuffer;				//定数バッファ。
-		//RootSignature m_rootSignature;					//ルートシグネチャ。
-		//PipelineState m_ModelPipelineState;				//モデル用のパイプラインステート。
-		//PipelineState m_ModelInstancingPipelineState;	//インスタンシングモデル用のパイプラインステート。
-		//PipelineState m_transModelPipelineState;		//モデル用のパイプラインステート(半透明マテリアル)。
-		//PipelineState m_ModelShadowPipelineState;		//シャドウマップのモデル用のパイプラインステート。
-		//PipelineState m_ModelShadowInstancingPipelineState;		//シャドウマップのインスタンスモデル用。
-
-		//Shader m_vsModel;								//モデル用の頂点シェーダー。
-		//Shader m_vsModelInstancing;						//インスタンシングモデル用の頂点シェーダー。
-		//Shader m_psModel;								//モデル用のピクセルシェーダー。
-		//Shader m_vsModelShadowMap;						//シャドウマップのモデル用の頂点シェーダー。
-		//Shader m_vsModelShadowInstancing;				//シャドウマップのインスタンスモデル用。
-		//Shader m_psModelShadowMap;						//シャドウマップのモデル用のピクセルシェーダー。
-		//Shader m_psTransModel;							//半透明のモデル用のピクセルシェーダー。
 	};
 	/// <summary>
 	/// スキン無しマテリアル。
 	/// </summary>
 	class NonSkinMaterial : public IMaterial {
-	private:
-		/// <summary>
-		/// シェーダーの初期化。
-		/// </summary>
-		/// <param name="fxFilePath">fxファイルのファイルパス</param>
-		void InitShaders(const wchar_t* fxFilePath)override final
-		{};
+	public:
 		/// <summary>
 		/// レンダリングを開始するときに呼び出す関数。
 		/// </summary>
@@ -124,13 +92,7 @@ namespace Engine {
 	/// スキンありマテリアル。
 	/// </summary>
 	class SkinMaterial :public IMaterial{
-	private:
-		/// <summary>
-		/// シェーダーの初期化。
-		/// </summary>
-		/// <param name="fxFilePath">fxファイルのファイルパス</param>
-		void InitShaders(const wchar_t* fxFilePath)override final
-		{};
+	public:
 		/// <summary>
 		/// レンダリングを開始するときに呼び出す関数。
 		/// </summary>
