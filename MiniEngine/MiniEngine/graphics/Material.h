@@ -86,20 +86,20 @@ namespace Engine {
 		Texture	m_normalMap;							//法線マップ。
 		Texture	m_specularMap;							//スペキュラマップ。
 		ConstantBuffer m_constantBuffer;				//定数バッファ。
-		RootSignature m_rootSignature;					//ルートシグネチャ。
-		PipelineState m_ModelPipelineState;				//モデル用のパイプラインステート。
-		PipelineState m_ModelInstancingPipelineState;	//インスタンシングモデル用のパイプラインステート。
-		PipelineState m_transModelPipelineState;		//モデル用のパイプラインステート(半透明マテリアル)。
-		PipelineState m_ModelShadowPipelineState;		//シャドウマップのモデル用のパイプラインステート。
-		PipelineState m_ModelShadowInstancingPipelineState;		//シャドウマップのインスタンスモデル用。
+		//RootSignature m_rootSignature;					//ルートシグネチャ。
+		//PipelineState m_ModelPipelineState;				//モデル用のパイプラインステート。
+		//PipelineState m_ModelInstancingPipelineState;	//インスタンシングモデル用のパイプラインステート。
+		//PipelineState m_transModelPipelineState;		//モデル用のパイプラインステート(半透明マテリアル)。
+		//PipelineState m_ModelShadowPipelineState;		//シャドウマップのモデル用のパイプラインステート。
+		//PipelineState m_ModelShadowInstancingPipelineState;		//シャドウマップのインスタンスモデル用。
 
-		Shader m_vsModel;								//モデル用の頂点シェーダー。
-		Shader m_vsModelInstancing;						//インスタンシングモデル用の頂点シェーダー。
-		Shader m_psModel;								//モデル用のピクセルシェーダー。
-		Shader m_vsModelShadowMap;						//シャドウマップのモデル用の頂点シェーダー。
-		Shader m_vsModelShadowInstancing;				//シャドウマップのインスタンスモデル用。
-		Shader m_psModelShadowMap;						//シャドウマップのモデル用のピクセルシェーダー。
-		Shader m_psTransModel;							//半透明のモデル用のピクセルシェーダー。
+		//Shader m_vsModel;								//モデル用の頂点シェーダー。
+		//Shader m_vsModelInstancing;						//インスタンシングモデル用の頂点シェーダー。
+		//Shader m_psModel;								//モデル用のピクセルシェーダー。
+		//Shader m_vsModelShadowMap;						//シャドウマップのモデル用の頂点シェーダー。
+		//Shader m_vsModelShadowInstancing;				//シャドウマップのインスタンスモデル用。
+		//Shader m_psModelShadowMap;						//シャドウマップのモデル用のピクセルシェーダー。
+		//Shader m_psTransModel;							//半透明のモデル用のピクセルシェーダー。
 	};
 	/// <summary>
 	/// スキン無しマテリアル。
@@ -110,9 +110,14 @@ namespace Engine {
 		/// シェーダーの初期化。
 		/// </summary>
 		/// <param name="fxFilePath">fxファイルのファイルパス</param>
-		void InitShaders(const wchar_t* fxFilePath)override final;
-
-	private:
+		void InitShaders(const wchar_t* fxFilePath)override final
+		{};
+		/// <summary>
+		/// レンダリングを開始するときに呼び出す関数。
+		/// </summary>
+		/// <param name="rc">レンダリングコンテキスト</param>
+		/// <param name="maxInstance">インスタンスの数</param>
+		void BeginRender(RenderContext& rc, int maxInstance = 1) override final;
 
 	};
 	/// <summary>
@@ -124,7 +129,13 @@ namespace Engine {
 		/// シェーダーの初期化。
 		/// </summary>
 		/// <param name="fxFilePath">fxファイルのファイルパス</param>
-		void InitShaders(const wchar_t* fxFilePath)override final;
-
+		void InitShaders(const wchar_t* fxFilePath)override final
+		{};
+		/// <summary>
+		/// レンダリングを開始するときに呼び出す関数。
+		/// </summary>
+		/// <param name="rc">レンダリングコンテキスト</param>
+		/// <param name="maxInstance">インスタンスの数</param>
+		void BeginRender(RenderContext& rc, int maxInstance = 1) override final;
 	};
 }

@@ -106,6 +106,7 @@
     <ClCompile Include="MyProgram\graphics\PostEffect\PostEffect.cpp" />
     <ClCompile Include="MyProgram\graphics\Primitive.cpp" />
     <ClCompile Include="MyProgram\prefab\nature\Sky.cpp" />
+    <ClCompile Include="MyProgram\graphics\PipelineStatesDefault.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -190,6 +191,7 @@
     <ClInclude Include="MyProgram\graphics\PostEffect\PostEffect.h" />
     <ClInclude Include="MyProgram\graphics\Primitive.h" />
     <ClInclude Include="MyProgram\prefab\nature\Sky.h" />
+    <ClInclude Include="MyProgram\graphics\PipelineStatesDefault.h" />
     <ClInclude Include="system\debugLog.h" />
     <ClInclude Include="camera\Camera.h" />
     <ClInclude Include="d3dx12.h" />

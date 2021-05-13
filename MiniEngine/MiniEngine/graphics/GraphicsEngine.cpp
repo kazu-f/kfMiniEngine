@@ -149,6 +149,9 @@ namespace Engine {
 			return false;
 		}
 
+		//パイプラインステートを初期化。
+		CPipelineStatesDefault::Init();
+
 		//ビューポートを初期化。
 		m_viewport.TopLeftX = 0;
 		m_viewport.TopLeftY = 0;
