@@ -25,10 +25,7 @@ namespace Engine {
 	/// モデルクラス。
 	/// </summary>
 	class Model {
-
 	public:
-		static const wchar_t* MODEL_SHADER_PAHT;
-
 		/// <summary>
 		/// tkmファイルから初期化。
 		/// </summary>

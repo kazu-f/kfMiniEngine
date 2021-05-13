@@ -3,6 +3,19 @@
 
 namespace Engine
 {
+	const wchar_t* CPipelineStatesDefault::MODEL_SHADER_PAHT = L"Assets/shader/model.fx";
+	const char* CPipelineStatesDefault::VS_MODEL_ENTRY_POINT = "VSMain";
+	const char* CPipelineStatesDefault::VS_MODELINSTANCING_ENTRY_POINT = "VSMainInstancing";
+	const char* CPipelineStatesDefault::VS_SKINMODEL_ENTRY_POINT = "VSMainSkin";
+	const char* CPipelineStatesDefault::VS_SKINMODELINTANCING_ENTRY_POINT = "VSMainSkinInstancing";
+	const char* CPipelineStatesDefault::VS_MODEL_SHADOW_ENTRY_POINT = "VSMainNonSkinShadowMap";
+	const char* CPipelineStatesDefault::VS_MODEL_SHADOWINSTANCING_ENTRY_POINT = "VSMainNonSkinInstancingShadowMap";
+	const char* CPipelineStatesDefault::VS_SKINMODEL_SHADOW_ENTRY_POINT = "VSMainSkinShadowMap";
+	const char* CPipelineStatesDefault::VS_SKINMODEL_SHADOWINSTANCING_ENTRY_POINT = "VSMainSkinInstancingShadowMap";
+	const char* CPipelineStatesDefault::PS_GBUFFER_ENTRY_POINT = "PSMain_RenderGBuffer";
+	const char* CPipelineStatesDefault::PS_SHADOW_ENTRY_POINT = "PSMainShadowMap";
+	const char* CPipelineStatesDefault::PS_TRANS_ENTRY_POINT = "PSMain";
+
 	RootSignature CPipelineStatesDefault::m_modelDrawRootSignature;			//モデル描画用のルートシグネチャ。
 	Shader CPipelineStatesDefault::m_vsModel;								//モデル用の頂点シェーダー。
 	Shader CPipelineStatesDefault::m_vsModelInstancing;						//インスタンシングモデル用の頂点シェーダー。
@@ -27,7 +40,6 @@ namespace Engine
 	PipelineState CPipelineStatesDefault::m_SkinModelShadowPipelineState;		//シャドウマップのモデル用のパイプラインステート。(スキンあり)
 	PipelineState CPipelineStatesDefault::m_SkinModelShadowInstancingPipelineState;		//シャドウマップのインスタンスモデル用。(スキンあり)
 
-	const wchar_t* MODEL_FX_PAHT = L"Assets/shader/model.fx";
 
 	void CPipelineStatesDefault::Init()
 	{
@@ -39,23 +51,23 @@ namespace Engine
 	void CPipelineStatesDefault::InitShaders()
 	{
 		//モデルの頂点シェーダー。
-		m_vsModel.LoadVS(MODEL_FX_PAHT, "VSMain");
-		m_vsModelInstancing.LoadVS(MODEL_FX_PAHT, "VSMainInstancing");
-		m_vsSkinModel.LoadVS(MODEL_FX_PAHT, "VSMainSkin");
-		m_vsSkinModelInstancing.LoadVS(MODEL_FX_PAHT, "VSMainSkinInstancing");
+		m_vsModel.LoadVS(MODEL_SHADER_PAHT, VS_MODEL_ENTRY_POINT);
+		m_vsModelInstancing.LoadVS(MODEL_SHADER_PAHT, VS_MODELINSTANCING_ENTRY_POINT);
+		m_vsSkinModel.LoadVS(MODEL_SHADER_PAHT, VS_SKINMODEL_ENTRY_POINT);
+		m_vsSkinModelInstancing.LoadVS(MODEL_SHADER_PAHT, VS_SKINMODELINTANCING_ENTRY_POINT);
 
 		//GBufferに書き込むピクセルシェーダー。
-		m_psModel.LoadPS(MODEL_FX_PAHT, "PSMain_RenderGBuffer");
+		m_psModel.LoadPS(MODEL_SHADER_PAHT, PS_GBUFFER_ENTRY_POINT);
 
 		//シャドウマップ関連。
-		m_vsModelShadowMap.LoadVS(MODEL_FX_PAHT, "VSMainNonSkinShadowMap");
-		m_vsModelShadowInstancing.LoadVS(MODEL_FX_PAHT, "VSMainNonSkinInstancingShadowMap");
-		m_vsSkinModelShadowMap.LoadVS(MODEL_FX_PAHT, "VSMainSkinShadowMap");
-		m_vsSkinModelShadowInstancing.LoadVS(MODEL_FX_PAHT, "VSMainSkinInstancingShadowMap");
-		m_psModelShadowMap.LoadPS(MODEL_FX_PAHT, "PSMainShadowMap");
+		m_vsModelShadowMap.LoadVS(MODEL_SHADER_PAHT, VS_MODEL_SHADOW_ENTRY_POINT);
+		m_vsModelShadowInstancing.LoadVS(MODEL_SHADER_PAHT, VS_MODEL_SHADOWINSTANCING_ENTRY_POINT);
+		m_vsSkinModelShadowMap.LoadVS(MODEL_SHADER_PAHT, VS_SKINMODEL_SHADOW_ENTRY_POINT);
+		m_vsSkinModelShadowInstancing.LoadVS(MODEL_SHADER_PAHT, VS_SKINMODEL_SHADOWINSTANCING_ENTRY_POINT);
+		m_psModelShadowMap.LoadPS(MODEL_SHADER_PAHT, PS_SHADOW_ENTRY_POINT);
 
 		//透過オブジェクト描画。
-		m_psTransModel.LoadPS(MODEL_FX_PAHT, "PSMain");
+		m_psTransModel.LoadPS(MODEL_SHADER_PAHT, PS_TRANS_ENTRY_POINT);
 	}
 
 	void CPipelineStatesDefault::InitRootSignature()

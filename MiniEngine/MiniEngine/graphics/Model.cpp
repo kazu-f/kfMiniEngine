@@ -2,8 +2,6 @@
 #include "Model.h"
 
 namespace Engine {
-	const wchar_t* Model::MODEL_SHADER_PAHT = L"Assets/shader/model.fx";
-
 	void Model::Init(const ModelInitData& initData, int maxInstance)
 	{
 		//インスタンシング描画を行う？

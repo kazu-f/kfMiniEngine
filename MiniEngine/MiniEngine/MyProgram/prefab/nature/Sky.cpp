@@ -21,17 +21,14 @@ namespace Engine {
 
 		bool CSky::Start()
 		{
-			////モデルレンダー。
-			//m_modelRender = NewGO<prefab::ModelRender>(0);
-			//m_modelData.m_tkmFilePath = m_skyModelFilePath.c_str();
+			//モデルレンダー。
+			m_modelRender = NewGO<prefab::ModelRender>(0);
+			m_modelData.m_tkmFilePath = m_skyModelFilePath.c_str();
+			m_modelData.m_shaderData.vsFxFilePath = CPipelineStatesDefault::MODEL_SHADER_PAHT;
+			m_modelData.m_shaderData.vsEntryPointFunc = CPipelineStatesDefault::VS_MODEL_ENTRY_POINT;
+			m_modelRender->Init(m_modelData);
 
-			//m_modelRender->Init(m_modelData);
-
-			//if (m_modelRender->IsStart())
-			//{
-			//	m_skyCube.InitFromDDSFile(m_skyCubeMapFilePath.c_str());
-
-			//}
+			m_skyCube.InitFromDDSFile(m_skyCubeMapFilePath.c_str());
 
 			return true;
 		}

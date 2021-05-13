@@ -7,6 +7,20 @@ namespace Engine {
 	class CPipelineStatesDefault
 	{
 	public:
+		static const wchar_t* MODEL_SHADER_PAHT;
+		static const char* VS_MODEL_ENTRY_POINT;
+		static const char* VS_MODELINSTANCING_ENTRY_POINT;
+		static const char* VS_SKINMODEL_ENTRY_POINT;
+		static const char* VS_SKINMODELINTANCING_ENTRY_POINT;
+		static const char* VS_MODEL_SHADOW_ENTRY_POINT;
+		static const char* VS_MODEL_SHADOWINSTANCING_ENTRY_POINT;
+		static const char* VS_SKINMODEL_SHADOW_ENTRY_POINT;
+		static const char* VS_SKINMODEL_SHADOWINSTANCING_ENTRY_POINT;
+		static const char* PS_GBUFFER_ENTRY_POINT;
+		static const char* PS_SHADOW_ENTRY_POINT;
+		static const char* PS_TRANS_ENTRY_POINT;
+
+	public:
 		static void Init();
 		static RootSignature m_modelDrawRootSignature;			//モデル描画用のルートシグネチャ。
 		static Shader m_vsModel;								//モデル用の頂点シェーダー。
