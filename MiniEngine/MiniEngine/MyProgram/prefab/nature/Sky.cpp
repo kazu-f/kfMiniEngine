@@ -6,8 +6,9 @@ namespace Engine {
 	namespace prefab {
 
 		namespace {
-			const wchar_t* SKY_SHADER_FILEPATH = nullptr;
-			const char* PS_SKY_ENTRY_POINT = nullptr;
+			const wchar_t* SKY_SHADER_FILEPATH = L"Assets/shader/SkyCube.fx";
+			const char* VS_SKY_ENTRY_POINT = "VSMain_SkyCube";
+			const char* PS_SKY_ENTRY_POINT = "PSMain_SkyCube";
 		}
 
 
@@ -29,8 +30,8 @@ namespace Engine {
 			//モデルレンダー。
 			m_modelRender = NewGO<prefab::ModelRender>(0);
 			m_modelData.m_tkmFilePath = m_skyModelFilePath.c_str();
-			m_modelData.m_shaderData.vsFxFilePath = CPipelineStatesDefault::MODEL_SHADER_PAHT;
-			m_modelData.m_shaderData.vsEntryPointFunc = CPipelineStatesDefault::VS_MODEL_ENTRY_POINT;
+			m_modelData.m_shaderData.vsFxFilePath = SKY_SHADER_FILEPATH;
+			m_modelData.m_shaderData.vsEntryPointFunc = VS_SKY_ENTRY_POINT;
 			m_modelData.m_shaderData.psFxFilePath = SKY_SHADER_FILEPATH;
 			m_modelData.m_shaderData.psEntryPointFunc = PS_SKY_ENTRY_POINT;
 			m_modelRender->Init(m_modelData);
