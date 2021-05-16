@@ -62,6 +62,14 @@ namespace Engine {
 				//初期化ステップを開始する。
 				m_initStatus = enInitStatus_WaitInitModel;
 			}
+			/// <summary>
+			/// モデルマテリアルの検索。
+			/// </summary>
+			/// <param name="findMaterial">マテリアルを見つけたときに呼び出すコールバック関数。</param>
+			void FindMaterial(OnFindMateral findMaterial)
+			{
+				m_model.FindMaterial(findMaterial);
+			}
 
 		public:		//座標などの変更を行う関数。
 			/// <summary>

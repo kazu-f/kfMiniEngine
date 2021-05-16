@@ -22,6 +22,8 @@ namespace Engine {
 		std::vector<int>				skinFlags;				//スキンを持っているかどうかのフラグ。
 	};
 
+	typedef std::function<void(IMaterial*)>	OnFindMateral;
+
 	/// <summary>
 	/// メッシュパーツ。
 	/// </summary>
@@ -70,6 +72,18 @@ namespace Engine {
 		{
 			m_isShadowReceiver = flag;
 		}
+		typedef std::function<void(SMesh*)>		OnFindMesh;
+		/// <summary>
+		/// メッシュの検索。
+		/// </summary>
+		/// <param name="findMesh">メッシュを見つけた時に呼び出されるコールバック関数。</param>
+		void FindMesh(OnFindMesh findMesh) const;
+		/// <summary>
+		/// モデルマテリアルの検索。
+		/// </summary>
+		/// <param name="findMaterial">マテリアルを見つけたときに呼び出されるコールバック関数。</param>
+		void FindMaterial(OnFindMateral findMaterial) const;
+
 	private:
 		/// <summary>
 		/// tkmメッシュからメッシュを作成。

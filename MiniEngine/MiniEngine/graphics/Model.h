@@ -116,6 +116,14 @@ namespace Engine {
 		{
 			return m_tkmFile;
 		}
+		/// <summary>
+		/// モデルマテリアルの検索。
+		/// </summary>
+		/// <param name="findMaterial">マテリアルを見つけたときに呼び出されるコールバック関数。</param>
+		void FindMaterial(OnFindMateral findMaterial)
+		{
+			m_meshParts.FindMaterial(findMaterial);
+		}
 	private:
 
 		Matrix m_world;			//ワールド行列。

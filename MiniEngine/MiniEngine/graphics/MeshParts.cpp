@@ -196,6 +196,25 @@ namespace Engine {
 			m_skeleton->GetBoneMatricesTopAddress()
 		);
 	}
+	void MeshParts::FindMesh(OnFindMesh findMesh) const
+	{
+		for (auto* mesh : m_meshs)
+		{
+			findMesh(mesh);
+		}
+
+	}
+	void MeshParts::FindMaterial(OnFindMateral findMaterial) const
+	{
+		FindMesh([&](SMesh* mesh) 
+			{
+				for (auto* material : mesh->m_materials) {
+					findMaterial(material);
+				}
+			}
+		);
+
+	}
 	void MeshParts::Draw(
 		RenderContext& rc,
 		const Matrix& mWorld,

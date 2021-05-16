@@ -22,7 +22,14 @@ namespace Engine {
 		/// <param name="rc">レンダリングコンテキスト</param>
 		/// <param name="maxInstance">インスタンスの数</param>
 		virtual void BeginRender(RenderContext& rc, int maxInstance = 1) = 0;
+	public:
+		void SetAlbedoMap(Texture& tex)
+		{
+			m_albedoMap.InitFromD3DResource(tex.Get());
+		}
 
+
+	public:		//Get関数。
 		/// <summary>
 		/// アルベドマップを取得。
 		/// </summary>
