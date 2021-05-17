@@ -71,16 +71,16 @@ bool LightingDemoScene::Start()
 	m_model = NewGO<prefab::ModelRender>(0);
 
 	ModelInitData modelData;
-	modelData.m_shaderData.vsFxFilePath = DEMO_SHADER;
+	modelData.m_shaderData.vsFxFilePath = MODEL_SHADER;
 	modelData.m_shaderData.vsEntryPointFunc = "VSMain";
-	modelData.m_shaderData.psFxFilePath = DEMO_SHADER;
+	modelData.m_shaderData.psFxFilePath = MODEL_SHADER;
 	modelData.m_shaderData.psEntryPointFunc = "PSMain";
 	modelData.m_tkmFilePath = MODEL_FILEPATH[enDemo_Unity];
 	modelData.m_expandConstantBuffer = &DEMO_CB;
 	modelData.m_expandConstantBufferSize = sizeof(DemoConstantBuffer);
 	
 	m_model->Init(modelData);
-	m_model->SetForwardRenderFlag(true);
+	//m_model->SetForwardRenderFlag(true);
 
 	for (int i = 0; i < LIGHT_NUM; i++)
 	{
@@ -92,6 +92,12 @@ bool LightingDemoScene::Start()
 
 	MainCamera().SetTarget(CAMERA_TARGETPOS);
 	MainCamera().SetPosition(CAMERA_TARGETPOS + m_cameraPos);
+	MainCamera().SetFar(10000.0f);
+
+	//‹ó‚ð•t‚¯‚Ä‚¨‚­B
+	const float SkySize = 8.0f;
+	m_sky = NewGO<prefab::CSky>(0);
+	m_sky->SetScale(SkySize);
 
 	return true;
 }

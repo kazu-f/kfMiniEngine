@@ -20,6 +20,7 @@ private:
 	void ChangeDemo();
 
 private:
+	prefab::CSky* m_sky = nullptr;
 	prefab::ModelRender* m_model = nullptr;				//モデル。
 	std::vector<prefab::CDirectionLight*> m_lights;		//ライト。
 	const Vector3 CAMERA_TARGETPOS = { 0.0f,50.0f,0.0f };

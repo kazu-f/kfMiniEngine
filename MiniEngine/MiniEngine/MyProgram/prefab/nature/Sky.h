@@ -33,13 +33,13 @@ namespace Engine {
 			void OnDestroy() override final;
 
 		public:		//Set関数。
-			//空のサイズを設定。
+			//空のサイズを設定。単位:m
 			void SetScale(float scale) 
 			{
 				m_scale = { scale,scale,scale };
 				m_isDirty = true;
 			}
-			//空のサイズを設定(ベクトル)。
+			//空のサイズを設定(ベクトル)。単位:m
 			void SetScale(const Vector3& scale)
 			{
 				m_scale = scale;
@@ -118,12 +118,12 @@ namespace Engine {
 		private:
 			prefab::ModelRender* m_modelRender = nullptr;			//モデル描画のゲームオブジェクト。
 			Texture m_skyCube;										//スカイキューブマップのSRV。
-			Vector3 m_scale = { 8000.0f,8000.0f,8000.0f };			//空の拡大率。
+			Vector3 m_scale = { 100.0f,100.0f,100.0f };				//空の拡大率。(単位:m)
 			Vector3 m_position = Vector3::Zero;						//座標。
 			Vector3 m_emissionColor = Vector3::Zero;				//自己発光カラー。
 			bool m_isDirty = false;									//ダーティフラグ。
 			std::wstring m_skyCubeMapFilePath = L"Assets/modelData/preset/skyCubeMap.dds";		//空のキューブマップのファイルパス。
-			std::string m_skyModelFilePath = "Assets/modelData/preset/sky.tkm";					//空のtkmファイルのファイルパス。
+			std::string m_skyModelFilePath = "Assets/modelData/preset/Sky.tkm";					//空のtkmファイルのファイルパス。
 			ModelInitData m_modelData;
 		};//class CSky;
 

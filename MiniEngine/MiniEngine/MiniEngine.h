@@ -81,9 +81,11 @@
 #include "prefab/ModelRender.h"
 #include "prefab/SpriteRender.h"
 #include "prefab/light/DirectionLight.h"
+#include "graphics/light/LightManager.h"
 #include "level/Level.h"
 #include "Sound/SoundSource.h"
-#include "graphics/light/LightManager.h"
+#include "prefab/nature/Sky.h"
+
 #include "graphics/PreRender/ShadowMap.h"
 #include "graphics/PreRender/GBufferRender.h"
 #include "graphics/deferrd/DefferdShading.h"
