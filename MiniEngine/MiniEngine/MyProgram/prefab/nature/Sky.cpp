@@ -55,11 +55,13 @@ namespace Engine {
 		{
 			//更新の必要がある。
 			if (m_isDirty) {
-				m_modelRender->SetPosition(m_position);
+				//m_modelRender->SetPosition(m_position);
 				m_modelRender->SetScale(m_scale);
 
 				m_isDirty = false;
 			}
+
+			m_modelRender->SetPosition(MainCamera().GetPosition());
 		}
 
 

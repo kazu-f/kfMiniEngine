@@ -134,6 +134,9 @@ void GameScene::InitOther()
 	m_camera = NewGO<FollowCarCamera>(5);		//カメラ。
 
 	m_light = NewGO<SceneLight>(0);			//照明。
+
+	m_sky = NewGO<prefab::CSky>(5, "Sky");			//空。
+	m_sky->SetScale(1000.0f);
 }
 
 void GameScene::InitCourse()
