@@ -10,13 +10,26 @@
 
 #define START_SCENE GAME_SCENE
 
+void SetInitParam(SInitParam& initParam)
+{
+	initParam.frameBuffer_W = FRAME_BUFFER_W;	//フレームバッファのサイズ(幅)
+	initParam.frameBuffer_H = FRAME_BUFFER_H;	//フレームバッファのサイズ(高さ)
+	initParam.gameObjectPrioMax = 20;			//ゲームオブジェクトの優先度の最大数。
+
+	initParam.graphicsConf.shadowConf.isEnable = true;		//シャドウマップの有効化フラグ。
+	initParam.graphicsConf.postEffectConf.isBloom = true;	//ブルームの有効化フラグ。
+}
+
 ///////////////////////////////////////////////////////////////////
 // ウィンドウプログラムのメイン関数。
 ///////////////////////////////////////////////////////////////////
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
+	SInitParam initParam;
+	SetInitParam(initParam);
+
 	//ゲームの初期化。
-	InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
+	InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"), initParam);
 
 	//////////////////////////////////////
 	// ここから初期化を行うコードを記述する。

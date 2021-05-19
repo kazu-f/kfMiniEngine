@@ -1,7 +1,7 @@
 #pragma once
 
 #include "util/Stopwatch.h"
-#include "graphics/GraphicsConfig.h"
+#include "EngineStruct.h"
 
 namespace Engine {
 
@@ -39,7 +39,7 @@ namespace Engine {
 		/// <summary>
 		/// ゲームエンジンの初期化。
 		/// </summary>
-		void Init(HWND hwnd, UINT frameBufferWidth, UINT frameBufferHeight);
+		void Init(HWND hwnd, const SInitParam& initParam);
 		//インスタンスを取得する。
 		static TkEngine& Instance()
 		{

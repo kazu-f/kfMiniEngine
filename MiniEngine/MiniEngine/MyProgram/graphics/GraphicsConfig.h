@@ -28,4 +28,10 @@ namespace Engine {
 		bool isBloom = true;					//ブルームを有効にするか？
 	};
 
+	struct SGraphicsConfig
+	{
+		SShadowMapConfig shadowConf;
+		SPostEffectConfig postEffectConf;
+	};
+
 }

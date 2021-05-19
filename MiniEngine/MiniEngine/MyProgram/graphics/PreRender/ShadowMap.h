@@ -15,7 +15,7 @@ namespace Engine {
 		/// <summary>
 		/// 初期化処理。
 		/// </summary>
-		void Init(SShadowMapConfig& cnfig);
+		void Init(const SShadowMapConfig& cnfig);
 		/// <summary>
 		/// シャドウマップへのレンダリングを行う。
 		/// </summary>

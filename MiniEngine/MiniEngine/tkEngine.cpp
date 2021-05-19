@@ -20,17 +20,17 @@ namespace Engine {
 			m_graphicsEngine = nullptr;
 		}
 	}
-	void TkEngine::Init(HWND hwnd, UINT frameBufferWidth, UINT frameBufferHeight)
+	void TkEngine::Init(HWND hwnd, const SInitParam& initParam)
 	{
 		//グラフィックエンジンの初期化。
 		m_graphicsEngine = new CGraphicsEngine();
-		m_graphicsEngine->Init(hwnd, frameBufferWidth, frameBufferHeight);
+		m_graphicsEngine->Init(hwnd, initParam);
 		//物理エンジンの初期化。
 		m_physicsWorld.Init();
 		//サウンドエンジンの初期化。
 		m_soundEngine.Init();
 		//ゲームオブジェクトマネージャーの初期化。
-		GameObjectManager().Init(20);
+		GameObjectManager().Init(initParam.gameObjectPrioMax);
 	}
 	void TkEngine::GameUpdate()
 	{

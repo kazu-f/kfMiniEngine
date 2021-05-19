@@ -85,12 +85,12 @@ namespace Engine {
 
 
 	//ゲームの初期化。
-	void InitGame(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow, const TCHAR* appName)
+	void InitGame(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow, const TCHAR* appName, const SInitParam& initParam)
 	{
 		//ウィンドウを初期化。
 		InitWindow(hInstance, hPrevInstance, lpCmdLine, nCmdShow, appName);
 		//TKエンジンの初期化。
-		GameEngine().Init(g_hWnd, FRAME_BUFFER_W, FRAME_BUFFER_H);
+		GameEngine().Init(g_hWnd, initParam);
 	}
 	//ウィンドウメッセージをディスパッチ。falseが返ってきたら、ゲーム終了。
 	bool DispatchWindowMessage()

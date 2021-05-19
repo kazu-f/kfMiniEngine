@@ -2,7 +2,7 @@
 #include "ShadowMap.h"
 
 namespace Engine {
-	void CShadowMap::Init(SShadowMapConfig& config)
+	void CShadowMap::Init(const SShadowMapConfig& config)
 	{
 		m_isEnable = config.isEnable;
 		if (!m_isEnable) return;		//ñ≥å¯ÇæÇ¡ÇΩÇÁñﬂÇÈÅB

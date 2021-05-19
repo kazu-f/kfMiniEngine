@@ -60,15 +60,15 @@ namespace Engine {
 			WaitForSingleObject(m_fenceEvent, INFINITE);
 		}
 	}
-	bool CGraphicsEngine::Init(HWND hwnd, UINT frameBufferWidth, UINT frameBufferHeight)
+	bool CGraphicsEngine::Init(HWND hwnd, const SInitParam& initParam)
 	{
 		auto hdc = GetDC(hwnd);
 		auto rate = GetDeviceCaps(hdc, VREFRESH);
 		if (rate >= 120) {
 			m_vsyncInterval = 2;
 		}
-		m_frameBufferWidth = frameBufferWidth;
-		m_frameBufferHeight = frameBufferHeight;
+		m_frameBufferWidth = initParam.frameBuffer_W;
+		m_frameBufferHeight = initParam.frameBuffer_H;
 
 		//デバイスにアクセスするためのインターフェースを作成。
 		auto dxgiFactory = CreateDXGIFactory();
@@ -85,7 +85,7 @@ namespace Engine {
 			return false;
 		}
 		//スワップチェインを作成。
-		if (!CreateSwapChain(hwnd, frameBufferWidth, frameBufferHeight, dxgiFactory)) {
+		if (!CreateSwapChain(hwnd, m_frameBufferWidth, m_frameBufferHeight, dxgiFactory)) {
 			//スワップチェインの作成に失敗。
 			MessageBox(hwnd, TEXT("スワップチェインの作成に失敗しました。"), TEXT("エラー"), MB_OK);
 			return false;
@@ -105,7 +105,7 @@ namespace Engine {
 		}
 
 		//フレームバッファ用のDSVを作成する。
-		if (!CreateDSVForFrameBuffer(frameBufferWidth, frameBufferHeight)) {
+		if (!CreateDSVForFrameBuffer(m_frameBufferWidth, m_frameBufferHeight)) {
 			MessageBox(hwnd, TEXT("フレームバッファ用のDSVの作成に失敗しました。"), TEXT("エラー"), MB_OK);
 			return false;
 		}
@@ -138,8 +138,8 @@ namespace Engine {
 		//メインレンダリングターゲットの初期化。
 		float clearCol[] = { 0.5f,0.5f,0.5f,1.0f };
 		if(m_mainRenderTarget.Create(
-			static_cast<int>(frameBufferWidth),
-			static_cast<int>(frameBufferHeight),
+			static_cast<int>(m_frameBufferWidth),
+			static_cast<int>(m_frameBufferHeight),
 			1,
 			1,
 			DXGI_FORMAT_R32G32B32A32_FLOAT,
@@ -155,16 +155,16 @@ namespace Engine {
 		//ビューポートを初期化。
 		m_viewport.TopLeftX = 0;
 		m_viewport.TopLeftY = 0;
-		m_viewport.Width = static_cast<FLOAT>(frameBufferWidth);
-		m_viewport.Height = static_cast<FLOAT>(frameBufferHeight);
+		m_viewport.Width = static_cast<FLOAT>(m_frameBufferWidth);
+		m_viewport.Height = static_cast<FLOAT>(m_frameBufferHeight);
 		m_viewport.MinDepth = D3D12_MIN_DEPTH;
 		m_viewport.MaxDepth = D3D12_MAX_DEPTH;
 
 		//シザリング矩形を初期化。
 		m_scissorRect.left = 0;
 		m_scissorRect.top = 0;
-		m_scissorRect.right = frameBufferWidth;
-		m_scissorRect.bottom = frameBufferHeight;
+		m_scissorRect.right = m_frameBufferWidth;
+		m_scissorRect.bottom = m_frameBufferHeight;
 
 		//CBR_SVRのディスクリプタのサイズを取得。
 		m_cbrSrvDescriptorSize = m_d3dDevice->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
@@ -188,11 +188,8 @@ namespace Engine {
 		m_lightManager = std::make_unique<CLightManager>();
 		m_lightManager->Init();
 		//シャドウマップの作成。
-		SShadowMapConfig shadowConfig;
-		shadowConfig.isEnable = true;
-
 		m_shadowMap = std::make_unique<CShadowMap>();
-		m_shadowMap->Init(shadowConfig);
+		m_shadowMap->Init(initParam.graphicsConf.shadowConf);
 		//GBufferの作成。
 		m_gBuffer = std::make_unique<CGBufferRender>();
 		m_gBuffer->Init();
@@ -200,18 +197,15 @@ namespace Engine {
 		m_defferd = std::make_unique<CDefferdShading>();
 		m_defferd->Init(m_gBuffer.get());
 		//ポストエフェクト。
-		SPostEffectConfig postEffectConfig;
-		postEffectConfig.isBloom = true;
-
 		m_postEffect = std::make_unique<CPostEffect>();
-		m_postEffect->Create(postEffectConfig);
+		m_postEffect->Create(initParam.graphicsConf.postEffectConf);
 
 		//フルスクリーンコピー用のスプライトの初期化。
 		SpriteInitData spriteData;
 		spriteData.m_fxFilePath = Sprite::SPRITE_SHADER_PATH;
 		spriteData.m_textures[0] = &m_mainRenderTarget.GetRenderTargetTexture();
-		spriteData.m_width = static_cast<float>(frameBufferWidth);
-		spriteData.m_height = static_cast<float>(frameBufferHeight);
+		spriteData.m_width = static_cast<float>(m_frameBufferWidth);
+		spriteData.m_height = static_cast<float>(m_frameBufferHeight);
 		spriteData.m_isAlpha = false;			//αブレンディングは無効。
 		m_copyFullScreenSprite.Init(spriteData);
 

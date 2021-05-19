@@ -746,6 +746,9 @@
     <ClInclude Include="MyProgram\graphics\UserMaterial.h">
       <Filter>MyProgram\graphics</Filter>
     </ClInclude>
+    <ClInclude Include="MyProgram\EngineStruct.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\LAP.png">

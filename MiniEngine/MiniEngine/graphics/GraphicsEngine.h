@@ -10,6 +10,7 @@
 #include "DirectXTK/Inc/DDSTextureLoader.h"
 #include "DirectXTK/Inc/ResourceUploadBatch.h"
 
+#include "EngineStruct.h"
 #include "RenderContext.h"
 #include "RenderTarget.h"
 #include "2D/Sprite.h"
@@ -43,7 +44,7 @@ namespace Engine {
 		/// <param name="frameBufferwidth">フレームバッファの幅</param>
 		/// <param name="frameBufferHeight">フレームバッファの高さ</param>
 		/// <returns>falseが返ってきたら作成に失敗。</returns>
-		bool Init(HWND hwnd, UINT frameBufferWidth, UINT frameBufferHeight);
+		bool Init(HWND hwnd, const SInitParam& initParam);
 		/// <summary>
 		/// 更新処理。
 		/// </summary>
