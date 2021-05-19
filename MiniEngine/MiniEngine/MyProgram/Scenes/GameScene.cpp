@@ -11,7 +11,7 @@
 
 #define ON 1
 #define OFF 0
-#define IS_SPECTATOR OFF			//観客を出すかどうか。
+#define IS_SPECTATOR ON			//観客を出すかどうか。
 #define DEBUG_DELETE OFF				//削除処理を呼び出せるようにするか。
 
 namespace {
@@ -97,6 +97,7 @@ void GameScene::Release()
 	DeleteGO(m_light);		//ライト。
 	DeleteGO(m_checkPointManager);	//チェックポイント。
 	DeleteGO(m_raceController);
+	DeleteGO(m_sky);
 }
 
 void GameScene::PreUpdate()

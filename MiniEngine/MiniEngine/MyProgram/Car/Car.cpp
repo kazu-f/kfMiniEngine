@@ -36,9 +36,6 @@ Car::Car()
 	m_stateAccele = std::make_unique<CarStateAccele>(this);
 	m_stateBrake = std::make_unique<CarStateBrake>(this);
 	m_checkedCon = std::make_unique<CheckedController>();
-
-	//現在のステートを初期化。
-	ChangeState(m_stateIdle.get());
 }
 
 Car::~Car()
@@ -103,11 +100,16 @@ bool Car::Start()
 	);
 #endif
 
+	//現在のステートを初期化。
+	ChangeState(m_stateIdle.get());
+
 	return true;
 }
 
 void Car::Update()
 {
+	if (m_currentState == nullptr) return;
+
 #if ISRigidBody
 	RigidBodyMove();
 #else
