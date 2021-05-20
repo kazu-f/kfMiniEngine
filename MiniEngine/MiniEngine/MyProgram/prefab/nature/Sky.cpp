@@ -37,12 +37,9 @@ namespace Engine {
 			m_modelRender->Init(m_modelData);
 			//空はディファードでは行わない。
 			m_modelRender->SetForwardRenderFlag(true);
-
-			m_skyCube.SetTextureDimension(enTextureCube);
 			m_skyCube.InitFromDDSFile(m_skyCubeMapFilePath.c_str());
 			m_modelRender->FindMaterial([&](auto* mat) {
 				mat->SetAlbedoMap(m_skyCube);
-				mat->GetAlbedoMap().SetTextureDimension(enTextureCube);
 				});
 
 			//初回は更新が必要。

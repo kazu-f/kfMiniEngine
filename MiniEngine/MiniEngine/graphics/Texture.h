@@ -57,14 +57,6 @@ namespace Engine {
 		{
 			return m_texture;
 		}
-		/// <summary>
-		/// ビューディメンション？を設定。
-		/// </summary>
-		/// <param name="dimension"></param>
-		void SetTextureDimension(EnTextureDimension dimension)
-		{
-			m_dimension = dimension;
-		}
 	private:
 		/// <summary>
 		/// DDSファイルからテクスチャをロード。
@@ -83,6 +75,5 @@ namespace Engine {
 	private:
 		ID3D12Resource* m_texture = nullptr;	//テクスチャ。
 		D3D12_RESOURCE_DESC m_textureDesc;	//テクスチャ情報
-		EnTextureDimension m_dimension = enTexture2D;
 	};
 }
