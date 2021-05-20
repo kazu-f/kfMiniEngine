@@ -19,6 +19,9 @@ namespace Engine {
 		if (tkmMat.specularMap != nullptr) {
 			m_specularMap.InitFromMemory(tkmMat.specularMap.get(), tkmMat.specularMapSize);
 		}
+		if (tkmMat.specularMap != nullptr) {
+			m_reflectionMap.InitFromMemory(tkmMat.reflectionMap.get(), tkmMat.reflectionMapSize);
+		}
 		//TODO:リフレクションマップと屈折率マップの初期化。
 	}
 	void IMaterial::InitFromTkmMaterila(
@@ -32,6 +35,7 @@ namespace Engine {
 		SMaterialParam matParam;
 		matParam.hasNormalMap = m_normalMap.IsValid() ? 1 : 0;
 		matParam.hasSpecMap = m_specularMap.IsValid() ? 1 : 0;
+		matParam.hasReflectionMap = m_reflectionMap.IsValid() ? 1 : 0;
 		m_constantBuffer.Init(sizeof(SMaterialParam), &matParam);
 	}
 	void NonSkinMaterial::BeginRender(RenderContext& rc, int maxInstance)

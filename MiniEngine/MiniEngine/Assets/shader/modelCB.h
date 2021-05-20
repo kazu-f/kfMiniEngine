@@ -26,8 +26,9 @@ cbuffer lightCb : register(b1)
 *	Material.hのSMaterialParamに対応する。
 */
 cbuffer MaterialParamCb : register(b2) {
-	int hasNormalMap;		//法線マップがある？
-	int hasSpecularMap;		//スペキュラマップがある？
+	int hasNormalMap		: packoffset(c0.x);		//法線マップがある？
+	int hasSpecularMap		: packoffset(c0.y);		//スペキュラマップがある？
+	int hasReflectionMap	: packoffset(c0.z);		//反射マップがある？
 }
 
 //シャドウマップの数

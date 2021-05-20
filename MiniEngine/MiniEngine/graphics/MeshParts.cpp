@@ -71,30 +71,33 @@ namespace Engine {
 		for (auto& mesh : m_meshs) {
 			for (int matNo = 0; matNo < mesh->m_materials.size(); matNo++) {
 				auto& descriptorHeap = m_descriptorHeap[descriptorHeapNo];
+				int descSRNo = 0;
 				//ディスクリプタヒープにディスクリプタを登録していく。
-				descriptorHeap.RegistShaderResource(0, mesh->m_materials[matNo]->GetAlbedoMap());		//アルベドマップ(0番)。
-				descriptorHeap.RegistShaderResource(1, mesh->m_materials[matNo]->GetNormalMap());		//法線マップ(1番)。
-				descriptorHeap.RegistShaderResource(2, mesh->m_materials[matNo]->GetSpecularMap());	//スペキュラマップ(2番)。
-				descriptorHeap.RegistShaderResource(3, m_boneMatricesStructureBuffer);				//ボーンの設定(3番)。
-				descriptorHeap.RegistShaderResource(4, GraphicsEngine()->GetLightManager()->GetDirectionLightStructuredBuffer());	//ライトの設定(4番)。
+				descriptorHeap.RegistShaderResource(descSRNo++, mesh->m_materials[matNo]->GetAlbedoMap());		//アルベドマップ(0番)。
+				descriptorHeap.RegistShaderResource(descSRNo++, mesh->m_materials[matNo]->GetNormalMap());		//法線マップ(1番)。
+				descriptorHeap.RegistShaderResource(descSRNo++, mesh->m_materials[matNo]->GetSpecularMap());	//スペキュラマップ(2番)。
+				descriptorHeap.RegistShaderResource(descSRNo++, mesh->m_materials[matNo]->GetReflectionMap());	//反射マップ(3番)。
+				descriptorHeap.RegistShaderResource(descSRNo++, m_boneMatricesStructureBuffer);				//ボーンの設定(4番)。
+				descriptorHeap.RegistShaderResource(descSRNo++, GraphicsEngine()->GetLightManager()->GetDirectionLightStructuredBuffer());	//ライトの設定(5番)。
 				for (int i = 0; i < NUM_SHADOW_MAP; i++) {
-					//シャドウマップ。5～7番を使う
-					descriptorHeap.RegistShaderResource(5 + i, *GraphicsEngine()->GetShadowMap()->GetShadowMapTexture(i));
+					//シャドウマップ。
+					descriptorHeap.RegistShaderResource(descSRNo++, *GraphicsEngine()->GetShadowMap()->GetShadowMapTexture(i));
 				}
 				if (m_instancingDataPtr != nullptr) {
-					descriptorHeap.RegistShaderResource(8, *m_instancingDataPtr);			//インスタンシング描画用のデータ(8番)。
+					descriptorHeap.RegistShaderResource(descSRNo++, *m_instancingDataPtr);			//インスタンシング描画用のデータ(9番)。
 				}
 				if (m_expandShaderResourceView) {
 					//ユーザー拡張のシェーダーリソース。(10番)
 					descriptorHeap.RegistShaderResource(EXPAND_SRV_REG__START_NO, *m_expandShaderResourceView);
 				}
-				descriptorHeap.RegistConstantBuffer(0, m_commonConstantBuffer);											//モデルの定数バッファ(0番)。
-				descriptorHeap.RegistConstantBuffer(1, GraphicsEngine()->GetLightManager()->GetLightParamConstantBuffer());		//ライトの設定(1番)。
-				descriptorHeap.RegistConstantBuffer(2, mesh->m_materials[matNo]->GetConstantBuffer());				//マテリアルの定数バッファ(2番)。
-				descriptorHeap.RegistConstantBuffer(3, GraphicsEngine()->GetShadowMap()->GetShadowMapConstantBuffer());		//シャドウマップの定数バッファ(3番)。
+				int descCBNo = 0;
+				descriptorHeap.RegistConstantBuffer(descCBNo++, m_commonConstantBuffer);											//モデルの定数バッファ(0番)。
+				descriptorHeap.RegistConstantBuffer(descCBNo++, GraphicsEngine()->GetLightManager()->GetLightParamConstantBuffer());		//ライトの設定(1番)。
+				descriptorHeap.RegistConstantBuffer(descCBNo++, mesh->m_materials[matNo]->GetConstantBuffer());				//マテリアルの定数バッファ(2番)。
+				descriptorHeap.RegistConstantBuffer(descCBNo++, GraphicsEngine()->GetShadowMap()->GetShadowMapConstantBuffer());		//シャドウマップの定数バッファ(3番)。
 				if (m_expandConstantBuffer.IsValid()) {
 					//ユーザー拡張の定数バッファ(4番)。
-					descriptorHeap.RegistConstantBuffer(4, m_expandConstantBuffer);
+					descriptorHeap.RegistConstantBuffer(descCBNo++, m_expandConstantBuffer);
 				}
 				//ディスクリプタヒープへの登録を確定させる。
 				descriptorHeap.Commit();

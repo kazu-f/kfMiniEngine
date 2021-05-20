@@ -54,6 +54,10 @@ namespace Engine {
 		{
 			return m_specularMap;
 		}
+		Texture& GetReflectionMap()
+		{
+			return m_reflectionMap;
+		}
 		/// <summary>
 		/// 定数バッファを取得。
 		/// </summary>
@@ -76,10 +80,12 @@ namespace Engine {
 		struct SMaterialParam {
 			int hasNormalMap;	//法線マップを保持しているかどうかのフラグ。
 			int hasSpecMap;		//スペキュラマップを保持しているかどうかのフラグ。
+			int hasReflectionMap;		//スペキュラマップを保持しているかどうかのフラグ。
 		};
 		Texture	m_albedoMap;	//アルベドマップ。
 		Texture	m_normalMap;							//法線マップ。
 		Texture	m_specularMap;							//スペキュラマップ。
+		Texture	m_reflectionMap;						//反射マップ。
 		ConstantBuffer m_constantBuffer;				//定数バッファ。
 	};
 	/// <summary>

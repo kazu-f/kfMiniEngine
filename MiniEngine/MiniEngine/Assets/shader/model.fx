@@ -10,16 +10,17 @@
 Texture2D<float4> g_texture : register(t0);
 Texture2D<float4> g_normalMap : register(t1);
 Texture2D<float4> g_specularMap : register(t2);
+Texture2D<float4> g_reflectionMap : register(t3);
 //ボーン行列。
-StructuredBuffer<float4x4> boneMatrix : register(t3);
+StructuredBuffer<float4x4> boneMatrix : register(t4);
 //ディレクションライト。
-StructuredBuffer<SDirectionalLight> directionalLight : register(t4);
+StructuredBuffer<SDirectionalLight> directionalLight : register(t5);
 
-Texture2D<float4> shadowMap_0 : register(t5);		//シャドウマップ。
-Texture2D<float4> shadowMap_1 : register(t6);		//シャドウマップ。
-Texture2D<float4> shadowMap_2 : register(t7);		//シャドウマップ。
+Texture2D<float4> shadowMap_0 : register(t6);		//シャドウマップ。
+Texture2D<float4> shadowMap_1 : register(t7);		//シャドウマップ。
+Texture2D<float4> shadowMap_2 : register(t8);		//シャドウマップ。
 
-StructuredBuffer<float4x4> instancingDatas : register(t8);		//インスタンシング描画用のデータ。
+StructuredBuffer<float4x4> instancingDatas : register(t9);		//インスタンシング描画用のデータ。
 //サンプラステート。
 sampler g_sampler : register(s0);
 
