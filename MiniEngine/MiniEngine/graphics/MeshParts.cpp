@@ -84,8 +84,9 @@ namespace Engine {
 					descriptorHeap.RegistShaderResource(descSRNo++, *GraphicsEngine()->GetShadowMap()->GetShadowMapTexture(i));
 				}
 				if (m_instancingDataPtr != nullptr) {
-					descriptorHeap.RegistShaderResource(descSRNo++, *m_instancingDataPtr);			//インスタンシング描画用のデータ(9番)。
+					descriptorHeap.RegistShaderResource(descSRNo, *m_instancingDataPtr);			//インスタンシング描画用のデータ(9番)。
 				}
+				descSRNo++;
 				if (m_expandShaderResourceView) {
 					//ユーザー拡張のシェーダーリソース。(10番)
 					descriptorHeap.RegistShaderResource(EXPAND_SRV_REG__START_NO, *m_expandShaderResourceView);

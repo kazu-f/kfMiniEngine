@@ -31,6 +31,8 @@ Texture2D<float4> g_normalMap : register(t1);	//法線。
 Texture2D<float4> g_worldPosMap : register(t2);	//ワールド座標。
 Texture2D<float> g_specularMap : register(t3);	//スペキュラ。
 Texture2D<float> g_shadowMap : register(t4);	//シャドウ。
+Texture2D<float> g_reflectionMap : register(t5);	//反射率。
+TextureCube<float4> g_cubeMap : register(t6);	//キューブマップ。
 
 StructuredBuffer<SDirectionalLight> directionalLight : register(t9);	//ライト。
 
@@ -54,6 +56,7 @@ float4 PSMain(PSDefferdInput psIn) : SV_Target0
 	float3 worldPos = g_worldPosMap.Sample(g_sampler, psIn.uv).xyz;	//ワールド座標。
 	float metaric = g_specularMap.Sample(g_sampler, psIn.uv);	//スペキュラ。
 	float shadow = g_shadowMap.Sample(g_sampler, psIn.uv);		//シャドウ。
+	float reflection = g_reflectionMap.Sample(g_sampler, psIn.uv);		//シャドウ。
 
 	float3 lig = 0;		//ライト
 	float3 toEye = normalize(eyePos - worldPos);		//点から視点までの正規化ベクトル
@@ -83,8 +86,10 @@ float4 PSMain(PSDefferdInput psIn) : SV_Target0
 
 	//最終的な色を決定する。
 	
+	float3 refColor = g_cubeMap.Sample(g_sampler, reflect(toEye,normal)).xyz;
 	float4 finalColor = 1.0f;
-	finalColor.xyz = albedoColor.xyz * lig;
+	finalColor.xyz = albedoColor * (1.0f - reflection) + refColor * reflection;
+	finalColor.xyz = finalColor.xyz * lig;
 	finalColor.a = albedoColor.a;
 	return finalColor;
 }

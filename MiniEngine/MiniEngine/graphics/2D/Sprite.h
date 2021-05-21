@@ -74,6 +74,11 @@ namespace Engine {
 		{
 			m_mulColor = col;
 		}
+		/// <summary>
+		/// ディスクリプタヒープを初期化。
+		/// </summary>
+		/// <param name="initData"></param>
+		void InitDescriptorHeap(const SpriteInitData& initData);
 
 	private:
 		/// <summary>
@@ -86,11 +91,6 @@ namespace Engine {
 		/// </summary>
 		/// <param name="initData"></param>
 		void InitShader(const SpriteInitData& initData);
-		/// <summary>
-		/// ディスクリプタヒープを初期化。
-		/// </summary>
-		/// <param name="initData"></param>
-		void InitDescriptorHeap(const SpriteInitData& initData);
 		/// <summary>
 		/// 頂点バッファとインデックスバッファを初期化。
 		/// </summary>

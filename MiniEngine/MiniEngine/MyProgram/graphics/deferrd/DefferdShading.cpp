@@ -12,11 +12,13 @@ namespace Engine {
 		m_initData.m_vsEntryPointFunc = "VSMain";
 		m_initData.m_psEntryPoinFunc = "PSMain";
 		//テクスチャの設定。
-		for (int i = 0; i < static_cast<int>(EnGBuffer::enGBufferNum); i++)
+		int i = 0;
+		for (; i < static_cast<int>(EnGBuffer::enGBufferNum); i++)
 		{
 			m_initData.m_textures[i] = &gBuffer->GetGBufferTexture(static_cast<EnGBuffer>(i));
 		}
-		
+		m_initData.m_textures[i] = &m_cubeMapTexture;
+
 		m_defferd.Init(m_initData);
 
 		m_defferd.Update(Vector3::Zero, Quaternion::Identity, Vector3::One);

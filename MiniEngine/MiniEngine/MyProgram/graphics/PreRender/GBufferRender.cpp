@@ -66,7 +66,16 @@ namespace Engine {
 			DXGI_FORMAT_R32_FLOAT,
 			DXGI_FORMAT_UNKNOWN
 		);
-
+		//反射率バッファの初期化。
+		auto& reflection = GetRenderTarget(EnGBuffer::enGBufferReflection);
+		reflection.Create(
+			Width,
+			Height,
+			1,
+			1,
+			DXGI_FORMAT_R16G16_FLOAT,
+			DXGI_FORMAT_UNKNOWN
+		);
 		
 	}
 	void CGBufferRender::BeginRender(RenderContext& rc)

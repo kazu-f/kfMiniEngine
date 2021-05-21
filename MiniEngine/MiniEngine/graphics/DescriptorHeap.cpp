@@ -13,6 +13,11 @@ namespace Engine {
 
 	void DescriptorHeap::Commit()
 	{
+		for (auto& ds : m_descriptorHeap) {
+			if (ds) {
+				ds->Release();
+			}
+		}
 		const auto& d3dDevice = GraphicsEngine()->GetD3DDevice();
 		D3D12_DESCRIPTOR_HEAP_DESC srvHeapDesc = {};
 		srvHeapDesc.NumDescriptors = m_numShaderResource + m_numConstantBuffer + m_numUavResource;

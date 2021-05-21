@@ -8,6 +8,7 @@ namespace Engine {
 		enGBufferWorldPos,		//ワールド座標。
 		enGBufferSpecular,		//スペキュラ。
 		enGBufferShadow,		//影マップ。
+		enGBufferReflection,	//反射率。
 		enGBufferNum,			//GBufferの数。
 	};
 

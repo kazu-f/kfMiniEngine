@@ -268,6 +268,9 @@ PSOut_GBuffer PSMain_RenderGBuffer (SPSIn psIn){
 	float4 posInView = mul(mView, float4(psIn.worldPos, 1.0f));
 	Out.shadow = CalcShadow(psIn.worldPos, posInView.z);
 
+	//îΩéÀó¶ÅB
+	Out.reflection = g_reflectionMap.Sample(g_sampler, psIn.uv).xy;
+
 	return Out;
 }
 

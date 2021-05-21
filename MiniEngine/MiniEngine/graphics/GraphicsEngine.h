@@ -208,6 +208,11 @@ namespace Engine {
 			return m_camera2D;
 		}
 
+		CDefferdShading* GetDefferd()
+		{
+			return m_defferd.get();
+		}
+
 	private:
 		/// <summary>
 		/// D3Dデバイスの作成。

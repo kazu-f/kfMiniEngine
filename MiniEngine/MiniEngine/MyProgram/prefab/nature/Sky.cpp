@@ -41,6 +41,8 @@ namespace Engine {
 			m_modelRender->FindMaterial([&](auto* mat) {
 				mat->SetAlbedoMap(m_skyCube);
 				});
+			//ディファードに登録。
+			GraphicsEngine()->GetDefferd()->SetCubeMapTexture(m_skyCube);
 
 			//初回は更新が必要。
 			m_isDirty = true;

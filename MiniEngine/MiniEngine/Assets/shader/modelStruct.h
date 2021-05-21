@@ -39,6 +39,7 @@ struct PSOut_GBuffer {
 	float4 worldPos : SV_Target2;	//ワールド座標。
 	float spec : SV_Target3;		//スペキュラ。
 	float shadow : SV_Target4;		//シャドウ。
+	float2 reflection : SV_Target5;	//反射率。
 };
 
 //シャドウマップ用の頂点シェーダーへの入力。

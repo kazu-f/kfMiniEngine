@@ -32,6 +32,12 @@ namespace Engine {
 			/// </summary>
 			void OnDestroy() override final;
 
+		public:
+			Texture& GetSkyCubeMap()
+			{
+				return m_skyCube;
+			}
+
 		public:		//Set関数。
 			//空のサイズを設定。単位:m
 			void SetScale(float scale) 
