@@ -417,6 +417,9 @@
     <ClCompile Include="MyProgram\graphics\UserMaterial.cpp">
       <Filter>MyProgram\graphics</Filter>
     </ClCompile>
+    <ClCompile Include="MyProgram\graphics\PostEffect\Fxaa.cpp">
+      <Filter>MyProgram\graphics\PostEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tkEngine.h">
@@ -748,6 +751,9 @@
     </ClInclude>
     <ClInclude Include="MyProgram\EngineStruct.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\graphics\PostEffect\Fxaa.h">
+      <Filter>MyProgram\graphics\PostEffect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

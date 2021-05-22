@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MyProgram\graphics\PostEffect\Fxaa.cpp" />
     <ClCompile Include="MyProgram\graphics\PostEffect\Bloom.cpp" />
     <ClCompile Include="MyProgram\Car\Car.cpp" />
     <ClCompile Include="MyProgram\Car\State\CarStateAccele.cpp" />
@@ -120,6 +121,7 @@
     <ClCompile Include="MyProgram\graphics\UserMaterial.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MyProgram\graphics\PostEffect\Fxaa.h" />
     <ClInclude Include="MyProgram\EngineStruct.h" />
     <ClInclude Include="MyProgram\graphics\PostEffect\Bloom.h" />
     <ClInclude Include="MiniEngine.h" />

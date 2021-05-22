@@ -26,6 +26,7 @@ namespace Engine {
 	struct SPostEffectConfig
 	{
 		bool isBloom = true;					//ブルームを有効にするか？
+		bool isFxaa = true;						//アンチエイリアスを有効にするか？
 	};
 
 	struct SGraphicsConfig

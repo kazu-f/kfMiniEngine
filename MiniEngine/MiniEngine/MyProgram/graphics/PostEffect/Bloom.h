@@ -94,7 +94,7 @@ namespace Engine {
 		//ブラー用の定数バッファ。
 		ConstantBuffer m_blurParamCB[NUM_DOWN_SAMPRING_RT];		//ブラー用の定数バッファ。
 		//ディスクリプタヒープ。
-		DescriptorHeap m_sampleLuminanceDiscriptorHeap;			//輝度抽出時に使用するディスクリプタヒープ。
+		DescriptorHeap m_sampleLuminanceDescriptorHeap;			//輝度抽出時に使用するディスクリプタヒープ。
 		DescriptorHeap m_combineBlurDescriptorHeap;				//ボケ合成に使用するディスクリプタヒープ。
 		DescriptorHeap m_downSampleDescriptorHeap[NUM_DOWN_SAMPRING_RT];	//ダウンサンプリング用のディスクリプタヒープ。
 		DescriptorHeap m_combineMainRenderTargetDescriptorHeap;	//メインレンダリングターゲットへの合成に使用するディスクリプタヒープ。

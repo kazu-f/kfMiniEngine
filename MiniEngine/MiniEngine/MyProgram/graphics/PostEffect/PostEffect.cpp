@@ -21,6 +21,8 @@ namespace Engine {
 	{
 		//ブルームを初期化。
 		m_bloom.Init(config);
+		//アンチエイリアスを初期化。
+		m_fxaa.Init(config);
 		//四角形プリミティブを初期化。
 		InitPrimitive();
 	}
@@ -35,6 +37,8 @@ namespace Engine {
 
 		//ブルーム。
 		m_bloom.Render(rc);
+		//アンチ。
+		m_fxaa.Render(rc);
 	}
 	void CPostEffect::InitPrimitive()
 	{

@@ -163,8 +163,8 @@ namespace Engine {
 	void CBloom::CreateDescriptorHeap()
 	{
 		//輝度抽出用のディスクリプタヒープを作成。
-		m_sampleLuminanceDiscriptorHeap.RegistShaderResource(0, GraphicsEngine()->GetMainRenderTarget().GetRenderTargetTexture());
-		m_sampleLuminanceDiscriptorHeap.Commit();
+		m_sampleLuminanceDescriptorHeap.RegistShaderResource(0, GraphicsEngine()->GetMainRenderTarget().GetRenderTargetTexture());
+		m_sampleLuminanceDescriptorHeap.Commit();
 		
 		//ボケ合成用のディスクリプタヒープを作成。
 		for (int i = 0; i < NUM_DOWN_SAMPRING_RT / 2; i++) {
@@ -226,7 +226,7 @@ namespace Engine {
 		const float clearColor[] = { 0.0f,0.0f,0.0f,1.0f };
 		rc.ClearRenderTargetView(m_luminanceRT.GetRTVCpuDescriptorHandle(), clearColor);
 		//シェーダーリソースビューと定数バッファをセットする。
-		rc.SetDescriptorHeap(m_sampleLuminanceDiscriptorHeap);
+		rc.SetDescriptorHeap(m_sampleLuminanceDescriptorHeap);
 		//輝度抽出テクスチャを描画する。
 		rc.DrawIndexed(4);
 		//描画完了待ち。

@@ -2,6 +2,7 @@
 
 #include "graphics/Primitive.h"
 #include "Bloom.h"
+#include "Fxaa.h"
 
 namespace Engine {
 	/// <summary>
@@ -41,6 +42,7 @@ namespace Engine {
 
 	private:
 		CBloom m_bloom;				//ブルーム。
+		CFxaa m_fxaa;				//アンチエイリアス。
 		CPrimitive m_quadPrimitive;	//四角形プリミティブ。
 		int m_primitiveVertexNum = 0;	//プリミティブの頂点の数。
 	};
