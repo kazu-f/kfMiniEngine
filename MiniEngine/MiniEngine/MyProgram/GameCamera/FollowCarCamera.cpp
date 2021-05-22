@@ -4,7 +4,7 @@
 
 namespace {
 	const Vector3 CAMERA_DISTANCE = { 0.0f,150.0f,-800.0f };		//カメラの最初のターゲットからの位置。
-	const float CAMERA_FAR = 50000.0f;							//カメラの遠平面。
+	const float CAMERA_FAR = 250000.0f;							//カメラの遠平面。
 	const float TARGET_HIGHT = 80.0f;							//カメラのターゲットの座標からの高さ。
 	const float FOLLOW_WEIGHT = 0.7f;							//追従する強さ(0.0～1.0)。1.0に近いほど追従が強い。
 	const float MAX_LENGTH = 1000.0f;							//追従する際の最大距離。

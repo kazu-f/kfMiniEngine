@@ -28,6 +28,7 @@ namespace {
 
 	const int PHYSICS_DEBUGMODE = 0;
 
+	const float SKY_SIZE = 3500.0f;		//空のサイズ。
 }
 
 
@@ -137,7 +138,7 @@ void GameScene::InitOther()
 	m_light = NewGO<SceneLight>(0);			//照明。
 
 	m_sky = NewGO<prefab::CSky>(5, "Sky");			//空。
-	m_sky->SetScale(1000.0f);
+	m_sky->SetScale(SKY_SIZE);
 }
 
 void GameScene::InitCourse()

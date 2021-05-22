@@ -26,7 +26,7 @@ namespace Engine {
 		void SetCubeMapTexture(Texture& tex)
 		{
 			m_cubeMapTexture.InitFromD3DResource(tex.Get());
-			//ディスクリプタヒープを作り直して大丈夫かぁ？
+			//ディスクリプタヒープを作り直す。
 			m_defferd.InitDescriptorHeap(m_initData);
 		}
 
