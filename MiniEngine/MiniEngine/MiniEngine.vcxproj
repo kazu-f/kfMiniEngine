@@ -119,6 +119,7 @@
     <ClCompile Include="tkFile\TkmFile.cpp" />
     <ClCompile Include="tkFile\TksFile.cpp" />
     <ClCompile Include="MyProgram\graphics\UserMaterial.cpp" />
+    <ClCompile Include="MyProgram\graphics\PostEffect\Tonemap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyProgram\graphics\PostEffect\Fxaa.h" />
@@ -232,6 +233,7 @@
     <ClInclude Include="tkFile\TkmFile.h" />
     <ClInclude Include="tkFile\TksFile.h" />
     <ClInclude Include="MyProgram\graphics\UserMaterial.h" />
+    <ClInclude Include="MyProgram\graphics\PostEffect\Tonemap.h" />
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\LAP.png">

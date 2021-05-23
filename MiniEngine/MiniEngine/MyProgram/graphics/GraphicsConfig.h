@@ -23,8 +23,14 @@ namespace Engine {
 		//float	offsetTexelWorld = 0.05f;			//!<ブラーの時にフェッチするオフセット座標。ワールド空間の量。値が大きいほど大きくボケる。
 	};
 
+	struct STonemapConfig {
+		bool isEnable = false;
+		float luminance = 0.34f;		//明るさ。値が大きいほど明るくなる。
+	};
+
 	struct SPostEffectConfig
 	{
+		STonemapConfig tonemap;					//トーンマップの設定。
 		bool isBloom = true;					//ブルームを有効にするか？
 		bool isFxaa = true;						//アンチエイリアスを有効にするか？
 	};
