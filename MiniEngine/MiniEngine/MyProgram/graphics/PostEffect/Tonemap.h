@@ -57,6 +57,10 @@ namespace Engine {
 		/// </summary>
 		void InitShader();
 		/// <summary>
+		/// パイプラインステートの作成。
+		/// </summary>
+		void InitPipelineState();
+		/// <summary>
 		/// 定数バッファの作成。
 		/// </summary>
 		void CreateConstantBuffer();
@@ -95,7 +99,7 @@ namespace Engine {
 		DescriptorHeap	m_finalDescriptorHeap[2];						//最終描画のディスクリプタヒープ。
 		bool			m_isFirstWhenChangeScene = true;	//シーンが切り替わって初回の描画かどうかのフラグ。
 		Vector4			m_avSampleOffsets[MAX_SAMPLES];
-		ConstantBuffer	m_cbCalcLuminanceLog;				//輝度の平均対数を求めるための定数バッファ。
+		ConstantBuffer	m_cbCalcLuminanceLog[NUM_CALC_AVG_RT];				//輝度の平均対数を求めるための定数バッファ。
 		ConstantBuffer	m_cbTonemapCommon;					//トーンマップ共通の定数バッファ。
 		STonemapParam	m_tonemapParam;
 		bool			m_isEnable = false;					//トーンマップ有効化フラグ。

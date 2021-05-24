@@ -19,6 +19,8 @@ namespace Engine {
 	}
 	void CPostEffect::Create(const SPostEffectConfig& config)
 	{
+		//トーンマップを初期化。
+		m_tonemap.Init(config);
 		//ブルームを初期化。
 		m_bloom.Init(config);
 		//アンチエイリアスを初期化。
@@ -34,7 +36,8 @@ namespace Engine {
 		rc.SetIndexBuffer(m_quadPrimitive.GetIndexBuffer());
 		//プリミティブトポロジーを設定。
 		rc.SetPrimitiveTopology(m_quadPrimitive.GetPrimitiveTopology());
-
+		//トーンマップ。
+		m_tonemap.Render(rc);
 		//ブルーム。
 		m_bloom.Render(rc);
 		//アンチ。

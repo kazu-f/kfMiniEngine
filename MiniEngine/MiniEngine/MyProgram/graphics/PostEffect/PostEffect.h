@@ -1,6 +1,7 @@
 #pragma once
 
 #include "graphics/Primitive.h"
+#include "Tonemap.h"
 #include "Bloom.h"
 #include "Fxaa.h"
 
@@ -41,6 +42,7 @@ namespace Engine {
 		void InitPrimitive();
 
 	private:
+		CTonemap m_tonemap;
 		CBloom m_bloom;				//ブルーム。
 		CFxaa m_fxaa;				//アンチエイリアス。
 		CPrimitive m_quadPrimitive;	//四角形プリミティブ。
