@@ -102,6 +102,14 @@ namespace Engine {
 			return m_world;
 		}
 		/// <summary>
+		/// 自己発光色を設定する。
+		/// </summary>
+		/// <param name="emission">自己発光色。</param>
+		void SetEmissionColor(const Vector3& emission)
+		{
+			m_meshParts.SetEmissionColor(emission);
+		}
+		/// <summary>
 		/// シャドウレシーバーに設定する。
 		/// </summary>
 		void SetShadowReceiverFlag(bool flag)

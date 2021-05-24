@@ -129,6 +129,14 @@ namespace Engine {
 				m_scale.Set(xScale, yScale, zScale);
 			}
 			/// <summary>
+			/// 自己発光色を設定する。
+			/// </summary>
+			/// <param name="emission">自己発光色。</param>
+			void SetEmissionColor(const Vector3& emission)
+			{
+				m_model.SetEmissionColor(emission);
+			}
+			/// <summary>
 			/// シャドウキャスターフラグを設定。
 			/// </summary>
 			/// <remarks>

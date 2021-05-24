@@ -56,6 +56,7 @@ namespace Engine {
 			if (m_isDirty) {
 				//m_modelRender->SetPosition(m_position);
 				m_modelRender->SetScale(m_scale);
+				m_modelRender->SetEmissionColor(m_emissionColor);
 
 				m_isDirty = false;
 			}

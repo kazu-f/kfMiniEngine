@@ -240,6 +240,7 @@ namespace Engine {
 		cb.mWorld = mWorld;
 		cb.mView = mView;
 		cb.mProj = mProj;
+		cb.emissionColor = m_emissionColor;
 		cb.isShadowReceiver = m_isShadowReceiver ? 1 : 0;
 
 		m_commonConstantBuffer.CopyToVRAM(&cb);

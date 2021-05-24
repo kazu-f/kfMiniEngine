@@ -193,6 +193,13 @@ namespace Engine {
 			return m_shadowMap;
 		}
 		/// <summary>
+		/// ポストエフェクトを取得。
+		/// </summary>
+		std::unique_ptr<CPostEffect>& GetPostEffect()
+		{
+			return m_postEffect;
+		}
+		/// <summary>
 		/// 3Dカメラの取得。
 		/// </summary>
 		Camera& GetMainCamera()

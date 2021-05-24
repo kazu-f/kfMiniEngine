@@ -34,6 +34,14 @@ namespace Engine {
 		/// </summary>
 		/// <param name="rc">レンダリングコンテキスト。</param>
 		void Render(RenderContext& rc);
+	public:
+		/// <summary>
+		/// トーンマップの取得。
+		/// </summary>
+		CTonemap& GetTonemap()
+		{
+			return m_tonemap;
+		}
 
 	private:
 		/// <summary>

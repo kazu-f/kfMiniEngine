@@ -66,6 +66,14 @@ namespace Engine {
 		/// <param name="skeleton">スケルトン</param>
 		void BindSkeleton(Skeleton& skeleton);
 		/// <summary>
+		/// 自己発光色を設定する。
+		/// </summary>
+		/// <param name="emission">自己発光色。</param>
+		void SetEmissionColor(const Vector3& emission)
+		{
+			m_emissionColor = emission;
+		}
+		/// <summary>
 		/// シャドウレシーバーかどうか。
 		/// </summary>
 		void SetShadowReceiverFlag(bool flag)
@@ -115,6 +123,7 @@ namespace Engine {
 			Matrix mWorld;			//ワールド行列。
 			Matrix mView;			//ビュー行列。
 			Matrix mProj;			//プロジェクション行列。
+			Vector3 emissionColor = Vector3::Zero;	//自己発光色。
 			int isShadowReceiver = 0;	//シャドウレシーバーフラグ。
 		};
 		ConstantBuffer m_commonConstantBuffer;					//メッシュ共通の定数バッファ。
@@ -128,6 +137,7 @@ namespace Engine {
 		int m_maxInstance = 1;									//インスタンスの最大数。
 		void* m_expandData = nullptr;							//ユーザー拡張データ。
 		bool m_isCreateDescriptHeap = false;					//ディスクリプタヒープが作成されているか。
+		Vector3 m_emissionColor = Vector3::Zero;				//自己発光色。
 		bool m_isShadowReceiver = false;						//シャドウレシーバーフラグ。
 	};
 }

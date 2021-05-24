@@ -86,9 +86,10 @@ float4 PSMain(PSDefferdInput psIn) : SV_Target0
 
 	//最終的な色を決定する。
 	
-	float3 refColor = g_cubeMap.Sample(g_sampler, reflect(toEye,normal)).xyz;
+	float4 refColor = g_cubeMap.Sample(g_sampler, reflect(toEye,normal));
+	reflection *= refColor.a;
 	float4 finalColor = 1.0f;
-	finalColor.xyz = albedoColor * (1.0f - reflection) + refColor * reflection;
+	finalColor.xyz = albedoColor * (1.0f - reflection) + refColor.xyz * reflection;
 	finalColor.xyz = finalColor.xyz * lig;
 	finalColor.a = albedoColor.a;
 	return finalColor;

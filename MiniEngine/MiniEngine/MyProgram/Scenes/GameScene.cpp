@@ -75,7 +75,8 @@ bool GameScene::Start()
 	case EnInitStep::enInit_CheckPoint:
 		//チェックポイントを読み込む。
 		InitCheckPoint();
-
+		
+		GraphicsEngine()->GetPostEffect()->GetTonemap().Reset();
 		m_initState = enInit_End;
 		ret = true;
 		break;
@@ -139,6 +140,8 @@ void GameScene::InitOther()
 
 	m_sky = NewGO<prefab::CSky>(5, "Sky");			//空。
 	m_sky->SetScale(SKY_SIZE);
+	//const float emissionPow = 0.005f;
+	//m_sky->SetEmissionColor({ emissionPow, emissionPow, emissionPow });
 }
 
 void GameScene::InitCourse()
