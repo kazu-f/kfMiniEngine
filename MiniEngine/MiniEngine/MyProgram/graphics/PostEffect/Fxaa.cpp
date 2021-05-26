@@ -103,7 +103,7 @@ namespace Engine {
 		//メインレンダリングターゲットを取得。
 		auto& mainRT = GraphicsEngine()->GetMainRenderTarget();
 		//レンダリングターゲット利用可能待ち。
-		rc.WaitUntilToPossibleSetRenderTarget(mainRT);
+		rc.WaitUntilToPossibleSetRenderTarget(m_fxaaRenderTarget);
 		//パイプラインステート設定。
 		rc.SetPipelineState(m_fxaaPipelineState);
 		//レンダリングターゲットを設定。
@@ -121,7 +121,7 @@ namespace Engine {
 		//メインレンダリングターゲットを取得。
 		auto& mainRT = GraphicsEngine()->GetMainRenderTarget();
 		//レンダリングターゲット利用可能待ち。
-		rc.WaitUntilToPossibleSetRenderTarget(m_fxaaRenderTarget);
+		rc.WaitUntilToPossibleSetRenderTarget(mainRT);
 		//パイプラインステート設定。
 		rc.SetPipelineState(CPipelineStatesDefault::m_copyPipelineState);
 		//レンダリングターゲットを設定。
