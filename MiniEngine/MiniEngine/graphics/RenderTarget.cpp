@@ -14,6 +14,8 @@ namespace Engine {
 	)
 	{
 		auto d3dDevice = GraphicsEngine()->GetD3DDevice();
+		m_textureFormat = colorFormat;
+		m_depthStencilFormat = depthStencilFormat;
 		m_width = w;
 		m_height = h;
 		//レンダリングターゲットとなるテクスチャを作成する。

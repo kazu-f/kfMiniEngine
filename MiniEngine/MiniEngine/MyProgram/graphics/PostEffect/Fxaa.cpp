@@ -27,27 +27,20 @@ namespace Engine {
 		InitShader();
 		//パイプラインステートの作成。
 		InitPipelineState();
+		//レンダリングターゲットの作成。
+		InitRenderTarget();
 		//ディスクリプタヒープの作成。
 		CreateDescriptorHeap();
 	}
-	void CFxaa::Render(RenderContext& rc)
+	void CFxaa::Render(RenderContext& rc, CPostEffect* postEffect)
 	{
 		if (!m_isEnable) {
 			return;
 		}
-		//メインレンダリングターゲットを取得。
-		auto& mainRT = GraphicsEngine()->GetMainRenderTarget();
-		//レンダリングターゲット利用可能待ち。
-		rc.WaitUntilToPossibleSetRenderTarget(mainRT);
-		//パイプラインステート設定。
-		rc.SetPipelineState(m_fxaaPipelineState);
-		//レンダリングターゲットを設定。
-		rc.SetRenderTargetAndViewport(&mainRT);
-
-		//ディスクリプタヒープの設定。
-		rc.SetDescriptorHeap(m_descriptorHeap);
-		//ドローコール。
-		rc.DrawIndexed(4);
+		//アンチを掛ける。
+		Fxaa(rc, postEffect);
+		//メインレンダリングターゲットに掛けたものを描画。
+		FinalDraw(rc, postEffect);
 	}
 	void CFxaa::InitShader()
 	{
@@ -83,10 +76,62 @@ namespace Engine {
 		//アンチエイリアス用パイプラインステート。
 		m_fxaaPipelineState.Init(psoDesc);
 	}
+	void CFxaa::InitRenderTarget()
+	{
+		auto& mainRT = GraphicsEngine()->GetMainRenderTarget();
+		//アンチ描画用のレンダリングターゲットの作成。
+		m_fxaaRenderTarget.Create(
+			mainRT.GetWidth(),
+			mainRT.GetHeight(),
+			1,
+			1,
+			mainRT.GetRenderTargetTextureFormat(),
+			DXGI_FORMAT_UNKNOWN
+		);
+	}
 	void CFxaa::CreateDescriptorHeap()
 	{
 		//アンチエイリアス用のディスクリプタヒープを作成。
-		m_descriptorHeap.RegistShaderResource(0, GraphicsEngine()->GetMainRenderTarget().GetRenderTargetTexture());
-		m_descriptorHeap.Commit();
+		m_fxaaDescriptorHeap.RegistShaderResource(0, GraphicsEngine()->GetMainRenderTarget().GetRenderTargetTexture());
+		m_fxaaDescriptorHeap.Commit();
+		//メインレンダリングターゲットに描画するためのディスクリプタヒープを作成。
+		m_copyDescriptorHeap.RegistShaderResource(0, m_fxaaRenderTarget.GetRenderTargetTexture());
+		m_copyDescriptorHeap.Commit();
+	}
+	void CFxaa::Fxaa(RenderContext& rc, CPostEffect* postEffect)
+	{
+		//メインレンダリングターゲットを取得。
+		auto& mainRT = GraphicsEngine()->GetMainRenderTarget();
+		//レンダリングターゲット利用可能待ち。
+		rc.WaitUntilToPossibleSetRenderTarget(mainRT);
+		//パイプラインステート設定。
+		rc.SetPipelineState(m_fxaaPipelineState);
+		//レンダリングターゲットを設定。
+		rc.SetRenderTargetAndViewport(&m_fxaaRenderTarget);
+
+		//ディスクリプタヒープの設定。
+		rc.SetDescriptorHeap(m_fxaaDescriptorHeap);
+		//ドローコール。
+		postEffect->DrawFullScreenQuad(rc);
+		//レンダリングターゲット書き込み完了待ち。
+		rc.WaitUntilFinishDrawingToRenderTarget(m_fxaaRenderTarget);
+	}
+	void CFxaa::FinalDraw(RenderContext& rc, CPostEffect* postEffect)
+	{
+		//メインレンダリングターゲットを取得。
+		auto& mainRT = GraphicsEngine()->GetMainRenderTarget();
+		//レンダリングターゲット利用可能待ち。
+		rc.WaitUntilToPossibleSetRenderTarget(m_fxaaRenderTarget);
+		//パイプラインステート設定。
+		rc.SetPipelineState(CPipelineStatesDefault::m_copyPipelineState);
+		//レンダリングターゲットを設定。
+		rc.SetRenderTargetAndViewport(&mainRT);
+
+		//ディスクリプタヒープの設定。
+		rc.SetDescriptorHeap(m_copyDescriptorHeap);
+		//ドローコール。
+		postEffect->DrawFullScreenQuad(rc);
+		//レンダリングターゲット書き込み完了待ち。
+		rc.WaitUntilFinishDrawingToRenderTarget(mainRT);
 	}
 }

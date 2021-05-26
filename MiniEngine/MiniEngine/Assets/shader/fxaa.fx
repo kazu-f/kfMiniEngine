@@ -68,6 +68,7 @@ float4 FxaaPixelShader(
 	//輝度の差は閾値以下か？
 	if(lumaMaxSubMinM < lumaMaxScaledClamped){
 		//閾値以下だったため、アンチをかけない。
+		//return float4(1.0f, 0.0f, 0.0f, 1.0f);
 		return rgbyM;
 	}
 

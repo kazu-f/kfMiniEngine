@@ -20,8 +20,6 @@ namespace Engine {
 		const SShaderData VSYBlur = { L"Assets/shader/bloom.fx","VSYBlur" };		//Yブラー用頂点シェーダー。
 		const SShaderData PSBlur = { L"Assets/shader/bloom.fx","PSBlur" };			//ブラー用頂点シェーダー。
 		const SShaderData PSCombine = { L"Assets/shader/bloom.fx","PSCombine" };	//ボケ合成用のピクセルシェーダー。
-		const SShaderData VSCopy = { L"Assets/shader/copy.fx","VSMain" };			//コピー用頂点シェーダー。
-		const SShaderData PSCopy = { L"Assets/shader/copy.fx","PSMain" };			//コピー用ピクセルシェーダー。
 
 	}
 
@@ -103,8 +101,6 @@ namespace Engine {
 		m_vsYBlur.LoadVS(VSYBlur.filePath, VSYBlur.funcName);
 		m_psBlur.LoadPS(PSBlur.filePath, PSBlur.funcName);
 		m_psCombine.LoadPS(PSCombine.filePath, PSCombine.funcName);
-		m_copyVS.LoadVS(VSCopy.filePath, VSCopy.funcName);
-		m_copyPS.LoadPS(PSCopy.filePath, PSCopy.funcName);
 	}
 	void CBloom::InitPipelineState()
 	{
@@ -156,8 +152,8 @@ namespace Engine {
 		psoDesc.BlendState.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
 		psoDesc.BlendState.RenderTarget[0].SrcBlend = D3D12_BLEND_ONE;
 		psoDesc.BlendState.RenderTarget[0].DestBlend = D3D12_BLEND_ONE;
-		psoDesc.VS = CD3DX12_SHADER_BYTECODE(m_copyVS.GetCompiledBlob());
-		psoDesc.PS = CD3DX12_SHADER_BYTECODE(m_copyPS.GetCompiledBlob());
+		psoDesc.VS = CD3DX12_SHADER_BYTECODE(CPipelineStatesDefault::m_vsCopy.GetCompiledBlob());
+		psoDesc.PS = CD3DX12_SHADER_BYTECODE(CPipelineStatesDefault::m_psCopy.GetCompiledBlob());
 		m_combineMainRenderTargetPipelineState.Init(psoDesc);
 	}
 	void CBloom::CreateDescriptorHeap()
@@ -214,7 +210,7 @@ namespace Engine {
 		}
 
 	}
-	void CBloom::SamplingLuminance(RenderContext& rc)
+	void CBloom::SamplingLuminance(RenderContext& rc, CPostEffect* postEffect)
 	{
 		//メインレンダリングターゲットをテクスチャとして利用出来るようになるまで待機。
 		rc.WaitUntilToPossibleSetRenderTarget(m_luminanceRT);
@@ -228,11 +224,11 @@ namespace Engine {
 		//シェーダーリソースビューと定数バッファをセットする。
 		rc.SetDescriptorHeap(m_sampleLuminanceDescriptorHeap);
 		//輝度抽出テクスチャを描画する。
-		rc.DrawIndexed(4);
+		postEffect->DrawFullScreenQuad(rc);
 		//描画完了待ち。
 		rc.WaitUntilFinishDrawingToRenderTarget(m_luminanceRT);
 	}
-	void CBloom::BlurLuminanceTexture(RenderContext& rc)
+	void CBloom::BlurLuminanceTexture(RenderContext& rc, CPostEffect* postEffect)
 	{
 		//テクスチャ。
 		RenderTarget* prevRt = &m_luminanceRT;
@@ -256,7 +252,7 @@ namespace Engine {
 				//シェーダーリソースビューと定数バッファのセット。
 				rc.SetDescriptorHeap(m_downSampleDescriptorHeap[rtIndex]);
 				//ドローコール。
-				rc.DrawIndexed(4);
+				postEffect->DrawFullScreenQuad(rc);
 				//描画完了待ち。
 				rc.WaitUntilFinishDrawingToRenderTarget(m_downSamplingRT[rtIndex]);
 			}
@@ -280,7 +276,7 @@ namespace Engine {
 				//シェーダーリソースビューと定数バッファのセット。
 				rc.SetDescriptorHeap(m_downSampleDescriptorHeap[rtIndex]);
 				//ドローコール。
-				rc.DrawIndexed(4);
+				postEffect->DrawFullScreenQuad(rc);
 				//描画完了待ち。
 				rc.WaitUntilFinishDrawingToRenderTarget(m_downSamplingRT[rtIndex]);
 			}
@@ -290,10 +286,10 @@ namespace Engine {
 		}
 
 	}
-	void CBloom::CombineBlurImage(RenderContext& rc)
+	void CBloom::CombineBlurImage(RenderContext& rc, CPostEffect* postEffect)
 	{
 		//メインレンダリングターゲットとして利用可能待ち。
-		rc.WaitUntilFinishDrawingToRenderTarget(m_combineRT);
+		rc.WaitUntilToPossibleSetRenderTarget(m_combineRT);
 		//ボケ合成用のパイプラインステートをセット。
 		rc.SetPipelineState(m_combineBlurImagePipelineState);
 		//レンダリングターゲットを設定。
@@ -302,11 +298,11 @@ namespace Engine {
 		//ディスクリプタヒープをセット。
 		rc.SetDescriptorHeap(m_combineBlurDescriptorHeap);
 		//ドローコール。
-		rc.DrawIndexed(4);
+		postEffect->DrawFullScreenQuad(rc);
 		//描画完了待ち。
 		rc.WaitUntilFinishDrawingToRenderTarget(m_combineRT);
 	}
-	void CBloom::CombineMainRenderTarget(RenderContext& rc)
+	void CBloom::CombineMainRenderTarget(RenderContext& rc, CPostEffect* postEffect)
 	{
 		//メインレンダリングターゲットを取得。
 		auto& mainRT = GraphicsEngine()->GetMainRenderTarget();
@@ -320,9 +316,11 @@ namespace Engine {
 		//ディスクリプタヒープの設定。
 		rc.SetDescriptorHeap(m_combineMainRenderTargetDescriptorHeap);
 		//ドローコール。
-		rc.DrawIndexed(4);
+		postEffect->DrawFullScreenQuad(rc);
+		//レンダリングターゲット書き込み完了待ち。
+		rc.WaitUntilFinishDrawingToRenderTarget(mainRT);
 	}
-	void CBloom::Render(RenderContext& rc)
+	void CBloom::Render(RenderContext& rc, CPostEffect* postEffect)
 	{
 		if (!m_isEnable) {
 			//初期化されていない。
@@ -334,13 +332,13 @@ namespace Engine {
 		//ルートシグネチャを設定。
 		rc.SetRootSignature(m_rootSignature);
 		//輝度を抽出。
-		SamplingLuminance(rc);
+		SamplingLuminance(rc, postEffect);
 		//輝度をぼかす。
-		BlurLuminanceTexture(rc);
+		BlurLuminanceTexture(rc, postEffect);
 		//ぼかした画像を合成。
-		CombineBlurImage(rc);
+		CombineBlurImage(rc, postEffect);
 		//メインレンダリングターゲットに合成。
-		CombineMainRenderTarget(rc);
+		CombineMainRenderTarget(rc, postEffect);
 	}
 }
 

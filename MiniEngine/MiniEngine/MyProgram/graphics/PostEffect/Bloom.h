@@ -16,7 +16,8 @@ namespace Engine {
 		/// 描画。
 		/// </summary>
 		/// <param name="rc">レンダリングコンテキスト。</param>
-		void Render(RenderContext& rc);
+		/// <param name="postEffect">ポストエフェクト。</param>
+		void Render(RenderContext& rc, CPostEffect* postEffect);
 		/// <summary>
 		/// 重みを更新。
 		/// </summary>
@@ -44,20 +45,20 @@ namespace Engine {
 		/// <summary>
 		/// 輝度抽出。
 		/// </summary>
-		void SamplingLuminance(RenderContext& rc);
+		void SamplingLuminance(RenderContext& rc, CPostEffect* postEffect);
 		/// <summary>
 		/// 輝度テクスチャにブラーを掛ける。
 		/// </summary>
-		void BlurLuminanceTexture(RenderContext& rc);
+		void BlurLuminanceTexture(RenderContext& rc, CPostEffect* postEffect);
 		/// <summary>
 		/// ボケ画像を合成。
 		/// </summary>
 		/// <param name="rc"></param>
-		void CombineBlurImage(RenderContext& rc);
+		void CombineBlurImage(RenderContext& rc, CPostEffect* postEffect);
 		/// <summary>
 		/// メインレンダリングターゲットへの合成。
 		/// </summary>
-		void CombineMainRenderTarget(RenderContext& rc);
+		void CombineMainRenderTarget(RenderContext& rc, CPostEffect* postEffect);
 
 	private:
 		static const int NUM_WEIGHTS = 8;			//重み付けする数。
@@ -89,8 +90,6 @@ namespace Engine {
 		Shader m_vsYBlur;										//Y方向ブラーパスの頂点シェーダー。
 		Shader m_psBlur;										//X方向ブラー/Y方向ブラーパスのピクセルシェーダー。
 		Shader m_psCombine;										//ボケ合成パスのピクセルシェーダー。
-		Shader m_copyVS;										//コピー用の頂点シェーダー。
-		Shader m_copyPS;										//コピー用のピクセルシェーダー。
 		//ブラー用の定数バッファ。
 		ConstantBuffer m_blurParamCB[NUM_DOWN_SAMPRING_RT];		//ブラー用の定数バッファ。
 		//ディスクリプタヒープ。

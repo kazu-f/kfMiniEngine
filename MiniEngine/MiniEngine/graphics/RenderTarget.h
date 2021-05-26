@@ -86,6 +86,22 @@ namespace Engine {
 		{
 			return m_dsvClearValue;
 		}
+		/// <summary>
+		/// レンダリングターゲットのテクスチャのフォーマットを取得。
+		/// </summary>
+		/// <returns>フォーマット。</returns>
+		DXGI_FORMAT GetRenderTargetTextureFormat()const
+		{
+			return m_textureFormat;
+		}
+		/// <summary>
+		/// デプスステンシルのフォーマットを取得。
+		/// </summary>
+		/// <returns>フォーマット。</returns>
+		DXGI_FORMAT GetDepthStencilFormat()const
+		{
+			return m_depthStencilFormat;
+		}
 		void SetRTVClearColor(const Vector4 color)
 		{
 			m_rtvClearColor[0] = color.x;
@@ -151,6 +167,8 @@ namespace Engine {
 		ID3D12DescriptorHeap* m_dsvHeap = nullptr;		//深度ステンシルバッファビューのディスクリプタヒープ。
 		UINT m_rtvDescriptorSize = 0;				//フレームバッファのディスクリプタのサイズ。
 		UINT m_dsvDescriptorSize = 0;				//深度ステンシルバッファのディスクリプタのサイズ。
+		DXGI_FORMAT m_textureFormat = DXGI_FORMAT_UNKNOWN;	//テクスチャフォーマット。
+		DXGI_FORMAT m_depthStencilFormat = DXGI_FORMAT_UNKNOWN;	//デプスステンシルバッファのフォーマット。
 		int m_width = 0;							//レンダリングターゲットの幅。
 		int m_height = 0;							//レンダリングターゲットの高さ。
 		float m_rtvClearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f };	//レンダリングターゲットビューのクリアカラー。

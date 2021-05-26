@@ -47,6 +47,11 @@ namespace Engine {
 		/// <returns>trueで作成成功。</returns>
 		void Create(PrimitiveInitData& initData);
 		/// <summary>
+		/// 描画。
+		/// </summary>
+		/// <param name="rc"></param>
+		void Draw(RenderContext& rc);
+		/// <summary>
 		/// 頂点バッファを取得。
 		/// </summary>
 		VertexBuffer& GetVertexBuffer()

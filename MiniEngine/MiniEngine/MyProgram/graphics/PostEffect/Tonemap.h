@@ -14,14 +14,15 @@ namespace Engine {
 		/// 平均輝度の計算。
 		/// </summary>
 		/// <param name="rc">レンダリングコンテキスト。</param>
-		void CalcLuminanceAverage(RenderContext& rc);
+		void CalcLuminanceAverage(RenderContext& rc, CPostEffect* postEffect);
 		/// <summary>
 		/// トーンマップの実行。
 		/// <para>トーンマップの処理の前にCalcLuminanceAverageを実行して平均輝度の計算を行う必要がある。</para>
 		/// <para>平均輝度の計算はポストエフェクトの先頭で行う。</para>
 		/// </summary>
 		/// <param name="rc">レンダリングコンテキスト。</param>
-		void Render(RenderContext& rc);
+		/// <param name="postEffect">ポストエフェクト。</param>
+		void Render(RenderContext& rc,CPostEffect* postEffect);
 		/// <summary>
 		/// トーンマップの処理をリセット。
 		/// <para>輝度が大きく変わるシーン切り替えなどが発生する場合などに、</para>

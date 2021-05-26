@@ -30,18 +30,16 @@ namespace Engine {
 	}
 	void CPostEffect::Render(RenderContext& rc)
 	{
-		//頂点バッファを設定。
-		rc.SetVertexBuffer(m_quadPrimitive.GetVertexBuffer());
-		//インデックスバッファを設定。
-		rc.SetIndexBuffer(m_quadPrimitive.GetIndexBuffer());
-		//プリミティブトポロジーを設定。
-		rc.SetPrimitiveTopology(m_quadPrimitive.GetPrimitiveTopology());
 		//トーンマップ。
-		m_tonemap.Render(rc);
+		m_tonemap.Render(rc,this);
 		//ブルーム。
-		m_bloom.Render(rc);
+		m_bloom.Render(rc,this);
 		//アンチ。
-		m_fxaa.Render(rc);
+		m_fxaa.Render(rc,this);
+	}
+	void CPostEffect::DrawFullScreenQuad(RenderContext& rc)
+	{
+		m_quadPrimitive.Draw(rc);
 	}
 	void CPostEffect::InitPrimitive()
 	{

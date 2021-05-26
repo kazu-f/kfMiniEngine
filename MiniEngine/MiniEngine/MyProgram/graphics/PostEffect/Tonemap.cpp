@@ -210,7 +210,7 @@ namespace Engine {
 		}
 	}
 
-	void CTonemap::CalcLuminanceAverage(RenderContext& rc)
+	void CTonemap::CalcLuminanceAverage(RenderContext& rc, CPostEffect* postEffect)
 	{
 		if (!m_isEnable) {
 			return;
@@ -242,7 +242,7 @@ namespace Engine {
 			rc.SetPipelineState(m_calcLumionanceLogAveragePipelineState);
 			rc.SetRenderTargetAndViewport(&m_calcAvgRT[curRtNo]);
 			//ドローコール。
-			rc.DrawIndexed(4);
+			postEffect->DrawFullScreenQuad(rc);
 			//レンダリングターゲットの書き込み完了待ち。
 			rc.WaitUntilFinishDrawingToRenderTarget(m_calcAvgRT[curRtNo]);
 		}
@@ -259,7 +259,7 @@ namespace Engine {
 				rc.SetPipelineState(m_calcLuminanceAveragePipelineState);
 				rc.SetRenderTargetAndViewport(&m_calcAvgRT[curRtNo]);
 				//ドローコール。
-				rc.DrawIndexed(4);
+				postEffect->DrawFullScreenQuad(rc);
 				//レンダリングターゲットの書き込み完了待ち。
 				rc.WaitUntilFinishDrawingToRenderTarget(m_calcAvgRT[curRtNo]);
 
@@ -277,7 +277,7 @@ namespace Engine {
 			rc.SetPipelineState(m_calcLuminanceExpAveragePipelineState);
 			rc.SetRenderTargetAndViewport(&m_calcAvgRT[curRtNo]);
 			//ドローコール。
-			rc.DrawIndexed(4);
+			postEffect->DrawFullScreenQuad(rc);
 			//レンダリングターゲットの書き込み完了待ち。
 			rc.WaitUntilFinishDrawingToRenderTarget(m_calcAvgRT[curRtNo]);
 		}
@@ -300,14 +300,14 @@ namespace Engine {
 			}
 			rc.SetRenderTargetAndViewport(&m_avgRT[m_currentAvgRT]);
 			//ドローコール。
-			rc.DrawIndexed(4);
+			postEffect->DrawFullScreenQuad(rc);
 			//レンダリングターゲットの書き込み完了待ち。
 			rc.WaitUntilFinishDrawingToRenderTarget(m_avgRT[m_currentAvgRT]);
 		}
 
 	}
 
-	void CTonemap::Render(RenderContext& rc)
+	void CTonemap::Render(RenderContext& rc, CPostEffect* postEffect)
 	{
 		if (!m_isEnable)
 		{
@@ -317,7 +317,7 @@ namespace Engine {
 		m_tonemapParam.deltaTime = GameTime().GetFrameDeltaTime();
 		m_cbTonemapCommon.CopyToVRAM(m_tonemapParam);
 		//平均輝度の計算。
-		CalcLuminanceAverage(rc);
+		CalcLuminanceAverage(rc, postEffect);
 
 		//トーンマップの最終描画。
 		auto& mainRT = GraphicsEngine()->GetMainRenderTarget();
@@ -327,7 +327,7 @@ namespace Engine {
 		rc.SetDescriptorHeap(m_finalDescriptorHeap[m_currentAvgRT]);
 		rc.SetRenderTargetAndViewport(&mainRT);
 		//描画。
-		rc.DrawIndexed(4);
+		postEffect->DrawFullScreenQuad(rc);
 		//レンダリングターゲット書き込み完了待ち。
 		rc.WaitUntilFinishDrawingToRenderTarget(mainRT);
 	}

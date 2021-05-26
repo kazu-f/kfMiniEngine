@@ -36,6 +36,13 @@ namespace Engine {
 		void Render(RenderContext& rc);
 	public:
 		/// <summary>
+		/// フルスクリーン描画。
+		/// </summary>
+		/// <param name="rc">レンダリングコンテキスト。</param>
+		void DrawFullScreenQuad(RenderContext& rc);
+
+	public:
+		/// <summary>
 		/// トーンマップの取得。
 		/// </summary>
 		CTonemap& GetTonemap()

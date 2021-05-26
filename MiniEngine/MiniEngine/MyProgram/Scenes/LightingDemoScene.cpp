@@ -38,7 +38,7 @@ namespace {
 	const float AUTO_ROTSPEED = 0.8f;
 
 	const wchar_t* DEMO_SHADER = L"Assets/shader/modelDemo.fx";
-	const wchar_t* MODEL_SHADER = CPipelineStatesDefault::MODEL_SHADER_PAHT;
+	const wchar_t* MODEL_SHADER = CPipelineStatesDefault::MODEL_SHADER_PATH;
 
 	struct DemoConstantBuffer {
 		int isPBR = 0;		//PBR
