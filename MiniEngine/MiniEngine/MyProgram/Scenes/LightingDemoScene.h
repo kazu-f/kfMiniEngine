@@ -18,9 +18,14 @@ private:
 	void RotCamera();
 	//描画デモを変更。
 	void ChangeDemo();
+	//ライトを作る。
+	void CreateLight(const Vector3& dir,const Vector4& col);
+	//ライトを消す。
+	void DeleteLight();
 
 private:
-	prefab::CSky* m_sky = nullptr;
+	prefab::CSky* m_sky = nullptr;						//空。
+	Vector3 m_skyEmission = Vector3::One;		//エミッションカラー。
 	prefab::ModelRender* m_model = nullptr;				//モデル。
 	std::vector<prefab::CDirectionLight*> m_lights;		//ライト。
 	const Vector3 CAMERA_TARGETPOS = { 0.0f,50.0f,0.0f };

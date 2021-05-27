@@ -25,7 +25,7 @@ namespace {
 		Vector4 Color = Vector4::White;
 	};
 
-	const int LIGHT_NUM = 2;						//ライトの本数。
+	const int LIGHT_NUM = 5;						//ライトの本数。
 	const float LIGHT_POW = 2.0f;					//ライトの強さ。
 	//ライトデータ。
 	const LightData LIGHTDATAS[LIGHT_NUM] = {
@@ -85,8 +85,8 @@ bool LightingDemoScene::Start()
 	for (int i = 0; i < LIGHT_NUM; i++)
 	{
 		prefab::CDirectionLight* light = NewGO<prefab::CDirectionLight>(0);
-		light->SetDirection(LIGHTDATAS[i].Dir);
-		light->SetColor(LIGHTDATAS[i].Color);
+		light->SetDirection(LIGHTDATAS[0].Dir);
+		light->SetColor(LIGHTDATAS[0].Color);
 		m_lights.push_back(light);
 	}
 
@@ -123,6 +123,19 @@ void LightingDemoScene::RotCamera()
 	const float PadY = Pad(0).GetRStickYF();
 	
 	const float delTime = GameTime().GetFrameDeltaTime();
+
+	if (Pad(0).IsTrigger(enButtonX))
+	{
+		//CreateLight(LIGHTDATAS[0].Dir, LIGHTDATAS[0].Color);
+		m_skyEmission = m_skyEmission + Vector3::One * 0.1f;
+		m_sky->SetEmissionColor(m_skyEmission);
+	}
+	if (Pad(0).IsTrigger(enButtonY))
+	{
+		//DeleteLight();
+		m_skyEmission = m_skyEmission - Vector3::One * 0.1f;
+		m_sky->SetEmissionColor(m_skyEmission);
+	}
 
 #if CAMERA_ROTMODE
 	if (Pad(0).IsTrigger(enButtonA))
@@ -183,4 +196,21 @@ void LightingDemoScene::ChangeDemo()
 		DEMO_STATE++;
 		DEMO_STATE %= enDemoNum;
 	}
+}
+
+void LightingDemoScene::CreateLight(const Vector3& dir, const Vector4& col)
+{
+	prefab::CDirectionLight* light = NewGO<prefab::CDirectionLight>(0);
+	light->SetDirection(dir);
+	light->SetColor(col);
+	m_lights.push_back(light);
+}
+
+void LightingDemoScene::DeleteLight()
+{
+	if (m_lights.size() == 0)return;
+	//先頭のライトを消す。
+	DeleteGO(*m_lights.begin());
+	//ライトの登録を解除。
+	m_lights.erase(m_lights.begin());
 }
