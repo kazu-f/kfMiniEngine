@@ -17,9 +17,9 @@ void SetInitParam(SInitParam& initParam)
 	initParam.gameObjectPrioMax = 20;			//ゲームオブジェクトの優先度の最大数。
 
 	initParam.graphicsConf.shadowConf.isEnable = true;		//シャドウマップの有効化フラグ。
-	//initParam.graphicsConf.shadowConf.depthOffset[0] = 0.01f;
-	//initParam.graphicsConf.shadowConf.depthOffset[1] = 0.02f;
-	//initParam.graphicsConf.shadowConf.depthOffset[2] = 0.02f;
+	initParam.graphicsConf.shadowConf.depthOffset[0] = 0.01f;
+	initParam.graphicsConf.shadowConf.depthOffset[1] = 0.02f;
+	initParam.graphicsConf.shadowConf.depthOffset[2] = 0.02f;
 	initParam.graphicsConf.postEffectConf.tonemap.isEnable = true;		//トーンマップ有効化フラグ。
 	initParam.graphicsConf.postEffectConf.tonemap.luminance = 0.34f;	//明るさ。
 	initParam.graphicsConf.postEffectConf.isBloom = true;	//ブルームの有効化フラグ。

@@ -5,7 +5,7 @@ namespace {
 	const float AMBIENT_LIGHT_POWER = 1.0f;
 	const Vector3 AMBIENT_LIGHT = { AMBIENT_LIGHT_POWER,AMBIENT_LIGHT_POWER,AMBIENT_LIGHT_POWER };
 	const Vector3 SHADOW_DIRECTION = { 0.0f,-1.0f,0.0f };
-	const float DIRLIGHT_POWER = 3.0f;
+	const float DIRLIGHT_POWER = 2.5f;
 	const Vector4 DIRLIGHT_COLOR = { DIRLIGHT_POWER,DIRLIGHT_POWER,DIRLIGHT_POWER,1.0f };
 }
 
@@ -51,12 +51,28 @@ bool SceneLight::Start()
 
 	prefab::CDirectionLight* light3 = NewGO<prefab::CDirectionLight>(0);
 
-	m_lightDir = { 0.0f,-1.0f,0.0f };
+	m_lightDir = { 0.0f,-1.0f,1.0f };
 	//color = { 0.0f,1.0f,1.0f,1.0f };
 	light3->SetColor(color);
 	light3->SetDirection(m_lightDir);
 
 	m_lightArray.push_back(light3);
+
+	prefab::CDirectionLight* light4 = NewGO<prefab::CDirectionLight>(0);
+
+	m_lightDir = { 1.0f,-1.0f,0.0f };
+	light4->SetColor(color);
+	light4->SetDirection(m_lightDir);
+
+	m_lightArray.push_back(light4);
+
+	prefab::CDirectionLight* light5 = NewGO<prefab::CDirectionLight>(0);
+
+	m_lightDir = { 0.0f,-1.0f,0.0f };
+	light5->SetColor(color);
+	light5->SetDirection(m_lightDir);
+
+	m_lightArray.push_back(light5);
 
 	//ŠÂ‹«Œõ‚ÌÝ’èB
 	GraphicsEngine()->GetLightManager()->SetAmbientLight(AMBIENT_LIGHT);
