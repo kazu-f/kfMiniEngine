@@ -53,6 +53,7 @@ bool Car::Start()
 	m_model->SetPosition(m_position);
 	m_model->SetRotation(m_rotation);
 	m_model->SetShadowCasterFlag(true);
+	m_model->SetShadowReceiverFlag(true);
 
 #if ISRigidBody
 	//Ô‚ÌƒRƒŠƒWƒ‡ƒ“‚ğì¬B
