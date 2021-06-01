@@ -52,7 +52,7 @@ namespace Engine {
 			Height,
 			1,
 			1,
-			DXGI_FORMAT_R32_FLOAT,
+			DXGI_FORMAT_R8G8B8A8_UNORM,
 			DXGI_FORMAT_UNKNOWN
 		);
 		//spec.SetRTVClearColor({ 0.0f,0.0f,0.0f,0.0f });		//クリアカラーを設定。

@@ -110,6 +110,7 @@ float3 CalcNormal(float3 normal, float3 biNormal, float3 tangent, float2 uv)
 		//法線マップから法線を引っ張ってくる。
 		float3 binSpaceNormal = g_normalMap.Sample(g_sampler, uv).xyz;
 		binSpaceNormal = (binSpaceNormal * 2.0f) - 1.0f;	//-1.0f～1.0fに調整。
+		binSpaceNormal = normalize(binSpaceNormal);
 		ret = tangent * binSpaceNormal.x		//接線(法線に対して右？)
 			+ biNormal * binSpaceNormal.y			//従法線(法線に対して上)
 			+ normal * binSpaceNormal.z;			//法線方向
@@ -258,10 +259,10 @@ PSOut_GBuffer PSMain_RenderGBuffer (SPSIn psIn){
 	Out.worldPos = float4(psIn.worldPos, 0.0f);
 
 	//スペキュラマップ。
-	Out.spec = 0.0f;
+	Out.specMap = 0.0f;
 	if (hasSpecularMap) {
 		//スペキュラマップがある。
-		Out.spec = g_specularMap.Sample(g_sampler, psIn.uv).r;
+		Out.specMap = g_specularMap.Sample(g_sampler, psIn.uv);
 	}
 
 	//シャドウ。

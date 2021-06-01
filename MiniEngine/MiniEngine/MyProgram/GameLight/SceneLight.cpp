@@ -2,10 +2,10 @@
 #include "SceneLight.h"
 
 namespace {
-	const float AMBIENT_LIGHT_POWER = 1.0f;
+	const float AMBIENT_LIGHT_POWER = 0.5f;
 	const Vector3 AMBIENT_LIGHT = { AMBIENT_LIGHT_POWER,AMBIENT_LIGHT_POWER,AMBIENT_LIGHT_POWER };
-	const Vector3 SHADOW_DIRECTION = { 0.0f,-1.0f,0.0f };
-	const float DIRLIGHT_POWER = 2.5f;
+	const Vector3 SHADOW_DIRECTION = { 0.0f,-0.984f,0.173f };
+	const float DIRLIGHT_POWER = 5.5f;
 	const Vector4 DIRLIGHT_COLOR = { DIRLIGHT_POWER,DIRLIGHT_POWER,DIRLIGHT_POWER,1.0f };
 }
 
@@ -33,7 +33,9 @@ bool SceneLight::Start()
 
 	//Vector4 color = Vector4::Gray * 3.0f;
 	Vector4 color = DIRLIGHT_COLOR;
-	m_lightDir = { 0.0f,-1.0f,-1.0f };
+	m_lightDir = SHADOW_DIRECTION;
+	m_lightDir.Set(1.0f, -1.0f, 0.0f);
+	m_lightDir.Normalize();
 	//color = { 1.0f,1.0f,0.0f,1.0f };
 	light->SetColor(color);
 	light->SetDirection(m_lightDir);
@@ -42,6 +44,7 @@ bool SceneLight::Start()
 
 	prefab::CDirectionLight* light2 = NewGO<prefab::CDirectionLight>(0);
 
+	color = { 1.3f, 1.3f, 1.3f ,1.0f};
 	m_lightDir = { -1.0f,-1.0f,0.0f };
 	//color = { 0.0f,1.0f,1.0f,1.0f };
 	light2->SetColor(color);

@@ -20,6 +20,10 @@ namespace Engine {
 			{config.shadowMapWidth,config.shadowMapHeight >> 1},		//中距離。
 			{config.shadowMapWidth >> 1,config.shadowMapHeight >> 1}	//遠距離。
 		};
+
+		//ライトの高さ。
+		m_lightHeight = config.lightHeight;
+
 		//クリアカラーを作成。
 		float clearColor[] = {
 			1.0f,1.0f,1.0f,1.0f

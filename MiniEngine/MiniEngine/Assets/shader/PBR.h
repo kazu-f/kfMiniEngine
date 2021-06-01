@@ -37,7 +37,7 @@ float specFresnel(float f0, float u)
 *	Vが視点
 *	Nが法線
 */
-float3 CookTrranceSpecular(float3 L, float3 V, float3 N, float metaric)
+float CookTrranceSpecular(float3 L, float3 V, float3 N, float metaric)
 {
 	float microfacet = 0.3f;		//マイクロファセット
 									//表面の凸凹具合を表す的な？
@@ -96,7 +96,7 @@ float NormalizedDisneyDiffuse(float3 N, float3 L, float3 V, float roughness)
 	//法線と視点方向の内積。
 	float dotNV = saturate(dot(N, V));
 
-	return max(0.2f, (dotNL * dotNV) / PI);
+	return max(0.2f, dotNL * dotNV);
 
 	//float3 H = normalize(L + V);		//ハーフベクトル。
 
