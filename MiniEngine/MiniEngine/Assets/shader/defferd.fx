@@ -61,8 +61,8 @@ float4 PSMain(PSDefferdInput psIn) : SV_Target0
 
 	float3 lig = 0;		//ライト
 	float3 toEye = normalize(eyePos - worldPos);		//点から視点までの正規化ベクトル
-	float roughness = 0.5f;			//拡散反射の面の粗さ。
 	float spec = specMap.a;			//スペキュラマップのrチャンネルにスペキュラ強度。
+	float roughness = 1.0f - spec;			//拡散反射の面の粗さ。
 	float metaric = specMap.r;		//gチャンネルに金属度。
 
 	for (int ligNo = 0; ligNo < numDirectionLight; ligNo++)

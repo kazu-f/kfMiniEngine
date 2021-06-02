@@ -3,13 +3,14 @@
 */
 
 static const float FOG_START	=  40000.0f;		//フォグが掛かり始める距離。
-static const float FOG_END		= 150000.0f;		//フォグが完全に掛かる距離。
-static const float4 FOG_COLOR = float4(0.9f, 0.9f, 0.9f, 1.0f);		//フォグの色。
+static const float FOG_END		= 80000.0f;		//フォグが完全に掛かる距離。
+static const float4 FOG_COLOR = float4(0.6f, 0.6f, 0.6f, 1.0f);		//フォグの色。
 
 float4 CalcFog(float4 color, float dist)
 {
 	float fog = (FOG_END - dist) / (FOG_END - FOG_START);
 	fog = max(0.0f, min(1.0f, fog));
+	fog = pow(fog, 1.0f);
 	float4 finalColor = color * fog + FOG_COLOR * (1.0f - fog);
 	return finalColor;
 }
