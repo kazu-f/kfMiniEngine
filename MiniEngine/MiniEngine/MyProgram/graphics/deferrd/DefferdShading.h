@@ -1,4 +1,5 @@
 #pragma once
+#include "graphics/Primitive.h"
 
 /*
 	ディファードレンダリングを行うクラス。
@@ -14,7 +15,7 @@ namespace Engine {
 		CDefferdShading() {};
 		~CDefferdShading() {};
 
-		void Init(CGBufferRender* gBuffer);
+		void Init();
 		/// <summary>
 		/// ディファードレンダリングを行う。
 		/// </summary>
@@ -27,12 +28,44 @@ namespace Engine {
 		{
 			m_cubeMapTexture.InitFromD3DResource(tex.Get());
 			//ディスクリプタヒープを作り直す。
-			m_defferd.InitDescriptorHeap(m_initData);
+			CreateDescriptorHeap();
 		}
 
 	private:
-		Sprite m_defferd;				//ディファードの書き込み先。
-		SpriteInitData	m_initData;		//初期化情報。
+		/// <summary>
+		/// 四角形プリミティブの作成。
+		/// </summary>
+		void InitPrimitive();
+		/// <summary>
+		/// シェーダーの初期化。
+		/// </summary>
+		void InitShader();
+		/// <summary>
+		/// パイプラインステートの初期化。
+		/// </summary>
+		void InitPipelineState();
+		/// <summary>
+		/// 定数バッファの初期化。
+		/// </summary>
+		void InitConstantBuffer();
+		/// <summary>
+		/// ディスクリプタヒープの作成。
+		/// </summary>
+		void CreateDescriptorHeap();
+
+	private:
+		//ディファードの定数バッファ構造体。
+		struct SDefferdCB
+		{
+			Matrix mViewProjInv;					//カメラの行列の逆行列。
+		};
+
+		CPrimitive m_primitive;						//四角形プリミティブ。
+		Shader m_vsDefferd;							//ディファードの頂点シェーダー。
+		Shader m_psDefferd;							//ディファードのピクセルシェーダー。
+		PipelineState m_defferdPipelineState;		//パイプラインステート。
+		DescriptorHeap m_defferdDescriptorHeap;		//ディスクリプタヒープ。
+		ConstantBuffer m_constantBuffer;			//定数バッファ。
 		Texture m_cubeMapTexture;		//テクスチャ。
 	};
 

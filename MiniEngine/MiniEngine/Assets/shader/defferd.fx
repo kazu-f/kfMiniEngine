@@ -13,7 +13,6 @@
 
 cbuffer cb : register(b0) {
 	float4x4 mvp;		
-	float4 mulColor;	
 };
 
 struct VSDefferdInput {
@@ -34,7 +33,7 @@ Texture2D<float> g_shadowMap : register(t4);	//シャドウ。
 Texture2D<float> g_reflectionMap : register(t5);	//反射率。
 TextureCube<float4> g_cubeMap : register(t6);	//キューブマップ。
 
-StructuredBuffer<SDirectionalLight> directionalLight : register(t9);	//ライト。
+StructuredBuffer<SDirectionalLight> directionalLight : register(t7);	//ライト。
 
 //サンプラステート。
 sampler g_sampler : register(s0);
@@ -43,7 +42,7 @@ sampler g_sampler : register(s0);
 PSDefferdInput VSMain(VSDefferdInput In)
 {
 	PSDefferdInput psIn;
-	psIn.pos = mul(mvp,In.pos);
+	psIn.pos = In.pos;
 	psIn.uv = In.uv;
 	return psIn;
 }

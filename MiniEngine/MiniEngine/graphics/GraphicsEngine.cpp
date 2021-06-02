@@ -195,7 +195,7 @@ namespace Engine {
 		m_gBuffer->Init();
 		//ディファード用クラス作成。
 		m_defferd = std::make_unique<CDefferdShading>();
-		m_defferd->Init(m_gBuffer.get());
+		m_defferd->Init();
 		//ポストエフェクト。
 		m_postEffect = std::make_unique<CPostEffect>();
 		m_postEffect->Create(initParam.graphicsConf.postEffectConf);

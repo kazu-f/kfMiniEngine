@@ -77,7 +77,5 @@ namespace Engine {
 
 		//作成。
 		m_quadPrimitive.Create(primitiveData);
-		//頂点の数を記録しておく。
-		m_primitiveVertexNum = primitiveData.vertexSize / primitiveData.indexStride;
 	}
 }

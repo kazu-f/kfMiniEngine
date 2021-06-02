@@ -166,7 +166,7 @@ namespace Engine {
 			return m_frameBufferHeight;
 		}
 		/// <summary>
-		/// レンダリングターゲットをフレームバッファに変更する。
+		/// レンダリングターゲットをメインレンダリングターゲットに変更する。
 		/// </summary>
 		/// <param name="rc"></param>
 		void ChangeToMainRenderTarget(RenderContext& rc);
@@ -198,6 +198,13 @@ namespace Engine {
 		std::unique_ptr<CPostEffect>& GetPostEffect()
 		{
 			return m_postEffect;
+		}
+		/// <summary>
+		/// G-Bufferを取得。
+		/// </summary>
+		std::unique_ptr<CGBufferRender>& GetGBuffer()
+		{
+			return m_gBuffer;
 		}
 		/// <summary>
 		/// 3Dカメラの取得。
