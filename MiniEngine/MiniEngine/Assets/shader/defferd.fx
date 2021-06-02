@@ -5,6 +5,7 @@
 #include "modelCB.h"
 #include "modelStruct.h"
 #include "PBR.h"
+#include "Fog.h"
 
 //cbuffer PSDefferdCb : register(b0)
 //{
@@ -12,7 +13,7 @@
 //};
 
 cbuffer cb : register(b0) {
-	float4x4 mvp;		
+	float4x4 mvpInv;
 };
 
 struct VSDefferdInput {
@@ -104,6 +105,11 @@ float4 PSMain(PSDefferdInput psIn) : SV_Target0
 	finalColor.xyz = albedoColor * (1.0f - reflection) + refColor.xyz * reflection;
 	
 	finalColor.xyz = finalColor.xyz * lig;
+
+	//ñ∂ÇÃåvéZÅB
+	float len = length(eyePos - worldPos);
+	finalColor = CalcFog(finalColor, len);
+
 	finalColor.a = albedoColor.a;
 	return finalColor;
 }

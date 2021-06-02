@@ -57,7 +57,7 @@ namespace Engine {
 		//ディファードの定数バッファ構造体。
 		struct SDefferdCB
 		{
-			Matrix mViewProjInv;					//カメラの行列の逆行列。
+			Matrix mViewProjInv;					//ビュープロジェクション行列の逆行列。
 		};
 
 		CPrimitive m_primitive;						//四角形プリミティブ。
