@@ -1,5 +1,6 @@
 #pragma once
 #include "physics/BoxCollider.h"
+#include "CarDriver/ICarDriver.h"
 
 class ICarState;
 class CarStateIdle;
@@ -12,6 +13,12 @@ class Car : public IGameObject
 public:
 	static const float MOVE_COEFFICIENT;				//時間ベースの移動に掛ける係数。
 
+	enum EnDriverType {
+		enTypePlayer,			//プレイヤー操作。
+		enTypeAI,				//AI操作。
+		enDriverTypeNum
+	};
+public:
 	Car();
 	~Car();
 	bool Start() override;			//初期化処理。
@@ -23,7 +30,16 @@ public:
 	friend class CarStateIdle;
 	friend class CarStateBrake;
 public:
+	/// <summary>
+	/// ステートを変更する。
+	/// </summary>
+	/// <param name="state">ステートクラスのアドレス。</param>
 	void ChangeState(ICarState* state);
+	/// <summary>
+	/// 車のドライバーを設定する。
+	/// </summary>
+	/// <param name="type">ドライバーの種類。</param>
+	void SetCarDriver(EnDriverType type);
 public:		//Set関数とか
 	void SetPosition(const Vector3& pos)
 	{
@@ -87,11 +103,14 @@ protected:		//車の移動などの処理
 
 protected:
 	static constexpr float MAX_SPEED = 6800.0f;
-protected:
+
+protected:	//ステート等
 	ICarState* m_currentState = nullptr;
 	std::unique_ptr<CarStateIdle> m_stateIdle;
 	std::unique_ptr<CarStateAccele> m_stateAccele;
 	std::unique_ptr<CarStateBrake> m_stateBrake;
+
+	std::unique_ptr<ICarDriver> m_carDriver;
 protected:
 	prefab::ModelRender* m_model = nullptr;
 	//移動関係。

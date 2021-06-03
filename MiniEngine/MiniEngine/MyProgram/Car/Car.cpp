@@ -6,6 +6,7 @@
 #include "State/CarStateBrake.h"
 #include "GameCamera/GameCamera.h"
 #include "CheckPoint/CheckedController.h"
+#include "CarDriver/PlayerCarDriver.h"
 
 #define ISRigidBody 0
 
@@ -111,6 +112,10 @@ void Car::Update()
 {
 	if (m_currentState == nullptr) return;
 
+	if (m_carDriver.get() == nullptr) return;
+
+	m_carDriver->Update();
+
 #if ISRigidBody
 	RigidBodyMove();
 #else
@@ -151,6 +156,34 @@ void Car::ChangeState(ICarState* state)
 	m_currentState->Enter();
 }
 
+void Car::SetCarDriver(EnDriverType type)
+{
+	ENGINE_ASSERT(
+		0 <= type || type < enDriverTypeNum,
+		"車のドライバーの種類を正しく指定できていません。\n"
+		"Car.hのEnDriverTypeを確認してください。"
+	);
+
+	ENGINE_ASSERT(
+		m_carDriver.get() == nullptr,
+		"車のドライバーが既に設定されています。"
+	)
+
+	switch (type)
+	{
+	case EnDriverType::enTypePlayer:
+		m_carDriver = std::make_unique<PlayerCarDriver>();
+		break;
+
+	case EnDriverType::enTypeAI:
+
+		break;
+	default:
+		break;
+	}
+
+}
+
 void Car::CalcDirection()
 {
 	//クオータニオンから向きを求める。
@@ -164,8 +197,8 @@ void Car::CalcDirection()
 
 void Car::CharaConMove()
 {
-	const float PadX = Pad(0).GetLStickXF();
-	const float PadY = Pad(0).GetLStickYF();
+	//const float HandlePower = Pad(0).GetLStickXF();
+	const float HandlePower = m_carDriver->GetDriverHandle();
 	const float DeltaTime = GameTime().GetFrameDeltaTime();
 
 	//ステート実行。
@@ -180,7 +213,7 @@ void Car::CharaConMove()
 		//ブレーキ中はカーブしやすい。
 		rotSpeed *= DRIFT_POWER;
 	}
-	dirRot.SetRotationDegY(Math::PI * rotSpeed * PadX * DeltaTime);
+	dirRot.SetRotationDegY(Math::PI * rotSpeed * HandlePower * DeltaTime);
 	dirRot.Apply(vMove);
 	vMove.Normalize();
 	//移動方向を求める。
@@ -220,8 +253,8 @@ void Car::CharaConMove()
 
 void Car::RigidBodyMove()
 {
-	const float PadX = Pad(0).GetLStickXF();
-	const float PadY = Pad(0).GetLStickYF();
+	//const float HandlePower = Pad(0).GetLStickXF();
+	const float HandlePower = m_carDriver->GetDriverHandle();
 	const float DeltaTime = GameTime().GetFrameDeltaTime();
 
 	m_rigidBody.GetPositionAndRotation(m_position, m_rotation);
@@ -239,7 +272,7 @@ void Car::RigidBodyMove()
 		//ブレーキ中はカーブしやすい。
 		rotSpeed *= DRIFT_POWER;
 	}
-	dirRot.SetRotationDegY(Math::PI * rotSpeed * PadX * DeltaTime);
+	dirRot.SetRotationDegY(Math::PI * rotSpeed * HandlePower * DeltaTime);
 	dirRot.Apply(vMove);
 	vMove.Normalize();
 	//移動方向を求める。
