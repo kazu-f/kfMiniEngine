@@ -7,6 +7,7 @@
 #include "GameCamera/GameCamera.h"
 #include "CheckPoint/CheckedController.h"
 #include "CarDriver/PlayerCarDriver.h"
+#include "CarDriver/AICarDriver.h"
 
 #define ISRigidBody 0
 
@@ -176,7 +177,7 @@ void Car::SetCarDriver(EnDriverType type)
 		break;
 
 	case EnDriverType::enTypeAI:
-
+		m_carDriver = std::make_unique<AICarDriver>(this);
 		break;
 	default:
 		break;

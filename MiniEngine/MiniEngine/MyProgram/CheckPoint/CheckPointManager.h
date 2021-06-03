@@ -40,9 +40,17 @@ public:
 	/// <summary>
 	/// インスタンスを取得する。
 	/// </summary>
-	CheckPointManager* GetInstance()
+	static CheckPointManager* GetInstance()
 	{
 		return m_instance;
+	}
+	/// <summary>
+	/// チェックポイントを取得する。
+	/// </summary>
+	/// <param name="pointNo">チェックポイント番号。</param>
+	CheckPointBase* GetCheckPoint(int pointNo)
+	{
+		return m_checkPointList[pointNo].get();
 	}
 	/// <summary>
 	/// チェックコントローラーを登録する。

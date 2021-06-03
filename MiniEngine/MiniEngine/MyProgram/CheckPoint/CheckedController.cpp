@@ -20,14 +20,15 @@ void CheckedController::Update(Vector3& pos, Quaternion& rot)
 {
 	m_position = pos;
 	m_rotation = rot;
-	CalcForward();
+	CalcDirection();
 }
 
-void CheckedController::CalcForward()
+void CheckedController::CalcDirection()
 {
 	//クオータニオンから向きを求める。
 	Matrix mRot;
 	mRot.MakeRotationFromQuaternion(m_rotation);
 	//向きを代入する。
 	m_forward = { mRot.m[2][0],mRot.m[2][1] ,mRot.m[2][2] };
+	m_right = { mRot.m[0][0],mRot.m[0][1],mRot.m[0][2] };
 }

@@ -35,11 +35,11 @@ void CarStateIdle::Execute()
 	//‰½‚à‚µ‚Ä‚È‚¢‚Æ‚«‚Í­‚µ‚¸‚Â‘¬“x‚ğ—‚Æ‚·B
 	m_car->AddDicceleration(DICCELATION);
 
-	if (Pad(0).IsPress(enButtonA))
+	if (m_car->m_carDriver->GetDriverInput(ICarDriver::enDriverAccele))
 	{
 		m_car->ChangeState(m_car->m_stateAccele.get());
 	}
-	if (Pad(0).IsPress(enButtonB))
+	if (m_car->m_carDriver->GetDriverInput(ICarDriver::enDriverBrake))
 	{
 		m_car->ChangeState(m_car->m_stateBrake.get());
 	}

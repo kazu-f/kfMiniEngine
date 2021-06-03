@@ -432,6 +432,9 @@
     <ClCompile Include="MyProgram\Car\CarDriver\PlayerCarDriver.cpp">
       <Filter>MyProgram\Car\CarDriver</Filter>
     </ClCompile>
+    <ClCompile Include="MyProgram\Car\CarDriver\AICarDriver.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tkEngine.h">
@@ -775,6 +778,9 @@
     </ClInclude>
     <ClInclude Include="MyProgram\Car\CarDriver\PlayerCarDriver.h">
       <Filter>MyProgram\Car\CarDriver</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\Car\CarDriver\AICarDriver.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

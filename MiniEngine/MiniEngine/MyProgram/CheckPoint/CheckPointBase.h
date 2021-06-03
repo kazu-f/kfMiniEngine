@@ -62,6 +62,10 @@ public:		//ゲット関係。
 	{
 		return m_checkPointNo;
 	}
+	CheckPointBase* GetBackCheckPoint()
+	{
+		return m_backPoint;
+	}
 
 protected:
 	CPhysicsGhostObject m_ghostObj;					//ゴーストオブジェクト。

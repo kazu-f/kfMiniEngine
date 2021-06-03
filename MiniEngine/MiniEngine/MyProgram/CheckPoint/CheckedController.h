@@ -67,6 +67,13 @@ public:		//ゲット関係。
 		return m_forward;
 	}
 	/// <summary>
+	/// 右方向を取得する。
+	/// </summary>
+	const Vector3& GetRight()const
+	{
+		return m_right;
+	}
+	/// <summary>
 	/// 現在のチェックポイント番号を取得する。
 	/// </summary>
 	int GetCheckPointNo()
@@ -94,15 +101,16 @@ public:		//ゲット関係。
 
 private:
 	/// <summary>
-	/// 回転から前方向を計算。
+	/// 回転から方向を計算。
 	/// </summary>
-	void CalcForward();
+	void CalcDirection();
 
 private:
 	CRigidBody* m_rigidBody = nullptr;					//判定を行う剛体。
 	Vector3 m_position = Vector3::Zero;					//座標。
 	Quaternion m_rotation = Quaternion::Identity;		//回転。
 	Vector3 m_forward = Vector3::AxisZ;					//前方向。
+	Vector3 m_right = Vector3::AxisX;					//右方向。
 	int m_currentCheckPointNo = 0;						//現在の次のチェックポイント番号。
 	int m_currentLapsNum = 0;							//現在の周回数。
 	bool m_isReverseRun = false;						//逆走中か？

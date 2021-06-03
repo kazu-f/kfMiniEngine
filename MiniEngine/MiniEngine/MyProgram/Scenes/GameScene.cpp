@@ -11,7 +11,7 @@
 
 #define ON 1
 #define OFF 0
-#define IS_SPECTATOR ON			//観客を出すかどうか。
+#define IS_SPECTATOR OFF			//観客を出すかどうか。
 #define DEBUG_DELETE OFF				//削除処理を呼び出せるようにするか。
 
 namespace {
@@ -153,7 +153,8 @@ void GameScene::InitCourse()
 			m_car = NewGO<Car>(0);
 			m_car->SetPosition(objData.position);
 			m_car->SetRotation(objData.rotation);
-			m_car->SetCarDriver(Car::EnDriverType::enTypePlayer);
+			m_car->SetCarDriver(Car::EnDriverType::enTypeAI);
+			//m_car->SetCarDriver(Car::EnDriverType::enTypePlayer);
 
 			return true;
 		}

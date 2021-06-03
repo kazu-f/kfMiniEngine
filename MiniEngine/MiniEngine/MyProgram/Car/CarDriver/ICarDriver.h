@@ -34,6 +34,12 @@ public:
 	}
 
 protected:
+	/// <summary>
+	/// 入力をリセット。
+	/// </summary>
+	void ResetDriverInput();
+
+protected:
 	bool m_driverInput[enDriverNum] = { false };
 	float m_driverHandle = 0.0f;			//ハンドル入力量。(-1.0f ～ 1,0f)
 

@@ -42,7 +42,7 @@ void CarStateAccele::Execute()
 
 	CalcSoundFrequencyRetio();
 
-	if (!Pad(0).IsPress(enButtonA))
+	if (!m_car->m_carDriver->GetDriverInput(ICarDriver::enDriverAccele))
 	{
 		m_car->ChangeState(m_car->m_stateIdle.get());
 	}
