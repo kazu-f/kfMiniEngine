@@ -14,6 +14,7 @@ public:
 	virtual ~ICarState();			//デストラクタ。
 
 	virtual bool IsDrift() = 0;		//ドリフトが可能か？
+	virtual bool IsDecelerate() = 0;	//減速中か？
 
 	friend class Car;
 protected:

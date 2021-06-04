@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MyProgram\Car\State\CarStateDrift.cpp" />
     <ClCompile Include="MyProgram\Car\CarDriver\AICarDriver.cpp" />
     <ClCompile Include="MyProgram\Car\CarDriver\ICarDriver.cpp" />
     <ClCompile Include="MyProgram\graphics\PostEffect\Fxaa.cpp" />
@@ -125,6 +126,7 @@
     <ClCompile Include="MyProgram\graphics\PostEffect\Tonemap.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MyProgram\Car\State\CarStateDrift.h" />
     <ClInclude Include="MyProgram\Car\CarDriver\AICarDriver.h" />
     <ClInclude Include="MyProgram\Car\CarDriver\ICarDriver.h" />
     <ClInclude Include="MyProgram\graphics\PostEffect\Fxaa.h" />

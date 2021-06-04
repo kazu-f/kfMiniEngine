@@ -435,6 +435,9 @@
     <ClCompile Include="MyProgram\Car\CarDriver\AICarDriver.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="MyProgram\Car\State\CarStateDrift.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tkEngine.h">
@@ -780,6 +783,9 @@
       <Filter>MyProgram\Car\CarDriver</Filter>
     </ClInclude>
     <ClInclude Include="MyProgram\Car\CarDriver\AICarDriver.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\Car\State\CarStateDrift.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

@@ -22,7 +22,6 @@ public:
 		m_car = car;
 	}
 private:
-	float LinearInterpolation(float start, float end, float linear);
 
 private:
 	Car* m_car = nullptr;

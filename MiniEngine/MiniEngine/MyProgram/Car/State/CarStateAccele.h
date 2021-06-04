@@ -16,6 +16,11 @@ public:
 	{
 		return false;
 	}
+	//Œ¸‘¬’†‚©H
+	bool IsDecelerate() override final
+	{
+		return false;
+	}
 
 protected:
 	void Enter()override final;		//–‘Oˆ—B

@@ -31,4 +31,7 @@ void CheckedController::CalcDirection()
 	//Œü‚«‚ğ‘ã“ü‚·‚éB
 	m_forward = { mRot.m[2][0],mRot.m[2][1] ,mRot.m[2][2] };
 	m_right = { mRot.m[0][0],mRot.m[0][1],mRot.m[0][2] };
+
+	m_forward.Normalize();
+	m_right.Normalize();
 }

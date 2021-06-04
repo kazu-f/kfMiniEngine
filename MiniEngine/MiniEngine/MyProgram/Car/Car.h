@@ -6,6 +6,7 @@ class ICarState;
 class CarStateIdle;
 class CarStateAccele;
 class CarStateBrake;
+class CarStateDrift;
 class CheckedController;
 
 class Car : public IGameObject
@@ -18,6 +19,14 @@ public:
 		enTypeAI,				//AI操作。
 		enDriverTypeNum
 	};
+
+	enum EnCarState {
+		enStateIdle,
+		enStateAccele,
+		enStateBrake,
+		enStateDrift,
+		enStateNum
+	};
 public:
 	Car();
 	~Car();
@@ -29,6 +38,7 @@ public:
 	friend class CarStateAccele;
 	friend class CarStateIdle;
 	friend class CarStateBrake;
+	friend class CarStateDrift;
 public:
 	/// <summary>
 	/// ステートを変更する。
@@ -83,10 +93,7 @@ protected:		//車の移動などの処理
 	/// 減速度を与える。
 	/// </summary>
 	/// <param name="diccele">減速度。</param>
-	void AddDicceleration(const float diccele)
-	{
-		m_speed = max(0.0f, m_speed - (diccele * MOVE_COEFFICIENT * GameTime().GetFrameDeltaTime()));
-	}
+	void AddDicceleration(const float diccele);
 	/// <summary>
 	/// 車の向きを計算する。
 	/// </summary>
@@ -96,10 +103,6 @@ protected:		//車の移動などの処理
 	/// キャラコンを使った移動。
 	/// </summary>
 	void CharaConMove();
-	/// <summary>
-	/// 剛体の移動。
-	/// </summary>
-	void RigidBodyMove();
 
 protected:
 	static constexpr float MAX_SPEED = 6800.0f;
@@ -109,14 +112,13 @@ protected:	//ステート等
 	std::unique_ptr<CarStateIdle> m_stateIdle;
 	std::unique_ptr<CarStateAccele> m_stateAccele;
 	std::unique_ptr<CarStateBrake> m_stateBrake;
+	std::unique_ptr<CarStateDrift> m_stateDrift;
 
 	std::unique_ptr<ICarDriver> m_carDriver;
 protected:
 	prefab::ModelRender* m_model = nullptr;
 	//移動関係。
 	CCharacterController m_charaCon;		//キャラコン。
-	CRigidBody m_rigidBody;					//剛体。
-	CBoxCollider m_carCollider;		//車のコライダー。
 	std::unique_ptr<CheckedController> m_checkedCon;			//チェックポイントに監視される。
 	Vector3 m_position = Vector3::Zero;		//座標。
 	Vector3 m_moveSpeed = Vector3::Zero;	//移動速度。

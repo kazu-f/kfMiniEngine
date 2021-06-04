@@ -77,7 +77,7 @@ void LapUI::Update()
 	if (!(m_currentLapNum < m_nextLapNum)) {
 		return;
 	}
-	if (m_nextLapNum == enLap_Num) {
+	if (m_nextLapNum >= enLap_Num) {
 		//ƒS[ƒ‹‚µ‚½B
 		m_isGoal = true;
 	}

@@ -57,6 +57,11 @@ public:		//ゲット関係。
 	{
 		return m_position;
 	}
+	//向きを取得。
+	const Vector3& GetDirection()const
+	{
+		return m_forward;
+	}
 	//チェックポイント番号を取得。
 	int GetCheckPointNum()
 	{

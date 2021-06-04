@@ -1,44 +1,45 @@
 #include "stdafx.h"
-#include "CarStateBrake.h"
-#include "CarStateIdle.h"
-#include "CarStateAccele.h"
 #include "CarStateDrift.h"
+#include "CarStateIdle.h"
+#include "CarStateBrake.h"
+#include "CarStateAccele.h"
 
 namespace {
-	const float BRAKE_POWER = 120.0f;
+	const float FIRST_DICCELATION = 120.0f;
+	const float DICCELATION = 10.0f;
 }
 
-CarStateBrake::CarStateBrake(Car* car) :
+CarStateDrift::CarStateDrift(Car* car):
 	ICarState::ICarState(car)
 {
 	m_breakeSound = NewGO<prefab::CSoundSource>(0);
 	m_breakeSound->Init(L"Assets/sound/Car/CarSkid.wav");
 }
 
-CarStateBrake::~CarStateBrake()
+CarStateDrift::~CarStateDrift()
 {
 	//サウンドの削除。
 	DeleteGO(m_breakeSound);
 }
 
-void CarStateBrake::Enter()
+void CarStateDrift::Enter()
 {
 	m_breakeSound->Play(true);
 }
 
-void CarStateBrake::Leave()
+void CarStateDrift::Leave()
 {
 	m_breakeSound->Stop();
+	m_driftSpeed = 0.0f;
 }
 
-void CarStateBrake::Execute()
+void CarStateDrift::Execute()
 {
-	//ブレーキで減速する。
-	m_car->AddDicceleration(BRAKE_POWER);
+	m_car->AddDicceleration(DICCELATION);
 
-	if (m_car->m_carDriver->GetDriverInput(ICarDriver::enDriverDrift))
+	if (m_car->m_carDriver->GetDriverInput(ICarDriver::enDriverBrake))
 	{
-		m_car->ChangeState(m_car->m_stateDrift.get());
+		m_car->ChangeState(m_car->m_stateBrake.get());
 	}
 	else if (m_car->m_carDriver->GetDriverInput(ICarDriver::enDriverAccele))
 	{
@@ -48,5 +49,4 @@ void CarStateBrake::Execute()
 	{
 		m_car->ChangeState(m_car->m_stateIdle.get());
 	}
-
 }

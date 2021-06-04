@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "CarStateAccele.h"
 #include "CarStateIdle.h"
+#include "CarStateDrift.h"
+#include "CarStateBrake.h"
 
 namespace {
 	const float FIRST_SPEED = 280.0f;
@@ -42,7 +44,15 @@ void CarStateAccele::Execute()
 
 	CalcSoundFrequencyRetio();
 
-	if (!m_car->m_carDriver->GetDriverInput(ICarDriver::enDriverAccele))
+	if (m_car->m_carDriver->GetDriverInput(ICarDriver::enDriverDrift))
+	{
+		m_car->ChangeState(m_car->m_stateDrift.get());
+	}
+	else if (m_car->m_carDriver->GetDriverInput(ICarDriver::enDriverBrake))
+	{
+		m_car->ChangeState(m_car->m_stateBrake.get());
+	}
+	else if(m_car->m_carDriver->GetDriverInput(ICarDriver::enDriverIdle))
 	{
 		m_car->ChangeState(m_car->m_stateIdle.get());
 	}

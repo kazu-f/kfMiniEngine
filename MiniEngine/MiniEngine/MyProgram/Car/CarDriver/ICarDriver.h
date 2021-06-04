@@ -3,8 +3,10 @@ class ICarDriver
 {
 public:
 	enum EnDriverInput {
+		enDriverIdle,
 		enDriverAccele,
 		enDriverBrake,
+		enDriverDrift,
 		enDriverNum
 	};
 public:

@@ -1,20 +1,15 @@
 #pragma once
-
 #include "ICarState.h"
-
-/// <summary>
-/// 車のブレーキ時ステート
-/// </summary>
-class CarStateBrake : public ICarState
+class CarStateDrift : public ICarState
 {
 public:
-	CarStateBrake(Car* car);
-	~CarStateBrake();
+	CarStateDrift(Car* car);
+	~CarStateDrift();
 
 	//ドリフト可能か？
 	bool IsDrift() override final
 	{
-		return false;
+		return true;
 	}
 	//減速中か？
 	bool IsDecelerate() override final
@@ -27,5 +22,6 @@ protected:
 	void Execute()override final;	//実行処理。
 private:
 	prefab::CSoundSource* m_breakeSound = nullptr;
+	float m_driftSpeed = 0.0f;
 };
 

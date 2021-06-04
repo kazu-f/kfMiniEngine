@@ -153,8 +153,8 @@ void GameScene::InitCourse()
 			m_car = NewGO<Car>(0);
 			m_car->SetPosition(objData.position);
 			m_car->SetRotation(objData.rotation);
-			m_car->SetCarDriver(Car::EnDriverType::enTypeAI);
-			//m_car->SetCarDriver(Car::EnDriverType::enTypePlayer);
+			//m_car->SetCarDriver(Car::EnDriverType::enTypeAI);
+			m_car->SetCarDriver(Car::EnDriverType::enTypePlayer);
 
 			return true;
 		}
