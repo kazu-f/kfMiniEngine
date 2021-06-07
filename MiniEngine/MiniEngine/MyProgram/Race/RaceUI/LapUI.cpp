@@ -6,7 +6,7 @@ namespace {
 	const Vector2 TEXTSIZE = { 200.0f,100.0f };				//テキストのサイズ。
 
 	//周回数のスプライトのファイルパス。
-	const char* LAPNUM_FILEPATH[LapUI::enLap_Num] = {
+	const char* LAPNUM_FILEPATH[Race::enLap_Num] = {
 		"Assets/sprite/LapNum_1.dds",
 		"Assets/sprite/LapNum_2.dds",
 		"Assets/sprite/LapNum_3.dds"
@@ -39,7 +39,7 @@ void LapUI::OnDestroy()
 	DeleteGO(m_lapTextSprite);
 	DeleteGO(m_maxLapSprite);
 	DeleteGO(m_slashSprite);
-	for (int i = 0; i < enLap_Num; i++) {
+	for (int i = 0; i < Race::enLap_Num; i++) {
 		DeleteGO(m_currentLapSprite[i]);
 	}
 }
@@ -56,10 +56,10 @@ bool LapUI::Start()
 	m_slashSprite->SetPosition(SLASH_POS);
 	//最大周回数。
 	m_maxLapSprite = NewGO<prefab::CSpriteRender>(SPRITE_PRIO);
-	m_maxLapSprite->Init(LAPNUM_FILEPATH[enLap_Num - 1], LAPNUM_SIZE.x, LAPNUM_SIZE.y);
+	m_maxLapSprite->Init(LAPNUM_FILEPATH[Race::enLap_Num - 1], LAPNUM_SIZE.x, LAPNUM_SIZE.y);
 	m_maxLapSprite->SetPosition(MAX_LAPPOS);
 	//現在周回数。
-	for (int i = 0; i < enLap_Num; i++) {
+	for (int i = 0; i < Race::enLap_Num; i++) {
 		m_currentLapSprite[i] = NewGO<prefab::CSpriteRender>(SPRITE_PRIO);
 		m_currentLapSprite[i]->Init(LAPNUM_FILEPATH[i], LAPNUM_SIZE.x, LAPNUM_SIZE.y);
 		m_currentLapSprite[i]->SetPosition(CURRENT_LAPPOS);
@@ -77,11 +77,7 @@ void LapUI::Update()
 	if (!(m_currentLapNum < m_nextLapNum)) {
 		return;
 	}
-	if (m_nextLapNum >= enLap_Num) {
-		//ゴールした。
-		m_isGoal = true;
-	}
-	else {
+	if (m_nextLapNum < Race::enLap_Num) {
 		//周回数を切り替える。。
 		CountUpLap();
 	}

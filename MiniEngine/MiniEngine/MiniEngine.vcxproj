@@ -183,6 +183,7 @@
     <ClInclude Include="MyProgram\prefab\ModelRender.h" />
     <ClInclude Include="MyProgram\prefab\SpriteRender.h" />
     <ClInclude Include="MyProgram\Race\RaceController.h" />
+    <ClInclude Include="MyProgram\Race\RaceEnum.h" />
     <ClInclude Include="MyProgram\Race\RaceUI\GoalUI.h" />
     <ClInclude Include="MyProgram\Race\RaceUI\LapUI.h" />
     <ClInclude Include="MyProgram\Race\RaceUI\ReverseRunUI.h" />
@@ -260,6 +261,10 @@
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\RaceGoalUI.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\Lose.png" />
+    <ImageContentTask Include="Assets\sprite\Win.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

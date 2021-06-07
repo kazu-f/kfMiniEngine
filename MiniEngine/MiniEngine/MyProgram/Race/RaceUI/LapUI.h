@@ -1,14 +1,9 @@
 #pragma once
+#include "../RaceEnum.h"
 
 class LapUI : public IGameObject
 {
 public:
-	enum EnLapNum {
-		enLap_One,
-		enLap_Two,
-		enLap_Three,
-		enLap_Num
-	};
 
 	LapUI();
 	~LapUI();
@@ -32,7 +27,7 @@ public:		//Get関数。
 	/// </summary>
 	bool IsGoal() const
 	{
-		return m_isGoal;
+		return m_nextLapNum >= Race::enLap_Num;
 	}
 
 private:	//内部処理。
@@ -42,7 +37,7 @@ private:	//内部処理。
 	void CountUpLap();
 
 private:
-	prefab::CSpriteRender* m_currentLapSprite[enLap_Num] = { nullptr };	//現在の周回数。
+	prefab::CSpriteRender* m_currentLapSprite[Race::enLap_Num] = { nullptr };	//現在の周回数。
 	prefab::CSpriteRender* m_maxLapSprite = nullptr;					//周回の最大数。
 	prefab::CSpriteRender* m_slashSprite = nullptr;						//スラッシュ。(/)
 	prefab::CSpriteRender* m_lapTextSprite = nullptr;					//テキスト。(Lap)
@@ -50,6 +45,5 @@ private:
 	int m_currentLapNum = 0;								//現在の周回数。
 	int m_nextLapNum = 0;									//次の周回数。
 	float m_currentTime = 0.0f;								//点滅時間。
-	bool m_isGoal = false;									//ゴールしたか？
 };
 

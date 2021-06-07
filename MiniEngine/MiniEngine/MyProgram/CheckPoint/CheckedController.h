@@ -1,4 +1,5 @@
 #pragma once
+#include "Race/RaceEnum.h"
 
 /// <summary>
 /// チェックポイントから判定されるもの。
@@ -94,9 +95,18 @@ public:		//ゲット関係。
 	{
 		return m_rigidBody;
 	}
+	/// <summary>
+	/// 逆走中か？
+	/// </summary>
+	/// <returns>逆走中ならtrue。</returns>
 	bool IsReverseRun()const
 	{
 		return m_isReverseRun;
+	}
+
+	bool IsGoal()const
+	{
+		return m_currentLapsNum >= Race::enLap_Num;
 	}
 
 private:

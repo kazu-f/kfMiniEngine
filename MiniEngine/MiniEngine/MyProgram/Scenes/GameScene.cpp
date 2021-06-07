@@ -11,15 +11,15 @@
 
 #define ON 1
 #define OFF 0
-#define IS_SPECTATOR OFF			//観客を出すかどうか。
+#define IS_SPECTATOR ON			//観客を出すかどうか。
 #define DEBUG_DELETE OFF				//削除処理を呼び出せるようにするか。
 
 namespace {
-#if 0								//もう使うことはなさそう？
-	const char* COURSE_PATH = "Assets/level/CourseLevel.tkl";
-	const char* SPECTATOR_PATH = "Assets/level/spectatorLevel.tkl";
+#if 0
+	const char* COURSE_PATH = "Assets/level/CourseLevel.tkl";			//プレイヤーのみ
+	const char* SPECTATOR_PATH = "Assets/level/spectatorLevel2.tkl";
 #else
-	const char* COURSE_PATH = "Assets/level/CourseLevel2.tkl";
+	const char* COURSE_PATH = "Assets/level/CourseLevel2.tkl";			//CPUあり。
 	const char* SPECTATOR_PATH = "Assets/level/spectatorLevel2.tkl";
 #endif
 	const char* GUARDRAIL_ROAD = "Assets/level/RoadGuardrailLevel.tkl";
@@ -88,7 +88,8 @@ bool GameScene::Start()
 void GameScene::Release()
 {
 	DeleteGO(m_camera);		//カメラ。
-	DeleteGO(m_car);		//車。
+	DeleteGO(m_playerCar);		//車。
+	DeleteGO(m_cpuCar);		//車。
 	DeleteGO(m_ground);		//背景モデル。
 	for (int i = 0; i < enSpectatorNum; i++)
 	{
@@ -149,12 +150,23 @@ void GameScene::InitCourse()
 	m_guardrail = NewGO<Guardrail>(0);		//ガードレール。
 
 	m_courseLevel.Init(COURSE_PATH, [&](SLevelObjectData& objData) {
-		if (wcscmp(objData.name, L"Sup") == 0) {
-			m_car = NewGO<Car>(0);
-			m_car->SetPosition(objData.position);
-			m_car->SetRotation(objData.rotation);
-			//m_car->SetCarDriver(Car::EnDriverType::enTypeAI);
-			m_car->SetCarDriver(Car::EnDriverType::enTypePlayer);
+		if (wcscmp(objData.name, L"PlayerCar") == 0) {
+			m_playerCar = NewGO<Car>(0);
+			m_playerCar->SetPosition(objData.position);
+			m_playerCar->SetRotation(objData.rotation);
+			//m_playerCar->SetCarDriver(Car::EnDriverType::enTypeAI);
+			m_playerCar->SetCarDriver(Car::EnDriverType::enTypePlayer);
+			m_playerCar->SetCarColor(CAR::enCar_Red);
+
+			return true;
+		}
+		if (wcscmp(objData.name, L"CPUCar") == 0) {
+			m_cpuCar = NewGO<Car>(0);
+			m_cpuCar->SetPosition(objData.position);
+			m_cpuCar->SetRotation(objData.rotation);
+			m_cpuCar->SetCarDriver(Car::EnDriverType::enTypeAI);
+			//m_cpuCar->SetCarDriver(Car::EnDriverType::enTypePlayer);
+			m_cpuCar->SetCarColor(CAR::enCar_Blue);
 
 			return true;
 		}
@@ -185,9 +197,9 @@ void GameScene::InitCourse()
 
 		return false;
 		});
-	if (m_car != nullptr)
+	if (m_playerCar != nullptr)
 	{
-		m_camera->SetTargetCar(m_car);
+		m_camera->SetTargetCar(m_playerCar);
 	}
 	else
 	{
@@ -254,7 +266,11 @@ void GameScene::InitRaceController()
 	//レースの制御クラス。
 	m_raceController = NewGO<RaceController>(3);
 	//プレイヤーを設定する。
-	m_raceController->SetPlayer(m_car->GetCheckedController());
+	m_raceController->SetPlayer(m_playerCar->GetCheckedController());
+	//CPUを設定。
+	if (m_cpuCar != nullptr) {
+		m_raceController->RegistCPU(m_cpuCar->GetCheckedController());
+	}
 }
 
 void GameScene::InitCheckPoint()
@@ -306,7 +322,10 @@ void GameScene::InitCheckPoint()
 			return true;
 		}
 	);
-	m_checkPointManager->RegistCheckedController(m_car->GetCheckedController());
+	m_checkPointManager->RegistCheckedController(m_playerCar->GetCheckedController());
+	if (m_cpuCar != nullptr) {
+		m_checkPointManager->RegistCheckedController(m_cpuCar->GetCheckedController());
+	}
 	m_checkPointManager->EnableInit();
 }
 

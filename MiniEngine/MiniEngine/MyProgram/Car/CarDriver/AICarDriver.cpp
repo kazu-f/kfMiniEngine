@@ -7,7 +7,7 @@ namespace {
 	//ハンドル量を線形変換するための変数。
 	const float HANDLE_FROM_ANGLE_START = 0.8f;
 	const float HANDLE_FROM_ANGLE_END = 1.0f;
-	const float HANDLE_FROM_DIST_START = 600.0f;
+	const float HANDLE_FROM_DIST_START = 800.0f;
 	const float HANDLE_FROM_DIST_END = 100.0f;
 }
 

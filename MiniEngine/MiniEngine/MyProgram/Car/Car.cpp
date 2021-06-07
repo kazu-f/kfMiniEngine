@@ -11,6 +11,14 @@
 #include "CarDriver/AICarDriver.h"
 
 namespace {
+
+	//車のモデル
+	const char* CAR_MODEL[CAR::enCar_Num] =
+	{
+		"Assets/modelData/Car/Car.tkm",
+		"Assets/modelData/Car/Car_B.tkm",
+	};
+
 	const float GRAVITY = 980.0f;			//重力加速度。
 	const float HANDLE_WEIGHT = 0.3f;		//ハンドルの効き。
 	const float CURVE_DEG = 15.0f;			//カーブの角度。
@@ -39,7 +47,7 @@ bool Car::Start()
 {
 	//3Dモデルを作成。
 	ModelInitData initData;
-	initData.m_tkmFilePath = "Assets/modelData/Car/Car.tkm";
+	initData.m_tkmFilePath = CAR_MODEL[m_carColor];
 	m_model = NewGO<prefab::ModelRender>(0);
 	m_model->Init(initData);
 	//モデルの設定。

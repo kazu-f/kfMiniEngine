@@ -56,7 +56,8 @@ private:
 	CheckPointManager* m_checkPointManager = nullptr;	//チェックポイントの管理者。
 	RaceController* m_raceController = nullptr;			//レースの管理。
 	FollowCarCamera* m_camera = nullptr;		//カメラ。
-	Car* m_car = nullptr;					//車。
+	Car* m_playerCar = nullptr;					//車。
+	Car* m_cpuCar = nullptr;					//車。
 	BackGround* m_ground = nullptr;			//地面。
 	Spectator* m_spectator[enSpectatorNum] = { nullptr };		//観客。
 	Guardrail* m_guardrail = nullptr;		//ガードレール。

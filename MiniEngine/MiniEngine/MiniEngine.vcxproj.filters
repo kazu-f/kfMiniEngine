@@ -788,6 +788,9 @@
     <ClInclude Include="MyProgram\Car\State\CarStateDrift.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="MyProgram\Race\RaceEnum.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\LAP.png">
@@ -810,6 +813,12 @@
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\RaceGoalUI.png">
       <Filter>Assets\sprite</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Lose.png">
+      <Filter>リソース ファイル</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Win.png">
+      <Filter>リソース ファイル</Filter>
     </ImageContentTask>
   </ItemGroup>
 </Project>

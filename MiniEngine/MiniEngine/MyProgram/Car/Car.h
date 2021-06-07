@@ -9,6 +9,14 @@ class CarStateBrake;
 class CarStateDrift;
 class CheckedController;
 
+namespace CAR{
+	enum EnCarColor {
+		enCar_Red,		//赤
+		enCar_Blue,		//青
+		enCar_Num		//種類数
+	};
+}
+
 class Car : public IGameObject
 {
 public:
@@ -58,6 +66,11 @@ public:		//Set関数とか
 	void SetRotation(const Quaternion& rot)
 	{
 		m_rotation = rot;
+	}
+
+	void SetCarColor(const CAR::EnCarColor colorType)
+	{
+		m_carColor = colorType;
 	}
 
 public:		//Get関数とか
@@ -116,6 +129,7 @@ protected:	//ステート等
 
 	std::unique_ptr<ICarDriver> m_carDriver;
 protected:
+	CAR::EnCarColor m_carColor = CAR::enCar_Red;
 	prefab::ModelRender* m_model = nullptr;
 	//移動関係。
 	CCharacterController m_charaCon;		//キャラコン。
