@@ -68,14 +68,17 @@ float4 FxaaPixelShader(
 	//輝度の差は閾値以下か？
 	if(lumaMaxSubMinM < lumaMaxScaledClamped){
 		//閾値以下だったため、アンチをかけない。
-		//return float4(1.0f, 0.0f, 0.0f, 1.0f);
+		//return float4(0.0f, 0.0f, 0.0f, 1.0f);
 		return rgbyM;
 	}
+	//return float4(1.0f, 0.0f, 0.0f, 1.0f);
 
 	//輝度の差を利用して、ギザギザが発生している可能性の高いテクセルをフェッチする。
 	float2 dir;
 	dir.x = dirSwMinusNe + dirSeMinusNw;
 	dir.y = dirSwMinusNe - dirSeMinusNw;
+	//dir.x = -((lumaNw + lumaNe) - (lumaSw + lumaSe));
+	//dir.y = ((lumaNw + lumaSw) - (lumaNe + lumaSe));
 
 	float2 dir1 = normalize(dir.xy);
 	float4 rgbyN1 = sceneTexture.Sample(g_sampler, pos.xy - dir1 * fxaaConsoleRcpFrameOpt.zw);
@@ -84,8 +87,8 @@ float4 FxaaPixelShader(
 	float dirAbsMinTimesC = min(abs(dir1.x),abs(dir1.y)) * fxaaConsoleEdgeSharpness;
 	float2 dir2 = clamp(dir1.xy / dirAbsMinTimesC, -2.0, 2.0);
 
-	float4 rgbyN2 = sceneTexture.Sample(g_sampler, pos.xy - dir2 * fxaaConsoleRcpFrameOpt.zw);
-	float4 rgbyP2 = sceneTexture.Sample(g_sampler, pos.xy + dir2 * fxaaConsoleRcpFrameOpt.zw);
+	float4 rgbyN2 = sceneTexture.Sample(g_sampler, pos.xy - dir2 * fxaaConsoleRcpFrameOpt2.zw);
+	float4 rgbyP2 = sceneTexture.Sample(g_sampler, pos.xy + dir2 * fxaaConsoleRcpFrameOpt2.zw);
 	//ブレンド
 	float4 rgbyA = rgbyN1 + rgbyP1;
 	float4 rgbyB = ((rgbyN2 + rgbyP2) * 0.25) + (rgbyA * 0.25);
@@ -95,7 +98,10 @@ float4 FxaaPixelShader(
 	if(twoTap){
 		//輝度の差がまだ大きいためブレンド。
 		rgbyB.xyz = rgbyA.xyz * 0.5;
+
+		//return float4(0.0f, 1.0f, 0.0f, 1.0f);
 	}
+	//return float4(1.0f, 0.0f, 0.0f, 1.0f);
 
 	return rgbyB;
 }
@@ -125,6 +131,18 @@ float4 PSMain(PSInput In) : SV_TARGET0
 		0.0833f,			//fxaaConsoleEdgeThresholdMin
 		texSize				//テクスチャのサイズ。
 	);
+
+	//return FxaaPixelShader(
+	//	In.uv,
+	//	rcpFrame,			//fxaaConsoleRcpFrameOpt
+	//	rcpFrame,			//fxaaConsoleRcpFrameOpt2
+	//	0.166f,				//fxaaQualityEdgeThreshold
+	//	0.0833f,			//fxaaQualityEdgeThresholdMin
+	//	1.0f,				//fxaaConsoleEdgeSharpness
+	//	0.125,				//fxaaConsoleEdgeThreshold
+	//	0.0312,			//fxaaConsoleEdgeThresholdMin
+	//	texSize				//テクスチャのサイズ。
+	//);
 }
 
 
