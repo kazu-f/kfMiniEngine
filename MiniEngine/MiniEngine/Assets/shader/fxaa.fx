@@ -91,6 +91,7 @@ float4 FxaaPixelShader(
 	float4 rgbyP2 = sceneTexture.Sample(g_sampler, pos.xy + dir2 * fxaaConsoleRcpFrameOpt2.zw);
 	//ƒuƒŒƒ“ƒh
 	float4 rgbyA = rgbyN1 + rgbyP1;
+	//return rgbyA * 0.5f;
 	float4 rgbyB = ((rgbyN2 + rgbyP2) * 0.25) + (rgbyA * 0.25);
 
 	int twoTap = (rgbyB.y < lumaMin) || (rgbyB.y > lumaMax);

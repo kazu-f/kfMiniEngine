@@ -41,10 +41,11 @@ float4 PSMain_SkyCube(SPSIn_SkyCube In) : SV_Target0
 {
 	float4 color = float4(0.0f,0.0f,0.0f,1.0f);	
 	color.xyz = skyCubeMap.Sample(g_sampler, In.normal).xyz + 0.09f;
+	//color.xyz += emissionColor;
+
 	color = CalcSkyFog(color, In.worldPos.y);
 	color.a = 1.0f;
 
-//	color.xyz += emissionColor;
 	return color;
 	//return float4(1.0f,0.0f,0.0f,1.0f);
 }

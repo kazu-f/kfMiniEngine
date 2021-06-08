@@ -205,7 +205,7 @@ float4 PSFinal(PSInput In) : SV_TARGET0
 	float fAvgLum = lumAvgTexture.Sample(Sampler,float2(0.5f,0.5f)).r;
 	float3 hsv = Rgb2Hsv(vSample.xyz);
 	hsv.z -= fAvgLum;
-	hsv.z += 0.2f;
+	hsv.z += middleGray;
 	hsv.z = max(0.0f, hsv.z);
 	vSample.xyz = Hsv2Rgb(hsv);
 	/*float3 avgColor = LUMINANCE_VECTOR * fAvgLum;

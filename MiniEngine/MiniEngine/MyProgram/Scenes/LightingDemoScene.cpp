@@ -26,11 +26,14 @@ namespace {
 	};
 
 	const int LIGHT_NUM = 5;						//ライトの本数。
-	const float LIGHT_POW = 2.0f;					//ライトの強さ。
+	const float LIGHT_POW = 2.3;					//ライトの強さ。
 	//ライトデータ。
 	const LightData LIGHTDATAS[LIGHT_NUM] = {
-		{ {1.0f,0.0f,0.0f},{LIGHT_POW,LIGHT_POW,LIGHT_POW,1.0f } },
-		{ {1.0f,0.0f,0.0f},{LIGHT_POW,LIGHT_POW,LIGHT_POW,1.0f } },
+		{ {0.0f,-1.0f,0.0f},{5.5f,5.5f,5.5f,1.0f } },
+		{ {-1.0f,-1.0f,0.0f},{LIGHT_POW,LIGHT_POW,LIGHT_POW,1.0f } },
+		{ {0.0f,-1.0f,1.0f},{LIGHT_POW,LIGHT_POW,LIGHT_POW,1.0f } },
+		{ {0.0f,-1.0f,-1.0f},{LIGHT_POW,LIGHT_POW,LIGHT_POW,1.0f } },
+		{ {1.0f,-1.0f,0.0f},{LIGHT_POW,LIGHT_POW,LIGHT_POW,1.0f } },
 	};
 
 	//カメラ
@@ -85,19 +88,25 @@ bool LightingDemoScene::Start()
 	for (int i = 0; i < LIGHT_NUM; i++)
 	{
 		prefab::CDirectionLight* light = NewGO<prefab::CDirectionLight>(0);
-		light->SetDirection(LIGHTDATAS[0].Dir);
-		light->SetColor(LIGHTDATAS[0].Color);
+		light->SetDirection(LIGHTDATAS[i].Dir);
+		light->SetColor(LIGHTDATAS[i].Color);
 		m_lights.push_back(light);
 	}
 
 	MainCamera().SetTarget(CAMERA_TARGETPOS);
 	MainCamera().SetPosition(CAMERA_TARGETPOS + m_cameraPos);
-	MainCamera().SetFar(10000.0f);
+	MainCamera().SetFar(1000000.0f);
 
 	//空を付けておく。
-	const float SkySize = 8.0f;
+	const float SkySize = 1000.0f;
 	m_sky = NewGO<prefab::CSky>(0);
 	m_sky->SetScale(SkySize);
+	const float SKY_EMISSION = -0.04f;
+	m_sky->SetEmissionColor({ SKY_EMISSION ,SKY_EMISSION ,SKY_EMISSION });
+
+	GraphicsEngine()->GetPostEffect()->GetTonemap().SetLuminance(0.54f);
+	const float AMBIENT = 0.8f;
+	GraphicsEngine()->GetLightManager()->SetAmbientLight({ AMBIENT ,AMBIENT ,AMBIENT });
 
 	return true;
 }
