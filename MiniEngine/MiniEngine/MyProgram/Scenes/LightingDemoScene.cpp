@@ -4,7 +4,9 @@
 #define ROTMODE 0
 #define AUTOMODE 1
 
-#define CAMERA_ROTMODE AUTOMODE
+#define CAMERA_ROTMODE ROTMODE
+
+//#define SKY_ON
 
 namespace {
 	//モデルのファイルパス。
@@ -26,8 +28,10 @@ namespace {
 	};
 
 	const int LIGHT_NUM = 5;						//ライトの本数。
-	const float LIGHT_POW = 2.3;					//ライトの強さ。
 	//ライトデータ。
+#ifdef SKY_ON
+	const float AMBIENT = 0.8f;						//アンビエントライト。
+	const float LIGHT_POW = 2.3;					//ライトの強さ。
 	const LightData LIGHTDATAS[LIGHT_NUM] = {
 		{ {0.0f,-1.0f,0.0f},{5.5f,5.5f,5.5f,1.0f } },
 		{ {-1.0f,-1.0f,0.0f},{LIGHT_POW,LIGHT_POW,LIGHT_POW,1.0f } },
@@ -35,6 +39,18 @@ namespace {
 		{ {0.0f,-1.0f,-1.0f},{LIGHT_POW,LIGHT_POW,LIGHT_POW,1.0f } },
 		{ {1.0f,-1.0f,0.0f},{LIGHT_POW,LIGHT_POW,LIGHT_POW,1.0f } },
 	};
+#else
+	const float AMBIENT = 0.5f;						//アンビエントライトの強さ。
+	const float LIGHT_POW = 1.0f;					//ライトの強さ。
+	const LightData LIGHTDATAS[LIGHT_NUM] = {
+		{ {0.0f,-1.0f,0.0f},{1.0f,1.0f,1.0f,1.0f } },
+		{ {-1.0f,-1.0f,0.0f},{LIGHT_POW,LIGHT_POW,LIGHT_POW,1.0f } },
+		{ {0.0f,-1.0f,1.0f},{LIGHT_POW,LIGHT_POW,LIGHT_POW,1.0f } },
+		{ {0.0f,-1.0f,-1.0f},{LIGHT_POW,LIGHT_POW,LIGHT_POW,1.0f } },
+		{ {1.0f,-1.0f,0.0f},{LIGHT_POW,LIGHT_POW,LIGHT_POW,1.0f } },
+	};
+#endif // SKY_ON
+
 
 	//カメラ
 	const float CAMERA_ROTSPEED = 90.0f;
@@ -74,16 +90,21 @@ bool LightingDemoScene::Start()
 	m_model = NewGO<prefab::ModelRender>(0);
 
 	ModelInitData modelData;
-	modelData.m_shaderData.vsFxFilePath = MODEL_SHADER;
-	modelData.m_shaderData.vsEntryPointFunc = "VSMain";
-	modelData.m_shaderData.psFxFilePath = MODEL_SHADER;
-	modelData.m_shaderData.psEntryPointFunc = "PSMain";
+	//modelData.m_shaderData.vsFxFilePath = MODEL_SHADER;
+	//modelData.m_shaderData.vsEntryPointFunc = "VSMain";
+	//modelData.m_shaderData.psFxFilePath = MODEL_SHADER;
+	//modelData.m_shaderData.psEntryPointFunc = "PSMain";
 	modelData.m_tkmFilePath = MODEL_FILEPATH[enDemo_Unity];
 	modelData.m_expandConstantBuffer = &DEMO_CB;
 	modelData.m_expandConstantBufferSize = sizeof(DemoConstantBuffer);
 	
 	m_model->Init(modelData);
 	//m_model->SetForwardRenderFlag(true);
+
+	//prefab::CDirectionLight* light = NewGO<prefab::CDirectionLight>(0);
+	//light->SetDirection(LIGHTDATAS[0].Dir);
+	//light->SetColor(LIGHTDATAS[0].Color);
+	//m_lights.push_back(light);
 
 	for (int i = 0; i < LIGHT_NUM; i++)
 	{
@@ -97,15 +118,17 @@ bool LightingDemoScene::Start()
 	MainCamera().SetPosition(CAMERA_TARGETPOS + m_cameraPos);
 	MainCamera().SetFar(1000000.0f);
 
+#ifdef SKY_ON
 	//空を付けておく。
 	const float SkySize = 1000.0f;
 	m_sky = NewGO<prefab::CSky>(0);
 	m_sky->SetScale(SkySize);
-	const float SKY_EMISSION = -0.04f;
+	const float SKY_EMISSION = 0.05f;
 	m_sky->SetEmissionColor({ SKY_EMISSION ,SKY_EMISSION ,SKY_EMISSION });
 
+#endif // SKY_ON
+
 	GraphicsEngine()->GetPostEffect()->GetTonemap().SetLuminance(0.54f);
-	const float AMBIENT = 0.8f;
 	GraphicsEngine()->GetLightManager()->SetAmbientLight({ AMBIENT ,AMBIENT ,AMBIENT });
 
 	return true;
@@ -133,6 +156,7 @@ void LightingDemoScene::RotCamera()
 	
 	const float delTime = GameTime().GetFrameDeltaTime();
 
+#ifdef SKY_ON
 	if (Pad(0).IsTrigger(enButtonX))
 	{
 		//CreateLight(LIGHTDATAS[0].Dir, LIGHTDATAS[0].Color);
@@ -145,6 +169,7 @@ void LightingDemoScene::RotCamera()
 		m_skyEmission = m_skyEmission - Vector3::One * 0.1f;
 		m_sky->SetEmissionColor(m_skyEmission);
 	}
+#endif // SKY_ON
 
 #if CAMERA_ROTMODE
 	if (Pad(0).IsTrigger(enButtonA))

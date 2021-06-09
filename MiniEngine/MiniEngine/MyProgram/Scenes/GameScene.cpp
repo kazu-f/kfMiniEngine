@@ -29,6 +29,7 @@ namespace {
 	const int PHYSICS_DEBUGMODE = 0;
 
 	const float SKY_SIZE = 3500.0f;		//空のサイズ。
+	const float SKY_EMISSION_POW = 0.09f;	//空の自己発光。
 }
 
 
@@ -141,8 +142,7 @@ void GameScene::InitOther()
 
 	m_sky = NewGO<prefab::CSky>(5, "Sky");			//空。
 	m_sky->SetScale(SKY_SIZE);
-	//const float emissionPow = 0.005f;
-	//m_sky->SetEmissionColor({ emissionPow, emissionPow, emissionPow });
+	m_sky->SetEmissionColor({ SKY_EMISSION_POW, SKY_EMISSION_POW, SKY_EMISSION_POW });
 }
 
 void GameScene::InitCourse()

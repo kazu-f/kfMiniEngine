@@ -24,7 +24,7 @@ static const float SKYFOG_END	= 100.0f;		//フォグが完全に掛かる高さ。
 
 float4 CalcSkyFog(float4 color, float height)
 {
-	float fog = (SKYFOG_END - height) / (SKYFOG_END - SKYFOG_START);
+	float fog = (SKYFOG_END - abs(height)) / (SKYFOG_END - SKYFOG_START);
 	fog = max(0.0f, min(1.0f, fog));
 
 	float4 finalColor = color * fog + FOG_COLOR * (1.0f - fog);

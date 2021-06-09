@@ -61,7 +61,7 @@ float CookTrranceSpecular(float3 L, float3 V, float3 N, float metaric)
 																	//最大値を1.0、最小値を0.0の間で
 																	//値の小さいほうを取る
 
-	float m = PI * NdotV * NdotL;			//クックトランス反射モデルの分母になる値？	
+	float m = PI * max(NdotV * NdotL,0.01f);			//クックトランス反射モデルの分母になる値？	
 
 	/*
 	*	F:フレネル項
@@ -91,32 +91,33 @@ float SchlickFresnel(float u, float f0, float f90)
 */
 float NormalizedDisneyDiffuse(float3 N, float3 L, float3 V, float roughness)
 {
-	//法線とライト方向の内積。
-	float dotNL = saturate(dot(N, L));
-	//法線と視点方向の内積。
-	float dotNV = saturate(dot(N, V));
+	//return 0.0f;
+	////法線とライト方向の内積。
+	//float dotNL = saturate(dot(N, L));
+	////法線と視点方向の内積。
+	//float dotNV = saturate(dot(N, V));
 
-	return max(0.2f, dotNL * dotNV);
+	//return max(0.2f, dotNL * dotNV);
 
-	//float3 H = normalize(L + V);		//ハーフベクトル。
+	float3 H = normalize(L + V);		//ハーフベクトル。
 
-	//float energyBias = lerp(0.0f, 0.5f, roughness);				//なんか正規化のための数値？0.0～0.5の線形補完
-	//float energyFactor = lerp(1.0f, 1.0f / 1.51f, roughness);	//同じく？なんかメンドイ線形補完してる感じする。
-	////内積する。(下限0.0～上限1.0)
-	//float LdotH = saturate(dot(L, H));		//ライトとハーフベクトル
-	//float NdotL = saturate(dot(N, L));		//法線とライト
-	//float NdotV = saturate(dot(N, V));		//法線と視点
+	float energyBias = lerp(0.0f, 0.5f, roughness);				//なんか正規化のための数値？0.0～0.5の線形補完
+	//内積する。(下限0.0～上限1.0)
+	float LdotH = saturate(dot(L, H));		//ライトとハーフベクトル
+	float NdotL = saturate(dot(N, L));		//法線とライト
+	float NdotV = saturate(dot(N, V));		//法線と視点
+	float HdotV = saturate(dot(H, V));		//ハーフベクトルと視点
 
-	////謎数値　フレネル反射率?(0.0～1.0)
-	//float Fd90 = energyBias + 2.0f * LdotH * LdotH * roughness;
+	//謎数値　フレネル反射率?(0.0～1.0)
+	float Fd90 = energyBias + 2.0f * LdotH * LdotH * roughness;
 
-	////これだったら普通にフレネル式使うんでいいんでは？
-	//float FL = SchlickFresnel(1.0f, Fd90, NdotL);	//フレネル係数(法線・ライト)
-	//float FV = SchlickFresnel(1.0f, Fd90, NdotV);	//フレネル係数(法線・視点)
+	//これだったら普通にフレネル式使うんでいいんでは？
+	float FL = SchlickFresnel(NdotL, 1.0f, Fd90);	//フレネル係数(法線・ライト)
+	float FV = SchlickFresnel(NdotV, 1.0f, Fd90);	//フレネル係数(法線・視点)
 
-	///*
-	//*	よくわからん係数 * ライトの強さ？
-	//*	* フレネル係数(N・L) * フレネル係数(N・V) / PI
-	//*/
-	//return (energyFactor * FL * FV) / PI;
+	/*
+	*	フレネル係数(N・L) * フレネル係数(N・V)
+	*	これを正規化ランバート拡散へ掛ける。
+	*/
+	return (FL * FV);
 }
