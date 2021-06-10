@@ -12,22 +12,34 @@ static const float PI = 3.14159265358979323846;
 float Beckmann(float m, float t)
 {
 
-	float t2 = t * t;
-	float t4 = t * t * t * t;
-	float m2 = m * m;
-	float D = 1.0f / (4.0f * m2 * t4);
-	D *= exp((-1.0f / m2) * (1.0f - t2) / t2);
-	return D;
+	//float t2 = t * t;
+	//float t4 = t * t * t * t;
+	//float m2 = m * m;
+	//float D = 1.0f / (4.0f * m2 * t4);
+	//D *= exp((-1.0f / m2) * (1.0f - t2) / t2);
+	//return D;
 
-	//float M = m * m;
-	//float T = t * t;
-	//return exp((T - 1) / (M * T)) / (M * M * T);
+	float M = m;
+	float T = t * t;
+	return exp((T - 1) / (M * T)) / (PI * M * T * T);
 }
+
+//float DGGX(float roughness, float NdotH)
+//{
+//	float rough2 = roughness * roughness;
+//	float NdotH2 = NdotH * NdotH;
+//
+//	float t = rough2;
+//	float m = (NdotH2 * (rough2 - 1.0f) + 1.0f);
+//	float M = m * m * PI;
+//
+//	return t / M;
+//}
 
 //フレネル項?の近似式らしい？
 float specFresnel(float f0, float u)
 {
-	return f0 + (1 - f0) * pow(1 - u, 5);
+	return f0 + (1.0f - f0) * pow(1.0f - u, 5);
 }
 
 /*
@@ -39,7 +51,7 @@ float specFresnel(float f0, float u)
 */
 float CookTrranceSpecular(float3 L, float3 V, float3 N, float metaric)
 {
-	float microfacet = 0.3f;		//マイクロファセット
+	float microfacet = max(0.18f, 1.0f - metaric);		//マイクロファセット
 									//表面の凸凹具合を表す的な？
 									//面の粗さとかを調整するパラメータらしい？
 	float f0 = metaric;				//謎の数字。
@@ -54,7 +66,7 @@ float CookTrranceSpecular(float3 L, float3 V, float3 N, float metaric)
 	float NdotV = max(0.01f, dot(N, V));		//法線と視点
 
 	float D = Beckmann(microfacet, NdotH);	//微小面分布関数。
-	float F = specFresnel(f0, VdotH);		//フレネル項の近似式。
+	float F = specFresnel(f0, VdotH);		//フレネル項。
 
 	float t = 2.0 * NdotH / VdotH;			//計算の共通項を取っておく感じ。
 	float G = min(1.0f, min(t * NdotV, t * NdotL));		//幾何学的減衰係数？
@@ -91,7 +103,6 @@ float SchlickFresnel(float u, float f0, float f90)
 */
 float NormalizedDisneyDiffuse(float3 N, float3 L, float3 V, float roughness)
 {
-	//return 0.0f;
 	////法線とライト方向の内積。
 	//float dotNL = saturate(dot(N, L));
 	////法線と視点方向の内積。
@@ -111,7 +122,6 @@ float NormalizedDisneyDiffuse(float3 N, float3 L, float3 V, float roughness)
 	//謎数値　フレネル反射率?(0.0～1.0)
 	float Fd90 = energyBias + 2.0f * LdotH * LdotH * roughness;
 
-	//これだったら普通にフレネル式使うんでいいんでは？
 	float FL = SchlickFresnel(NdotL, 1.0f, Fd90);	//フレネル係数(法線・ライト)
 	float FV = SchlickFresnel(NdotV, 1.0f, Fd90);	//フレネル係数(法線・視点)
 

@@ -47,7 +47,7 @@ bool SceneLight::Start()
 	prefab::CDirectionLight* light2 = NewGO<prefab::CDirectionLight>(0);
 
 	//color = { 2.3f, 2.3f, 2.3f ,1.0f};
-	color = { 1.3f, 1.3f, 1.3f ,1.0f};
+	color = { 0.8f, 0.8f, 0.8f ,1.0f};
 	m_lightDir = { -1.0f,-1.0f,0.0f };
 	//color = { 0.0f,1.0f,1.0f,1.0f };
 	light2->SetColor(color);

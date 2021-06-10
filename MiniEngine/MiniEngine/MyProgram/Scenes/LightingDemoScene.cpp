@@ -6,7 +6,7 @@
 
 #define CAMERA_ROTMODE ROTMODE
 
-//#define SKY_ON
+#define SKY_ON
 
 namespace {
 	//モデルのファイルパス。
@@ -30,10 +30,10 @@ namespace {
 	const int LIGHT_NUM = 5;						//ライトの本数。
 	//ライトデータ。
 #ifdef SKY_ON
-	const float AMBIENT = 0.8f;						//アンビエントライト。
-	const float LIGHT_POW = 2.3;					//ライトの強さ。
+	const float AMBIENT = 0.5f;						//アンビエントライト。
+	const float LIGHT_POW = 0.6;					//ライトの強さ。
 	const LightData LIGHTDATAS[LIGHT_NUM] = {
-		{ {0.0f,-1.0f,0.0f},{5.5f,5.5f,5.5f,1.0f } },
+		{ {0.0f,-1.0f,0.0f},{1.5f,1.5f,1.5f,1.0f } },
 		{ {-1.0f,-1.0f,0.0f},{LIGHT_POW,LIGHT_POW,LIGHT_POW,1.0f } },
 		{ {0.0f,-1.0f,1.0f},{LIGHT_POW,LIGHT_POW,LIGHT_POW,1.0f } },
 		{ {0.0f,-1.0f,-1.0f},{LIGHT_POW,LIGHT_POW,LIGHT_POW,1.0f } },
@@ -116,7 +116,7 @@ bool LightingDemoScene::Start()
 
 	MainCamera().SetTarget(CAMERA_TARGETPOS);
 	MainCamera().SetPosition(CAMERA_TARGETPOS + m_cameraPos);
-	MainCamera().SetFar(1000000.0f);
+	MainCamera().SetFar(200000.0f);
 
 #ifdef SKY_ON
 	//空を付けておく。
