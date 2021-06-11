@@ -202,7 +202,7 @@ namespace Engine {
 		float total = 0;
 		for (int i = 0; i < NUM_WEIGHTS; i++) {
 			m_blurParam.weights[i] = expf(-0.5f * static_cast<float>(i * i) / dispersion);
-			total += m_blurParam.weights[i];
+			total += 2.0f * m_blurParam.weights[i];
 		}
 		//‹KŠi‰»
 		for (int i = 0; i < NUM_WEIGHTS; i++) {
