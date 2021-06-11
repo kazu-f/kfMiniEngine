@@ -12,33 +12,22 @@ static const float PI = 3.14159265358979323846;
 float Beckmann(float m, float t)
 {
 
-	//float t2 = t * t;
-	//float t4 = t * t * t * t;
-	//float m2 = m * m;
-	//float D = 1.0f / (4.0f * m2 * t4);
-	//D *= exp((-1.0f / m2) * (1.0f - t2) / t2);
-	//return D;
+	float t2 = t * t;
+	float t4 = t * t * t * t;
+	float m2 = m * m;
+	float D = 1.0f / (4.0f * m2 * t4);
+	D *= exp((-1.0f / m2) * (1.0f - t2) / t2);
+	return D;
 
-	float M = m;
-	float T = t * t;
-	return exp((T - 1) / (M * T)) / (PI * M * T * T);
+	//float M = m;
+	//float T = t * t;
+	//return exp((T - 1) / (M * T)) / (PI * M * T * T);
 }
-
-//float DGGX(float roughness, float NdotH)
-//{
-//	float rough2 = roughness * roughness;
-//	float NdotH2 = NdotH * NdotH;
-//
-//	float t = rough2;
-//	float m = (NdotH2 * (rough2 - 1.0f) + 1.0f);
-//	float M = m * m * PI;
-//
-//	return t / M;
-//}
 
 //フレネル項?の近似式らしい？
 float specFresnel(float f0, float u)
 {
+	//金属反射のためf90は1.0固定でいい。
 	return f0 + (1.0f - f0) * pow(1.0f - u, 5);
 }
 
@@ -54,8 +43,7 @@ float CookTrranceSpecular(float3 L, float3 V, float3 N, float metaric)
 	float microfacet = max(0.18f, 1.0f - metaric);		//マイクロファセット
 									//表面の凸凹具合を表す的な？
 									//面の粗さとかを調整するパラメータらしい？
-	float f0 = metaric;				//謎の数字。
-									//垂直入射時のフレネル反射係数???
+	float f0 = metaric;				//垂直入射時のフレネル反射係数。
 
 	float3 H = normalize(L + V);		//ライト+視点のハーフベクトル。
 
@@ -80,16 +68,16 @@ float CookTrranceSpecular(float3 L, float3 V, float3 N, float metaric)
 	*	D:微小面分布
 	*	G:幾何学的減衰係数
 	*/
-	return max(F * D * G / m, 0.0f);
+	return max(F * D * G / NdotL, 0.0f);
 }
 
 /*
-*	フレネル式？
-*	なんか少し違う？1.0の部分が変数になってる？
+*	フレネル式の近似式。
+*	f0が垂直に光が入射したときのフレネル反射率。
+*	f90が平行に光が入射したときのフレネル反射率。
 */
 float SchlickFresnel(float u, float f0, float f90)
 {
-	//f90が1.0ならフレネル式?。
 	return f0 + (f90 - f0) * pow(1.0f - u, 5.0f);
 }
 
@@ -113,6 +101,7 @@ float NormalizedDisneyDiffuse(float3 N, float3 L, float3 V, float roughness)
 	float3 H = normalize(L + V);		//ハーフベクトル。
 
 	float energyBias = lerp(0.0f, 0.5f, roughness);				//なんか正規化のための数値？0.0～0.5の線形補完
+	float energyFactor = lerp(1.0f, 1.0f / 1.51f, roughness);
 	//内積する。(下限0.0～上限1.0)
 	float LdotH = saturate(dot(L, H));		//ライトとハーフベクトル
 	float NdotL = saturate(dot(N, L));		//法線とライト
@@ -120,6 +109,7 @@ float NormalizedDisneyDiffuse(float3 N, float3 L, float3 V, float roughness)
 	float HdotV = saturate(dot(H, V));		//ハーフベクトルと視点
 
 	//謎数値　フレネル反射率?(0.0～1.0)
+	//光が平行に入射したときのフレネル反射率を求める。
 	float Fd90 = energyBias + 2.0f * LdotH * LdotH * roughness;
 
 	float FL = SchlickFresnel(NdotL, 1.0f, Fd90);	//フレネル係数(法線・ライト)
@@ -129,5 +119,5 @@ float NormalizedDisneyDiffuse(float3 N, float3 L, float3 V, float roughness)
 	*	フレネル係数(N・L) * フレネル係数(N・V)
 	*	これを正規化ランバート拡散へ掛ける。
 	*/
-	return (FL * FV);
+	return (FL * FV * energyFactor);
 }
