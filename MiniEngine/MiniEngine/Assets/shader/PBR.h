@@ -48,10 +48,10 @@ float CookTrranceSpecular(float3 L, float3 V, float3 N, float metaric)
 	float3 H = normalize(L + V);		//ライト+視点のハーフベクトル。
 
 	//色々内積取ってる。
-	float NdotH = max(0.01f,dot(N, H));		//法線とハーフベクトル
-	float VdotH = max(0.01f, dot(V, H));		//視点とハーフベクトル
-	float NdotL = max(0.01f, dot(N, L));		//法線とライト
-	float NdotV = max(0.01f, dot(N, V));		//法線と視点
+	float NdotH = dot(N, H);		//法線とハーフベクトル
+	float VdotH = dot(V, H);		//視点とハーフベクトル
+	float NdotL = dot(N, L);		//法線とライト
+	float NdotV = dot(N, V);		//法線と視点
 
 	float D = Beckmann(microfacet, NdotH);	//微小面分布関数。
 	float F = specFresnel(f0, VdotH);		//フレネル項。

@@ -42,10 +42,10 @@ namespace {
 		{ {1.0f,-1.0f,0.0f},{LIGHT_POW,LIGHT_POW,LIGHT_POW,1.0f } },
 	};
 #else
-	const float AMBIENT = 0.3f;						//アンビエントライトの強さ。
+	const float AMBIENT = 0.2f;						//アンビエントライトの強さ。
 	const float LIGHT_POW = 0.2f;					//ライトの強さ。
 	const LightData LIGHTDATAS[LIGHT_NUM] = {
-		{ {0.0f,-1.0f,0.0f},{1.0f,1.0f,1.0f,1.0f } },
+		{ {0.0f,-1.0f,0.0f},{3.5f,3.5f,3.5f,1.5f } },
 		{ {-1.0f,-1.0f,0.0f},{LIGHT_POW,LIGHT_POW,LIGHT_POW,1.0f } },
 		{ {0.0f,-1.0f,1.0f},{LIGHT_POW,LIGHT_POW,LIGHT_POW,1.0f } },
 		{ {0.0f,-1.0f,-1.0f},{LIGHT_POW,LIGHT_POW,LIGHT_POW,1.0f } },
@@ -92,21 +92,21 @@ bool LightingDemoScene::Start()
 	m_model = NewGO<prefab::ModelRender>(0);
 
 	ModelInitData modelData;
-	//modelData.m_shaderData.vsFxFilePath = MODEL_SHADER;
-	//modelData.m_shaderData.vsEntryPointFunc = "VSMain";
-	//modelData.m_shaderData.psFxFilePath = MODEL_SHADER;
-	//modelData.m_shaderData.psEntryPointFunc = "PSMain";
-	modelData.m_tkmFilePath = MODEL_FILEPATH[enDemo_Car];
+	modelData.m_shaderData.vsFxFilePath = DEMO_SHADER;
+	modelData.m_shaderData.vsEntryPointFunc = "VSMain";
+	modelData.m_shaderData.psFxFilePath = DEMO_SHADER;
+	modelData.m_shaderData.psEntryPointFunc = "PSMain";
+	modelData.m_tkmFilePath = MODEL_FILEPATH[enDemo_Unity];
 	modelData.m_expandConstantBuffer = &DEMO_CB;
 	modelData.m_expandConstantBufferSize = sizeof(DemoConstantBuffer);
 	
 	m_model->Init(modelData);
-	m_model->SetScale(Vector3::One * 0.3f);
-	m_model->SetPosition({ 0.0f,30.0f,0.0f });
-	//m_model->SetForwardRenderFlag(true);
+	//m_model->SetScale(Vector3::One * 0.3f);
+	//m_model->SetPosition({ 0.0f,30.0f,0.0f });
+	m_model->SetForwardRenderFlag(true);
 
 	prefab::CDirectionLight* light = NewGO<prefab::CDirectionLight>(0);
-	light->SetDirection({0.5f,-1.0f,-0.5f});
+	light->SetDirection({1.0f,0.0f,0.0f});
 	light->SetColor(LIGHTDATAS[0].Color);
 	m_lights.push_back(light);
 

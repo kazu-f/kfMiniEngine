@@ -39,6 +39,9 @@ StructuredBuffer<SDirectionalLight> directionalLight : register(t7);	//ライト。
 //サンプラステート。
 sampler g_sampler : register(s0);
 
+//ライトの輝度。
+static const float LIGHT_LUMINANCE = float3(0.298912, 0.586611, 0.114478);
+
 //ディファード用の頂点シェーダー。
 PSDefferdInput VSMain(VSDefferdInput In)
 {
@@ -80,9 +83,10 @@ float4 PSMain(PSDefferdInput psIn) : SV_Target0
 			
 			//クックトランスモデルの鏡面反射
 			//float3 specCol = CookTrranceSpecular(-directionalLight[ligNo].direction, toEye, normal, metaric) * directionalLight[ligNo].color.xyz;
+			float ligLum = dot(LIGHT_LUMINANCE, directionalLight[ligNo].color.xyz);
 			float specPower = CookTrranceSpecular(-directionalLight[ligNo].direction, toEye, normal, spec);
 			//鏡面反射光の光は金属度が上がると、材質の色になる。
-			float3 specCol = lerp(float3(1.0f, 1.0f, 1.0f), albedoColor, metaric) * specPower;
+			float3 specCol = lerp(directionalLight[ligNo].color.xyz, albedoColor * ligLum, metaric) * specPower;
 			//return float4(specCol, 1.0f);
 			//拡散反射光と鏡面反射光を線形補完。
 			lig += lerp(diffuse, specCol, spec);
@@ -96,11 +100,6 @@ float4 PSMain(PSDefferdInput psIn) : SV_Target0
 	}
 	//環境光。
 	lig += ambientLight;
-
-	/*lig += albedoColor * ambientLight / PI * (1.0f - metaric);
-	lig += CookTrranceSpecular(normal, toEye, normal, metaric) * albedoColor * metaric;
-	*/
-	//lig *= lerp(1.0f, 0.5f, shadow);
 
 	//最終的な色を決定する。
 	

@@ -200,6 +200,9 @@ SPSIn VSMainSkinInstancing(SVSIn vsIn, uint instanceID : SV_InstanceID)
 	return psIn;
 }
 
+//ライトの輝度。
+static const float LIGHT_LUMINANCE = float3(0.298912, 0.586611, 0.114478);
+
 //物理ベースライティングのピクセルシェーダー。
 float4 PSMain(SPSIn psIn) : SV_Target0
 {
@@ -230,21 +233,15 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 			//DisneyModel拡散反射
 			float disneyDiffuse = NormalizedDisneyDiffuse(normal, -directionalLight[ligNo].direction, toEye, roughness);
 			float3 diffuse = baseColor * disneyDiffuse;
-			//return float4(diffuse, 1.0f);
 
 			//クックトランスモデルの鏡面反射
-			//float3 specCol = CookTrranceSpecular(-directionalLight[ligNo].direction, toEye, normal, metaric) * directionalLight[ligNo].color.xyz;
+			float ligLum = dot(LIGHT_LUMINANCE, directionalLight[ligNo].color.xyz);
 			float specPower = CookTrranceSpecular(-directionalLight[ligNo].direction, toEye, normal, spec);
 			//鏡面反射光の光は金属度が上がると、材質の色になる。
-			float3 specCol = lerp(float3(1.0f, 1.0f, 1.0f), albedoColor, metaric) * specPower;
-			//	return float4(specCol, 1.0f);
-				//拡散反射光と鏡面反射光を線形補完。
-			lig += lerp(diffuse, specCol, spec);
-			//lig *= albedoColor;
+			float3 specCol = lerp(directionalLight[ligNo].color.xyz, albedoColor * ligLum, metaric) * specPower;
 
-			//float specTerm = length(albedoColor.xyz * metaric);
-			//specCol *= lerp(float3(specTerm, specTerm, specTerm), albedoColor.xyz, metaric);
-			//lig += diffuse * (1.0f - specTerm) + specCol;
+			//拡散反射光と鏡面反射光を線形補完。
+			lig += lerp(diffuse, specCol, spec);
 		}
 	}
 	//環境光。
@@ -261,8 +258,8 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	finalColor.xyz = albedoColor.xyz * lig;
 
 	//霧の計算。
-	//float len = length(eyePos - psIn.worldPos);
-	//finalColor = CalcFog(finalColor, len);
+	float len = length(eyePos - psIn.worldPos);
+	finalColor = CalcFog(finalColor, len);
 
 	finalColor.a = albedoColor.a;
 	return finalColor;

@@ -16,16 +16,17 @@ cbuffer DemoCB : register(b4){
 Texture2D<float4> g_texture : register(t0);
 Texture2D<float4> g_normalMap : register(t1);
 Texture2D<float4> g_specularMap : register(t2);
+Texture2D<float4> g_reflectionMap : register(t3);
 //ボーン行列。
-StructuredBuffer<float4x4> boneMatrix : register(t3);
+StructuredBuffer<float4x4> boneMatrix : register(t4);
 //ディレクションライト。
-StructuredBuffer<SDirectionalLight> directionalLight : register(t4);
+StructuredBuffer<SDirectionalLight> directionalLight : register(t5);
 
-Texture2D<float4> shadowMap_0 : register(t5);		//シャドウマップ。
-Texture2D<float4> shadowMap_1 : register(t6);		//シャドウマップ。
-Texture2D<float4> shadowMap_2 : register(t7);		//シャドウマップ。
+Texture2D<float4> shadowMap_0 : register(t6);		//シャドウマップ。
+Texture2D<float4> shadowMap_1 : register(t7);		//シャドウマップ。
+Texture2D<float4> shadowMap_2 : register(t8);		//シャドウマップ。
 
-StructuredBuffer<float4x4> instancingDatas : register(t8);		//インスタンシング描画用のデータ。
+StructuredBuffer<float4x4> instancingDatas : register(t9);		//インスタンシング描画用のデータ。
 //サンプラステート。
 sampler g_sampler : register(s0);
 
@@ -130,7 +131,7 @@ float3 PhongSpec(float3 L,float3 Normal,float3 toEye, float3 Color,float specPow
 	//求めたtoEyeDirの反射ベクトルを求める。
 	float3 reflectEyeDir = -toEye + 2 * dot(Normal, toEye) * Normal;
 	//求めた反射ベクトルとディレクションライトの方向との内積を取って、スペキュラの強さを計算する。
-	float3 t = max(0.0f, dot(-L, reflectEyeDir));
+	float t = max(0.0f, dot(-L, reflectEyeDir));
 	//pow関数を使って、スペキュラを絞る。絞りの強さは定数バッファで渡されている。
 	float3 spec = pow(t, specPow) * Color;
 	//⑤ スペキュラ反射が求まったら、ligに加算する。
@@ -216,64 +217,64 @@ SPSIn VSMainSkinInstancing(SVSIn vsIn, uint instanceID : SV_InstanceID)
 	return psIn;
 }
 
-//通常のライティングのピクセルシェーダー。
+
+//ライトの輝度。
+static const float LIGHT_LUMINANCE = float3(0.298912, 0.586611, 0.114478);
+//ライティングのピクセルシェーダー。
 float4 PSMain(SPSIn psIn) : SV_Target0
 {
-
-	float3 lig = 0;		//ライト
-	float4 albedoColor = g_texture.Sample(g_sampler, psIn.uv);	//テクスチャカラー。		
 	//法線の計算。
-	float3 normal = 0.0f;
-	if (isNormal) {
-		normal = CalcNormal(psIn.normal, psIn.biNormal, psIn.Tangent, psIn.uv);
-	}
-	else {
-		normal = psIn.normal;
-	}
+	float3 normal = CalcNormal(psIn.normal,psIn.biNormal,psIn.Tangent,psIn.uv);
+	float3 lig = 0;		//ライト
 	float3 toEye = normalize(eyePos - psIn.worldPos);		//点から視点までの正規化ベクトル
-	float metaric = 0.0f;			//スペキュラ
-	if (isSpec) {
-		if (hasSpecularMap) {
-			//スペキュラマップがある。
-			metaric = g_specularMap.Sample(g_sampler, psIn.uv).a;
-		}
+	float metaric = 0.0f;			//金属度。
+	float spec = 0.0f;
+	float4 albedoColor = g_texture.Sample(g_sampler, psIn.uv);	//テクスチャカラー。		
+	if (hasSpecularMap) {
+		//スペキュラマップがある。
+		float4 specMap = g_specularMap.Sample(g_sampler, psIn.uv);
+		metaric = specMap.r;
+		spec = specMap.a;
 	}
+	float roughness = 1.0f - spec;			//拡散反射の面の粗さ。
+	//シャドウ。
+	float4 posInView = mul(mView, float4(psIn.worldPos, 1.0f));
+	float shadow = CalcShadow(psIn.worldPos, posInView.z);
 
-	float roughness = 1.0f;			//拡散反射の面の粗さ。
 	for (int ligNo = 0; ligNo < numDirectionLight; ligNo++)
 	{
-		//ディファード拡散反射の色。
-		float3 baseColor = max(dot(normal, -directionalLight[ligNo].direction), 0.0f) * directionalLight[ligNo].color.xyz;
+		if (shadow < 0.9f) {
+			//ディファード拡散反射の色。
+			float3 baseColor = max(dot(normal, -directionalLight[ligNo].direction), 0.0f) * directionalLight[ligNo].color.xyz / PI;
 
-		float3 diffuse = 0.0f;
-		float3 specCol = 0.0f;
-		if (isPBR) {
-			//DisneyModel拡散反射
-			float disneyDiffuse = NormalizedDisneyDiffuse(normal, -directionalLight[ligNo].direction, toEye, roughness);
-			diffuse = baseColor * disneyDiffuse;
-			////クックトランスモデルの鏡面反射
-			specCol = CookTrranceSpecular(-directionalLight[ligNo].direction, toEye, normal, metaric) * directionalLight[ligNo].color.xyz;
+			float3 diffuse = 0.0f;
+			float3 specCol = 0.0f;
+			if (isPBR) {
+				//DisneyModel拡散反射
+				float disneyDiffuse = NormalizedDisneyDiffuse(normal, -directionalLight[ligNo].direction, toEye, roughness);
+				diffuse = baseColor * disneyDiffuse;
+				////クックトランスモデルの鏡面反射
+				float ligLum = dot(LIGHT_LUMINANCE, directionalLight[ligNo].color.xyz);
+				float specPower = CookTrranceSpecular(-directionalLight[ligNo].direction, toEye, normal, spec);
+				float3 specCol = lerp(directionalLight[ligNo].color.xyz, albedoColor * ligLum, metaric) * specPower;
+			}
+			else {
+				//通常の正規化ランバート拡散反射
+				diffuse = baseColor;
+				//フォン鏡面反射
+				specCol = PhongSpec(directionalLight[ligNo].direction, normal, toEye, directionalLight[ligNo].color.xyz, 1.3f);
+			}
+
+
+
+			////拡散反射光と鏡面反射光を線形補完。
+			lig += lerp(diffuse, specCol, metaric);
+
 		}
-		else {
-			//通常の正規化ランバート拡散反射
-			diffuse = baseColor / PI;
-			//フォン鏡面反射
-			specCol = PhongSpec(directionalLight[ligNo].direction, normal, toEye, directionalLight[ligNo].color.xyz, 1.3f);
-		}
-
-		////拡散反射光と鏡面反射光を線形補完。
-		lig += lerp(diffuse, specCol, metaric);
-
-		//lig += specCol + diffuse;
 
 	}
 	//環境光。
-	lig += ambientLight / PI * (1.0f - metaric);
-	//シャドウ。
-	float4 posInView = mul(mView, float4(psIn.worldPos,1.0f));
-	float shadow = CalcShadow(psIn.worldPos, posInView.z);
-
-	lig *= lerp(1.0f, 0.5f, shadow);
+	lig += ambientLight;
 
 	//最終的な色を決定する。
 	float4 finalColor = 1.0f;
@@ -283,24 +284,24 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 }
 
 //GBufferに書き込むピクセルシェーダーのエントリ関数。
-PSOut_GBuffer PSMain_RenderGBuffer (SPSIn psIn){
+PSOut_GBuffer PSMain_RenderGBuffer(SPSIn psIn) {
 	PSOut_GBuffer Out = (PSOut_GBuffer)0;
 
 	Out.albedo = g_texture.Sample(g_sampler, psIn.uv);		//アルベド。
+	//Out.albedo = g_texture.SampleLevel(g_sampler, psIn.uv, 0);		//アルベド。
 	//法線マップ。
-	//float3 normal = CalcNormal(psIn.normal, psIn.biNormal, psIn.Tangent, psIn.uv);
-	float3 normal = psIn.normal;
+	float3 normal = CalcNormal(psIn.normal, psIn.biNormal, psIn.Tangent, psIn.uv);
 	Out.normal.xyz = (normal / 2.0f) + 0.5f;
 
 	//ワールド座標。
 	Out.worldPos = float4(psIn.worldPos, 0.0f);
 
 	//スペキュラマップ。
-	Out.spec = 0.0f;
-	//if (hasSpecularMap) {
-	//	//スペキュラマップがある。
-	//	Out.spec = g_specularMap.Sample(g_sampler, psIn.uv).r;
-	//}
+	Out.specMap = 0.0f;
+	if (hasSpecularMap) {
+		//スペキュラマップがある。
+		Out.specMap = g_specularMap.Sample(g_sampler, psIn.uv);
+	}
 
 	//シャドウ。
 	float4 posInView = mul(mView, float4(psIn.worldPos, 1.0f));

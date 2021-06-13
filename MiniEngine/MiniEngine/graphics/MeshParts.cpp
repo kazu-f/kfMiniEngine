@@ -178,6 +178,7 @@ namespace Engine {
 			}
 			else {
 				//新しくシェーダーを作る。
+				//TODO:スキンの有無を渡せるようにしないと影落とすのが上手くいかないかも？
 				mat = new UserMaterial;
 			}
 
