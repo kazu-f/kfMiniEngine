@@ -221,9 +221,10 @@ namespace Engine {
 				);
 				m_LVPMatrix[i] = mLightView * proj;									//ライトビュープロジェクション行列を作成。
 				m_shadowCbEntity.mLVP[i] = m_LVPMatrix[i];							//定数バッファ用に記録。
-				m_shadowCbEntity.shadowAreaDepthInViewSpace[i] = farPlaneZ * 0.8f;	//境界線辺りを上手く描画するために、エリアを少し狭める？
+				const float WHEIGHT = 0.85f;
+				m_shadowCbEntity.shadowAreaDepthInViewSpace[i] = farPlaneZ * WHEIGHT;	//境界線辺りを上手く描画するために、エリアを少し狭める？
 				m_shadowCbEntity.depthOffset[i] = m_depthOffset[i];					//深度値オフセット。
-				nearPlaneZ = farPlaneZ * 0.8f;
+				nearPlaneZ = farPlaneZ * WHEIGHT;
 			}
 		}
 
