@@ -2,12 +2,13 @@
 #include "SceneLight.h"
 
 namespace {
-	const float AMBIENT_LIGHT_POWER = 0.5f;
+	const float AMBIENT_LIGHT_POWER = 0.4f;
 	//const float AMBIENT_LIGHT_POWER = 0.8f;
 	const Vector3 AMBIENT_LIGHT = { AMBIENT_LIGHT_POWER,AMBIENT_LIGHT_POWER,AMBIENT_LIGHT_POWER };
 	const Vector3 SHADOW_DIRECTION = { 0.173f,-0.984f,0.173f };
-	const float DIRLIGHT_POWER = 1.2f;
+	const float DIRLIGHT_POWER = 4.8f;
 	//const float DIRLIGHT_POWER = 5.5f;
+	const float SUBLIGHT_POWER = 1.5f;
 	const Vector4 DIRLIGHT_COLOR = { DIRLIGHT_POWER,DIRLIGHT_POWER,DIRLIGHT_POWER,1.0f };
 }
 
@@ -36,7 +37,7 @@ bool SceneLight::Start()
 	//Vector4 color = Vector4::Gray * 3.0f;
 	Vector4 color = DIRLIGHT_COLOR;
 	m_lightDir = SHADOW_DIRECTION;
-	m_lightDir.Set(1.0f, -1.0f, 0.0f);
+	//m_lightDir.Set(1.0f, -1.0f, 0.0f);
 	m_lightDir.Normalize();
 	//color = { 1.0f,1.0f,0.0f,1.0f };
 	light->SetColor(color);
@@ -46,10 +47,8 @@ bool SceneLight::Start()
 
 	prefab::CDirectionLight* light2 = NewGO<prefab::CDirectionLight>(0);
 
-	//color = { 2.3f, 2.3f, 2.3f ,1.0f};
-	color = { 0.6f, 0.6f, 0.6f ,1.0f};
+	color = { SUBLIGHT_POWER, SUBLIGHT_POWER, SUBLIGHT_POWER ,1.0f};
 	m_lightDir = { -1.0f,-1.0f,0.0f };
-	//color = { 0.0f,1.0f,1.0f,1.0f };
 	light2->SetColor(color);
 	light2->SetDirection(m_lightDir);
 
@@ -58,7 +57,6 @@ bool SceneLight::Start()
 	prefab::CDirectionLight* light3 = NewGO<prefab::CDirectionLight>(0);
 
 	m_lightDir = { 0.0f,-1.0f,1.0f };
-	//color = { 0.0f,1.0f,1.0f,1.0f };
 	light3->SetColor(color);
 	light3->SetDirection(m_lightDir);
 
@@ -74,7 +72,7 @@ bool SceneLight::Start()
 
 	prefab::CDirectionLight* light5 = NewGO<prefab::CDirectionLight>(0);
 
-	m_lightDir = { 0.0f,-1.0f,0.0f };
+	m_lightDir = { 0.0f,-1.0f,-1.0f };
 	light5->SetColor(color);
 	light5->SetDirection(m_lightDir);
 

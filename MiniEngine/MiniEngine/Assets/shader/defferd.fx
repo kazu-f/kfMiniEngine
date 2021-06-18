@@ -72,7 +72,7 @@ float4 PSMain(PSDefferdInput psIn) : SV_Target0
 
 	for (int ligNo = 0; ligNo < numDirectionLight; ligNo++)
 	{
-		if (shadow < 0.9f) {
+		//if (shadow < 0.9f) {
 			//ランバート拡散反射の色。
 			float3 baseColor = saturate(dot(normal, -directionalLight[ligNo].direction)) * directionalLight[ligNo].color.xyz / PI;
 			//DisneyModel拡散反射
@@ -96,14 +96,20 @@ float4 PSMain(PSDefferdInput psIn) : SV_Target0
 			//float specTerm = length(albedoColor.xyz * metaric);
 			//specCol *= lerp(float3(specTerm, specTerm, specTerm), albedoColor.xyz, metaric);
 			//lig += diffuse * (1.0f - specTerm) + specCol;
-		}
+		//}
 	}
+
+	lig *= lerp(1.0f, 0.1f, shadow);
 	//環境光。
 	lig += ambientLight;
 
 	//最終的な色を決定する。
 	
-	float4 refColor = g_cubeMap.Sample(g_sampler, reflect(toEye,normal));
+	float4 refColor = float4(0.0f, 0.0f, 0.0f, 0.0f);
+	//影でないなら環境マップ。
+	if (shadow < 0.9f) {
+		refColor = g_cubeMap.Sample(g_sampler, reflect(toEye, normal));
+	}
 	reflection *= refColor.a;
 	float4 finalColor = 1.0f;
 	finalColor.xyz = albedoColor * (1.0f - reflection) + refColor.xyz * reflection;

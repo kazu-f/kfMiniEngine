@@ -8,7 +8,7 @@
 #define DEBUG_SCENE 1
 #define LIGHTDEMO_SCENE 2
 
-#define START_SCENE LIGHTDEMO_SCENE
+#define START_SCENE GAME_SCENE
 
 void SetInitParam(SInitParam& initParam)
 {
@@ -17,12 +17,17 @@ void SetInitParam(SInitParam& initParam)
 	initParam.gameObjectPrioMax = 20;			//ゲームオブジェクトの優先度の最大数。
 
 	initParam.graphicsConf.shadowConf.isEnable = true;		//シャドウマップの有効化フラグ。
+	initParam.graphicsConf.shadowConf.shadowMapWidth = 4096;
+	initParam.graphicsConf.shadowConf.shadowMapWidth = 4096;
+	initParam.graphicsConf.shadowConf.shadowAreas[0] = 2000.0f;		//シャドウマップの有効範囲(近景)
+	initParam.graphicsConf.shadowConf.shadowAreas[1] = 4000.0f;		//シャドウマップの有効範囲(中景)
+	initParam.graphicsConf.shadowConf.shadowAreas[2] = 20000.0f;	//シャドウマップの有効範囲(遠景)
 	//initParam.graphicsConf.shadowConf.depthOffset[0] = 0.01f;
 	//initParam.graphicsConf.shadowConf.depthOffset[1] = 0.02f;
 	//initParam.graphicsConf.shadowConf.depthOffset[2] = 0.02f;
 	initParam.graphicsConf.shadowConf.lightHeight = 5000.0f;
-	initParam.graphicsConf.postEffectConf.tonemap.isEnable = false;		//トーンマップ有効化フラグ。
-	initParam.graphicsConf.postEffectConf.tonemap.luminance = 0.20f;	//明るさ。
+	initParam.graphicsConf.postEffectConf.tonemap.isEnable = true;		//トーンマップ有効化フラグ。
+	initParam.graphicsConf.postEffectConf.tonemap.luminance = 0.28f;	//明るさ。
 	initParam.graphicsConf.postEffectConf.isBloom = true;	//ブルームの有効化フラグ。
 	initParam.graphicsConf.postEffectConf.isFxaa = true;	//アンチエイリアス有効化フラグ。
 }

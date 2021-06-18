@@ -29,7 +29,7 @@ namespace {
 	const int PHYSICS_DEBUGMODE = 0;
 
 	const float SKY_SIZE = 3500.0f;		//空のサイズ。
-	const float SKY_EMISSION_POW = 0.13f;	//空の自己発光。
+	const float SKY_EMISSION_POW = 0.14f;	//空の自己発光。
 }
 
 
