@@ -13,6 +13,8 @@ namespace Engine {
 			const wchar_t* filePath = nullptr;
 			const char* funcName = nullptr;
 		};
+		
+		const float BLOOM_WHEIGHT = 25.0f;
 
 		const SShaderData VS = { L"Assets/shader/bloom.fx","VSMain" };		//汎用頂点シェーダー。
 		const SShaderData PSLuminance = { L"Assets/shader/bloom.fx","PSSamplingLuminance" };	//輝度抽出用ピクセルシェーダー。
@@ -328,7 +330,7 @@ namespace Engine {
 		}
 
 		//重みを更新。
-		UpdateWeight(25.0f);
+		UpdateWeight(BLOOM_WHEIGHT);
 		//ルートシグネチャを設定。
 		rc.SetRootSignature(m_rootSignature);
 		//輝度を抽出。

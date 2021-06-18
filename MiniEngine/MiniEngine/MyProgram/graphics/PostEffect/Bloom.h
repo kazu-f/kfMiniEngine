@@ -62,7 +62,7 @@ namespace Engine {
 
 	private:
 		static const int NUM_WEIGHTS = 8;			//重み付けする数。
-		static const int NUM_DOWN_SAMPRING_RT = 8;		//ダウンサンプリングする数。(縦と横があるためダウンサンプリングしたい数 * 2)
+		static const int NUM_DOWN_SAMPRING_RT = 10;		//ダウンサンプリングする数。(縦と横があるためダウンサンプリングしたい数 * 2)
 		/// <summary>
 		/// ブラー用のパラメータ。
 		/// </summary>

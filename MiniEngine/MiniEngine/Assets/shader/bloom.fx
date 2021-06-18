@@ -152,6 +152,7 @@ Texture2D<float4> combineTexture00 : register(t0);
 Texture2D<float4> combineTexture01 : register(t1);
 Texture2D<float4> combineTexture02 : register(t2);
 Texture2D<float4> combineTexture03 : register(t3);
+Texture2D<float4> combineTexture04 : register(t4);
 /*
 	合成用ピクセルシェーダー。
 */
@@ -162,7 +163,8 @@ float4 PSCombine(PSInput In ):SV_TARGET0
 	combineColor += combineTexture01.Sample(Sampler,uv);
 	combineColor += combineTexture02.Sample(Sampler,uv);
 	combineColor += combineTexture03.Sample(Sampler,uv);
-	combineColor /= 4.0f;   //平均化。
+	combineColor += combineTexture04.Sample(Sampler,uv);
+	combineColor /= 5.0f;   //平均化。
 	combineColor.a = 1.0f;  //αの値を1にする。
 	return combineColor;
 }
