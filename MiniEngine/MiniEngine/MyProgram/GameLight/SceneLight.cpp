@@ -6,9 +6,9 @@ namespace {
 	//const float AMBIENT_LIGHT_POWER = 0.8f;
 	const Vector3 AMBIENT_LIGHT = { AMBIENT_LIGHT_POWER,AMBIENT_LIGHT_POWER,AMBIENT_LIGHT_POWER };
 	const Vector3 SHADOW_DIRECTION = { 0.173f,-0.984f,0.173f };
-	const float DIRLIGHT_POWER = 4.8f;
+	const float DIRLIGHT_POWER = 2.8f;
 	//const float DIRLIGHT_POWER = 5.5f;
-	const float SUBLIGHT_POWER = 1.5f;
+	const float SUBLIGHT_POWER = 0.9f;
 	const Vector4 DIRLIGHT_COLOR = { DIRLIGHT_POWER,DIRLIGHT_POWER,DIRLIGHT_POWER,1.0f };
 }
 

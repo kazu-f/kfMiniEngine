@@ -203,11 +203,12 @@ float4 PSFinal(PSInput In) : SV_TARGET0
 {
 	float4 vSample = sceneTexture.Sample(Sampler,In.uv);
 	float fAvgLum = lumAvgTexture.Sample(Sampler,float2(0.5f,0.5f)).r;
-	float3 hsv = Rgb2Hsv(vSample.xyz);
-	hsv.z -= fAvgLum;
-	hsv.z += middleGray;
-	hsv.z = max(0.0f, hsv.z);
-	vSample.xyz = Hsv2Rgb(hsv);
+	//float3 hsv = Rgb2Hsv(vSample.xyz);
+	//hsv.z *= middleGray / max(0.0001f,fAvgLum);
+	//hsv.z -= fAvgLum;
+	//hsv.z += middleGray;
+	//hsv.z = max(0.0f, hsv.z);
+	//vSample.xyz = Hsv2Rgb(hsv);
 	/*float3 avgColor = LUMINANCE_VECTOR * fAvgLum;
 	//平均カラーとの差分を計算する。
 	vSample.xyz = vSample.xyz - avgColor;
@@ -216,7 +217,7 @@ float4 PSFinal(PSInput In) : SV_TARGET0
 	*/
 	//平均輝度を画面の中心の明るさとして再計算を行う。
 	//float t = dot(LUMINANCE_VECTOR, vSample);
-	//vSample.rgb *= middleGray / max(0.0001f,fAvgLum);
+	vSample.rgb *= middleGray / max(0.0001f,fAvgLum);
 	//vSample.rgb /= (1.0f+vSample);
 	return vSample;
 }
