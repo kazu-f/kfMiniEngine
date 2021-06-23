@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MyProgram\Scenes\Title\ChoiseGameStart.cpp" />
+    <ClCompile Include="MyProgram\Scenes\Title\ITitleChoises.cpp" />
     <ClCompile Include="MyProgram\Car\State\CarStateDrift.cpp" />
     <ClCompile Include="MyProgram\Car\CarDriver\AICarDriver.cpp" />
     <ClCompile Include="MyProgram\Car\CarDriver\ICarDriver.cpp" />
@@ -112,6 +114,7 @@
     <ClCompile Include="MyProgram\prefab\nature\Sky.cpp" />
     <ClCompile Include="MyProgram\graphics\PipelineStatesDefault.cpp" />
     <ClCompile Include="MyProgram\Car\CarDriver\PlayerCarDriver.cpp" />
+    <ClCompile Include="MyProgram\Scenes\Title\PickArrow.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -127,6 +130,8 @@
     <ClCompile Include="MyProgram\graphics\PostEffect\Tonemap.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MyProgram\Scenes\Title\ChoiseGameStart.h" />
+    <ClInclude Include="MyProgram\Scenes\Title\ITitleChoises.h" />
     <ClInclude Include="MyProgram\Car\State\CarStateDrift.h" />
     <ClInclude Include="MyProgram\Car\CarDriver\AICarDriver.h" />
     <ClInclude Include="MyProgram\Car\CarDriver\ICarDriver.h" />
@@ -207,6 +212,7 @@
     <ClInclude Include="MyProgram\prefab\nature\Sky.h" />
     <ClInclude Include="MyProgram\graphics\PipelineStatesDefault.h" />
     <ClInclude Include="MyProgram\Car\CarDriver\PlayerCarDriver.h" />
+    <ClInclude Include="MyProgram\Scenes\Title\PickArrow.h" />
     <ClInclude Include="system\debugLog.h" />
     <ClInclude Include="camera\Camera.h" />
     <ClInclude Include="d3dx12.h" />
@@ -256,6 +262,11 @@
     <ImageContentTask Include="Assets\sprite\Race\RaceGoalUI.png" />
     <ImageContentTask Include="Assets\sprite\Race\RoadClosed.png" />
     <ImageContentTask Include="Assets\sprite\Race\Win.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\Title\Race_ChoisePick.png" />
+    <ImageContentTask Include="Assets\sprite\Title\Race_GameStart.png" />
+    <ImageContentTask Include="Assets\sprite\Title\Race_Title.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -31,6 +31,8 @@ public:
 		m_cpus[m_cpusNum] = cpus;
 		m_cpusNum++;
 	}
+	//レースが終了したか？
+	bool IsEndRace();
 
 private:
 	/// <summary>

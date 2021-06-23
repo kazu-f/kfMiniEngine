@@ -54,6 +54,11 @@ void RaceController::Update()
 	}
 }
 
+bool RaceController::IsEndRace()
+{
+	return m_goalUI->IsTimePassed();
+}
+
 void RaceController::GoaledCarUpdate()
 {
 	//プレイヤーがゴール済みか判定。

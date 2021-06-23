@@ -129,10 +129,10 @@ void Car::SetCarDriver(EnDriverType type)
 		"Car.hのEnDriverTypeを確認してください。"
 	);
 
-	ENGINE_ASSERT(
-		m_carDriver.get() == nullptr,
-		"車のドライバーが既に設定されています。"
-	)
+	if (m_carDriver.get() != nullptr) {
+		ENGINE_LOG("既に車のドライバが設定されています。");
+		m_carDriver.reset();
+	}
 
 	switch (type)
 	{
@@ -147,6 +147,11 @@ void Car::SetCarDriver(EnDriverType type)
 		break;
 	}
 
+}
+
+bool Car::IsGoal()
+{
+	return m_checkedCon->IsGoal();
 }
 
 void Car::AddDicceleration(const float diccele)

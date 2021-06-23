@@ -12,7 +12,7 @@ public:
 	bool Start()override final;
 	void Update()override final;
 	void OnDestroy()override final;
-
+	//ƒS[ƒ‹‚µ‚Ä‚©‚ç‚ÌŒo‰ßŽžŠÔ‚ªˆê’èˆÈãB
 	bool IsTimePassed()const
 	{
 		return m_currentElapsedTime > TIME_LIMIT;

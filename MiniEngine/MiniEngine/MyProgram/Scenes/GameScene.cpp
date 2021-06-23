@@ -8,11 +8,12 @@
 #include "CheckPoint/CheckPointManager.h"
 #include "Ground/BackGround.h"
 #include "Race/RaceController.h"
+#include "Title\TitleScene.h"
 
 #define ON 1
 #define OFF 0
 #define IS_SPECTATOR ON			//観客を出すかどうか。
-#define DEBUG_DELETE OFF				//削除処理を呼び出せるようにするか。
+#define DEBUG_DELETE ON				//削除処理を呼び出せるようにするか。
 
 namespace {
 #if 0
@@ -39,6 +40,7 @@ GameScene::GameScene()
 
 GameScene::~GameScene()
 {
+	NewGO<TitleScene>(0);
 }
 
 bool GameScene::Start()
@@ -111,12 +113,24 @@ void GameScene::PreUpdate()
 
 void GameScene::Update()
 {
-	Quaternion qRot;
-	if (Pad(0).IsPress(enButtonRight)) {
-		qRot.SetRotationDegY(1.0f);
-	}
-	else if (Pad(0).IsPress(enButtonLeft)) {
-		qRot.SetRotationDegY(-1.0f);
+	switch (m_raceState)
+	{
+	case GameScene::enState_InRace:
+		if (m_playerCar->IsGoal())
+		{
+			//自動操縦に切り替え。
+			m_playerCar->SetCarDriver(Car::EnDriverType::enTypeAI);
+			m_raceState = enState_EndRace;
+		}
+		break;
+	case GameScene::enState_EndRace:
+		if (Pad(0).IsTrigger(enButtonA) && m_raceController->IsEndRace())
+		{
+			DeleteGO(this);
+		}
+		break;
+	default:
+		break;
 	}
 
 #if DEBUG_DELETE

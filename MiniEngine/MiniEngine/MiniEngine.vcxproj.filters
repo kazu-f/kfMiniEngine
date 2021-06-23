@@ -139,6 +139,9 @@
     <Filter Include="Assets\sprite\Race">
       <UniqueIdentifier>{5dbea08e-3113-40ee-a2f5-1b9c45b9ab96}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\sprite\Title">
+      <UniqueIdentifier>{20c2f297-6f33-4b16-b2fd-8c01f1ab0c2a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tkEngine.cpp">
@@ -441,10 +444,19 @@
     <ClCompile Include="MyProgram\Car\CarDriver\AICarDriver.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="MyProgram\Car\State\CarStateDrift.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="MyProgram\Scenes\Title\TitleScene.cpp">
+      <Filter>MyProgram\Scenes\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\Scenes\Title\PickArrow.cpp">
+      <Filter>MyProgram\Scenes\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\Scenes\Title\ITitleChoises.cpp">
+      <Filter>MyProgram\Scenes\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\Car\State\CarStateDrift.cpp">
+      <Filter>MyProgram\Car\State</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\Scenes\Title\ChoiseGameStart.cpp">
       <Filter>MyProgram\Scenes\Title</Filter>
     </ClCompile>
   </ItemGroup>
@@ -794,13 +806,22 @@
     <ClInclude Include="MyProgram\Car\CarDriver\AICarDriver.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="MyProgram\Scenes\Title\TitleScene.h">
+      <Filter>MyProgram\Scenes\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\Scenes\Title\PickArrow.h">
+      <Filter>MyProgram\Scenes\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\Scenes\Title\ITitleChoises.h">
+      <Filter>MyProgram\Scenes\Title</Filter>
+    </ClInclude>
     <ClInclude Include="MyProgram\Car\State\CarStateDrift.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>MyProgram\Car\State</Filter>
     </ClInclude>
     <ClInclude Include="MyProgram\Race\RaceEnum.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>MyProgram\Race</Filter>
     </ClInclude>
-    <ClInclude Include="MyProgram\Scenes\Title\TitleScene.h">
+    <ClInclude Include="MyProgram\Scenes\Title\ChoiseGameStart.h">
       <Filter>MyProgram\Scenes\Title</Filter>
     </ClInclude>
   </ItemGroup>
@@ -832,5 +853,16 @@
     <ImageContentTask Include="Assets\sprite\Race\Win.png">
       <Filter>Assets\sprite\Race</Filter>
     </ImageContentTask>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\sprite\Title\Race_ChoisePick.png">
+      <Filter>Assets\sprite\Title</Filter>
+    </Image>
+    <Image Include="Assets\sprite\Title\Race_GameStart.png">
+      <Filter>Assets\sprite\Title</Filter>
+    </Image>
+    <Image Include="Assets\sprite\Title\Race_Title.png">
+      <Filter>Assets\sprite\Title</Filter>
+    </Image>
   </ItemGroup>
 </Project>

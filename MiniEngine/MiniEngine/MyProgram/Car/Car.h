@@ -92,6 +92,8 @@ public:		//GetŠÖ”‚Æ‚©
 	{
 		return m_checkedCon.get();
 	}
+	//ƒS[ƒ‹Ï‚İ‚©H
+	bool IsGoal();
 
 protected:		//Ô‚ÌˆÚ“®‚È‚Ç‚Ìˆ—
 	/// <summary>

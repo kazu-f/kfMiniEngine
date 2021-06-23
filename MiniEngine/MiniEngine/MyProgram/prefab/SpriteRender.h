@@ -41,6 +41,14 @@ namespace Engine {
 				m_position = pos;
 			}
 			/// <summary>
+			/// À•W‚ğİ’èB(2D)
+			/// </summary>
+			void SetPosition(const Vector2& pos)
+			{
+				m_position.x = pos.x;
+				m_position.y = pos.y;
+			}
+			/// <summary>
 			/// ‰ñ“]‚ğİ’èB
 			/// </summary>
 			void SetRotation(const Quaternion& rot)

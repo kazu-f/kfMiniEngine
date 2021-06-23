@@ -51,6 +51,15 @@ private:
 	};
 	EnInitStep m_initState = enInit_Other;	//初期化ステップ。
 
+	//レースステート。
+	enum EnRaceState {
+		enState_InRace,
+		enState_EndRace,
+		enState_RaceStateNum
+	};
+	EnRaceState m_raceState = enState_InRace;
+private:
+
 	CLevel m_courseLevel;					//コースのレベル。
 	CLevel m_spectatorLevel;				//観客のレベル。
 	CheckPointManager* m_checkPointManager = nullptr;	//チェックポイントの管理者。

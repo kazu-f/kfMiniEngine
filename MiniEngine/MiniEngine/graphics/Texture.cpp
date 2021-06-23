@@ -80,6 +80,10 @@ namespace Engine {
 
 		if (FAILED(hr)) {
 			//テクスチャの作成に失敗しました。
+			ENGINE_MESSAGE_BOX(
+				"ddsファイルが開けません。\n", 
+				"ファイルパスを確認してください。\n"
+			);
 			return;
 		}
 

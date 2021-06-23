@@ -1,6 +1,17 @@
 #pragma once
+
+class PickArrow;
+class ITitleChoises;
+class ChoiseGameStart;
+
 class TitleScene : public IGameObject
 {
+public:
+	enum EnChoises {
+		en_GameStart,
+		en_ChoisesNum
+	};
+
 public:
 	TitleScene();
 	~TitleScene();
@@ -9,15 +20,12 @@ public:
 	void OnDestroy() override final;
 
 private:
-	enum EnChoises {
-		en_GameStart,
-		en_ChoisesNum
-	};
 
 private:
+	EnChoises m_currentChoises = en_GameStart;								//現在選択中の選択肢。
+	std::unique_ptr<ITitleChoises> m_titleChoises[en_ChoisesNum];		//タイトル選択肢。
 	prefab::CSpriteRender* m_titleSprite = nullptr;							//タイトルのスプライト。
-	prefab::CSpriteRender* m_choisesSprite[en_ChoisesNum] = { nullptr };	//選択肢のスプライト。
-	prefab::CSpriteRender* m_pickSprite = nullptr;							//ピック中の物を指すスプライト。
-
+	PickArrow* m_pickArrow = nullptr;										//現在選択中のものを指す矢印。
+	bool m_isDecision = false;												//決定をしたか？
 };
 

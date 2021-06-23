@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "system/system.h"
 #include "Scenes/GameScene.h"
+#include "Scenes/Title/TitleScene.h"
 #include "Scenes/DebugScene.h"
 #include "Scenes/LightingDemoScene.h"
 
@@ -52,7 +53,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 #elif START_SCENE == LIGHTDEMO_SCENE
 	NewGO<LightingDemoScene>(0);
 #elif START_SCENE == GAME_SCENE
-	NewGO<GameScene>(0);
+	//NewGO<GameScene>(0);
+	NewGO<TitleScene>(0);
 #endif
 	//////////////////////////////////////
 	// 初期化を行うコードを書くのはここまで！！！
