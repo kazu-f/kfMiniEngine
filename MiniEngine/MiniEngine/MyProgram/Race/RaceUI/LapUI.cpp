@@ -7,12 +7,12 @@ namespace {
 
 	//周回数のスプライトのファイルパス。
 	const char* LAPNUM_FILEPATH[Race::enLap_Num] = {
-		"Assets/sprite/LapNum_1.dds",
-		"Assets/sprite/LapNum_2.dds",
-		"Assets/sprite/LapNum_3.dds"
+		"Assets/sprite/Race/LapNum_1.dds",
+		"Assets/sprite/Race/LapNum_2.dds",
+		"Assets/sprite/Race/LapNum_3.dds"
 	};
-	const char* LAPTEXT_FILEPATH = "Assets/sprite/LAP.dds";				//テキストが書かれたスプライト(LAP)
-	const char* LAPSLASH_FILEPATH = "Assets/sprite/LapSlash.dds";		//スラッシュ(/)のスプライト。
+	const char* LAPTEXT_FILEPATH = "Assets/sprite/Race/LAP.dds";				//テキストが書かれたスプライト(LAP)
+	const char* LAPSLASH_FILEPATH = "Assets/sprite/Race/LapSlash.dds";		//スラッシュ(/)のスプライト。
 
 	const Vector3 CURRENT_LAPPOS = { 480.0f,-320.0f,0.0f };		//現在の周回数の位置。
 	const Vector3 MAX_LAPPOS = { 580.0f,-320.0f,0.0f };			//最大周回数の位置。

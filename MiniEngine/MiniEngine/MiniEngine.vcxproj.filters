@@ -133,6 +133,12 @@
     <Filter Include="MyProgram\Car\CarDriver">
       <UniqueIdentifier>{87f61c3e-5bf7-4309-ba3d-984b67d71e49}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MyProgram\Scenes\Title">
+      <UniqueIdentifier>{46ef7421-847f-4e4a-83c2-55822b2c6289}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\sprite\Race">
+      <UniqueIdentifier>{5dbea08e-3113-40ee-a2f5-1b9c45b9ab96}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tkEngine.cpp">
@@ -437,6 +443,9 @@
     </ClCompile>
     <ClCompile Include="MyProgram\Car\State\CarStateDrift.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\Scenes\Title\TitleScene.cpp">
+      <Filter>MyProgram\Scenes\Title</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -791,34 +800,37 @@
     <ClInclude Include="MyProgram\Race\RaceEnum.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="MyProgram\Scenes\Title\TitleScene.h">
+      <Filter>MyProgram\Scenes\Title</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ImageContentTask Include="Assets\sprite\LAP.png">
-      <Filter>Assets\sprite</Filter>
+    <ImageContentTask Include="Assets\sprite\Race\LAP.png">
+      <Filter>Assets\sprite\Race</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\LapNum_1.png">
-      <Filter>Assets\sprite</Filter>
+    <ImageContentTask Include="Assets\sprite\Race\LapNum_1.png">
+      <Filter>Assets\sprite\Race</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\LapNum_2.png">
-      <Filter>Assets\sprite</Filter>
+    <ImageContentTask Include="Assets\sprite\Race\LapNum_2.png">
+      <Filter>Assets\sprite\Race</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\LapNum_3.png">
-      <Filter>Assets\sprite</Filter>
+    <ImageContentTask Include="Assets\sprite\Race\LapNum_3.png">
+      <Filter>Assets\sprite\Race</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\LapSlash.png">
-      <Filter>Assets\sprite</Filter>
+    <ImageContentTask Include="Assets\sprite\Race\LapSlash.png">
+      <Filter>Assets\sprite\Race</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\RoadClosed.png">
-      <Filter>Assets\sprite</Filter>
+    <ImageContentTask Include="Assets\sprite\Race\Lose.png">
+      <Filter>Assets\sprite\Race</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\RaceGoalUI.png">
-      <Filter>Assets\sprite</Filter>
+    <ImageContentTask Include="Assets\sprite\Race\RaceGoalUI.png">
+      <Filter>Assets\sprite\Race</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Lose.png">
-      <Filter>リソース ファイル</Filter>
+    <ImageContentTask Include="Assets\sprite\Race\RoadClosed.png">
+      <Filter>Assets\sprite\Race</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Win.png">
-      <Filter>リソース ファイル</Filter>
+    <ImageContentTask Include="Assets\sprite\Race\Win.png">
+      <Filter>Assets\sprite\Race</Filter>
     </ImageContentTask>
   </ItemGroup>
 </Project>

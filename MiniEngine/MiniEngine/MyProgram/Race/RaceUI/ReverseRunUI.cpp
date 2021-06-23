@@ -2,7 +2,7 @@
 #include "ReverseRunUI.h"
 
 namespace {
-	const char* SPRITE_FILEPATH = "Assets/sprite/RoadClosed.dds";	//スプライトのファイルパス。
+	const char* SPRITE_FILEPATH = "Assets/sprite/Race/RoadClosed.dds";	//スプライトのファイルパス。
 	const Vector3 UI_POS = { 0.0f,200.0f,0.0f };				//スプライトの位置。
 	const Vector2 UI_SIZE = { 100.0f,100.0f };				//スプライトのサイズ。
 

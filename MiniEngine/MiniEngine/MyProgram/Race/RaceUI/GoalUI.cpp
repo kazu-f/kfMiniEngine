@@ -2,9 +2,9 @@
 #include "GoalUI.h"
 
 namespace {
-	const char* SPRITE_FILEPATH = "Assets/sprite/RaceGoalUI.dds";				//スプライトのファイルパス。
-	const char* SPRITE_WIN_FILEPATH = "Assets/sprite/Win.dds";					//勝利表記のファイルパス。
-	const char* SPRITE_LOSE_FILEPATH = "Assets/sprite/Lose.dds";					//敗北表記のファイルパス。
+	const char* SPRITE_FILEPATH = "Assets/sprite/Race/RaceGoalUI.dds";				//スプライトのファイルパス。
+	const char* SPRITE_WIN_FILEPATH = "Assets/sprite/Race/Win.dds";					//勝利表記のファイルパス。
+	const char* SPRITE_LOSE_FILEPATH = "Assets/sprite/Race/Lose.dds";					//敗北表記のファイルパス。
 
 	const Vector3 SPRITE_POS = { 0.0f,120.0f,0.0f };				//スプライトの位置。
 	const Vector2 SPRITE_SIZE = { 300.0f,100.0f };					//スプライトのサイズ。

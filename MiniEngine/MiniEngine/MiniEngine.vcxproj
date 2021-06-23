@@ -118,6 +118,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="system\system.cpp" />
+    <ClCompile Include="MyProgram\Scenes\Title\TitleScene.cpp" />
     <ClCompile Include="tkEngine.cpp" />
     <ClCompile Include="tkFile\TkaFile.cpp" />
     <ClCompile Include="tkFile\TkmFile.cpp" />
@@ -237,6 +238,7 @@
     <ClInclude Include="math\Vector.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="system\system.h" />
+    <ClInclude Include="MyProgram\Scenes\Title\TitleScene.h" />
     <ClInclude Include="tkEngine.h" />
     <ClInclude Include="tkFile\TkaFile.h" />
     <ClInclude Include="tkFile\TkmFile.h" />
@@ -245,26 +247,15 @@
     <ClInclude Include="MyProgram\graphics\PostEffect\Tonemap.h" />
   </ItemGroup>
   <ItemGroup>
-    <ImageContentTask Include="Assets\sprite\LAP.png">
-      <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(RelativeDir)/%(Filename).dds</ContentOutput>
-      <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(RelativeDir)/%(Filename).dds</ContentOutput>
-    </ImageContentTask>
-  </ItemGroup>
-  <ItemGroup>
-    <ImageContentTask Include="Assets\sprite\LapNum_1.png" />
-    <ImageContentTask Include="Assets\sprite\LapNum_2.png" />
-    <ImageContentTask Include="Assets\sprite\LapNum_3.png" />
-    <ImageContentTask Include="Assets\sprite\LapSlash.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ImageContentTask Include="Assets\sprite\RoadClosed.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ImageContentTask Include="Assets\sprite\RaceGoalUI.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ImageContentTask Include="Assets\sprite\Lose.png" />
-    <ImageContentTask Include="Assets\sprite\Win.png" />
+    <ImageContentTask Include="Assets\sprite\Race\LAP.png" />
+    <ImageContentTask Include="Assets\sprite\Race\LapNum_1.png" />
+    <ImageContentTask Include="Assets\sprite\Race\LapNum_2.png" />
+    <ImageContentTask Include="Assets\sprite\Race\LapNum_3.png" />
+    <ImageContentTask Include="Assets\sprite\Race\LapSlash.png" />
+    <ImageContentTask Include="Assets\sprite\Race\Lose.png" />
+    <ImageContentTask Include="Assets\sprite\Race\RaceGoalUI.png" />
+    <ImageContentTask Include="Assets\sprite\Race\RoadClosed.png" />
+    <ImageContentTask Include="Assets\sprite\Race\Win.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
