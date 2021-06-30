@@ -16,6 +16,8 @@ namespace {
 	{
 		{200.0f,-150.0f,0.0f}
 	};
+
+	const wchar_t* BGM_FILEPATH = L"Assets/sound/Title/RaceGameTitle.wav";		//タイトルBGM。
 	const Vector2 CHOISES_SPRITESIZE = { 500.0f,100.0f };		//選択肢のスプライトのサイズ。
 	const Vector2 CHOISES_PIVOT= { 0.0f,0.5f };					//選択肢のスプライトのピボットの位置。
 }
@@ -37,12 +39,13 @@ TitleScene::TitleScene()
 
 TitleScene::~TitleScene()
 {
+	DeleteGO(m_titleSprite);
+	DeleteGO(m_pickArrow);
 }
 
 void TitleScene::OnDestroy()
 {
-	DeleteGO(m_titleSprite);
-	DeleteGO(m_pickArrow);
+	DeleteGO(m_titleBGM);
 }
 
 bool TitleScene::Start()
@@ -58,6 +61,12 @@ bool TitleScene::Start()
 	//矢印作成。
 	m_pickArrow = NewGO<PickArrow>(0);
 	m_pickArrow->SetPosition(CHOISES_POS[m_currentChoises]);
+
+	//BGMを流す。
+	m_titleBGM = NewGO<prefab::CSoundSource>(0);
+	m_titleBGM->InitStreaming(BGM_FILEPATH);
+	m_titleBGM->Play(true);
+	m_titleBGM->SetVolume(0.5f);
 
 	return true;
 }

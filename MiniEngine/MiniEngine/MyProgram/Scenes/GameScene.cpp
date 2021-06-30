@@ -13,7 +13,7 @@
 #define ON 1
 #define OFF 0
 #define IS_SPECTATOR ON			//観客を出すかどうか。
-#define DEBUG_DELETE ON				//削除処理を呼び出せるようにするか。
+#define DEBUG_DELETE OFF				//削除処理を呼び出せるようにするか。
 
 namespace {
 #if 0
@@ -31,6 +31,8 @@ namespace {
 
 	const float SKY_SIZE = 3500.0f;		//空のサイズ。
 	const float SKY_EMISSION_POW = 0.06f;	//空の自己発光。
+
+	const wchar_t* RACE_BGM = L"Assets/sound/Race/Race.wav";
 }
 
 
@@ -80,6 +82,8 @@ bool GameScene::Start()
 		InitCheckPoint();
 		
 		GraphicsEngine()->GetPostEffect()->GetTonemap().Reset();
+
+		m_bgm->Play(true);
 		m_initState = enInit_End;
 		ret = true;
 		break;
@@ -157,6 +161,11 @@ void GameScene::InitOther()
 	m_sky = NewGO<prefab::CSky>(5, "Sky");			//空。
 	m_sky->SetScale(SKY_SIZE);
 	m_sky->SetEmissionColor({ SKY_EMISSION_POW, SKY_EMISSION_POW, SKY_EMISSION_POW });
+
+	//BGM
+	m_bgm = NewGO<prefab::CSoundSource>(0);
+	m_bgm->InitStreaming(RACE_BGM);
+	m_bgm->SetVolume(0.5f);
 }
 
 void GameScene::InitCourse()

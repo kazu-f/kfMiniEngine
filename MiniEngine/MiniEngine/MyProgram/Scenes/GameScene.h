@@ -72,5 +72,6 @@ private:
 	Guardrail* m_guardrail = nullptr;		//ガードレール。
 	SceneLight* m_light = nullptr;			//照明。
 	prefab::CSky* m_sky = nullptr;			//空。
+	prefab::CSoundSource* m_bgm = nullptr;	//BGM。
 };
 

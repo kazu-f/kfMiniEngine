@@ -39,6 +39,6 @@ void PickArrow::Update()
 {
 	//ŽžŠÔ‚ðŒo‰ß‚³‚¹‚éB
 	m_swingTime += GameTime().GetFrameDeltaTime() * SWING_SPEED[m_state];
-	float t = std::pow(sinf(m_swingTime), 2.0f);		//sin”g‚ðŽg‚Á‚Ä—h‚ç‚·B
+	float t = sinf(m_swingTime) / 2.0f + 0.5f;		//sin”g‚ð0.0`1.0‚É•âŠ®‚µ‚Ä—h‚ç‚·B
 	m_pickSprite->SetPosition(m_position + m_pickSwing * t);
 }
