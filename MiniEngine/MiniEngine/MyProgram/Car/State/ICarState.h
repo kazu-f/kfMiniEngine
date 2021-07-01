@@ -1,8 +1,6 @@
 #pragma once
 
-#include "Car/CarMoveController.h"
-class CarStateIdle;
-class CarStateAccele;
+class CarMoveController;
 
 /// <summary>
 /// 車のステートクラス。

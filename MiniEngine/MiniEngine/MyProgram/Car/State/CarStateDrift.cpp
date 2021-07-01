@@ -3,11 +3,12 @@
 #include "CarStateIdle.h"
 #include "CarStateBrake.h"
 #include "CarStateAccele.h"
-#include "Car\CarDriver\ICarDriver.h"
+#include "Car/CarDriver/ICarDriver.h"
+#include "Car/CarMoveController.h"
 
 namespace {
 	const float FIRST_DICCELATION = 120.0f;
-	const float DICCELATION = 10.0f;
+	const float DICCELATION = 15.0f;
 }
 
 CarStateDrift::CarStateDrift(CarMoveController* car):
@@ -48,6 +49,6 @@ void CarStateDrift::Execute()
 	}
 	else if (m_car->GetCarDriver()->GetDriverInput(ICarDriver::enDriverIdle))
 	{
-		m_car->ChangeState(CarMoveController::EnCarState::enStateIdle);
+		m_car->ChangeState(CarMoveController::EnCarState::enStateAccele);
 	}
 }

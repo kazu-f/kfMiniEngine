@@ -5,6 +5,7 @@
 #include "CarDriver/AICarDriver.h"
 #include "CheckPoint/CheckedController.h"
 #include "GameCamera/GameCamera.h"
+#include "SpeedoMeter.h"
 
 namespace {
 
@@ -48,8 +49,14 @@ bool Car::Start()
 		m_carMoveCon->GetRotation()
 	);
 
-	//
+	//移動制御クラスの初期化。
 	m_carMoveCon->Init(m_position, m_rotation);
+
+	if (m_isPlayer)
+	{
+		m_speedoMeter = std::make_unique<SpeedoMeter>();
+		m_speedoMeter->Init();
+	}
 
 	return true;
 }
@@ -72,6 +79,12 @@ void Car::Update()
 
 	m_checkedCon->Update(m_position, m_rotation);
 
+	//速度メーター。
+	if (m_isPlayer)
+	{
+		m_speedoMeter->UpdateSpeed(m_carMoveCon->GetSpeed());
+	}
+
 	//if (g_pad[0]->IsTrigger(enButtonX)) {
 	//	DeleteGO(this);
 	//}
@@ -80,6 +93,10 @@ void Car::Update()
 void Car::OnDestroy()
 {
 	DeleteGO(m_model);
+	if (m_isPlayer)
+	{
+		m_speedoMeter->Release();
+	}
 }
 
 void Car::SetCarDriver(EnDriverType type)

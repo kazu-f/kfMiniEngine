@@ -108,6 +108,7 @@ void GameScene::Release()
 	DeleteGO(m_checkPointManager);	//チェックポイント。
 	DeleteGO(m_raceController);
 	DeleteGO(m_sky);
+	DeleteGO(m_bgm);
 }
 
 void GameScene::PreUpdate()
@@ -180,6 +181,7 @@ void GameScene::InitCourse()
 			//m_playerCar->SetCarDriver(Car::EnDriverType::enTypeAI);
 			m_playerCar->SetCarDriver(Car::EnDriverType::enTypePlayer);
 			m_playerCar->SetCarColor(CAR::enCar_Red);
+			m_playerCar->SetIsPlayer(true);
 
 			return true;
 		}

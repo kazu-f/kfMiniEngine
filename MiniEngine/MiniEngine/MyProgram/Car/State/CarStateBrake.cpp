@@ -3,10 +3,11 @@
 #include "CarStateIdle.h"
 #include "CarStateAccele.h"
 #include "CarStateDrift.h"
-#include "Car\CarDriver\ICarDriver.h"
+#include "Car/CarDriver/ICarDriver.h"
+#include "Car/CarMoveController.h"
 
 namespace {
-	const float BRAKE_POWER = 120.0f;
+	const float BRAKE_POWER = 30.0f;
 }
 
 CarStateBrake::CarStateBrake(CarMoveController* car) :

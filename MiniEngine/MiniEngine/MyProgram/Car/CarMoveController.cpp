@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "CarMoveController.h"
+#include "Car.h"
 #include "State/ICarState.h"
 #include "State/CarStateIdle.h"
 #include "State/CarStateAccele.h"
 #include "State/CarStateBrake.h"
 #include "State/CarStateDrift.h"
 #include "CarDriver/ICarDriver.h"
-
 
 namespace {
 
@@ -110,7 +110,7 @@ void CarMoveController::AddDicceleration(const float diccele)
 	float MinSpeed = 0.0f;
 	if (m_currentState->IsDrift())
 	{
-		MinSpeed = 1000.0f;
+		MinSpeed = min(m_speed * 0.9f, MAX_SPEED * (3.0f / 4.0f));
 	}
 	m_speed = max(MinSpeed, m_speed - (diccele * MOVE_COEFFICIENT * GameTime().GetFrameDeltaTime()));
 }

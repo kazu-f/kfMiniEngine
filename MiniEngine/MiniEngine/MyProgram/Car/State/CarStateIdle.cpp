@@ -2,10 +2,11 @@
 #include "CarStateIdle.h"
 #include "CarStateAccele.h"
 #include "CarStateBrake.h"
-#include "Car\CarDriver\ICarDriver.h"
+#include "Car/CarDriver/ICarDriver.h"
+#include "Car/CarMoveController.h"
 
 namespace {
-	const float DICCELATION = 30.0f;
+	const float DICCELATION = 10.0f;
 }
 
 CarStateIdle::CarStateIdle(CarMoveController* car):

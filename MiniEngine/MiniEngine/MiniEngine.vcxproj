@@ -272,6 +272,10 @@
     <ImageContentTask Include="Assets\sprite\Title\Race_GameStart.png" />
     <ImageContentTask Include="Assets\sprite\Title\Race_Title.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\Car\Needle.png" />
+    <ImageContentTask Include="Assets\sprite\Car\SpeedoMeter.png" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{2D3EA6DA-4878-40F4-A02B-65F5732B7B86}</ProjectGuid>

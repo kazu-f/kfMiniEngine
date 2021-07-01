@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "ICarState.h"
-#include "CarStateIdle.h"
-#include "CarStateAccele.h"
+#include "Car/CarMoveController.h"
 
 
 ICarState::ICarState(CarMoveController* car):

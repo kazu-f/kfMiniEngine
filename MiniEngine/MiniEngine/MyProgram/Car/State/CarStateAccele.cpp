@@ -3,11 +3,12 @@
 #include "CarStateIdle.h"
 #include "CarStateDrift.h"
 #include "CarStateBrake.h"
-#include "Car\CarDriver\ICarDriver.h"
+#include "Car/CarDriver/ICarDriver.h"
+#include "Car/CarMoveController.h"
 
 namespace {
-	const float FIRST_SPEED = 280.0f;
-	const float ACCELE_SPEED = 80.0f;
+	const float FIRST_SPEED = 120.0f;
+	const float ACCELE_SPEED = 10.0f;
 }
 
 CarStateAccele::CarStateAccele(CarMoveController* car):
@@ -25,7 +26,9 @@ CarStateAccele::~CarStateAccele()
 
 void CarStateAccele::Enter()
 {
-	m_car->AddAcceleration(FIRST_SPEED);
+	if (m_car->GetSpeed() < FIRST_SPEED) {
+		m_car->AddAcceleration(FIRST_SPEED);
+	}
 	m_acceleSound->Play(true);
 	CalcSoundFrequencyRetio();
 }

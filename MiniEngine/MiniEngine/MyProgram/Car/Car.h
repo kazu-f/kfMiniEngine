@@ -2,6 +2,7 @@
 #include "CarMoveController.h"
 class CheckedController;
 class ICarDriver;
+class SpeedoMeter;
 
 namespace CAR{
 	enum EnCarColor {
@@ -43,12 +44,20 @@ public:		//Set関数とか
 	//車のドライバを設定する。
 	void SetCarDriver(EnDriverType type);
 
+	void SetIsPlayer(const bool isPlayer)
+	{
+		m_isPlayer = isPlayer;
+	}
 public:		//Get関数とか
 	const Vector3& GetPosition()const
 	{
 		return m_position;
 	}
-
+	//移動コントローラーを取得。
+	CarMoveController* GetCarMoveController()
+	{
+		return m_carMoveCon.get();
+	}
 	//チェックコントローラーを取得。
 	CheckedController* GetCheckedController()
 	{
@@ -57,15 +66,17 @@ public:		//Get関数とか
 	//ゴール済みか？
 	bool IsGoal();
 
-protected:
+private:
 	CAR::EnCarColor m_carColor = CAR::enCar_Red;
 	prefab::ModelRender* m_model = nullptr;
 
 	std::unique_ptr<ICarDriver> m_carDriver;					//車の操作のドライバー。
 	std::unique_ptr<CarMoveController> m_carMoveCon;			//車の移動を管理する。
 	std::unique_ptr<CheckedController> m_checkedCon;			//チェックポイントに監視される。
+	std::unique_ptr<SpeedoMeter> m_speedoMeter;					//スピードメーターのスプライト。
 
 	Vector3 m_position = Vector3::Zero;				//座標。
 	Quaternion m_rotation = Quaternion::Identity;	//回転。
+	bool m_isPlayer = false;						//プレイヤーか？
 };
 

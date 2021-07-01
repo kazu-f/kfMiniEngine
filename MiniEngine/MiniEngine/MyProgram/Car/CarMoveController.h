@@ -1,5 +1,6 @@
 #pragma once
 
+class Car;
 class ICarState;
 class CarStateIdle;
 class CarStateAccele;

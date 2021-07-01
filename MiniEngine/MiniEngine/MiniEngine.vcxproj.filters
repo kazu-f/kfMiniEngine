@@ -875,4 +875,12 @@
       <Filter>リソース ファイル</Filter>
     </ImageContentTask>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\sprite\Car\Needle.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Assets\sprite\Car\SpeedoMeter.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
