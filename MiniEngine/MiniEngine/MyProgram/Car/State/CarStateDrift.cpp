@@ -3,13 +3,14 @@
 #include "CarStateIdle.h"
 #include "CarStateBrake.h"
 #include "CarStateAccele.h"
+#include "Car\CarDriver\ICarDriver.h"
 
 namespace {
 	const float FIRST_DICCELATION = 120.0f;
 	const float DICCELATION = 10.0f;
 }
 
-CarStateDrift::CarStateDrift(Car* car):
+CarStateDrift::CarStateDrift(CarMoveController* car):
 	ICarState::ICarState(car)
 {
 	m_breakeSound = NewGO<prefab::CSoundSource>(0);
@@ -37,16 +38,16 @@ void CarStateDrift::Execute()
 {
 	m_car->AddDicceleration(DICCELATION);
 
-	if (m_car->m_carDriver->GetDriverInput(ICarDriver::enDriverBrake))
+	if (m_car->GetCarDriver()->GetDriverInput(ICarDriver::enDriverBrake))
 	{
-		m_car->ChangeState(m_car->m_stateBrake.get());
+		m_car->ChangeState(CarMoveController::EnCarState::enStateBrake);
 	}
-	else if (m_car->m_carDriver->GetDriverInput(ICarDriver::enDriverAccele))
+	else if (m_car->GetCarDriver()->GetDriverInput(ICarDriver::enDriverAccele))
 	{
-		m_car->ChangeState(m_car->m_stateAccele.get());
+		m_car->ChangeState(CarMoveController::EnCarState::enStateAccele);
 	}
-	else if (m_car->m_carDriver->GetDriverInput(ICarDriver::enDriverIdle))
+	else if (m_car->GetCarDriver()->GetDriverInput(ICarDriver::enDriverIdle))
 	{
-		m_car->ChangeState(m_car->m_stateIdle.get());
+		m_car->ChangeState(CarMoveController::EnCarState::enStateIdle);
 	}
 }

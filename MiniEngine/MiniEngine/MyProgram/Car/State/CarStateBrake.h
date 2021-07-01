@@ -8,7 +8,7 @@
 class CarStateBrake : public ICarState
 {
 public:
-	CarStateBrake(Car* car);
+	CarStateBrake(CarMoveController* car);
 	~CarStateBrake();
 
 	//ドリフト可能か？

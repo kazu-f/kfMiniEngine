@@ -8,7 +8,7 @@
 class CarStateAccele : public ICarState
 {
 public:
-	CarStateAccele(Car* car);		//コンストラクタ。
+	CarStateAccele(CarMoveController* car);		//コンストラクタ。
 	~CarStateAccele();				//デストラクタ。
 
 	//ドリフト可能か？

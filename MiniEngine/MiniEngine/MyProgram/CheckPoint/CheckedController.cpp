@@ -9,14 +9,14 @@ CheckedController::~CheckedController()
 {
 }
 
-void CheckedController::Init(CRigidBody* rb, Vector3& pos, Quaternion& rot)
+void CheckedController::Init(CRigidBody* rb, const Vector3& pos, const Quaternion& rot)
 {
 	m_rigidBody = rb;
 	m_position = pos;
 	m_rotation = rot;
 }
 
-void CheckedController::Update(Vector3& pos, Quaternion& rot)
+void CheckedController::Update(const Vector3& pos, const Quaternion& rot)
 {
 	m_position = pos;
 	m_rotation = rot;

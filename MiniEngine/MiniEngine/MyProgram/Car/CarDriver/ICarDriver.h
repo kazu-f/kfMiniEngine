@@ -17,7 +17,7 @@ public:
 	/// </summary>
 	/// <param name="enInput">入力の種類。</param>
 	/// <returns>bool型の入力。</returns>
-	bool GetDriverInput(EnDriverInput enInput)
+	const bool GetDriverInput(EnDriverInput enInput) const
 	{
 		ENGINE_ASSERT(
 			0 <= enInput || enInput < enDriverNum,
@@ -30,7 +30,7 @@ public:
 	/// ハンドルの入力値を受け取る。
 	/// </summary>
 	/// <returns>float型の入力。</returns>
-	float GetDriverHandle()
+	const float GetDriverHandle() const
 	{
 		return m_driverHandle;
 	}

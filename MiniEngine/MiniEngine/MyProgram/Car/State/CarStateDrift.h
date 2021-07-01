@@ -3,7 +3,7 @@
 class CarStateDrift : public ICarState
 {
 public:
-	CarStateDrift(Car* car);
+	CarStateDrift(CarMoveController* car);
 	~CarStateDrift();
 
 	//ドリフト可能か？

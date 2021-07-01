@@ -78,7 +78,7 @@ namespace Engine {
 	#define ENGINE_LOG(format,...)				DebugLog(format,__VA_ARGS__);								//デバッグ用のログを出力する。
 #define ENGINE_WARNING_LOG(format,...)			WarningLog(format, __VA_ARGS__);							//警告ログを出力する。
 	#define ENGINE_MESSAGE_BOX(format,...)		WarningMessageBox(__FILE__,__LINE__,format,__VA_ARGS__);	//メッセージボックスを表示。
-	#define ENGINE_ASSERT(flag,format,...)		DebugAssert(flag,format,__FILE__,__LINE__,__VA_ARGS__);		//アサートする。
+	#define ENGINE_ASSERT(flag,format,...)		DebugAssert(flag,format,__FILE__,__LINE__,__VA_ARGS__);		//flagが偽の時にアサートする。
 #else
 	#define ENGINE_LOG(format,...)
 	#define ENGINE_WARNING_LOG(format,...)

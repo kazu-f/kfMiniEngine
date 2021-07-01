@@ -4,7 +4,7 @@
 #include "CarStateAccele.h"
 
 
-ICarState::ICarState(Car* car):
+ICarState::ICarState(CarMoveController* car):
 	m_car(car)
 {
 }

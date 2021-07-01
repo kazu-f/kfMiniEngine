@@ -3,7 +3,7 @@
 class CarStateIdle : public ICarState
 {
 public:
-	CarStateIdle(Car* car);			//コンストラクタ。
+	CarStateIdle(CarMoveController* car);			//コンストラクタ。
 	~CarStateIdle();				//デストラクタ。
 	//ドリフト可能か？
 	bool IsDrift()override final

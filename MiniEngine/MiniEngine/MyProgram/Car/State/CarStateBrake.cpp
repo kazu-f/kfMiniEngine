@@ -3,12 +3,13 @@
 #include "CarStateIdle.h"
 #include "CarStateAccele.h"
 #include "CarStateDrift.h"
+#include "Car\CarDriver\ICarDriver.h"
 
 namespace {
 	const float BRAKE_POWER = 120.0f;
 }
 
-CarStateBrake::CarStateBrake(Car* car) :
+CarStateBrake::CarStateBrake(CarMoveController* car) :
 	ICarState::ICarState(car)
 {
 	m_breakeSound = NewGO<prefab::CSoundSource>(0);
@@ -36,17 +37,17 @@ void CarStateBrake::Execute()
 	//ブレーキで減速する。
 	m_car->AddDicceleration(BRAKE_POWER);
 
-	if (m_car->m_carDriver->GetDriverInput(ICarDriver::enDriverDrift))
+	if (m_car->GetCarDriver()->GetDriverInput(ICarDriver::enDriverDrift))
 	{
-		m_car->ChangeState(m_car->m_stateDrift.get());
+		m_car->ChangeState(CarMoveController::EnCarState::enStateDrift);
 	}
-	else if (m_car->m_carDriver->GetDriverInput(ICarDriver::enDriverAccele))
+	else if (m_car->GetCarDriver()->GetDriverInput(ICarDriver::enDriverAccele))
 	{
-		m_car->ChangeState(m_car->m_stateAccele.get());
+		m_car->ChangeState(CarMoveController::EnCarState::enStateAccele);
 	}
-	else if (m_car->m_carDriver->GetDriverInput(ICarDriver::enDriverIdle))
+	else if (m_car->GetCarDriver()->GetDriverInput(ICarDriver::enDriverIdle))
 	{
-		m_car->ChangeState(m_car->m_stateIdle.get());
+		m_car->ChangeState(CarMoveController::EnCarState::enStateIdle);
 	}
 
 }

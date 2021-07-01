@@ -3,13 +3,14 @@
 #include "CarStateIdle.h"
 #include "CarStateDrift.h"
 #include "CarStateBrake.h"
+#include "Car\CarDriver\ICarDriver.h"
 
 namespace {
 	const float FIRST_SPEED = 280.0f;
 	const float ACCELE_SPEED = 80.0f;
 }
 
-CarStateAccele::CarStateAccele(Car* car):
+CarStateAccele::CarStateAccele(CarMoveController* car):
 	ICarState::ICarState(car)
 {
 	m_acceleSound = NewGO<prefab::CSoundSource>(5);
@@ -44,24 +45,24 @@ void CarStateAccele::Execute()
 
 	CalcSoundFrequencyRetio();
 
-	if (m_car->m_carDriver->GetDriverInput(ICarDriver::enDriverDrift))
+	if (m_car->GetCarDriver()->GetDriverInput(ICarDriver::enDriverDrift))
 	{
-		m_car->ChangeState(m_car->m_stateDrift.get());
+		m_car->ChangeState(CarMoveController::EnCarState::enStateDrift);
 	}
-	else if (m_car->m_carDriver->GetDriverInput(ICarDriver::enDriverBrake))
+	else if (m_car->GetCarDriver()->GetDriverInput(ICarDriver::enDriverBrake))
 	{
-		m_car->ChangeState(m_car->m_stateBrake.get());
+		m_car->ChangeState(CarMoveController::EnCarState::enStateBrake);
 	}
-	else if(m_car->m_carDriver->GetDriverInput(ICarDriver::enDriverIdle))
+	else if(m_car->GetCarDriver()->GetDriverInput(ICarDriver::enDriverIdle))
 	{
-		m_car->ChangeState(m_car->m_stateIdle.get());
+		m_car->ChangeState(CarMoveController::EnCarState::enStateIdle);
 	}
 }
 
 void CarStateAccele::CalcSoundFrequencyRetio()
 {
 	float speed = m_car->GetSpeed();
-	m_soundFrequency = speed * (1.0f / Car::MAX_SPEED);
+	m_soundFrequency = speed * (1.0f / CarMoveController::MAX_SPEED);
 	m_soundFrequency = min(1.4f,max(0.6f, m_soundFrequency));
 	m_acceleSound->SetFrequencyRetio(m_soundFrequency);
 }

@@ -15,13 +15,13 @@ public:
 	/// <param name="chara">キャラコン。</param>
 	/// <param name="pos">座標。</param>
 	/// <param name="rot">回転。</param>
-	void Init(CRigidBody* rb, Vector3& pos, Quaternion& rot);
+	void Init(CRigidBody* rb, const Vector3& pos, const Quaternion& rot);
 	/// <summary>
 	/// 更新。
 	/// </summary>
 	/// <param name="pos">座標。</param>
 	/// <param name="rot">回転。</param>
-	void Update(Vector3& pos, Quaternion& rot);
+	void Update(const Vector3& pos, const Quaternion& rot);
 	/// <summary>
 	/// 周回数をカウントアップする。
 	/// </summary>

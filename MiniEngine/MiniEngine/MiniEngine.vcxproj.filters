@@ -459,6 +459,12 @@
     <ClCompile Include="MyProgram\Scenes\Title\ChoiseGameStart.cpp">
       <Filter>MyProgram\Scenes\Title</Filter>
     </ClCompile>
+    <ClCompile Include="MyProgram\Car\SpeedoMeter.cpp">
+      <Filter>MyProgram\Car</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\Car\CarMoveController.cpp">
+      <Filter>MyProgram\Car</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tkEngine.h">
@@ -824,6 +830,12 @@
     <ClInclude Include="MyProgram\Scenes\Title\ChoiseGameStart.h">
       <Filter>MyProgram\Scenes\Title</Filter>
     </ClInclude>
+    <ClInclude Include="MyProgram\Car\SpeedoMeter.h">
+      <Filter>MyProgram\Car</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\Car\CarMoveController.h">
+      <Filter>MyProgram\Car</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\Race\LAP.png">
@@ -853,16 +865,14 @@
     <ImageContentTask Include="Assets\sprite\Race\Win.png">
       <Filter>Assets\sprite\Race</Filter>
     </ImageContentTask>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Assets\sprite\Title\Race_ChoisePick.png">
-      <Filter>Assets\sprite\Title</Filter>
-    </Image>
-    <Image Include="Assets\sprite\Title\Race_GameStart.png">
-      <Filter>Assets\sprite\Title</Filter>
-    </Image>
-    <Image Include="Assets\sprite\Title\Race_Title.png">
-      <Filter>Assets\sprite\Title</Filter>
-    </Image>
+    <ImageContentTask Include="Assets\sprite\Title\Race_ChoisePick.png">
+      <Filter>リソース ファイル</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Title\Race_GameStart.png">
+      <Filter>リソース ファイル</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Title\Race_Title.png">
+      <Filter>リソース ファイル</Filter>
+    </ImageContentTask>
   </ItemGroup>
 </Project>
