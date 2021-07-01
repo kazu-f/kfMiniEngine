@@ -15,7 +15,9 @@ namespace {
 	const float CURVE_DEG = 15.0f;			//カーブの角度。
 	const float DRIFT_POWER = 1.4f;			//ドリフトの強さ。
 
-	const float DEADROT_SPEED = 0.1f;		//速度が一定以下なら回転しない。
+	
+	const float DEADROT_STARTSPEED = 1800.0f;		//速度が一定以下なら回転しない。
+	const float DEADROT_ENDSPEED = 100.0f;		//速度が一定以下なら回転しない。
 
 }
 
@@ -62,16 +64,16 @@ bool CarMoveController::MoveCar()
 	//方向を求める。
 	//回転を軽くかける。
 	Quaternion dirRot;
-	float rotSpeed = CURVE_DEG;
+	float rotSpeed = CURVE_DEG * HandlePower;
 	if (m_currentState->IsDecelerate()) {
 		//減速中はカーブしやすい。
 		rotSpeed *= DRIFT_POWER;
 	}
-	dirRot.SetRotationDegY(Math::PI * rotSpeed * HandlePower * DeltaTime);
 
-	if (m_speed > DEADROT_SPEED) {
-		m_rotation.Multiply(dirRot);
-	}
+	float speedWeight = max(0.0f, min(1.0f, (DEADROT_ENDSPEED - m_speed) / (DEADROT_ENDSPEED - DEADROT_STARTSPEED)));
+	dirRot.SetRotationDegY(Math::PI * rotSpeed * DeltaTime * speedWeight);
+	m_rotation.Multiply(dirRot);
+
 	//回転から方向を計算。
 	CalcDirection();
 
