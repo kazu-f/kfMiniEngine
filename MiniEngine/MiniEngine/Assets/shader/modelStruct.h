@@ -45,10 +45,12 @@ struct PSOut_GBuffer {
 //シャドウマップ用の頂点シェーダーへの入力。
 struct SShadowMapVSIn {
 	float4 pos : POSITION;
+	float2 uv : TEXCOORD0;	//uv座標。
 	SSkinVSIn skinVert;
 };
 //シャドウマップ用のピクセルシェーダーへの入力。
 struct SShadowMapPSIn {
 	float4 pos : SV_POSITION;
+	float2 uv : TEXCOORD0;	//uv座標。
 };
 

@@ -38,6 +38,18 @@ bool DebugScene::Start()
 
 	//InitSprite();
 
+	//{
+	//	ModelInitData modelData;
+	//	modelData.m_tkmFilePath = "Assets/modelData/tree/AlaskaCedar_1.tkm";
+
+	//	auto tree = NewGO<prefab::ModelRender>(0);
+	//	tree->Init(modelData);
+	//	tree->SetForwardRenderFlag(true);
+	//	//tree->SetScale({ 0.05f,0.05f,0.05f });
+	//	tree->SetShadowReceiverFlag(true);
+	//	tree->SetShadowCasterFlag(true);
+	//}
+
 	m_courseLevel.Init("Assets/level/testLevel.tkl", [&](SLevelObjectData& objData) {
 		if (wcscmp(objData.name, L"unityChan") == 0) {
 

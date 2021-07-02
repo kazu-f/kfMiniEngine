@@ -192,6 +192,7 @@ namespace Engine
 			psoDesc.PS = CD3DX12_SHADER_BYTECODE(m_psTransModel.GetCompiledBlob());
 			psoDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;		//アルベドカラー出力用。
 			psoDesc.BlendState.IndependentBlendEnable = TRUE;
+			psoDesc.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
 			psoDesc.BlendState.RenderTarget[0].BlendEnable = TRUE;
 			psoDesc.BlendState.RenderTarget[0].SrcBlend = D3D12_BLEND_SRC_ALPHA;
 			psoDesc.BlendState.RenderTarget[0].DestBlend = D3D12_BLEND_INV_SRC_ALPHA;

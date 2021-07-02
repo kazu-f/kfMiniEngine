@@ -214,6 +214,8 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	float metaric = 0.0f;			//金属度。
 	float spec = 0.0f;
 	float4 albedoColor = g_texture.Sample(g_sampler, psIn.uv);	//テクスチャカラー。		
+	clip(albedoColor.a - 0.1f);
+
 	if (hasSpecularMap) {
 		//スペキュラマップがある。
 		float4 specMap = g_specularMap.Sample(g_sampler, psIn.uv);
@@ -305,6 +307,7 @@ SShadowMapPSIn VSMainNonSkinShadowMap(SShadowMapVSIn vsIn)
 	psIn.pos = mul(mWorld, vsIn.pos);
 	psIn.pos = mul(mView, psIn.pos);
 	psIn.pos = mul(mProj, psIn.pos);
+	psIn.uv = vsIn.uv;
 
 	return psIn;
 }
@@ -318,6 +321,7 @@ SShadowMapPSIn VSMainNonSkinInstancingShadowMap(SShadowMapVSIn vsIn, uint instan
 	psIn.pos = mul(instancingDatas[instanceID], vsIn.pos);
 	psIn.pos = mul(mView, psIn.pos);
 	psIn.pos = mul(mProj, psIn.pos);
+	psIn.uv = vsIn.uv;
 
 	return psIn;
 }
@@ -331,6 +335,7 @@ SShadowMapPSIn VSMainSkinShadowMap(SShadowMapVSIn vsIn)
 	psIn.pos = mul(skinMatrix, vsIn.pos);
 	psIn.pos = mul(mView, psIn.pos);
 	psIn.pos = mul(mProj, psIn.pos);
+	psIn.uv = vsIn.uv;
 
 	return psIn;
 }
@@ -347,6 +352,7 @@ SShadowMapPSIn VSMainSkinInstancingShadowMap(SShadowMapVSIn vsIn, uint instanceI
 	psIn.pos = mul(m, vsIn.pos);
 	psIn.pos = mul(mView, psIn.pos);
 	psIn.pos = mul(mProj, psIn.pos);
+	psIn.uv = vsIn.uv;
 
 	return psIn;
 }
@@ -355,5 +361,8 @@ SShadowMapPSIn VSMainSkinInstancingShadowMap(SShadowMapVSIn vsIn, uint instanceI
 */
 float4 PSMainShadowMap(SShadowMapPSIn psIn) :SV_Target0
 {
+	float4 albedoColor = g_texture.Sample(g_sampler, psIn.uv);	//テクスチャカラー。		
+	clip(albedoColor.a - 0.1f);
+
 	return psIn.pos.z / psIn.pos.w;
 }
