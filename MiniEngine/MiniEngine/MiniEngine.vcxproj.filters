@@ -142,6 +142,9 @@
     <Filter Include="Assets\sprite\Title">
       <UniqueIdentifier>{20c2f297-6f33-4b16-b2fd-8c01f1ab0c2a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MyProgram\Tree">
+      <UniqueIdentifier>{9f64f3fb-b848-4360-ac9b-d00cdb932cb2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tkEngine.cpp">
@@ -464,6 +467,9 @@
     </ClCompile>
     <ClCompile Include="MyProgram\Car\CarMoveController.cpp">
       <Filter>MyProgram\Car</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\Tree\TreeInstancing.cpp">
+      <Filter>MyProgram\Tree</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -836,6 +842,9 @@
     <ClInclude Include="MyProgram\Car\CarMoveController.h">
       <Filter>MyProgram\Car</Filter>
     </ClInclude>
+    <ClInclude Include="MyProgram\Tree\TreeInstancing.h">
+      <Filter>MyProgram\Tree</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\Race\LAP.png">
@@ -874,13 +883,11 @@
     <ImageContentTask Include="Assets\sprite\Title\Race_Title.png">
       <Filter>リソース ファイル</Filter>
     </ImageContentTask>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Assets\sprite\Car\Needle.png">
+    <ImageContentTask Include="Assets\sprite\Car\Needle.png">
       <Filter>リソース ファイル</Filter>
-    </Image>
-    <Image Include="Assets\sprite\Car\SpeedoMeter.png">
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Car\SpeedoMeter.png">
       <Filter>リソース ファイル</Filter>
-    </Image>
+    </ImageContentTask>
   </ItemGroup>
 </Project>

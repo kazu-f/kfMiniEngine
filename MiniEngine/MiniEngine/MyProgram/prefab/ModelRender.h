@@ -28,6 +28,16 @@ namespace Engine {
 			/// </summary>
 			void Update() override;
 			/// <summary>
+			/// ポスト更新処理。
+			/// </summary>
+			void PostUpdate() override
+			{
+				if (m_model.IsInited())
+				{
+					m_model.SendGPUInstancingDatas();
+				}
+			}
+			/// <summary>
 			/// 事前レンダリング。
 			/// </summary>
 			void PreRender(RenderContext& rc)override;

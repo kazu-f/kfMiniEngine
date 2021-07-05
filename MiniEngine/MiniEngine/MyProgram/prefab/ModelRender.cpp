@@ -96,8 +96,6 @@ namespace Engine {
 				shadowMap->RegistShadowCaster(&m_model);
 			}
 
-			m_model.SendGPUInstancingDatas();
-
 			if (m_animation.IsInited()) {
 				//アニメーションを再生。
 				m_animation.Progress(GameTime().GetFrameDeltaTime());

@@ -130,6 +130,7 @@
     <ClCompile Include="tkFile\TksFile.cpp" />
     <ClCompile Include="MyProgram\graphics\UserMaterial.cpp" />
     <ClCompile Include="MyProgram\graphics\PostEffect\Tonemap.cpp" />
+    <ClCompile Include="MyProgram\Tree\TreeInstancing.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyProgram\Car\CarMoveController.h" />
@@ -255,6 +256,7 @@
     <ClInclude Include="tkFile\TksFile.h" />
     <ClInclude Include="MyProgram\graphics\UserMaterial.h" />
     <ClInclude Include="MyProgram\graphics\PostEffect\Tonemap.h" />
+    <ClInclude Include="MyProgram\Tree\TreeInstancing.h" />
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\Race\LAP.png" />
