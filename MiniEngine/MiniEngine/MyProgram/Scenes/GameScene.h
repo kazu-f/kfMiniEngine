@@ -3,9 +3,11 @@
 /// ゲームクラス。
 /// </summary>
 #include "Spectator/SpectatorNames.h"
+#include "Tree/TreeFilePathName.h"
 
 class FollowCarCamera;
 class Car;
+class TreeInstancing;
 class Spectator;
 class Guardrail;
 class SceneLight;
@@ -27,6 +29,7 @@ public:
 private:	//初期化ステップで呼び出す処理。
 	void InitOther();			//カメラやライトを初期化。
 	void InitCourse();			//コースを読み込む。
+	void InitTree();			//木々を読み込む。
 	void InitSpectator();		//観客を配置する。
 	void InitRaceController();	//レースの制御を行うクラスの初期化。
 	void InitCheckPoint();		//チェックポイントを配置する。
@@ -44,6 +47,7 @@ private:
 	enum EnInitStep {
 		enInit_Other,				//ライトやカメラの作成。
 		enInit_Course,				//コースの読み込み。
+		enInit_Tree,				//木々の読み込み。
 		enInit_Spectator,			//観客の配置。
 		enInit_RaceController,		//レース制御クラスの作成。
 		enInit_CheckPoint,			//チェックポイントの配置。
@@ -68,6 +72,7 @@ private:
 	Car* m_playerCar = nullptr;					//車。
 	Car* m_cpuCar = nullptr;					//車。
 	BackGround* m_ground = nullptr;			//地面。
+	TreeInstancing* m_trees = nullptr;		//木々。
 	Spectator* m_spectator[enSpectatorNum] = { nullptr };		//観客。
 	Guardrail* m_guardrail = nullptr;		//ガードレール。
 	SceneLight* m_light = nullptr;			//照明。

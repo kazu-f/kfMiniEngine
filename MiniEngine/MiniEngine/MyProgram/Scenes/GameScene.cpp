@@ -2,6 +2,7 @@
 #include "GameScene.h"
 #include "GameCamera/FollowCarCamera.h"
 #include "Car/Car.h"
+#include "Tree/TreeInstancing.h"
 #include "Spectator/Spectator.h"
 #include "GameLight/SceneLight.h"
 #include "Guardrail/Guardrail.h"
@@ -61,6 +62,12 @@ bool GameScene::Start()
 	case GameScene::enInit_Course:
 		//コースを読み込む。
 		InitCourse();
+
+		m_initState = enInit_Tree;
+		break;
+
+	case GameScene::enInit_Tree:
+		InitTree();
 
 		m_initState = enInit_Spectator;
 		break;
@@ -231,8 +238,32 @@ void GameScene::InitCourse()
 		ENGINE_LOG(
 			"レベルで車が見つからなかった。"
 			":tklファイルのデータを確認。"
-		)
+		);
 	}
+}
+
+void GameScene::InitTree()
+{
+	m_trees = NewGO<TreeInstancing>(0);
+	m_trees->SetTreeFilePath(TREE::Alaska1);
+	
+	CLevel treeLevelData;
+	treeLevelData.Init(TREE::LEVEL_FILEPATH, [&](SLevelObjectData& objData) {
+		if (objData.EqualObjectName(L"Alaska1")) {
+			//オブジェクトの情報を追加。
+			m_trees->AddTreeObjData(
+				objData.position,
+				objData.rotation,
+				objData.scale
+			);
+
+			return true;
+		}
+
+		return false;
+		}
+	);
+
 }
 
 void GameScene::InitSpectator()

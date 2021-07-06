@@ -206,6 +206,7 @@
     <ClInclude Include="MyProgram\Sound\WaveFileBank.h" />
     <ClInclude Include="MyProgram\Spectator\Spectator.h" />
     <ClInclude Include="MyProgram\Spectator\SpectatorNames.h" />
+    <ClInclude Include="MyProgram\Tree\TreeFilePathName.h" />
     <ClInclude Include="MyProgram\util\CGameTime.h" />
     <ClInclude Include="MyProgram\util\NameKey.h" />
     <ClInclude Include="MyProgram\util\Stopwatch.h" />

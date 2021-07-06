@@ -44,6 +44,8 @@ namespace Engine {
 		static PipelineState m_SkinModelInstancingPipelineState;//インスタンシングモデル用のパイプラインステート。(スキンあり)
 		static PipelineState m_transModelPipelineState;			//モデル用のパイプラインステート(半透明マテリアル)。
 		static PipelineState m_transSkinModelPipelineState;			//モデル用のパイプラインステート(半透明マテリアル)。(スキンあり)
+		static PipelineState m_transModelInstancingPipelineState;			//インスタンシングモデル用のパイプラインステート(半透明マテリアル)。
+		static PipelineState m_transSkinModelInstancingPipelineState;			//インスタンシングモデル用のパイプラインステート(半透明マテリアル)。(スキンあり)
 		static PipelineState m_ModelShadowPipelineState;		//シャドウマップのモデル用のパイプラインステート。
 		static PipelineState m_ModelShadowInstancingPipelineState;		//シャドウマップのインスタンスモデル用。
 		static PipelineState m_SkinModelShadowPipelineState;		//シャドウマップのモデル用のパイプラインステート。(スキンあり)

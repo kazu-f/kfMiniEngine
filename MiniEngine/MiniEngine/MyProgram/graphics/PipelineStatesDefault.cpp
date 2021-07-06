@@ -41,6 +41,8 @@ namespace Engine
 	PipelineState CPipelineStatesDefault::m_SkinModelInstancingPipelineState;	//インスタンシングモデル用のパイプラインステート。(スキンあり)
 	PipelineState CPipelineStatesDefault::m_transModelPipelineState;		//モデル用のパイプラインステート(半透明マテリアル)。
 	PipelineState CPipelineStatesDefault::m_transSkinModelPipelineState;		//モデル用のパイプラインステート(半透明マテリアル)。
+	PipelineState CPipelineStatesDefault::m_transModelInstancingPipelineState;		//インスタンシングモデル用のパイプラインステート(半透明マテリアル)。
+	PipelineState CPipelineStatesDefault::m_transSkinModelInstancingPipelineState;		//インスタンシングモデル用のパイプラインステート(半透明マテリアル)(スキンあり)。
 	PipelineState CPipelineStatesDefault::m_ModelShadowPipelineState;		//シャドウマップのモデル用のパイプラインステート。
 	PipelineState CPipelineStatesDefault::m_ModelShadowInstancingPipelineState;		//シャドウマップのインスタンスモデル用。
 	PipelineState CPipelineStatesDefault::m_SkinModelShadowPipelineState;		//シャドウマップのモデル用のパイプラインステート。(スキンあり)
@@ -197,13 +199,20 @@ namespace Engine
 			psoDesc.BlendState.RenderTarget[0].SrcBlend = D3D12_BLEND_SRC_ALPHA;
 			psoDesc.BlendState.RenderTarget[0].DestBlend = D3D12_BLEND_INV_SRC_ALPHA;
 			psoDesc.BlendState.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
-
+			//スキン無し。
 			m_transModelPipelineState.Init(psoDesc);
+			//インスタンシング。
+			psoDesc.VS = CD3DX12_SHADER_BYTECODE(m_vsModelInstancing.GetCompiledBlob());
+			m_transModelInstancingPipelineState.Init(psoDesc);
 
 			//スキンあり。
 			psoDesc.VS = CD3DX12_SHADER_BYTECODE(m_vsSkinModel.GetCompiledBlob());
-
 			m_transSkinModelPipelineState.Init(psoDesc);
+			//インスタンシング。
+			psoDesc.VS = CD3DX12_SHADER_BYTECODE(m_vsSkinModelInstancing.GetCompiledBlob());
+			m_transSkinModelInstancingPipelineState.Init(psoDesc);
+
+
 		}
 	}
 

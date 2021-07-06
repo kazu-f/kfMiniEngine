@@ -69,7 +69,12 @@ namespace Engine {
 			break;
 		case enRenderStep_ForwardRender:
 			//”¼“§–¾ƒ‚ƒfƒ‹‚Ì•`‰æB
-			rc.SetPipelineState(CPipelineStatesDefault::m_transModelPipelineState);
+			if (maxInstance > 1) {
+				rc.SetPipelineState(CPipelineStatesDefault::m_transModelInstancingPipelineState);
+			}
+			else {
+				rc.SetPipelineState(CPipelineStatesDefault::m_transModelPipelineState);
+			}
 
 			break;
 		default:
@@ -107,7 +112,12 @@ namespace Engine {
 			break;
 		case enRenderStep_ForwardRender:
 			//”¼“§–¾ƒ‚ƒfƒ‹‚Ì•`‰æB
-			rc.SetPipelineState(CPipelineStatesDefault::m_transSkinModelPipelineState);
+			if (maxInstance > 1) {
+				rc.SetPipelineState(CPipelineStatesDefault::m_transSkinModelInstancingPipelineState);
+			}
+			else {
+				rc.SetPipelineState(CPipelineStatesDefault::m_transSkinModelPipelineState);
+			}
 
 			break;
 		default:

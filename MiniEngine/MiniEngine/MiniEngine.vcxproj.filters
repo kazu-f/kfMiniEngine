@@ -845,6 +845,9 @@
     <ClInclude Include="MyProgram\Tree\TreeInstancing.h">
       <Filter>MyProgram\Tree</Filter>
     </ClInclude>
+    <ClInclude Include="MyProgram\Tree\TreeFilePathName.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\Race\LAP.png">
