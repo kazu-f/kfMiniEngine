@@ -26,16 +26,16 @@ bool TreeInstancing::Start()
 	m_treeModel->SetShadowCasterFlag(true);
 	m_treeModel->SetShadowReceiverFlag(true);
 	m_treeModel->SetForwardRenderFlag(true);
+
+	m_treeModel->SetCullingFar(20000.0f);
 	return true;
 }
 
 void TreeInstancing::Update()
 {
 	//インスタンシング描画用のデータを更新。
-	if (m_numRenderObjects < m_treeObjDatas.size()) {
+	m_treeModel->BeginUpdateInstancingData();
 		for (auto& objData : m_treeObjDatas) {
 			m_treeModel->UpdateInstancingData(objData.pos, objData.rot, objData.scale);
-			m_numRenderObjects++;
 		}
-	}
 }

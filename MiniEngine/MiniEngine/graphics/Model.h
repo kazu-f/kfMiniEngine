@@ -39,15 +39,24 @@ namespace Engine {
 		/// <param name="scale">拡大率</param>
 		void UpdateWorldMatrix(Vector3 pos, Quaternion rot, Vector3 scale);
 		/// <summary>
+		/// インスタンシング描画用のデータ更新の前に呼ぶ。
+		/// </summary>
+		void ResetInstancingDatas()
+		{
+			m_numInstance = 0;
+		}
+		/// <summary>
 		/// インスタンシング描画用の行列データを更新する。
 		/// </summary>
 		/// <param name="pos">座標</param>
 		/// <param name="rot">回転</param>
 		/// <param name="scale">拡大率</param>
+		/// <param name="isCulling">カリングをするかどうか。</param>
 		void UpdateInstancingData(
 			const Vector3& pos,
 			const Quaternion& rot,
-			const Vector3& scale
+			const Vector3& scale,
+			bool isCulling
 		);
 		/// <summary>
 		/// GPUにインスタンシング描画用のデータを送る。
@@ -58,7 +67,6 @@ namespace Engine {
 				m_instancingDataSB.Update(m_instancingData.get());
 			}
 		}
-
 		/// <summary>
 		/// スケルトンを関連付ける。
 		/// </summary>
@@ -116,7 +124,13 @@ namespace Engine {
 		{
 			m_meshParts.SetShadowReceiverFlag(flag);
 		}
-
+		/// <summary>
+		/// カリングするときの遠平面を指定。
+		/// </summary>
+		void SetCullingFar(const float culfar)
+		{
+			m_cullingFar = culfar;
+		}
 		/// <summary>
 		/// tkmファイルを取得。
 		/// </summary>
@@ -141,6 +155,7 @@ namespace Engine {
 		StructuredBuffer m_instancingDataSB;		//インスタンシング描画用のバッファ。
 		int m_maxInstance = 1;		//インスタンシング描画の最大数。
 		int m_numInstance = 0;		//インスタンスの数。
+		float m_cullingFar = 0.0f;
 		ModelUpAxis m_modelUpAxis = enModelUpAxis_Z;	//モデルの上方向。
 	};
 }

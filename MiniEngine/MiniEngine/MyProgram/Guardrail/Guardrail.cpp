@@ -37,6 +37,8 @@ bool Guardrail::Start()
 	m_model->SetShadowCasterFlag(true);
 	m_model->SetShadowReceiverFlag(true);
 
+	m_model->SetCullingFar(20000.0f);
+
 	return true;
 }
 
@@ -49,11 +51,9 @@ void Guardrail::OnDestroy()
 void Guardrail::Update()
 {
 	//インスタンシング描画用のデータを更新。
-	if (m_numRenderObjects < m_objectsData.size()) {
-		for (auto& objData : m_objectsData) {
-			m_model->UpdateInstancingData(objData.position, objData.rotation, objData.scale);
-			m_numRenderObjects++;
-		}
+	m_model->BeginUpdateInstancingData();
+	for (auto& objData : m_objectsData) {
+		m_model->UpdateInstancingData(objData.position, objData.rotation, objData.scale, true);
 	}
 }
 

@@ -38,10 +38,25 @@ namespace Engine {
 		mScale.MakeScaling(scale);
 		m_world = mBias * mScale * mRot * mTrans;
 	}
-	void Model::UpdateInstancingData(const Vector3& pos, const Quaternion& rot, const Vector3& scale)
+	void Model::UpdateInstancingData(const Vector3& pos, const Quaternion& rot, const Vector3& scale, bool isCulling)
 	{
 		UpdateWorldMatrix(pos, rot, scale);
 		if (m_numInstance < m_maxInstance) {
+			if (isCulling) {
+				Vector4 screenPos = pos;
+				GraphicsEngine()->GetMainCamera().GetViewMatrix().Apply(screenPos);
+				float viewPosZ = screenPos.z;
+				GraphicsEngine()->GetMainCamera().GetProjectionMatrix().Apply(screenPos);
+				screenPos.x /= screenPos.w;
+				screenPos.y /= screenPos.w;
+				screenPos.z /= screenPos.w;
+				if (screenPos.x < -1.2f || screenPos.x > 1.2f ||
+					screenPos.y < -1.2f || screenPos.y > 1.2f ||
+					viewPosZ > m_cullingFar || viewPosZ < -100.0f)
+				{
+					return;
+				}
+			}
 			//インスタンシングデータを更新する。
 			m_instancingData[m_numInstance] = m_world;
 			m_numInstance++;
@@ -56,7 +71,8 @@ namespace Engine {
 			rc,
 			m_world,
 			MainCamera().GetViewMatrix(),
-			MainCamera().GetProjectionMatrix()
+			MainCamera().GetProjectionMatrix(),
+			m_numInstance
 		);
 	}
 	void Model::Draw(RenderContext& rc, Matrix mLVP)
@@ -65,7 +81,8 @@ namespace Engine {
 			rc,
 			m_world,
 			mLVP,
-			Matrix::Identity
+			Matrix::Identity,
+			m_numInstance
 		);
 	}
 }

@@ -60,7 +60,6 @@ public:
 private:
 	prefab::ModelRender* m_model = nullptr;	//モデル。
 	std::vector<LowObjctData> m_objectsData;	//インスタンシング描画用のデータ。
-	int m_numRenderObjects = 0;					//オブジェクトの数。
 
 	const char* m_modelFilePath = nullptr;		//モデルのファイルパス。
 	const char* m_animFilePath = nullptr;			//アニメーションのファイルパス。

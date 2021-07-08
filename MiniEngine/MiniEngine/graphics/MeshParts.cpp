@@ -224,7 +224,8 @@ namespace Engine {
 		RenderContext& rc,
 		const Matrix& mWorld,
 		const Matrix& mView,
-		const Matrix& mProj
+		const Matrix& mProj, 
+		const int instanceNum
 	)
 	{
 		if (m_isCreateDescriptHeap == false) {
@@ -270,7 +271,7 @@ namespace Engine {
 				//ƒhƒ[B
 				rc.DrawIndexed(
 					ib->GetCount(), 
-					m_maxInstance > 1 ? m_maxInstance : 1
+					m_maxInstance > 1 ? instanceNum : 1
 				);
 				descriptorHeapNo++;
 			}

@@ -179,14 +179,29 @@ namespace Engine {
 				m_isForwardRender = flag;
 			}
 			/// <summary>
+			/// カリングするときの遠平面を指定。
+			/// </summary>
+			void SetCullingFar(const float culfar)
+			{
+				m_model.SetCullingFar(culfar);
+			}
+			/// <summary>
+			/// インスタンシング描画のデータ更新する時に呼び出す関数。
+			/// </summary>
+			void BeginUpdateInstancingData()
+			{
+				m_model.ResetInstancingDatas();
+			}
+			/// <summary>
 			/// インスタンシング描画のデータを更新する。
 			/// </summary>
 			/// <param name="pos">座標。</param>
 			/// <param name="rot">回転。</param>
 			/// <param name="scale">スケール。</param>
-			void UpdateInstancingData(const Vector3& pos, const Quaternion& rot, const Vector3& scale)
+			/// <param name="isCuling">カリングをするかどうか。</param>
+			void UpdateInstancingData(const Vector3& pos, const Quaternion& rot, const Vector3& scale , bool isCulling = false)
 			{
-				m_model.UpdateInstancingData(pos, rot, scale);
+				m_model.UpdateInstancingData(pos, rot, scale, isCulling);
 			}
 			/// <summary>
 			/// 再生するアニメーションを変更する。

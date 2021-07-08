@@ -5,6 +5,10 @@
 #define OFF 0
 #define ISBOX OFF			//デバッグ用に観客を箱に置き換えるか。
 
+namespace {
+	const float CULL_FAR = 20000.0f;
+}
+
 Spectator::Spectator()
 {
 }
@@ -75,18 +79,18 @@ bool Spectator::Start()
 	//影の設定。
 	m_model->SetShadowCasterFlag(m_isShadowCaster);
 	m_model->SetShadowReceiverFlag(false);
+	m_model->SetCullingFar(CULL_FAR);
 
 	return true;
 }
 
 void Spectator::Update()
 {
+	//リセット。
+	m_model->BeginUpdateInstancingData();
 	//インスタンシング描画用のデータを更新。
-	if (m_numRenderObjects < m_objectsData.size()) {
-		for (auto& objData : m_objectsData) {
-			m_model->UpdateInstancingData(objData.position, objData.rotation, objData.scale);
-			m_numRenderObjects++;
-		}
+	for (auto& objData : m_objectsData) {
+		m_model->UpdateInstancingData(objData.position, objData.rotation, objData.scale,true);
 	}
 }
 

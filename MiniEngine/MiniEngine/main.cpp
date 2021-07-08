@@ -11,6 +11,9 @@
 
 #define START_SCENE GAME_SCENE
 
+//1フレームの経過時間を出力する。
+#define CALC_TIME
+
 void SetInitParam(SInitParam& initParam)
 {
 	initParam.frameBuffer_W = FRAME_BUFFER_W;	//フレームバッファのサイズ(幅)
@@ -59,23 +62,32 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//////////////////////////////////////
 	// 初期化を行うコードを書くのはここまで！！！
 	//////////////////////////////////////
-
+#ifdef CALC_TIME
+	Stopwatch sw;
+#endif
 	// ここからゲームループ。
 	while (DispatchWindowMessage())
 	{
+#ifdef CALC_TIME
+		sw.Start();
+#endif
 		/*
 			次の目標
 			エンジンの中で更新処理をまとめて、
 			この中で呼び出す。
 		*/
 		GameEngine().GameUpdate();
-		
+
+#ifdef CALC_TIME
+		sw.Stop();
+#endif
 		
 		//////////////////////////////////////
 		//ここから絵を描くコードを記述する。
 		//////////////////////////////////////
-
-
+		char text[256];
+		sprintf_s(text, "1フレームの経過時間::%dミリ秒\n", static_cast<int>(sw.GetElapsedMillisecond()));
+		OutputDebugString(text);
 
 		//////////////////////////////////////
 		//絵を描くコードを書くのはここまで！！！

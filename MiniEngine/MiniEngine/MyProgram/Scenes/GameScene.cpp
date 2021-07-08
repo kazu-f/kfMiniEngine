@@ -105,6 +105,7 @@ void GameScene::Release()
 	DeleteGO(m_playerCar);		//車。
 	DeleteGO(m_cpuCar);		//車。
 	DeleteGO(m_ground);		//背景モデル。
+	DeleteGO(m_trees);
 	for (int i = 0; i < enSpectatorNum; i++)
 	{
 		//観客。
