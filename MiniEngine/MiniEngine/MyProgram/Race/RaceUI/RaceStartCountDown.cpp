@@ -23,6 +23,9 @@ namespace {
 	const float WAIT_TIME = 1.8f;
 	const float COUNT_FADE_START_TIME = 0.7f;
 	const float COUNT_FADE_END_TIME = 1.0f;
+
+	const float COUNT_SCALE_START = 1.0f;
+	const float COUNT_SCALE_END = 0.8f;
 }
 
 RaceStartCountDown::RaceStartCountDown()
@@ -70,6 +73,10 @@ void RaceStartCountDown::OnDestroy()
 	{
 		DeleteGO(sprite);
 	}
+	for (auto* se : m_seCount)
+	{
+		DeleteGO(se);
+	}
 }
 
 void RaceStartCountDown::Update()
@@ -90,8 +97,15 @@ void RaceStartCountDown::CountFade(const float time)
 
 	m_timeInSecond += time;
 
+	float currentTime = (m_timeInSecond - static_cast<int>(m_countState));
+	//スケールを下げていく。
+	if (m_countState != en_start) {
+		float scaleSize = COUNT_SCALE_START * (1.0f - currentTime) + COUNT_SCALE_END * currentTime;
+		m_countDownSprite[m_countState]->SetScale({ scaleSize ,scaleSize ,scaleSize });
+	}
+
 	//経過時間からα値を計算。
-	float alphaWeight = (COUNT_FADE_END_TIME - (m_timeInSecond - static_cast<int>(m_countState))) / (COUNT_FADE_END_TIME - COUNT_FADE_START_TIME);
+	float alphaWeight = (COUNT_FADE_END_TIME - currentTime) / (COUNT_FADE_END_TIME - COUNT_FADE_START_TIME);
 	alphaWeight = min(1.0f, max(0.0f, alphaWeight));
 	m_countDownSprite[m_countState]->SetMulColor({ 1.0f,1.0f,1.0f,alphaWeight });
 
@@ -115,6 +129,7 @@ void RaceStartCountDown::CountSound()
 	if (m_countState == enNum) return;
 	if (!m_countUpNow)return;
 	m_seCount[m_countState]->Play(false);
+	m_seCount[m_countState] = nullptr;
 	m_countUpNow = false;
 
 }
