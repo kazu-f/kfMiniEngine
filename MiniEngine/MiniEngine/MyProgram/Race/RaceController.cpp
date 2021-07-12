@@ -1,9 +1,11 @@
 #include "stdafx.h"
 #include "RaceController.h"
+#include "Car/Car.h"
 #include "CheckPoint/CheckedController.h"
 #include "RaceUI/LapUI.h"
 #include "RaceUI/ReverseRunUI.h"
 #include "RaceUI/GoalUI.h"
+#include "RaceUI/RaceStartCountDown.h"
 
 RaceController::RaceController()
 {
@@ -19,6 +21,7 @@ void RaceController::OnDestroy()
 	DeleteGO(m_LapUI);
 	DeleteGO(m_reverseRunUI);
 	DeleteGO(m_goalUI);
+	DeleteGO(m_raceStart);
 }
 
 bool RaceController::Start()
@@ -32,6 +35,10 @@ bool RaceController::Start()
 	//ゴール表記のUI。
 	m_goalUI = NewGO<GoalUI>(4);
 
+	//スタートのカウントダウンを行うクラス。
+	m_raceStart = NewGO<RaceStartCountDown>(4);
+	m_raceStart->SetActiveFlag(false);
+
 	return true;
 }
 
@@ -40,12 +47,24 @@ void RaceController::Update()
 	if (m_player == nullptr) {
 		return;
 	}
+	m_raceStart->SetActiveFlag(m_isInRaceScene);
+	if (!m_raceStart->IsRaceStarted()) {
+		return; 
+	}
+	else {
+		//レース開始の合図を送る。
+		m_player->SetIsRaceStart(true);
+		for (int i = 0; i < m_cpusNum; i++) {
+			m_cpus[i]->SetIsRaceStart(true);
+		}
+	}
+
 	//ゴール済みかどうかを更新する。
 	GoaledCarUpdate();
 	//ラップ番号をセット。
-	m_LapUI->SetCurrentLap(m_player->GetCurrentLapNum());
+	m_LapUI->SetCurrentLap(m_player->GetCheckedController()->GetCurrentLapNum());
 	//逆走中のフラグを設定する。
-	m_reverseRunUI->SetIsReverseRunFlag(m_player->IsReverseRun());
+	m_reverseRunUI->SetIsReverseRunFlag(m_player->GetCheckedController()->IsReverseRun());
 
 	//ゴール時の処理。
 	if (m_LapUI->IsGoal() && !m_goalUI->IsActive()) {
@@ -76,7 +95,7 @@ void RaceController::GoaledCarUpdate()
 	}
 }
 
-void RaceController::RegistGoaledCar(CheckedController* goaledCar)
+void RaceController::RegistGoaledCar(Car* goaledCar)
 {
 	ENGINE_ASSERT(
 		m_goaledCarsNum < CAR_NUM,

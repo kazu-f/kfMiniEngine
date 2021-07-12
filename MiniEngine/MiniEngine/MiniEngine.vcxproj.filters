@@ -471,6 +471,9 @@
     <ClCompile Include="MyProgram\Tree\TreeInstancing.cpp">
       <Filter>MyProgram\Tree</Filter>
     </ClCompile>
+    <ClCompile Include="MyProgram\Race\RaceUI\RaceStartCountDown.cpp">
+      <Filter>MyProgram\Race\RaceUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tkEngine.h">
@@ -848,6 +851,9 @@
     <ClInclude Include="MyProgram\Tree\TreeFilePathName.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="MyProgram\Race\RaceUI\RaceStartCountDown.h">
+      <Filter>MyProgram\Race\RaceUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\Race\LAP.png">
@@ -890,6 +896,9 @@
       <Filter>リソース ファイル</Filter>
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\Car\SpeedoMeter.png">
+      <Filter>リソース ファイル</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Race\StartGO.png">
       <Filter>リソース ファイル</Filter>
     </ImageContentTask>
   </ItemGroup>

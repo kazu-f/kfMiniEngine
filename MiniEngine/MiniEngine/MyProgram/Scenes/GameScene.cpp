@@ -14,7 +14,7 @@
 #define ON 1
 #define OFF 0
 #define IS_SPECTATOR ON			//観客を出すかどうか。
-#define DEBUG_DELETE OFF				//削除処理を呼び出せるようにするか。
+#define DEBUG_DELETE ON				//削除処理を呼び出せるようにするか。
 
 namespace {
 #if 0
@@ -94,6 +94,10 @@ bool GameScene::Start()
 		m_initState = enInit_End;
 		ret = true;
 		break;
+	}
+	if (m_raceController != nullptr)
+	{
+		m_raceController->SetInRaceScene(ret);
 	}
 
 	return ret;
@@ -323,10 +327,10 @@ void GameScene::InitRaceController()
 	//レースの制御クラス。
 	m_raceController = NewGO<RaceController>(3);
 	//プレイヤーを設定する。
-	m_raceController->SetPlayer(m_playerCar->GetCheckedController());
+	m_raceController->SetPlayer(m_playerCar);
 	//CPUを設定。
 	if (m_cpuCar != nullptr) {
-		m_raceController->RegistCPU(m_cpuCar->GetCheckedController());
+		m_raceController->RegistCPU(m_cpuCar);
 	}
 }
 

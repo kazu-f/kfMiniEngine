@@ -36,8 +36,8 @@ bool Car::Start()
 	m_model = NewGO<prefab::ModelRender>(0);
 	m_model->Init(initData);
 	//モデルの設定。
-	m_model->SetPosition(m_carMoveCon->GetPosition());
-	m_model->SetRotation(m_carMoveCon->GetRotation());
+	m_model->SetPosition(m_position);
+	m_model->SetRotation(m_rotation);
 	m_model->SetShadowCasterFlag(true);
 	m_model->SetShadowReceiverFlag(true);
 
@@ -45,12 +45,14 @@ bool Car::Start()
 	//チェックポイントコントローラーの初期化。
 	m_checkedCon->Init(
 		m_carMoveCon->GetCharaCon().GetBody(),
-		m_carMoveCon->GetPosition(),
-		m_carMoveCon->GetRotation()
+		m_position,
+		m_rotation
 	);
 
 	//移動制御クラスの初期化。
 	m_carMoveCon->Init(m_position, m_rotation);
+	//現在のステートを初期化。
+	m_carMoveCon->ChangeState(CarMoveController::EnCarState::enStateIdle);
 
 	if (m_isPlayer)
 	{
@@ -64,6 +66,7 @@ bool Car::Start()
 void Car::Update()
 {
 	if (m_carDriver.get() == nullptr) return;
+	if (!m_isRaceStart) return;		//レースが始まっていない。
 
 	//ドライバの更新。
 	m_carDriver->Update();

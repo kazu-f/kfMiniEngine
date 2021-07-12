@@ -12,6 +12,7 @@ public:
 	TreeInstancing();
 	~TreeInstancing();
 	bool Start() override final;
+	void OnDestroy() override final;
 	void Update() override final;
 	//オブジェクトデータ追加。
 	void AddTreeObjData(const Vector3& pos, const Quaternion& rot, const Vector3& scale)

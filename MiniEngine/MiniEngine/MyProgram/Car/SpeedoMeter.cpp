@@ -8,8 +8,8 @@ namespace {
 
 	const Vector3 METER_POS = { -500.0f,-260.0f,0.0f };
 
-	const float MIN_NEEDLE_DEG = -114.0f;
-	const float MAX_NEEDLE_DEG = 114.0f;
+	const float MAX_NEEDLE_DEG = -114.0f;
+	const float MIN_NEEDLE_DEG = 114.0f;
 }
 
 SpeedoMeter::SpeedoMeter()
@@ -42,6 +42,11 @@ void SpeedoMeter::Init()
 		);
 	m_needle->SetPosition(METER_POS);
 	m_needle->SetPivot({ 0.5f, 0.05f });
+	//クオータニオン。
+	Quaternion qRot;
+	qRot.SetRotationDegZ(MIN_NEEDLE_DEG);
+	//針に回転を設定。
+	m_needle->SetRotation(qRot);
 
 }
 
@@ -64,7 +69,7 @@ void SpeedoMeter::UpdateSpeed(float speed)
 	//速度から回転の割合を計算。
 	float angleWeight = (CarMoveController::MAX_SPEED - speed) / CarMoveController::MAX_SPEED;
 	//針の角度を求める。
-	float deg = MIN_NEEDLE_DEG * (1.0f - angleWeight) + MAX_NEEDLE_DEG * angleWeight;
+	float deg = MAX_NEEDLE_DEG * (1.0f - angleWeight) + MIN_NEEDLE_DEG * angleWeight;
 	//クオータニオン。
 	Quaternion qRot;
 	qRot.SetRotationDegZ(deg);

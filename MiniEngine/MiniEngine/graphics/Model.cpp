@@ -40,7 +40,6 @@ namespace Engine {
 	}
 	void Model::UpdateInstancingData(const Vector3& pos, const Quaternion& rot, const Vector3& scale, bool isCulling)
 	{
-		UpdateWorldMatrix(pos, rot, scale);
 		if (m_numInstance < m_maxInstance) {
 			if (isCulling) {
 				Vector4 screenPos = pos;
@@ -50,6 +49,7 @@ namespace Engine {
 				screenPos.x /= screenPos.w;
 				screenPos.y /= screenPos.w;
 				screenPos.z /= screenPos.w;
+				//TODO:あまり好ましくないカリングしてるから直したい。
 				if (screenPos.x < -1.2f || screenPos.x > 1.2f ||
 					screenPos.y < -1.2f || screenPos.y > 1.2f ||
 					viewPosZ > m_cullingFar || viewPosZ < -100.0f)
@@ -57,6 +57,7 @@ namespace Engine {
 					return;
 				}
 			}
+			UpdateWorldMatrix(pos, rot, scale);
 			//インスタンシングデータを更新する。
 			m_instancingData[m_numInstance] = m_world;
 			m_numInstance++;

@@ -48,6 +48,11 @@ public:		//Set関数とか
 	{
 		m_isPlayer = isPlayer;
 	}
+	//レースが開始されたかを指定。
+	void SetIsRaceStart(const bool isRaceStart)
+	{
+		m_isRaceStart = isRaceStart;
+	}
 public:		//Get関数とか
 	const Vector3& GetPosition()const
 	{
@@ -78,5 +83,6 @@ private:
 	Vector3 m_position = Vector3::Zero;				//座標。
 	Quaternion m_rotation = Quaternion::Identity;	//回転。
 	bool m_isPlayer = false;						//プレイヤーか？
+	bool m_isRaceStart = false;						//レースが開始されたか。
 };
 

@@ -31,6 +31,11 @@ bool TreeInstancing::Start()
 	return true;
 }
 
+void TreeInstancing::OnDestroy()
+{
+	DeleteGO(m_treeModel);
+}
+
 void TreeInstancing::Update()
 {
 	//インスタンシング描画用のデータを更新。

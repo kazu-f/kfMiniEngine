@@ -102,7 +102,9 @@ namespace Engine {
 			}
 
 			//モデルを更新。
-			m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale);
+			if (!m_model.IsInstancing()) {
+				m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale);
+			}
 
 			if (m_skeleton.IsInited()) {
 				//スケルトンを更新。

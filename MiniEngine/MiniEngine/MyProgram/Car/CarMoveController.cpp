@@ -30,9 +30,6 @@ CarMoveController::CarMoveController()
 	m_carStates[EnCarState::enStateAccele] = std::make_unique<CarStateAccele>(this);
 	m_carStates[EnCarState::enStateBrake] = std::make_unique<CarStateBrake>(this);
 	m_carStates[EnCarState::enStateDrift] = std::make_unique<CarStateDrift>(this);
-
-	//現在のステートを初期化。
-	ChangeState(EnCarState::enStateIdle);
 }
 
 CarMoveController::~CarMoveController()

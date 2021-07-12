@@ -47,21 +47,16 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//ゲームの初期化。
 	InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"), initParam);
 
-	//////////////////////////////////////
-	// ここから初期化を行うコードを記述する。
-	//////////////////////////////////////
 
 #if START_SCENE == DEBUG_SCENE
 	NewGO<DebugScene>(0);
 #elif START_SCENE == LIGHTDEMO_SCENE
 	NewGO<LightingDemoScene>(0);
 #elif START_SCENE == GAME_SCENE
-	//NewGO<GameScene>(0);
 	NewGO<TitleScene>(0);
 #endif
-	//////////////////////////////////////
-	// 初期化を行うコードを書くのはここまで！！！
-	//////////////////////////////////////
+
+
 #ifdef CALC_TIME
 	Stopwatch sw;
 #endif
@@ -69,30 +64,22 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	while (DispatchWindowMessage())
 	{
 #ifdef CALC_TIME
+		//1フレームの経過時間を測る。
 		sw.Start();
 #endif
-		/*
-			次の目標
-			エンジンの中で更新処理をまとめて、
-			この中で呼び出す。
-		*/
+		//ゲームの処理を行う。
 		GameEngine().GameUpdate();
 
 #ifdef CALC_TIME
 		sw.Stop();
 #endif
 		
-		//////////////////////////////////////
-		//ここから絵を描くコードを記述する。
-		//////////////////////////////////////
+#ifdef CALC_TIME
 		char text[256];
 		sprintf_s(text, "1フレームの経過時間::%dミリ秒\n", static_cast<int>(sw.GetElapsedMillisecond()));
 		OutputDebugString(text);
+#endif
 
-		//////////////////////////////////////
-		//絵を描くコードを書くのはここまで！！！
-		//////////////////////////////////////
-		//レンダリング終了。
 	}
 	return 0;
 }
