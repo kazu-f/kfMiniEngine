@@ -11,9 +11,9 @@ class TreeInstancing : public IGameObject
 public:
 	TreeInstancing();
 	~TreeInstancing();
-	bool Start() override final;
-	void OnDestroy() override final;
-	void Update() override final;
+	bool Start() override final;		//開始時処理。
+	void OnDestroy() override final;	//削除時処理。
+	void Update() override final;		//更新処理。
 	//オブジェクトデータ追加。
 	void AddTreeObjData(const Vector3& pos, const Quaternion& rot, const Vector3& scale)
 	{
@@ -26,9 +26,9 @@ public:
 	}
 
 private:
-	prefab::ModelRender* m_treeModel = nullptr;
-	std::vector<TreeObjData> m_treeObjDatas;
-	std::string m_filePath;
-	int m_numRenderObjects = 0;
+	prefab::ModelRender* m_treeModel = nullptr;			//木のモデル。
+	std::vector<TreeObjData> m_treeObjDatas;			//木々のオブジェクトデータ。
+	std::string m_filePath;								//木のモデルのファイルパス。
+	int m_numInstancingNum = 0;
 };
 
