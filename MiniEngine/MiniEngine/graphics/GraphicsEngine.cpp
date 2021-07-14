@@ -499,7 +499,7 @@ namespace Engine {
 		m_fade->FadeRender(m_renderContext);
 
 		EndRender();
-	}
+ 	}
 	void CGraphicsEngine::PreRender(CGameObjectManager* goMgr)
 	{
 		//指向性シャドウ回りの処理。
@@ -624,6 +624,7 @@ namespace Engine {
 
 		//描画完了待ち。
 		WaitDraw();
+		m_frameIndex = m_swapChain->GetCurrentBackBufferIndex();
 	}
 
 	void CGraphicsEngine::ExecuteCommand()
