@@ -14,7 +14,7 @@
 #define ON 1
 #define OFF 0
 #define IS_SPECTATOR ON			//観客を出すかどうか。
-#define DEBUG_DELETE OFF				//削除処理を呼び出せるようにするか。
+#define DEBUG_DELETE ON				//削除処理を呼び出せるようにするか。
 
 namespace {
 #if 0
@@ -34,6 +34,7 @@ namespace {
 	const float SKY_EMISSION_POW = 0.06f;	//空の自己発光。
 
 	const wchar_t* RACE_BGM = L"Assets/sound/Race/Race.wav";
+	const float BGM_VOLUME = 0.5f;
 }
 
 
@@ -91,8 +92,12 @@ bool GameScene::Start()
 		GraphicsEngine()->GetPostEffect()->GetTonemap().Reset();
 
 		m_bgm->Play(true);
+		CFade::GetInstance()->StartFadeIn();
 		m_initState = enInit_End;
-		ret = true;
+	case EnInitStep::enInit_End:
+		if (!CFade::GetInstance()->IsFade()) {
+			ret = true;
+		}
 		break;
 	}
 	if (m_raceController != nullptr)
@@ -137,11 +142,20 @@ void GameScene::Update()
 		{
 			//自動操縦に切り替え。
 			m_playerCar->SetCarDriver(Car::EnDriverType::enTypeAI);
+			m_raceState = enState_GoalRace;
+		}
+		break;
+	case GameScene::enState_GoalRace:
+		if (Pad(0).IsTrigger(enButtonA) && m_raceController->IsEndRace())
+		{
+			CFade::GetInstance()->StartFadeOut();
 			m_raceState = enState_EndRace;
 		}
 		break;
 	case GameScene::enState_EndRace:
-		if (Pad(0).IsTrigger(enButtonA) && m_raceController->IsEndRace())
+		//徐々にBGMの音量を下げる。
+		m_bgm->SetVolume(BGM_VOLUME * CFade::GetInstance()->GetFadeRate());
+		if (!CFade::GetInstance()->IsFade())
 		{
 			DeleteGO(this);
 		}
@@ -154,7 +168,9 @@ void GameScene::Update()
 
 	if (Pad(0).IsTrigger(enButtonStart))
 	{
-		DeleteGO(this);
+		CFade::GetInstance()->StartFadeOut();
+		m_raceState = enState_EndRace;
+		//DeleteGO(this);
 	}
 
 #endif // DEBUG_DELETE
@@ -178,7 +194,7 @@ void GameScene::InitOther()
 	//BGM
 	m_bgm = NewGO<prefab::CSoundSource>(0);
 	m_bgm->InitStreaming(RACE_BGM);
-	m_bgm->SetVolume(0.5f);
+	m_bgm->SetVolume(BGM_VOLUME);
 }
 
 void GameScene::InitCourse()
@@ -302,10 +318,6 @@ void GameScene::InitSpectator()
 			//オブジェクトの情報を追加。
 			AddSpectatorData(objData, enClaudiaWoman);
 
-			return true;
-		}
-		//使わなくなったもの。存在している可能性考慮して残しとくが、そのうち消す。
-		if (objData.EqualObjectName(L"womanSuit")) {
 			return true;
 		}
 

@@ -24,6 +24,7 @@ namespace Engine {
 	class CGBufferRender;
 	class CDefferdShading;
 	class CPostEffect;
+	class CFade;
 
 	/// <summary>
 	/// DirectX12に依存するグラフィックスエンジン
@@ -221,7 +222,9 @@ namespace Engine {
 		{
 			return m_camera2D;
 		}
-
+		/// <summary>
+		/// ディファードの取得。
+		/// </summary>
 		CDefferdShading* GetDefferd()
 		{
 			return m_defferd.get();
@@ -339,6 +342,7 @@ namespace Engine {
 		std::unique_ptr<CGBufferRender> m_gBuffer;			//GBuffer。
 		std::unique_ptr<CDefferdShading> m_defferd;			//ディファード。
 		std::unique_ptr<CPostEffect> m_postEffect;			//ポストエフェクト。
+		std::unique_ptr<CFade> m_fade;						//フェード。
 
 		int m_vsyncInterval = 1;							//VSyncの間隔
 		////エフェクト関係

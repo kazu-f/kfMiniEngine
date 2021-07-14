@@ -199,6 +199,9 @@ namespace Engine {
 		//ポストエフェクト。
 		m_postEffect = std::make_unique<CPostEffect>();
 		m_postEffect->Create(initParam.graphicsConf.postEffectConf);
+		//フェード。
+		m_fade = std::make_unique<CFade>();
+		m_fade->Init();
 
 		//フルスクリーンコピー用のスプライトの初期化。
 		SpriteInitData spriteData;
@@ -491,6 +494,9 @@ namespace Engine {
 		ForwardRender(goMgr);
 
 		PostRender(goMgr);
+
+		m_fade->Update();
+		m_fade->FadeRender(m_renderContext);
 
 		EndRender();
 	}

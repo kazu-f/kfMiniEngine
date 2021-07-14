@@ -58,6 +58,7 @@ private:
 	//レースステート。
 	enum EnRaceState {
 		enState_InRace,
+		enState_GoalRace,
 		enState_EndRace,
 		enState_RaceStateNum
 	};

@@ -14,6 +14,9 @@ ChoiseGameStart::~ChoiseGameStart()
 void ChoiseGameStart::Execute()
 {
 	m_currentTime += GameTime().GetFrameDeltaTime();
+	if (m_currentTime > END_SELECTED_TIME / 2.0f) {
+		CFade::GetInstance()->StartFadeOut();
+	}
 	if (m_currentTime > END_SELECTED_TIME)
 	{
 		NewGO<GameScene>(0);

@@ -18,6 +18,8 @@ namespace {
 	};
 
 	const wchar_t* BGM_FILEPATH = L"Assets/sound/Title/RaceGameTitle.wav";		//タイトルBGM。
+	const float BGM_VOLUME = 0.5f;		//BGMのボリューム。
+
 	const Vector2 CHOISES_SPRITESIZE = { 500.0f,100.0f };		//選択肢のスプライトのサイズ。
 	const Vector2 CHOISES_PIVOT= { 0.0f,0.5f };					//選択肢のスプライトのピボットの位置。
 }
@@ -66,13 +68,20 @@ bool TitleScene::Start()
 	m_titleBGM = NewGO<prefab::CSoundSource>(0);
 	m_titleBGM->InitStreaming(BGM_FILEPATH);
 	m_titleBGM->Play(true);
-	m_titleBGM->SetVolume(0.5f);
+	m_titleBGM->SetVolume(BGM_VOLUME * CFade::GetInstance()->GetFadeRate());
+
+	CFade::GetInstance()->StartFadeIn();
 
 	return true;
 }
 
 void TitleScene::Update()
 {
+	auto* fade = CFade::GetInstance();
+	//ボリュームをフェードに合わせて変化。
+	m_titleBGM->SetVolume(BGM_VOLUME * fade->GetFadeRate());
+	if (fade->IsFade()) return;
+
 	m_pickArrow->SetPosition(CHOISES_POS[m_currentChoises]);
 
 	if (Pad(0).IsTrigger(enButtonA))

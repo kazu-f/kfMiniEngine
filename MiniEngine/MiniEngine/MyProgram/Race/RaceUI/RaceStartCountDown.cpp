@@ -10,6 +10,7 @@ namespace {
 	};
 	const wchar_t* SE_COUNT_FILEPATH = L"Assets/sound/Race/SECount.wav";
 	const wchar_t* SE_START_FILEPATH = L"Assets/sound/Race/SEStart.wav";
+	const float SE_VOLUME = 0.6f;		//SEのボリューム。
 
 	Vector2 SPRITE_SIZE[RaceStartCountDown::EnCountDown::enNum] = {
 		{200.0f,200.0f},
@@ -20,12 +21,14 @@ namespace {
 
 	Vector2 SPRITE_POS = { 0.0f,230.0f };
 
-	const float WAIT_TIME = 1.8f;
-	const float COUNT_FADE_START_TIME = 0.7f;
-	const float COUNT_FADE_END_TIME = 1.0f;
+	const float WAIT_TIME = 1.8f;		//レース開始前に待機する時間。
+	//フェードを補間する。。
+	const float COUNT_FADE_START_TIME = 0.7f;	//カウントダウンのフェードが始まる時間。
+	const float COUNT_FADE_END_TIME = 1.0f;		//カウントダウンのフェードが終わる時間。
 
-	const float COUNT_SCALE_START = 1.0f;
-	const float COUNT_SCALE_END = 0.8f;
+	//カウントダウンのスケールを線形補間する。
+	const float COUNT_SCALE_START = 1.0f;	//カウント開始時のスケール。
+	const float COUNT_SCALE_END = 0.8f;		//カウント終了時のスケール。
 }
 
 RaceStartCountDown::RaceStartCountDown()
@@ -62,6 +65,7 @@ bool RaceStartCountDown::Start()
 			//スタートのSE。
 			m_seCount[i]->Init(SE_START_FILEPATH);
 		}
+		m_seCount[i]->SetVolume(SE_VOLUME);
 	}
 
 	return true;
