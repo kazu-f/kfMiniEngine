@@ -13,6 +13,8 @@ public:
 	{
 		m_target = target;
 	}
+private:
+	void MoveTarget();
 
 private:
 	Vector3 m_target = Vector3::Zero;		//ターゲットの座標。

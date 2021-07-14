@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MyProgram\graphics\Fade.cpp" />
+    <ClCompile Include="MyProgram\Scenes\CullingTestScene.cpp" />
     <ClCompile Include="MyProgram\Car\CarMoveController.cpp" />
     <ClCompile Include="MyProgram\Scenes\Title\ChoiseGameStart.cpp" />
     <ClCompile Include="MyProgram\Scenes\Title\ITitleChoises.cpp" />
@@ -134,6 +136,8 @@
     <ClCompile Include="MyProgram\Tree\TreeInstancing.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MyProgram\graphics\Fade.h" />
+    <ClInclude Include="MyProgram\Scenes\CullingTestScene.h" />
     <ClInclude Include="MyProgram\Car\CarMoveController.h" />
     <ClInclude Include="MyProgram\Scenes\Title\ChoiseGameStart.h" />
     <ClInclude Include="MyProgram\Scenes\Title\ITitleChoises.h" />
@@ -283,6 +287,9 @@
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\Race\StartGO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\preset\fade.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

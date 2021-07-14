@@ -60,6 +60,7 @@ namespace Engine {
 			UpdateWorldMatrix(pos, rot, scale);
 			//インスタンシングデータを更新する。
 			m_instancingData[m_numInstance] = m_world;
+
 			m_numInstance++;
 		}
 		else {

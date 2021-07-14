@@ -474,6 +474,12 @@
     <ClCompile Include="MyProgram\Race\RaceUI\RaceStartCountDown.cpp">
       <Filter>MyProgram\Race\RaceUI</Filter>
     </ClCompile>
+    <ClCompile Include="MyProgram\Scenes\CullingTestScene.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\graphics\Fade.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tkEngine.h">
@@ -854,6 +860,12 @@
     <ClInclude Include="MyProgram\Race\RaceUI\RaceStartCountDown.h">
       <Filter>MyProgram\Race\RaceUI</Filter>
     </ClInclude>
+    <ClInclude Include="MyProgram\Scenes\CullingTestScene.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\graphics\Fade.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\Race\LAP.png">
@@ -899,6 +911,9 @@
       <Filter>リソース ファイル</Filter>
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\Race\StartGO.png">
+      <Filter>リソース ファイル</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\preset\fade.png">
       <Filter>リソース ファイル</Filter>
     </ImageContentTask>
   </ItemGroup>

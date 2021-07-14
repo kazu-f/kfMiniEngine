@@ -90,6 +90,7 @@
 #include "graphics/PreRender/GBufferRender.h"
 #include "graphics/deferrd/DefferdShading.h"
 #include "graphics/PostEffect/PostEffect.h"
+#include "graphics/Fade.h"
 
 #include "graphics/PipelineStatesDefault.h"
 

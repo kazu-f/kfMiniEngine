@@ -43,6 +43,10 @@ namespace Engine {
 		/// </summary>
 		void ResetInstancingDatas()
 		{
+			for (int i = 0; i < m_maxInstance; i++)
+			{
+				m_instancingData[i] = Matrix::Identity;
+			}
 			m_numInstance = 0;
 		}
 		/// <summary>

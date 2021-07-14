@@ -46,7 +46,7 @@ bool Spectator::Start()
 	}
 
 	//モデル初期化。
-	m_model = NewGO<prefab::ModelRender>(0);
+	m_model = NewGO<prefab::ModelRender>(10);
 	ModelInitData modelInitData;
 #if ISBOX
 	modelInitData.m_tkmFilePath = "Assets/modelData/testbg/testBox.tkm";	//デバッグ表示用の箱のモデル。

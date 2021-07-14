@@ -5,6 +5,7 @@ namespace {
 	const Vector3 CAMERA_DISTANCE = { 0.0f,200.0f,500.0f };
 	const float CAMERAMOV_SPEED = 100.0f;
 	const float CAMERAROT_SPEED = 20.0f;
+	const float CAMERATARGET_SPEED = 120.0f;
 }
 
 bool CGameCamera::Start()
@@ -38,6 +39,9 @@ void CGameCamera::Update()
 	vCamera = vDir * m_targetToPosLen;
 	MainCamera().SetPosition(targetPos + vCamera);
 
+	//ターゲットを動かす。
+	MoveTarget();
+
 	Quaternion qRot;
 	//カメラを回す。
 	qRot.SetRotationDegY(Pad(0).GetRStickXF() * GameTime().GetFrameDeltaTime() * CAMERAROT_SPEED);
@@ -48,4 +52,14 @@ void CGameCamera::Update()
 
 	MainCamera().SetPosition(cameraPos);
 	MainCamera().SetTarget(m_target);
+}
+
+void CGameCamera::MoveTarget()
+{
+	const float PadX = Pad(0).GetLStickXF();
+	const float PadY = Pad(0).GetLStickYF();
+
+	m_target += MainCamera().GetRight() * PadX * CAMERATARGET_SPEED * GameTime().GetFrameDeltaTime();
+	m_target += MainCamera().GetForward() * PadY * CAMERATARGET_SPEED * GameTime().GetFrameDeltaTime();
+	m_target.y = 0.0f;
 }
