@@ -155,6 +155,7 @@ namespace Engine {
 		//XZ平面上での衝突検出と解決を行う。
 		{
 			int loopCount = 0;
+			m_isHitWall = false;
 			while (true) {
 				//現在の座標から次の移動先へ向かうベクトルを求める。
 				Vector3 addPos;
@@ -219,6 +220,7 @@ namespace Engine {
 						nextPosition.z = m_position.z;
 						break;
 					}
+					m_isHitWall = true;
 				}
 				else {
 					//どことも当たらないので終わる。

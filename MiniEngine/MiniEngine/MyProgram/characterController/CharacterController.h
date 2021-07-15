@@ -57,12 +57,27 @@ namespace Engine {
 		{
 			return &m_rigidBody;
 		}
+		/// <summary>
+		/// 地面に接地しているか？
+		/// </summary>
+		bool IsOnGround()
+		{
+			return m_isOnGround;
+		}
+		/// <summary>
+		/// 壁に接しているか？
+		/// </summary>
+		bool IsHitWall()
+		{
+			return m_isHitWall;
+		}
 
 	private:
 		bool				m_isInited = false;				//初期化済み？
 		Vector3				m_position = Vector3::Zero;		//座標。
 		bool				m_isJump = false;				//ジャンプ中か？
 		bool				m_isOnGround = true;			//地面上にいるか？
+		bool				m_isHitWall = false;			//地面上にいるか？
 		CCapsuleCollider	m_sphere;						//コライダー。
 		float				m_radius = 0.0f;				//カプセルコライダーの半径。
 		float				m_height = 0.0f;				//カプセルコライダーの高さ。
