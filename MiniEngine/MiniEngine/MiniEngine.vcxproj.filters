@@ -444,9 +444,6 @@
     <ClCompile Include="MyProgram\Car\CarDriver\PlayerCarDriver.cpp">
       <Filter>MyProgram\Car\CarDriver</Filter>
     </ClCompile>
-    <ClCompile Include="MyProgram\Car\CarDriver\AICarDriver.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="MyProgram\Scenes\Title\TitleScene.cpp">
       <Filter>MyProgram\Scenes\Title</Filter>
     </ClCompile>
@@ -475,13 +472,16 @@
       <Filter>MyProgram\Race\RaceUI</Filter>
     </ClCompile>
     <ClCompile Include="MyProgram\Scenes\CullingTestScene.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>MyProgram\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="MyProgram\graphics\Fade.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="MyProgram\Car\CarDriver\AICarDriver.cpp">
+      <Filter>MyProgram\Car\CarDriver</Filter>
     </ClCompile>
     <ClCompile Include="MyProgram\Car\CarSoundController.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>MyProgram\Car</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\graphics\Fade.cpp">
+      <Filter>MyProgram\graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -812,9 +812,6 @@
     <ClInclude Include="MyProgram\graphics\UserMaterial.h">
       <Filter>MyProgram\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="MyProgram\EngineStruct.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="MyProgram\graphics\PostEffect\Fxaa.h">
       <Filter>MyProgram\graphics\PostEffect</Filter>
     </ClInclude>
@@ -826,9 +823,6 @@
     </ClInclude>
     <ClInclude Include="MyProgram\Car\CarDriver\PlayerCarDriver.h">
       <Filter>MyProgram\Car\CarDriver</Filter>
-    </ClInclude>
-    <ClInclude Include="MyProgram\Car\CarDriver\AICarDriver.h">
-      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="MyProgram\Scenes\Title\TitleScene.h">
       <Filter>MyProgram\Scenes\Title</Filter>
@@ -857,20 +851,26 @@
     <ClInclude Include="MyProgram\Tree\TreeInstancing.h">
       <Filter>MyProgram\Tree</Filter>
     </ClInclude>
-    <ClInclude Include="MyProgram\Tree\TreeFilePathName.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="MyProgram\Race\RaceUI\RaceStartCountDown.h">
       <Filter>MyProgram\Race\RaceUI</Filter>
     </ClInclude>
-    <ClInclude Include="MyProgram\Scenes\CullingTestScene.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="MyProgram\Tree\TreeFilePathName.h">
+      <Filter>MyProgram\Tree</Filter>
     </ClInclude>
-    <ClInclude Include="MyProgram\graphics\Fade.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="MyProgram\Car\CarDriver\AICarDriver.h">
+      <Filter>MyProgram\Car\CarDriver</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\Scenes\CullingTestScene.h">
+      <Filter>MyProgram\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="MyProgram\Car\CarSoundController.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>MyProgram\Car</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\graphics\Fade.h">
+      <Filter>MyProgram\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\EngineStruct.h">
+      <Filter>MyProgram</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
