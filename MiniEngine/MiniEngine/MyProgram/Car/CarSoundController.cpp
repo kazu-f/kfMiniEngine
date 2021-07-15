@@ -35,11 +35,27 @@ void CarSoundController::Init()
 	m_brakeSE->Init(BRAKE_SE_FILEPATH);
 }
 
+void CarSoundController::Release()
+{
+	if (m_engineSE != nullptr)
+	{
+		DeleteGO(m_engineSE);
+		m_engineSE = nullptr;
+	}
+	if (m_brakeSE != nullptr)
+	{
+		DeleteGO(m_brakeSE);
+		m_brakeSE = nullptr;
+	}
+}
+
 void CarSoundController::UpdateCarSound(Car* car)
 {
 	if (!m_engineSE->IsPlaying()) {
 		m_engineSE->Play(true);
 	}
+	m_engineSE->SetVolume(m_volume);
+	m_brakeSE->SetVolume(m_volume);
 
 	PlayBrake(car);
 

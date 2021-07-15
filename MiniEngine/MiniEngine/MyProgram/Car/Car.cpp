@@ -75,6 +75,7 @@ bool Car::Start()
 		if (m_isRaceCountDown) m_startStep = en_waitRaceStart;
 		break;
 	case en_waitRaceStart:
+		m_soundCon->SetCarVolume(CFade::GetInstance()->GetFadeRate());
 		m_soundCon->UpdateCarSound(this);
 		ret = m_isRaceStart;
 		break;
@@ -103,6 +104,7 @@ void Car::Update()
 
 	m_checkedCon->Update(m_position, m_rotation);
 	//サウンドの更新。
+	m_soundCon->SetCarVolume(CFade::GetInstance()->GetFadeRate());
 	m_soundCon->UpdateCarSound(this);
 
 	//速度メーター。
@@ -119,6 +121,7 @@ void Car::Update()
 void Car::OnDestroy()
 {
 	DeleteGO(m_model);
+	m_soundCon->Release();
 	if (m_isPlayer)
 	{
 		m_speedoMeter->Release();

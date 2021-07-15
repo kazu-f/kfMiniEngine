@@ -14,7 +14,7 @@ namespace {
 	const float HANDLE_WEIGHT = 0.3f;		//ハンドルの効き。
 	const float CURVE_DEG = 15.0f;			//カーブの角度。
 	const float DRIFT_POWER = 1.4f;			//ドリフトの強さ。
-
+	const float WALLHIT_MINSPEED = 2400.0f;	//壁に接触しているときの最低速度。
 	
 	const float DEADROT_STARTSPEED = 1800.0f;		//速度が一定以下なら回転しない。
 	const float DEADROT_ENDSPEED = 100.0f;		//速度が一定以下なら回転しない。
@@ -75,6 +75,15 @@ bool CarMoveController::MoveCar()
 	CalcDirection();
 
 	//移動速度を求める。
+	if (m_charaCon.IsHitWall())
+	{
+		if (m_speed > WALLHIT_MINSPEED)
+		{
+			m_speed *= 0.995f;
+			m_speed = max(m_speed, WALLHIT_MINSPEED);
+		}
+	}
+
 	m_moveSpeed.x = m_forward.x * m_speed;
 	m_moveSpeed.z = m_forward.z * m_speed;
 
