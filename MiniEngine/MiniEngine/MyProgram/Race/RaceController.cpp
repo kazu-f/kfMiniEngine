@@ -49,6 +49,11 @@ void RaceController::Update()
 	}
 	m_raceStart->SetActiveFlag(m_isInRaceScene);
 	if (!m_raceStart->IsRaceStarted()) {
+		//レース開始の合図を送る。
+		m_player->SetIsRaceCountDown(true);
+		for (int i = 0; i < m_cpusNum; i++) {
+			m_cpus[i]->SetIsRaceCountDown(true);
+		}
 		return; 
 	}
 	else {

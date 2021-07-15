@@ -3,6 +3,7 @@
 class CheckedController;
 class ICarDriver;
 class SpeedoMeter;
+class CarSoundController;
 
 namespace CAR{
 	enum EnCarColor {
@@ -48,6 +49,11 @@ public:		//Set関数とか
 	{
 		m_isPlayer = isPlayer;
 	}
+	//カウントダウン中かを指定。
+	void SetIsRaceCountDown(const bool isCountDown)
+	{
+		m_isRaceCountDown = isCountDown;
+	}
 	//レースが開始されたかを指定。
 	void SetIsRaceStart(const bool isRaceStart)
 	{
@@ -70,6 +76,14 @@ public:		//Get関数とか
 	}
 	//ゴール済みか？
 	bool IsGoal();
+private:
+	enum EnCarStartStep {
+		en_initCar,
+		en_waitCountDown,
+		en_waitRaceStart,
+		en_carStartStep
+	};
+	EnCarStartStep m_startStep = en_initCar;
 
 private:
 	CAR::EnCarColor m_carColor = CAR::enCar_Red;
@@ -78,11 +92,13 @@ private:
 	std::unique_ptr<ICarDriver> m_carDriver;					//車の操作のドライバー。
 	std::unique_ptr<CarMoveController> m_carMoveCon;			//車の移動を管理する。
 	std::unique_ptr<CheckedController> m_checkedCon;			//チェックポイントに監視される。
+	std::unique_ptr<CarSoundController> m_soundCon;			//チェックポイントに監視される。
 	std::unique_ptr<SpeedoMeter> m_speedoMeter;					//スピードメーターのスプライト。
 
 	Vector3 m_position = Vector3::Zero;				//座標。
 	Quaternion m_rotation = Quaternion::Identity;	//回転。
 	bool m_isPlayer = false;						//プレイヤーか？
 	bool m_isRaceStart = false;						//レースが開始されたか。
+	bool m_isRaceCountDown = false;						//カウントダウンが開始されたか。
 };
 

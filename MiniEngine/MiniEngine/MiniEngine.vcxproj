@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MyProgram\Car\CarSoundController.cpp" />
     <ClCompile Include="MyProgram\graphics\Fade.cpp" />
     <ClCompile Include="MyProgram\Scenes\CullingTestScene.cpp" />
     <ClCompile Include="MyProgram\Car\CarMoveController.cpp" />
@@ -136,6 +137,7 @@
     <ClCompile Include="MyProgram\Tree\TreeInstancing.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MyProgram\Car\CarSoundController.h" />
     <ClInclude Include="MyProgram\graphics\Fade.h" />
     <ClInclude Include="MyProgram\Scenes\CullingTestScene.h" />
     <ClInclude Include="MyProgram\Car\CarMoveController.h" />

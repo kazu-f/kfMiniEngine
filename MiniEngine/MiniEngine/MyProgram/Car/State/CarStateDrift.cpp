@@ -14,25 +14,18 @@ namespace {
 CarStateDrift::CarStateDrift(CarMoveController* car):
 	ICarState::ICarState(car)
 {
-	m_breakeSound = NewGO<prefab::CSoundSource>(0);
-	m_breakeSound->Init(L"Assets/sound/Car/CarSkid.wav");
 }
 
 CarStateDrift::~CarStateDrift()
 {
-	//サウンドの削除。
-	DeleteGO(m_breakeSound);
 }
 
 void CarStateDrift::Enter()
 {
-	m_breakeSound->Play(true);
 }
 
 void CarStateDrift::Leave()
 {
-	m_breakeSound->Stop();
-	m_driftSpeed = 0.0f;
 }
 
 void CarStateDrift::Execute()

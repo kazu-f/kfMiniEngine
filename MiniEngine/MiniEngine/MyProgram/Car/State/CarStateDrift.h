@@ -21,7 +21,5 @@ protected:
 	void Leave()override final;		//–Œãˆ—B
 	void Execute()override final;	//Àsˆ—B
 private:
-	prefab::CSoundSource* m_breakeSound = nullptr;
-	float m_driftSpeed = 0.0f;
 };
 

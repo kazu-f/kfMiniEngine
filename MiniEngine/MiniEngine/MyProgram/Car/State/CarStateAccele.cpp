@@ -14,14 +14,10 @@ namespace {
 CarStateAccele::CarStateAccele(CarMoveController* car):
 	ICarState::ICarState(car)
 {
-	m_acceleSound = NewGO<prefab::CSoundSource>(5);
-	m_acceleSound->Init(L"Assets/sound/Car/CarAcceleration.wav");
 }
 
 CarStateAccele::~CarStateAccele()
 {
-	//サウンドの削除。
-	DeleteGO(m_acceleSound);
 }
 
 void CarStateAccele::Enter()
@@ -29,13 +25,10 @@ void CarStateAccele::Enter()
 	if (m_car->GetSpeed() < FIRST_SPEED) {
 		m_car->AddAcceleration(FIRST_SPEED);
 	}
-	m_acceleSound->Play(true);
-	CalcSoundFrequencyRetio();
 }
 
 void CarStateAccele::Leave()
 {
-	m_acceleSound->Stop();
 }
 
 void CarStateAccele::Execute()
@@ -46,7 +39,6 @@ void CarStateAccele::Execute()
 
 	m_car->AddAcceleration(ACCELE_SPEED);
 
-	CalcSoundFrequencyRetio();
 
 	if (m_car->GetCarDriver()->GetDriverInput(ICarDriver::enDriverDrift))
 	{
@@ -62,10 +54,3 @@ void CarStateAccele::Execute()
 	}
 }
 
-void CarStateAccele::CalcSoundFrequencyRetio()
-{
-	float speed = m_car->GetSpeed();
-	m_soundFrequency = speed * (1.0f / CarMoveController::MAX_SPEED);
-	m_soundFrequency = min(1.4f,max(0.6f, m_soundFrequency));
-	m_acceleSound->SetFrequencyRetio(m_soundFrequency);
-}

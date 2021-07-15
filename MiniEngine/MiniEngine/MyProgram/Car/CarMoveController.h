@@ -102,6 +102,10 @@ public:		//GetŠÖ”B
 	{
 		return m_carDriver;
 	}
+	ICarState* GetCarState()const
+	{
+		return m_currentState;
+	}
 
 public:
 	static constexpr float MAX_SPEED = 6800.0f;

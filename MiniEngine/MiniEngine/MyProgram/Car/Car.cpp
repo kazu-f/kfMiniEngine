@@ -6,6 +6,7 @@
 #include "CheckPoint/CheckedController.h"
 #include "GameCamera/GameCamera.h"
 #include "SpeedoMeter.h"
+#include "CarSoundController.h"
 
 namespace {
 
@@ -22,6 +23,7 @@ Car::Car()
 {
 	m_checkedCon = std::make_unique<CheckedController>();
 	m_carMoveCon = std::make_unique<CarMoveController>();
+	m_soundCon = std::make_unique<CarSoundController>();
 }
 
 Car::~Car()
@@ -30,43 +32,62 @@ Car::~Car()
 
 bool Car::Start()
 {
+	bool ret = false;
 	//3Dモデルを作成。
 	ModelInitData initData;
-	initData.m_tkmFilePath = CAR_MODEL[m_carColor];
-	m_model = NewGO<prefab::ModelRender>(0);
-	m_model->Init(initData);
-	//モデルの設定。
-	m_model->SetPosition(m_position);
-	m_model->SetRotation(m_rotation);
-	m_model->SetShadowCasterFlag(true);
-	m_model->SetShadowReceiverFlag(true);
-
-
-	//チェックポイントコントローラーの初期化。
-	m_checkedCon->Init(
-		m_carMoveCon->GetCharaCon().GetBody(),
-		m_position,
-		m_rotation
-	);
-
-	//移動制御クラスの初期化。
-	m_carMoveCon->Init(m_position, m_rotation);
-	//現在のステートを初期化。
-	m_carMoveCon->ChangeState(CarMoveController::EnCarState::enStateIdle);
-
-	if (m_isPlayer)
+	switch (m_startStep)
 	{
-		m_speedoMeter = std::make_unique<SpeedoMeter>();
-		m_speedoMeter->Init();
+	case en_initCar:
+		initData.m_tkmFilePath = CAR_MODEL[m_carColor];
+		m_model = NewGO<prefab::ModelRender>(0);
+		m_model->Init(initData);
+		//モデルの設定。
+		m_model->SetPosition(m_position);
+		m_model->SetRotation(m_rotation);
+		m_model->SetShadowCasterFlag(true);
+		m_model->SetShadowReceiverFlag(true);
+
+
+		//チェックポイントコントローラーの初期化。
+		m_checkedCon->Init(
+			m_carMoveCon->GetCharaCon().GetBody(),
+			m_position,
+			m_rotation
+		);
+
+		//移動制御クラスの初期化。
+		m_carMoveCon->Init(m_position, m_rotation);
+		//現在のステートを初期化。
+		m_carMoveCon->ChangeState(CarMoveController::EnCarState::enStateIdle);
+
+		//サウンドの初期化。
+		m_soundCon->Init();
+
+		if (m_isPlayer)
+		{
+			m_speedoMeter = std::make_unique<SpeedoMeter>();
+			m_speedoMeter->Init();
+		}
+
+		m_startStep = en_waitCountDown;
+		break;
+	case en_waitCountDown:
+		if (m_isRaceCountDown) m_startStep = en_waitRaceStart;
+		break;
+	case en_waitRaceStart:
+		m_soundCon->UpdateCarSound(this);
+		ret = m_isRaceStart;
+		break;
+	default:
+		break;
 	}
 
-	return true;
+	return ret;
 }
 
 void Car::Update()
 {
 	if (m_carDriver.get() == nullptr) return;
-	if (!m_isRaceStart) return;		//レースが始まっていない。
 
 	//ドライバの更新。
 	m_carDriver->Update();
@@ -81,6 +102,8 @@ void Car::Update()
 	m_model->SetRotation(m_rotation);
 
 	m_checkedCon->Update(m_position, m_rotation);
+	//サウンドの更新。
+	m_soundCon->UpdateCarSound(this);
 
 	//速度メーター。
 	if (m_isPlayer)
