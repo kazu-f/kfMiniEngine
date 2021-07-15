@@ -135,6 +135,8 @@ bool LightingDemoScene::Start()
 	GraphicsEngine()->GetPostEffect()->GetTonemap().SetLuminance(0.54f);
 	GraphicsEngine()->GetLightManager()->SetAmbientLight({ AMBIENT ,AMBIENT ,AMBIENT });
 
+	CFade::GetInstance()->StartFadeIn();
+
 	return true;
 }
 
