@@ -922,5 +922,8 @@
     <ImageContentTask Include="Assets\sprite\preset\fade.png">
       <Filter>リソース ファイル</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Title\PressA.png">
+      <Filter>リソース ファイル</Filter>
+    </ImageContentTask>
   </ItemGroup>
 </Project>

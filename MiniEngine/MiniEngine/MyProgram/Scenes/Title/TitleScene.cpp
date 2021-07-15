@@ -6,6 +6,10 @@
 
 namespace {
 	const char* TITLE_SPRITE_PATH = "Assets/sprite/Title/Race_Title.dds";	//タイトルのファイルパス。
+	const char* PRESSA_SPRITE_PATH = "Assets/sprite/Title/PressA.dds";	//PressA表示のファイルパス。
+	Vector2 PRESSA_SIZE = { 300.0f,75.0f };							//PressA表示のサイズ。
+	Vector2 PRESSA_POS = { -360.0f,-260.0f };							//PressA表示の位置。
+
 	//選択肢のスプライトのファイルパス。
 	const char* CHOISES_PATH[TitleScene::EnChoises::en_ChoisesNum] = 
 	{
@@ -42,6 +46,7 @@ TitleScene::TitleScene()
 TitleScene::~TitleScene()
 {
 	DeleteGO(m_titleSprite);
+	DeleteGO(m_pressA);
 	DeleteGO(m_pickArrow);
 }
 
@@ -59,6 +64,16 @@ bool TitleScene::Start()
 		FRAME_BUFFER_W,
 		FRAME_BUFFER_H
 	);
+	
+	//タイトルのスプライト。
+	m_pressA = NewGO<prefab::CSpriteRender>(6);
+	m_pressA->Init(
+		PRESSA_SPRITE_PATH,
+		PRESSA_SIZE.x,
+		PRESSA_SIZE.y
+	);
+	m_pressA->SetPosition(PRESSA_POS);
+	m_pressA->SetPivot(Sprite::DEFAULT_PIVOT);
 
 	//矢印作成。
 	m_pickArrow = NewGO<PickArrow>(0);
@@ -80,6 +95,12 @@ void TitleScene::Update()
 	auto* fade = CFade::GetInstance();
 	//ボリュームをフェードに合わせて変化。
 	m_titleBGM->SetVolume(BGM_VOLUME * fade->GetFadeRate());
+
+	m_currentTime += GameTime().GetFrameDeltaTime();
+	float alpha = sinf(m_currentTime * 2.0f);
+	alpha = alpha * 0.5f + 0.5f;
+	m_pressA->SetMulColor({ 1.0f,1.0f,1.0f,alpha });
+
 	if (fade->IsFade()) return;
 
 	m_pickArrow->SetPosition(CHOISES_POS[m_currentChoises]);
