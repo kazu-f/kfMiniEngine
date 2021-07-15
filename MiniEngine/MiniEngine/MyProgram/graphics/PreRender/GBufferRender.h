@@ -29,6 +29,35 @@ namespace Engine {
 		/// 書き込み先を元に戻す。
 		/// </summary>
 		void EndRender(RenderContext& rc);
+		/// <summary>
+		/// ディファードレンダリング。
+		/// </summary>
+		void Render(RenderContext& rc);
+	public:
+		/// <summary>
+		/// ディファードレンダリングへ登録する。
+		/// </summary>
+		void RegistDefferdModel(Model* caster) {
+			m_defferdModelArray.push_back(caster);
+		}
+		/// <summary>
+		/// ディファードレンダリング登録を解除する。
+		/// </summary>
+		void RemoveDefferdModel(Model* caster)
+		{
+			auto it = std::find(m_defferdModelArray.begin(), m_defferdModelArray.end(), caster);
+			if (it != m_defferdModelArray.end()) {
+				m_defferdModelArray.erase(it);
+			}
+		}
+		/// <summary>
+		/// ディファードモデル登録をクリア。
+		/// </summary>
+		/// <remarks>エンジン内で呼び出す。</remarks>
+		void ClearDefferdModel()
+		{
+			m_defferdModelArray.clear();
+		}
 	public:		/////Get関数類
 		/// <summary>
 		/// レンダリングターゲットを取得。
@@ -50,7 +79,7 @@ namespace Engine {
 		}
 	private:
 		RenderTarget m_GBuffer[static_cast<int>(EnGBuffer::enGBufferNum)];		//GBuffer。
-		//ConstantBuffer m_cb;				//定数バッファ。
+		std::vector<Model*> m_defferdModelArray;								//ディファードで描画するモデル。
 	};	//////class CGBufferRender
 }
 

@@ -502,6 +502,9 @@ namespace Engine {
  	}
 	void CGraphicsEngine::PreRender(CGameObjectManager* goMgr)
 	{
+		//シャドウマップより前に行う処理。
+		goMgr->PreRender(m_renderContext);
+
 		//指向性シャドウ回りの処理。
 		m_shadowMap->RenderToShadowMap(m_renderContext);
 		m_shadowMap->WaitEndRenderToShadowMap(m_renderContext);
@@ -509,9 +512,7 @@ namespace Engine {
 
 		m_renderContext.SetRenderStep(enRenderStep_PreRender);
 		//Gbufferに書き込みを行う。
-		m_gBuffer->BeginRender(m_renderContext);
-		goMgr->PreRender(m_renderContext);
-		m_gBuffer->EndRender(m_renderContext);
+		m_gBuffer->Render(m_renderContext);
 	}
 	void CGraphicsEngine::DefferdShading(CGameObjectManager* goMgr)
 	{
@@ -624,7 +625,6 @@ namespace Engine {
 
 		//描画完了待ち。
 		WaitDraw();
-		m_frameIndex = m_swapChain->GetCurrentBackBufferIndex();
 	}
 
 	void CGraphicsEngine::ExecuteCommand()

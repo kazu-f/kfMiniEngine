@@ -104,5 +104,18 @@ namespace Engine {
 		//書き込みが終わるまで待つ。
 		rc.WaitUntilFinishDrawingToRenderTargets(arraySize, rts);
 		GraphicsEngine()->ChangeToMainRenderTarget(rc);
+		//ディファード登録を解除。
+		ClearDefferdModel();
+	}
+	void CGBufferRender::Render(RenderContext& rc)
+	{
+		BeginRender(rc);
+
+		for (auto* model : m_defferdModelArray)
+		{
+			model->Draw(rc);
+		}
+
+		EndRender(rc);
 	}
 }

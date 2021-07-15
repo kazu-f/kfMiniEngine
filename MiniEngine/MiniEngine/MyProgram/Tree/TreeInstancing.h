@@ -29,6 +29,5 @@ private:
 	prefab::ModelRender* m_treeModel = nullptr;			//木のモデル。
 	std::vector<TreeObjData> m_treeObjDatas;			//木々のオブジェクトデータ。
 	std::string m_filePath;								//木のモデルのファイルパス。
-	int m_numInstancingNum = 0;
 };
 

@@ -1,6 +1,10 @@
 #include "stdafx.h"
 #include "TreeInstancing.h"
 
+namespace {
+	const float CULL_FAR = 50000.0f;
+}
+
 TreeInstancing::TreeInstancing()
 {
 }
@@ -28,7 +32,7 @@ bool TreeInstancing::Start()
 	m_treeModel->SetShadowReceiverFlag(true);
 	m_treeModel->SetForwardRenderFlag(true);
 	//カリングする。
-	m_treeModel->SetCullingFar(20000.0f);
+	m_treeModel->SetCullingFar(CULL_FAR);
 	return true;
 }
 
@@ -40,10 +44,8 @@ void TreeInstancing::OnDestroy()
 void TreeInstancing::Update()
 {
 	//インスタンシング描画用のデータを更新。
-	if (m_treeObjDatas.size() > 1 && m_numInstancingNum < m_treeObjDatas.size()) {
-		for (auto& objData : m_treeObjDatas) {
-			m_treeModel->UpdateInstancingData(objData.pos, objData.rot, objData.scale);
-			m_numInstancingNum++;
-		}
+	m_treeModel->BeginUpdateInstancingData();
+	for (auto& objData : m_treeObjDatas) {
+		m_treeModel->UpdateInstancingData(objData.pos, objData.rot, objData.scale,true);
 	}
 }

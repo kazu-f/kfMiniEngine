@@ -1,6 +1,10 @@
 #include "stdafx.h"
 #include "Guardrail.h"
 
+namespace {
+	const float CULL_FAR = 20000.0f;
+}
+
 Guardrail::Guardrail()
 {
 }
@@ -37,7 +41,7 @@ bool Guardrail::Start()
 	m_model->SetShadowCasterFlag(true);
 	m_model->SetShadowReceiverFlag(true);
 
-	m_model->SetCullingFar(20000.0f);
+	m_model->SetCullingFar(CULL_FAR);
 
 	return true;
 }

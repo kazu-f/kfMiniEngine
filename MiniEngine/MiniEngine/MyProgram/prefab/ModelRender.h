@@ -32,10 +32,6 @@ namespace Engine {
 			/// </summary>
 			void PostUpdate() override
 			{
-				if (m_model.IsInited())
-				{
-					m_model.SendGPUInstancingDatas();
-				}
 			}
 			/// <summary>
 			/// 事前レンダリング。

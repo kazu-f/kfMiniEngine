@@ -89,13 +89,6 @@ namespace Engine {
 		}
 		void ModelRender::Update()
 		{
-			if (m_isShadowCaster)
-			{
-				//シャドウキャスターに登録する。
-				auto& shadowMap = GraphicsEngine()->GetShadowMap();
-				shadowMap->RegistShadowCaster(&m_model);
-			}
-
 			if (m_animation.IsInited()) {
 				//アニメーションを再生。
 				m_animation.Progress(GameTime().GetFrameDeltaTime());
@@ -119,9 +112,20 @@ namespace Engine {
 		}
 		void ModelRender::PreRender(RenderContext& rc)
 		{
-			//ディファードレンダリングを行う。
+			if (m_isShadowCaster)
+			{
+				//シャドウキャスターに登録する。
+				auto& shadowMap = GraphicsEngine()->GetShadowMap();
+				shadowMap->RegistShadowCaster(&m_model);
+			}
+			//ディファードレンダリングを行うか？。
 			if (!m_isForwardRender) {
-				m_model.Draw(rc);
+				GraphicsEngine()->GetGBuffer()->RegistDefferdModel(&m_model);
+			}
+			//インスタンシング描画のデータを更新。
+			if (m_model.IsInited())
+			{
+				m_model.SendGPUInstancingDatas();
 			}
 		}
 		void ModelRender::ForwardRender(RenderContext& renderContext)
