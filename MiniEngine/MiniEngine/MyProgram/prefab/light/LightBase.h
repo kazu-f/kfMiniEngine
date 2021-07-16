@@ -11,6 +11,7 @@ namespace Engine {
 		class CLightBase :public IGameObject
 		{
 		public:
+			virtual ~CLightBase() {};
 			bool Start()override final;
 			void OnDestroy()override final;
 			/// <summary>

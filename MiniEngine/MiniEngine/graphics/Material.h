@@ -9,6 +9,7 @@ namespace Engine {
 	/// </summary>
 	class IMaterial {
 	public:
+		virtual ~IMaterial() {};
 		/// <summary>
 		/// tkmファイルのマテリアル情報から初期化する。
 		/// </summary>
