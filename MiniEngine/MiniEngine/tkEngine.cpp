@@ -37,6 +37,8 @@ namespace Engine {
 
 		BeginFrame();
 
+		//サウンドエンジンの更新。
+		m_soundEngine.Update();
 		//	物理エンジンの更新。
 		m_physicsWorld.Update(GameTime().GetFrameDeltaTime());
 		//グラフィックエンジンの更新。

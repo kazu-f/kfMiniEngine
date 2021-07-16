@@ -120,6 +120,20 @@ namespace Engine {
 				return m_velocity;
 			}
 			/// <summary>
+			/// 音量が減衰する距離を取得。
+			/// </summary>
+			const float GetCurveDistanceScaler()const
+			{
+				return m_curveDistanceScaler;
+			}
+			/// <summary>
+			/// ドップラー効果の度合を取得。
+			/// </summary>
+			const float GetDopplerScaler()const
+			{
+				return m_dopplerScaler;
+			}
+			/// <summary>
 			/// ループフラグを取得。
 			/// </summary>
 			bool GetLoopFlag() const
@@ -137,6 +151,20 @@ namespace Engine {
 				{
 					m_sourceVoice->SetFrequencyRatio(raito);
 				}
+			}
+			/// <summary>
+			/// 音量が減衰する距離。
+			/// </summary>
+			void SetCurveDistanceScaler(float scaler)
+			{
+				m_curveDistanceScaler = scaler;
+			}
+			/// <summary>
+			/// ドップラー効果。
+			/// </summary>
+			void SetDopplerScaler(float scaler)
+			{
+				m_dopplerScaler = scaler;
 			}
 			/// <summary>
 			/// ソースボイスを取得。
@@ -213,6 +241,8 @@ namespace Engine {
 			Vector3						m_position = Vector3::Zero;	//音源の座標。3Dサウンドの時に必要。
 			Vector3						m_lastFramePosition = Vector3::Zero;	//音源の1フレーム前の座標。3Dサウンドの時に必要。
 			Vector3						m_velocity = Vector3::Zero;	//速度。3Dサウンドの時に必要。
+			float						m_curveDistanceScaler = 14.0f;	//音量が減衰する距離。
+			float						m_dopplerScaler = 0.0f;			//ドップラー効果。
 			FLOAT32 m_emitterAzimuths[INPUTCHANNELS];							//音の放射角？
 			FLOAT32 m_matrixCoefficients[INPUTCHANNELS * OUTPUTCHANNELS];		//行列係数。
 			X3DAUDIO_DSP_SETTINGS		m_dspSettings;				//設定？

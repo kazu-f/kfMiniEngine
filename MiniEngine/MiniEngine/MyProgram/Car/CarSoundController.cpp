@@ -15,6 +15,8 @@ namespace {
 	const float MIN_SOUND_RAITO = 0.5f;
 	const float MAX_SOUND_RAITO = 1.4f;
 	const float SOUND_RAITO_WAIGHT = 1.6f;
+
+	const float SOUND_DISTANCE_SCALER = 28000.0f;
 }
 
 CarSoundController::CarSoundController()
@@ -29,10 +31,12 @@ void CarSoundController::Init()
 {
 	//エンジンの音を読み込む。
 	m_engineSE = NewGO<prefab::CSoundSource>(0);
-	m_engineSE->Init(ENGINE_SE_FILEPATH);
+	m_engineSE->Init(ENGINE_SE_FILEPATH, true);
+	m_engineSE->SetCurveDistanceScaler(SOUND_DISTANCE_SCALER);
 	//ブレーキの音を読み込む。
 	m_brakeSE = NewGO<prefab::CSoundSource>(0);
-	m_brakeSE->Init(BRAKE_SE_FILEPATH);
+	m_brakeSE->Init(BRAKE_SE_FILEPATH, true);
+	m_brakeSE->SetCurveDistanceScaler(SOUND_DISTANCE_SCALER);
 }
 
 void CarSoundController::Release()
@@ -55,7 +59,9 @@ void CarSoundController::UpdateCarSound(Car* car)
 		m_engineSE->Play(true);
 	}
 	m_engineSE->SetVolume(m_volume);
+	m_engineSE->SetPosition(car->GetPosition());
 	m_brakeSE->SetVolume(m_volume);
+	m_brakeSE->SetPosition(car->GetPosition());
 
 	PlayBrake(car);
 

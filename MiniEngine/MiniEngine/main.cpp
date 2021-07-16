@@ -5,11 +5,13 @@
 #include "Scenes/DebugScene.h"
 #include "Scenes/LightingDemoScene.h"
 #include "Scenes/CullingTestScene.h"
+#include "Scenes/SoundTestScene.h"
 
 #define GAME_SCENE 0
 #define DEBUG_SCENE 1
 #define LIGHTDEMO_SCENE 2
 #define CULLINGDEMO_SCENE 3
+#define SOUNDTEST_SCENE 4
 
 #define START_SCENE GAME_SCENE
 
@@ -58,6 +60,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	NewGO<TitleScene>(0);
 #elif START_SCENE == CULLINGDEMO_SCENE
 	NewGO<CullingTestScene>(0);
+#elif START_SCENE == SOUNDTEST_SCENE
+	NewGO<SoundTestScene>(0);
 #endif
 
 

@@ -483,6 +483,9 @@
     <ClCompile Include="MyProgram\graphics\Fade.cpp">
       <Filter>MyProgram\graphics</Filter>
     </ClCompile>
+    <ClCompile Include="MyProgram\Scenes\SoundTestScene.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tkEngine.h">
@@ -871,6 +874,9 @@
     </ClInclude>
     <ClInclude Include="MyProgram\EngineStruct.h">
       <Filter>MyProgram</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\Scenes\SoundTestScene.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

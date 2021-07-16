@@ -142,6 +142,7 @@ namespace Engine {
 		m_submixVoice->SetEffectParameters(0, &native, sizeof(native));
 		//3Dオーディオの初期化。
 		const float SPEEDFSOUND = X3DAUDIO_SPEED_OF_SOUND;
+		X3DAudioInitialize(m_channelMask, SPEEDFSOUND, m_hx3DAudio);
 		m_listener.Position = { 0.0f,0.0f,0.0f };		//オーディオリスナーの座標。
 		m_listener.OrientFront = { 0.0f,0.0f,1.0f };	//オーディオリスナーの前方向。
 		m_listener.OrientTop = { 0.0f,1.0f,0.0f };		//オーディオリスナーの上方向。
@@ -243,6 +244,10 @@ namespace Engine {
 			vel.Div(deltaTime);
 			m_listenerPosition.CopyTo(m_listener.Position);
 			vel.CopyTo(m_listener.Velocity);
+			//if (vel.LengthSq() > 0.01f) {
+			//	vel.Normalize();
+			//	vel.CopyTo(m_listener.OrientFront);
+			//}
 		}
 		DWORD dwCalcFlags = X3DAUDIO_CALCULATE_MATRIX | X3DAUDIO_CALCULATE_DOPPLER
 			| X3DAUDIO_CALCULATE_LPF_DIRECT | X3DAUDIO_CALCULATE_LPF_REVERB
@@ -256,6 +261,8 @@ namespace Engine {
 
 		//3Dサウンドの計算。
 		for (auto& soundSource : m_3dSoundSource) {
+			if (!soundSource->IsPlaying())continue;
+
 			X3DAUDIO_EMITTER emitter;
 
 			emitter.pCone = &m_emitterCone;
@@ -278,35 +285,31 @@ namespace Engine {
 
 			emitter.OrientFront = { 0, 0, 1 };
 			emitter.OrientTop = { 0, 1, 0 };
-			emitter.ChannelCount = INPUTCHANNELS;
-			emitter.ChannelRadius = 1.0f;
-			emitter.pChannelAzimuths = soundSource->GetEmitterAzimuths();
+			soundSource->GetPosition().CopyTo(emitter.Position);
+			soundSource->GetVelocity().CopyTo(emitter.Velocity);
 
 			// Use of Inner radius allows for smoother transitions as
 			// a sound travels directly through, above, or below the listener.
 			// It also may be used to give elevation cues.
 			emitter.InnerRadius = 2.0f;
-			emitter.InnerRadiusAngle = X3DAUDIO_PI / 4.0f;;
+			emitter.InnerRadiusAngle = X3DAUDIO_PI / 4.0f;
+			
+			emitter.ChannelCount = INPUTCHANNELS;
+			emitter.ChannelRadius = 1.0f;
+			emitter.pChannelAzimuths = soundSource->GetEmitterAzimuths();
+
 
 			emitter.pVolumeCurve = (X3DAUDIO_DISTANCE_CURVE*)&X3DAudioDefault_LinearCurve;
 			emitter.pLFECurve = (X3DAUDIO_DISTANCE_CURVE*)&Emitter_LFE_Curve;
 			emitter.pLPFDirectCurve = NULL; // use default curve
 			emitter.pLPFReverbCurve = NULL; // use default curve
 			emitter.pReverbCurve = (X3DAUDIO_DISTANCE_CURVE*)&Emitter_Reverb_Curve;
-			emitter.CurveDistanceScaler = 14.0f;
-			emitter.DopplerScaler = 1.0f;
+			//減衰する距離に比例する
+			emitter.CurveDistanceScaler = soundSource->GetCurveDistanceScaler();
+			//ドップラー効果の度合い
+			emitter.DopplerScaler = soundSource->GetDopplerScaler();
 
-			soundSource->GetPosition().CopyTo(emitter.Position);
-			soundSource->GetVelocity().CopyTo(emitter.Velocity);
 
-			if (m_fUseInnerRadius) {
-				emitter.InnerRadius = 2.0f;
-				emitter.InnerRadiusAngle = X3DAUDIO_PI / 4.0f;
-			}
-			else {
-				emitter.InnerRadius = 0.0f;
-				emitter.InnerRadiusAngle = 0.0f;
-			}
 			X3DAUDIO_DSP_SETTINGS* dspSettings = soundSource->GetDspSettings();
 			X3DAudioCalculate(m_hx3DAudio, &m_listener, &emitter, dwCalcFlags,
 				dspSettings);

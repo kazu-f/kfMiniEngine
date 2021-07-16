@@ -121,6 +121,7 @@
     <ClCompile Include="MyProgram\Scenes\Title\PickArrow.cpp" />
     <ClCompile Include="MyProgram\Car\SpeedoMeter.cpp" />
     <ClCompile Include="MyProgram\Race\RaceUI\RaceStartCountDown.cpp" />
+    <ClCompile Include="MyProgram\Scenes\SoundTestScene.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -227,6 +228,7 @@
     <ClInclude Include="MyProgram\Scenes\Title\PickArrow.h" />
     <ClInclude Include="MyProgram\Car\SpeedoMeter.h" />
     <ClInclude Include="MyProgram\Race\RaceUI\RaceStartCountDown.h" />
+    <ClInclude Include="MyProgram\Scenes\SoundTestScene.h" />
     <ClInclude Include="system\debugLog.h" />
     <ClInclude Include="camera\Camera.h" />
     <ClInclude Include="d3dx12.h" />

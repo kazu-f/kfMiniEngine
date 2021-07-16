@@ -97,6 +97,8 @@ void FollowCarCamera::Update()
 	//カメラの座標を更新。
 	MainCamera().SetTarget(m_target);
 	MainCamera().SetPosition(m_position);
+
+	GameEngine().GetSoundEngine().SetListenerPosition(m_position);
 }
 
 void FollowCarCamera::OnDestroy()
