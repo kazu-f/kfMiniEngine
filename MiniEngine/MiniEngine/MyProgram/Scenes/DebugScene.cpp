@@ -5,6 +5,7 @@
 #include "GameLight/SceneLight.h"
 #include "GameCamera/GameCamera.h"
 #include "Car/Car.h"
+#include "Ground/BackGround.h"
 
 namespace {
 
@@ -38,6 +39,8 @@ bool DebugScene::Start()
 
 	//InitSprite();
 
+	//m_bg = NewGO<BackGround>(1);
+
 	//{
 	//	ModelInitData modelData;
 	//	modelData.m_tkmFilePath = "Assets/modelData/tree/AlaskaCedar_1.tkm";
@@ -53,12 +56,15 @@ bool DebugScene::Start()
 	m_courseLevel.Init("Assets/level/testLevel.tkl", [&](SLevelObjectData& objData) {
 		if (wcscmp(objData.name, L"unityChan") == 0) {
 
-			//m_player = NewGO<Player>(0);
-			m_ball = NewGO<PlayerBall>(0);
+			m_player = NewGO<Player>(0);
+			//m_ball = NewGO<PlayerBall>(0);
 
 			return true;
 		}
-		//if (objData.EqualObjectName(L"testbg/testBox")) {
+		if (objData.EqualObjectName(L"testbg/testBox")) {
+			return true;
+		}
+		//if (objData.EqualObjectName(L"testbg/bg")) {
 		//	return true;
 		//}
 
@@ -76,7 +82,8 @@ void DebugScene::OnDestroy()
 	DeleteGO(m_sprite);
 	DeleteGO(m_light);
 	DeleteGO(m_player);
-
+	DeleteGO(m_ball);
+	DeleteGO(m_bg);
 }
 
 void DebugScene::Update()

@@ -43,6 +43,7 @@ void CullingTestScene::OnDestroy()
 {
 	DeleteGO(m_camera);
 	DeleteGO(m_spectator);
+	DeleteGO(m_light);
 }
 
 void CullingTestScene::Update()

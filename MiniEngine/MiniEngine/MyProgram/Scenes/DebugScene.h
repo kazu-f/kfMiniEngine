@@ -7,6 +7,7 @@ class Player;
 class PlayerBall;
 class SceneLight;
 class CGameCamera;
+class BackGround;
 
 class DebugScene:public IGameObject
 {
@@ -31,5 +32,6 @@ private:
 	prefab::CSpriteRender* m_sprite = nullptr;
 	CGameCamera* m_camera = nullptr;
 	SceneLight* m_light = nullptr;
+	BackGround* m_bg = nullptr;
 };
 

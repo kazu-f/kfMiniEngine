@@ -9,6 +9,15 @@ namespace Engine {
 		const char* g_psShaderModelName = "ps_5_0";	//ピクセルシェーダーのシェーダモデル名。
 		const char* g_csShaderModelName = "cs_5_0";	//コンピュートシェーダーのシェーダーモデル名。
 	}
+
+	Shader::~Shader()
+	{
+		if (m_blob != nullptr) {
+			m_blob->Release();
+			m_blob = nullptr;
+		}
+	}
+
 	void Shader::Load(const wchar_t* filePath, const char* entryFuncName, const char* shaderModel)
 	{
 		ID3DBlob* errorBlob;

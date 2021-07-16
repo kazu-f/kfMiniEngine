@@ -42,7 +42,7 @@ namespace Engine {
 	public:
 		static const Vector2	DEFAULT_PIVOT;					//!<ピボット。
 		static const char* SPRITE_SHADER_PATH;					//!<スプライトのシェーダーのファイルパス。
-		virtual ~Sprite();
+		~Sprite();
 		/// <summary>
 		/// 初期化。
 		/// </summary>

@@ -10,6 +10,7 @@ namespace Engine {
 	class ICollider : Noncopyable
 	{
 	public:
+		virtual ~ICollider() {};
 		virtual btCollisionShape* GetBody()const = 0;
 	};
 }

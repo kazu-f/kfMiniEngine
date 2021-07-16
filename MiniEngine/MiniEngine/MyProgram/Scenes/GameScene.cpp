@@ -14,7 +14,7 @@
 #define ON 1
 #define OFF 0
 #define IS_SPECTATOR ON			//観客を出すかどうか。
-#define DEBUG_DELETE OFF				//削除処理を呼び出せるようにするか。
+#define DEBUG_DELETE ON				//削除処理を呼び出せるようにするか。
 
 namespace {
 #if 0

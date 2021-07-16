@@ -15,6 +15,7 @@ namespace Engine {
 
 	class Shader {
 	public:
+		~Shader();
 		/// <summary>
 		/// ピクセルシェーダーをロード。
 		/// </summary>

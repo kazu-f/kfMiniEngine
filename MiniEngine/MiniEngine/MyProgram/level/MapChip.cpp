@@ -20,5 +20,6 @@ namespace Engine {
 	}
 	CMapChip::~CMapChip()
 	{
+
 	}
 }
