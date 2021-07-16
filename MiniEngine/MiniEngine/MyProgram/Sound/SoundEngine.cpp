@@ -317,7 +317,7 @@ namespace Engine {
 			if (voice != nullptr)
 			{
 				// Apply X3DAudio generated DSP settings to XAudio2
-				voice->SetFrequencyRatio(dspSettings->DopplerFactor);
+				voice->SetFrequencyRatio(soundSource->GetFrequencyRetio() * dspSettings->DopplerFactor);
 				voice->SetOutputMatrix(m_masteringVoice, soundSource->GetNumInputChannel(), m_nChannels,
 					soundSource->GetMatrixCoefficients());
 

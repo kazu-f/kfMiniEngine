@@ -72,6 +72,10 @@ void SoundTestScene::Update()
 		MoveSound();
 	}
 
+	m_pitch += Pad(0).GetRStickYF() * GameTime().GetFrameDeltaTime();
+	m_pitch = min(2.0f, max(0.5f, m_pitch));
+	m_sound->SetFrequencyRetio(m_pitch);
+
 	MainCamera().SetTarget(m_soundPos);
 	MainCamera().SetPosition(m_camPos);
 	m_sound->SetPosition(m_soundPos);

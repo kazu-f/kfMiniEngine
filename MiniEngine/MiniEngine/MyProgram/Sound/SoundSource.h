@@ -134,6 +134,13 @@ namespace Engine {
 				return m_dopplerScaler;
 			}
 			/// <summary>
+			/// 周波数比を取得。
+			/// </summary>
+			const float GetFrequencyRetio()const
+			{
+				return m_frequencyRetio;
+			}
+			/// <summary>
 			/// ループフラグを取得。
 			/// </summary>
 			bool GetLoopFlag() const
@@ -147,9 +154,13 @@ namespace Engine {
 			/// <param name="raito">周波数比</param>
 			void SetFrequencyRetio(float raito)
 			{
-				if (m_sourceVoice != nullptr)
+				if (m_sourceVoice != nullptr
+					&& !m_is3DSound)
 				{
 					m_sourceVoice->SetFrequencyRatio(raito);
+				}
+				else {
+					m_frequencyRetio = raito;
 				}
 			}
 			/// <summary>
@@ -243,6 +254,7 @@ namespace Engine {
 			Vector3						m_velocity = Vector3::Zero;	//速度。3Dサウンドの時に必要。
 			float						m_curveDistanceScaler = 14.0f;	//音量が減衰する距離。
 			float						m_dopplerScaler = 0.0f;			//ドップラー効果。
+			float						m_frequencyRetio = 1.0f;		//周波数比？
 			FLOAT32 m_emitterAzimuths[INPUTCHANNELS];							//音の放射角？
 			FLOAT32 m_matrixCoefficients[INPUTCHANNELS * OUTPUTCHANNELS];		//行列係数。
 			X3DAUDIO_DSP_SETTINGS		m_dspSettings;				//設定？

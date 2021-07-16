@@ -18,6 +18,7 @@ private:
 	prefab::CSoundSource* m_sound = nullptr;
 	Vector3 m_camPos = Vector3::Zero;
 	Vector3 m_soundPos = Vector3::Zero;
+	float m_pitch = 1.0f;
 	bool m_moveFlag = false;
 };
 

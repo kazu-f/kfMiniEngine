@@ -70,9 +70,15 @@ void CarSoundController::UpdateCarSound(Car* car)
 
 void CarSoundController::CalcSoundFrequencyRetio(Car* car)
 {
-	float speed = car->GetCarMoveController()->GetSpeed();
-	m_soundFrequency = speed * (1.0f / CarMoveController::MAX_SPEED) * SOUND_RAITO_WAIGHT;
-	m_soundFrequency = min(MAX_SOUND_RAITO, max(MIN_SOUND_RAITO, m_soundFrequency));
+	float speedWeight = car->GetCarMoveController()->GetSpeed();
+	speedWeight /= CarMoveController::MAX_SPEED;
+	speedWeight = min(1.0f, max(0.0f, speedWeight));
+
+	m_soundFrequency = MAX_SOUND_RAITO * speedWeight + MIN_SOUND_RAITO * (1.0f - speedWeight);
+
+	//float speed = car->GetCarMoveController()->GetSpeed();
+	//m_soundFrequency = speed * (1.0f / CarMoveController::MAX_SPEED) * SOUND_RAITO_WAIGHT;
+	//m_soundFrequency = min(MAX_SOUND_RAITO, max(MIN_SOUND_RAITO, m_soundFrequency));
 	m_engineSE->SetFrequencyRetio(m_soundFrequency);
 }
 
