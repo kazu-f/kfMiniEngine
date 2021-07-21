@@ -37,16 +37,16 @@ namespace Engine
 		unsigned int hasDirection;		//このポイントライトが指向性ライトかどうかのフラグ。(スポットライトかどうか。)
 		unsigned int lightingMaterialIDGroup;	//ライトの影響を与えるマテリアルIDのグループ。
 	};
-	/// <summary>
-	/// スポットライト。
-	/// </summary>
-	struct SSpotLight {
-		Vector3		position;			//スポットライトの位置。
-		Vector4		directionAndAngle;	//ライトの方向と照射角度。	
-										//xyzに方向、wに角度(ラジアン単位)が入る。
-		Vector3		color;				//スポットライトのカラー。
-		Vector4		attn;				//減衰定数。x:ポイントライトの影響が届く範囲。y:スポットライトの減衰率。
-										//yが大きくなると、減衰が強くなる。1.0で線形の減衰率になる。z,w:未使用
-		unsigned int lightingMaterialIDGroup;	//ライトの影響を与えるマテリアルIDのグループ。
-	};
+	///// <summary>
+	///// スポットライト。
+	///// </summary>
+	//struct SSpotLight {
+	//	Vector3		position;			//スポットライトの位置。
+	//	Vector4		directionAndAngle;	//ライトの方向と照射角度。	
+	//									//xyzに方向、wに角度(ラジアン単位)が入る。
+	//	Vector3		color;				//スポットライトのカラー。
+	//	Vector4		attn;				//減衰定数。x:ポイントライトの影響が届く範囲。y:スポットライトの減衰率。
+	//									//yが大きくなると、減衰が強くなる。1.0で線形の減衰率になる。z,w:未使用
+	//	unsigned int lightingMaterialIDGroup;	//ライトの影響を与えるマテリアルIDのグループ。
+	//};
 }

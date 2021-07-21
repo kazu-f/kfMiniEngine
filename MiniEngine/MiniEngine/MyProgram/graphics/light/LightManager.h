@@ -9,6 +9,7 @@ namespace Engine {
 	namespace prefab {
 		class CLightBase;
 		class CDirectionLight;
+		class CPointLight;
 	}
 
 	/// <summary>
@@ -97,14 +98,16 @@ namespace Engine {
 			Vector4 screenParam;	//スクリーンパラメータ。
 		};
 		SLightParam	m_lightParam;			//ライトのパラメータ。
-		SDirectionLight m_rawDirectionLight[MAX_DIRECTION_LIGHT];		//ディレクションライトのデータの配列。
+		SDirectionLight m_rawDirectionLights[MAX_DIRECTION_LIGHT];		//ディレクションライトのデータの配列。
 		SPointLight		m_rawPointLights[MAX_POINT_LIGHT];				//ポイントライトのデータの配列。
 		/// <summary>
 		/// ここにディレクションライトクラスとポイントライトクラスのリスト。
 		/// </summary>
-		std::list<prefab::CDirectionLight*> m_directionLidhts;			//ディレクションライトの配列。
-		ConstantBuffer m_lightParamCB;		//定数バッファ。
-		StructuredBuffer m_directionLightSB;//ディレクションライトのストラクチャバッファ。
+		std::list<prefab::CDirectionLight*> m_directionLights;			//ディレクションライトの配列。
+		std::list<prefab::CPointLight*> m_pointLights;			//ポイントライトの配列。
+		ConstantBuffer m_lightParamCB;			//定数バッファ。
+		StructuredBuffer m_directionLightSB;	//ディレクションライトのストラクチャバッファ。
+		StructuredBuffer m_pointLightSB;		//ポイントライトのストラクチャバッファ。
 	};
 
 }

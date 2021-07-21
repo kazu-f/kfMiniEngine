@@ -484,7 +484,10 @@
       <Filter>MyProgram\graphics</Filter>
     </ClCompile>
     <ClCompile Include="MyProgram\Scenes\SoundTestScene.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>MyProgram\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\prefab\light\PointLight.cpp">
+      <Filter>MyProgram\prefab\light</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -876,7 +879,10 @@
       <Filter>MyProgram</Filter>
     </ClInclude>
     <ClInclude Include="MyProgram\Scenes\SoundTestScene.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>MyProgram\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\prefab\light\PointLight.h">
+      <Filter>MyProgram\prefab\light</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

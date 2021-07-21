@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "LightManager.h"
 #include "prefab/light/DirectionLight.h"
+#include "prefab/light/PointLight.h"
 
 namespace Engine {
 	using namespace prefab;
@@ -13,6 +14,8 @@ namespace Engine {
 		m_lightParamCB.Init(sizeof(SLightParam), nullptr);
 		//ディレクションライト用のストラクチャバッファを作成。
 		m_directionLightSB.Init(sizeof(SDirectionLight), MAX_DIRECTION_LIGHT, nullptr);
+		//ポイントライト用のストラクチャバッファを作成。
+		m_pointLightSB.Init(sizeof(SPointLight), MAX_POINT_LIGHT, nullptr);
 	}
 
 	void CLightManager::AddLight(prefab::CLightBase* light)
@@ -21,10 +24,22 @@ namespace Engine {
 		const std::type_info& typeInfo = typeid(*light);
 		if (typeInfo == typeid(CDirectionLight)) {
 			//登録済みか調べる。
-			auto findIt = std::find(m_directionLidhts.begin(), m_directionLidhts.end(), light);
-			if (findIt == m_directionLidhts.end()) {
+			auto findIt = std::find(m_directionLights.begin(), m_directionLights.end(), light);
+			if (findIt == m_directionLights.end()) {
 				//新規登録。
-				m_directionLidhts.push_back(reinterpret_cast<CDirectionLight*>(light));
+				m_directionLights.push_back(reinterpret_cast<CDirectionLight*>(light));
+			}
+			else {
+				//既に登録されている。
+				return;
+			}
+		}
+		if (typeInfo == typeid(CPointLight)) {
+			//登録済みか調べる。
+			auto findIt = std::find(m_pointLights.begin(), m_pointLights.end(), light);
+			if (findIt == m_pointLights.end()) {
+				//新規登録。
+				m_pointLights.push_back(reinterpret_cast<CPointLight*>(light));
 			}
 			else {
 				//既に登録されている。
@@ -38,9 +53,15 @@ namespace Engine {
 		//登録を解除する。
 		const std::type_info& typeInfo = typeid(*light);
 		if(typeInfo == typeid(CDirectionLight)){
-			m_directionLidhts.erase(
-				std::remove(m_directionLidhts.begin(),m_directionLidhts.end(),light),
-				m_directionLidhts.end()			
+			m_directionLights.erase(
+				std::remove(m_directionLights.begin(),m_directionLights.end(),light),
+				m_directionLights.end()			
+			);
+		}
+		else if(typeInfo == typeid(CPointLight)){
+			m_pointLights.erase(
+				std::remove(m_pointLights.begin(), m_pointLights.end(),light),
+				m_pointLights.end()
 			);
 		}
 	}
@@ -49,17 +70,26 @@ namespace Engine {
 	{
 		//ディレクションライトのストラクチャーバッファを更新。
 		int ligNo = 0;
-		for (auto lig : m_directionLidhts) {
+		for (auto lig : m_directionLights) {
 			if (lig->IsActive() == false) {
 				//アクティブじゃない奴はスキップ。
 				continue;
 			}
-			m_rawDirectionLight[ligNo] = lig->GetRawData();
+			m_rawDirectionLights[ligNo] = lig->GetRawData();
 			ligNo++;
 		}
 		int numDirLig = ligNo;		//ディレクションライトの数。
-		//ポイントライトの処理はそのうち。
+
+		//ポイントライトも同じように更新。
 		ligNo = 0;
+		for (auto lig : m_pointLights) {
+			if (lig->IsActive() == false) {
+				//アクティブじゃない奴はスキップ。
+				continue;
+			}
+			m_rawPointLights[ligNo] = lig->GetRawData();
+			ligNo++;
+		}
 		
 		int numPointLig = ligNo;
 
@@ -77,7 +107,9 @@ namespace Engine {
 		//ライトパラメータのデータを更新。
 		m_lightParamCB.CopyToVRAM(&m_lightParam);
 		//ディレクションライトのデータを更新。
-		m_directionLightSB.Update(&m_rawDirectionLight);
+		m_directionLightSB.Update(&m_rawDirectionLights);
+		//ポイントライトのデータを更新。
+		m_pointLightSB.Update(&m_rawPointLights);
 	}
 
 	void CLightManager::SendLightDataToGPU(RenderContext& rc)
