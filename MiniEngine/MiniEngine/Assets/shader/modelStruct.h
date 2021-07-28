@@ -1,11 +1,4 @@
 
-//ディレクションライト。
-struct SDirectionalLight {
-	float4 color;		//ライトの色。
-	float3 direction;	//ライトの方向。
-	unsigned int lightingMaterialIDGroup;		//ライトの影響を与えるマテリアルを決めるID。
-};
-
 //スキニング用の頂点データをひとまとめ。
 struct SSkinVSIn {
 	int4  Indices : BLENDINDICES0;

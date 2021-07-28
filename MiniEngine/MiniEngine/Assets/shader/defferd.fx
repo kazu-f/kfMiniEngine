@@ -3,6 +3,7 @@
 */
 
 #include "modelCB.h"
+#include "LightStruct.h"
 #include "modelStruct.h"
 #include "PBR.h"
 #include "Fog.h"
