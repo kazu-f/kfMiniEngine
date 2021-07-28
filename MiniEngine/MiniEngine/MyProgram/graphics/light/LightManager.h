@@ -97,17 +97,27 @@ namespace Engine {
 			int numPointLight;		//ポイントライトの数。
 			Vector4 screenParam;	//スクリーンパラメータ。
 		};
+		/// <summary>
+		/// ライトカリング用のカメラデータ。
+		/// </summary>
+		struct SLightCullingCameraData {
+			Matrix mProj;		//プロジェクション行列。
+			Matrix mProjInv;	//プロジェクション行列の逆行列。
+			Matrix mCameraRot;	//カメラの回転行列。
+		};
+
 		SLightParam	m_lightParam;			//ライトのパラメータ。
+		SLightCullingCameraData m_lightCullingCameraData;	//ライトカリング用のカメラデータ。
 		SDirectionLight m_rawDirectionLights[MAX_DIRECTION_LIGHT];		//ディレクションライトのデータの配列。
 		SPointLight		m_rawPointLights[MAX_POINT_LIGHT];				//ポイントライトのデータの配列。
-		/// <summary>
-		/// ここにディレクションライトクラスとポイントライトクラスのリスト。
-		/// </summary>
 		std::list<prefab::CDirectionLight*> m_directionLights;			//ディレクションライトの配列。
 		std::list<prefab::CPointLight*> m_pointLights;			//ポイントライトの配列。
-		ConstantBuffer m_lightParamCB;			//定数バッファ。
+		Shader m_csLightCulling;				//ライトカリング用のコンピュートシェーダー。
+		ConstantBuffer m_lightParamCB;			//ライト情報の定数バッファ。
+		ConstantBuffer m_lightCullingCameraCB;	//ライトカリング用のカメラデータの定数バッファ。
 		StructuredBuffer m_directionLightSB;	//ディレクションライトのストラクチャバッファ。
 		StructuredBuffer m_pointLightSB;		//ポイントライトのストラクチャバッファ。
+		RWStructuredBuffer m_pointLightNoListInTileUAV;		//タイルごとのポイントライトの番号のリストを出力するUAV。
 	};
 
 }
