@@ -169,10 +169,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="C:\Users\kbc19\Desktop\Engine\kfMiniEngine\MiniEngine\MiniEngine\effekseerRuntime\src\3rdParty\LLGI\src\LLGI.vcxproj">
-      <Project>{9428B2E1-814B-3467-B8F0-805E55C9369B}</Project>
-      <Name>LLGI</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
