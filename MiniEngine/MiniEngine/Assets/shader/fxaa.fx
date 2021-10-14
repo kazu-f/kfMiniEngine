@@ -60,7 +60,7 @@ float4 FxaaPixelShader(
 	float lumaMaxScaledClamped = max(fxaaConsoleEdgeThresholdMin,lumaMaxScaled);	//最終的な輝度の差の閾値。
 	//輝度の最低値、最大値。
 	float lumaMinM = min(lumaMin,lumaM);		//輝度の最低値を求める。
-	float lumaMaxM = min(lumaMax,lumaM);		//輝度の最大値を求める。
+	float lumaMaxM = max(lumaMax,lumaM);		//輝度の最大値を求める。
 	//輝度の差を求める。
 	float dirSwMinusNe = lumaSw - lumaNe;		//Sw - Me
 	float lumaMaxSubMinM = lumaMaxM - lumaMinM;	//最大値 - 最低値。
