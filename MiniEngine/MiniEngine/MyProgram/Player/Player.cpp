@@ -59,8 +59,8 @@ bool Player::Start()
 #elif MODEL == MALE_SUIT
 	ModelInitData initData;
 	initData.m_tkmFilePath = "Assets/modelData/Human/suitMale/suitMale.tkm";
-	initData.m_fxFilePath = "Assets/shader/model.fx";
-	initData.m_vsEntryPointFunc = "VSMainSkin";
+	//initData.m_fxFilePath = "Assets/shader/model.fx";
+	//initData.m_vsEntryPointFunc = "VSMainSkin";
 	//アニメーションの初期化データ。
 	AnimClipInitData animInitData[en_animNum];
 	animInitData[en_animIdle].tkaFilePath = "Assets/animData/Human/walk.tka";
@@ -71,6 +71,8 @@ bool Player::Start()
 #endif
 	m_model->SetPosition(m_position);
 	m_model->SetShadowCasterFlag(true);
+
+	m_model->SetScale({ 6.0f,6.0f,6.0f });
 
 	//キャラコンの設定。
 	m_chara.Init(
@@ -109,7 +111,7 @@ void Player::Update()
 
 	m_position = m_chara.Execute(moveVec);
 
-	//m_position += m_model->GetFootstepMove();
+	m_position += m_model->GetFootstepMove();
 	m_model->SetPosition(m_position);
 }
 

@@ -53,6 +53,8 @@ bool DebugScene::Start()
 	//	tree->SetShadowCasterFlag(true);
 	//}
 
+	CFade::GetInstance()->StartFadeIn();
+
 	m_courseLevel.Init("Assets/level/testLevel.tkl", [&](SLevelObjectData& objData) {
 		if (wcscmp(objData.name, L"unityChan") == 0) {
 

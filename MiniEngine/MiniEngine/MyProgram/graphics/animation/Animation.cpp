@@ -188,7 +188,7 @@ namespace Engine {
 		//フットステップの移動量を拡大する。
 		footstepDeltaValueInWorldSpace.x *= scale.x;
 		footstepDeltaValueInWorldSpace.y *= scale.y;
-		footstepDeltaValueInWorldSpace.y *= scale.y;
+		footstepDeltaValueInWorldSpace.z *= scale.z;
 		//フットステップの移動量を回す。
 		rotation.Apply(footstepDeltaValueInWorldSpace);
 		//フットステップの移動量をオイラー積分する。
